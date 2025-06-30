@@ -72,7 +72,7 @@ const Admin = () => {
         .select('*')
         .order('created_at', { ascending: true });
       if (error) throw error;
-      return data;
+      return data || [];
     },
     enabled: isAuthenticated
   });
@@ -85,7 +85,7 @@ const Admin = () => {
         .select('*')
         .order('created_at', { ascending: true });
       if (error) throw error;
-      return data;
+      return data || [];
     },
     enabled: isAuthenticated
   });
