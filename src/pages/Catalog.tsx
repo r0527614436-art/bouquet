@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight, X, Upload } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -23,14 +23,35 @@ interface Item {
 
 const Catalog = () => {
   const [showNotification, setShowNotification] = useState(false);
+  const [logoClickCount, setLogoClickCount] = useState(0);
+  const [lastClickTime, setLastClickTime] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowNotification(true);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLogoClick = () => {
+    const currentTime = Date.now();
+    
+    if (currentTime - lastClickTime > 1000) {
+      setLogoClickCount(1);
+    } else {
+      setLogoClickCount(prev => prev + 1);
+    }
+    
+    setLastClickTime(currentTime);
+
+    if (logoClickCount === 2) {
+      navigate('/admin');
+      setLogoClickCount(0);
+    }
+  };
 
   const { data: categories = [], isLoading } = useQuery({
     queryKey: ['categories'],
@@ -55,6 +76,14 @@ const Catalog = () => {
       }));
     }
   });
+
+  const scrollToCategory = (categoryId: string) => {
+    const element = document.getElementById(`category-${categoryId}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setSelectedCategory(categoryId);
+  };
 
   if (isLoading) {
     return (
@@ -82,13 +111,37 @@ const Catalog = () => {
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-16 w-auto ml-4"
+                className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                onClick={handleLogoClick}
               />
-              <h1 className="text-2xl font-bold text-pink-800">קטלוג בוקט</h1>
             </div>
           </div>
         </div>
       </header>
+
+      {/* Category Navigation */}
+      {categories.length > 0 && (
+        <div className="bg-white border-b border-pink-100 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex space-x-4 rtl:space-x-reverse py-4 overflow-x-auto">
+              {categories.map((category) => (
+                <Button
+                  key={category.id}
+                  onClick={() => scrollToCategory(category.id)}
+                  variant={selectedCategory === category.id ? "default" : "outline"}
+                  className={`whitespace-nowrap ${
+                    selectedCategory === category.id 
+                      ? "bg-pink-600 hover:bg-pink-700" 
+                      : "border-pink-600 text-pink-600 hover:bg-pink-50"
+                  }`}
+                >
+                  {category.name}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -98,7 +151,7 @@ const Catalog = () => {
           </div>
         ) : (
           categories.map((category) => (
-            <div key={category.id} className="mb-12">
+            <div key={category.id} id={`category-${category.id}`} className="mb-12">
               <h2 className="text-3xl font-bold text-pink-800 mb-6 border-b-2 border-pink-200 pb-2">
                 {category.name}
               </h2>
@@ -111,11 +164,13 @@ const Catalog = () => {
                     <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                       <img 
                         src={item.image_url} 
-                        alt={item.title}
+                        alt={item.title || 'פריט בקטלוג'}
                         className="w-full h-64 object-cover"
                       />
                       <div className="p-4">
-                        <h3 className="text-lg font-semibold text-pink-800 mb-2">{item.title}</h3>
+                        {item.title && (
+                          <h3 className="text-lg font-semibold text-pink-800 mb-2">{item.title}</h3>
+                        )}
                         {item.price && (
                           <p className="text-pink-600 font-bold text-xl">₪{item.price}</p>
                         )}

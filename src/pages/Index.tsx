@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Phone, Mail, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
-  const [resetTimer, setResetTimer] = useState<NodeJS.Timeout | null>(null);
+  const [lastClickTime, setLastClickTime] = useState(0);
   const navigate = useNavigate();
 
   const images = [
@@ -48,29 +48,16 @@ const Index = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
   const handleLogoClick = () => {
-    setLogoClickCount(prev => prev + 1);
-
-    if (resetTimer) {
-      clearTimeout(resetTimer);
+    const currentTime = Date.now();
+    
+    if (currentTime - lastClickTime > 1000) {
+      setLogoClickCount(1);
+    } else {
+      setLogoClickCount(prev => prev + 1);
     }
-
-    const timer = setTimeout(() => {
-      setLogoClickCount(0);
-    }, 2000);
-    setResetTimer(timer);
+    
+    setLastClickTime(currentTime);
 
     if (logoClickCount === 2) {
       navigate('/admin');
@@ -92,10 +79,9 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-16 w-auto ml-4 cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handleLogoClick}
               />
-              <h1 className="text-2xl font-bold text-pink-800">בוקט - שזירת פרחים</h1>
             </div>
             
             <nav className="hidden md:flex space-x-8 rtl:space-x-reverse">
@@ -127,8 +113,7 @@ const Index = () => {
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-4">{image.title}</h2>
-                  <p className="text-xl md:text-2xl mb-8">{image.description}</p>
+                  <h2 className="text-4xl md:text-6xl font-bold mb-8">{image.title}</h2>
                   <Link to="/catalog">
                     <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
                       צפה בקטלוג
@@ -140,20 +125,6 @@ const Index = () => {
             </div>
           ))}
         </div>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all"
-        >
-          <ChevronRight className="h-6 w-6 text-pink-600" />
-        </button>
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all"
-        >
-          <ChevronLeft className="h-6 w-6 text-pink-600" />
-        </button>
 
         {/* Dots Indicator */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 rtl:space-x-reverse">
@@ -176,7 +147,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
-              בוקט - שזירת פרחים רוחי רובינשטיין
+              בוקט - שזירת פרחים
             </h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
               מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות במודיעין עילית ובאזור המרכז.
@@ -201,43 +172,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16 bg-gradient-to-r from-pink-50 to-rose-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">השירותים שלנו</h2>
-            <p className="text-lg text-gray-700">שירותי שזירת פרחים מקצועיים לכל אירוע</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">שזירת פרחים לאירוסין</h3>
-              <p className="text-gray-600">זר אירוסין בהתאמה אישית עם פרחים איכותיים</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">הפקת אירועים דתיים</h3>
-              <p className="text-gray-600">עיצוב אירועים לפי תקציב עם פרחים לאירוע</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">משלוחים</h3>
-              <p className="text-gray-600">משלוחי פרחים לבני ברק, ירושלים, פתח תקווה ורמת גן</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">פרחים לשבת</h3>
-              <p className="text-gray-600">זרי פרחים מיוחדים לכבוד השבת והחגים</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">חבילת כלה שלמה</h3>
-              <p className="text-gray-600">פתרון מקיף הכולל זר כלה, חופה ועיצוב מלא</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">זרים עגולים</h3>
-              <p className="text-gray-600">זרי חישוק מעוצבים לאירועים מיוחדים</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -246,37 +180,25 @@ const Index = () => {
             <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto">
             <div className="text-center">
-              <div className="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="h-8 w-8 text-pink-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-pink-800 mb-2">טלפון</h3>
-              <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600">
+              <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון</h3>
+              <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block mb-4">
                 0527614436
               </a>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="h-8 w-8 text-pink-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-pink-800 mb-2">אימייל</h3>
-              <a href="mailto:r0527614436@gmail.com" className="text-lg text-gray-700 hover:text-pink-600">
+              <a href="mailto:r0527614436@gmail.com" className="text-lg text-gray-700 hover:text-pink-600 block">
                 r0527614436@gmail.com
               </a>
             </div>
 
             <div className="text-center">
-              <div className="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="h-8 w-8 text-pink-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-pink-800 mb-2">וואטסאפ</h3>
+              <h3 className="text-xl font-semibold text-pink-800 mb-4">וואטסאפ</h3>
               <Button 
                 onClick={openWhatsApp}
-                className="bg-green-600 hover:bg-green-700 text-white"
+                className="bg-green-600 hover:bg-green-700 text-white w-16 h-16 rounded-full p-0"
+                size="icon"
               >
-                שלח הודעה בוואטסאפ
+                <MessageCircle className="h-8 w-8" />
               </Button>
             </div>
           </div>
@@ -290,13 +212,13 @@ const Index = () => {
             <img 
               src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
               alt="בוקט לוגו" 
-              className="h-12 w-auto mx-auto mb-4"
+              className="h-18 w-auto mx-auto mb-4"
             />
-            <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים רוחי רובינשטיין</h3>
+            <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
             <p className="text-pink-200 mb-4">
               שזירת פרחים מקצועית במודיעין עילית ובאזור המרכז
             </p>
-            <div className="flex justify-center space-x-6 rtl:space-x-reverse">
+            <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
               <a href="tel:0527614436" className="text-pink-200 hover:text-white">
                 0527614436
               </a>
@@ -304,6 +226,17 @@ const Index = () => {
                 r0527614436@gmail.com
               </a>
             </div>
+            <p className="text-sm text-pink-200">
+              © 2025 כל הזכויות שמורות ל{' '}
+              <a 
+                href="https://c869463294b9.godaddysites.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white underline"
+              >
+                AD אתרים
+              </a>
+            </p>
           </div>
         </div>
       </footer>

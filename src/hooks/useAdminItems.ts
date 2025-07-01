@@ -3,20 +3,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-interface Item {
-  id: string;
-  category_id: string;
-  image_url: string;
-  title: string;
-  price: string;
-}
-
 export const useAdminItems = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
   const createItemMutation = useMutation({
-    mutationFn: async (item: Omit<Item, 'id'>) => {
+    mutationFn: async (item: { category_id: string; title: string; price: string; image_url: string }) => {
       const { data, error } = await supabase
         .from('catalog_items')
         .insert([item])
@@ -27,24 +19,26 @@ export const useAdminItems = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast({
         title: "הצלחה",
         description: "הפריט נוסף בהצלחה"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהוספת הפריט"
       });
     }
   });
 
   const updateItemMutation = useMutation({
-    mutationFn: async (item: Item) => {
+    mutationFn: async ({ id, ...item }: { id: string; category_id: string; title: string; price: string; image_url: string }) => {
       const { data, error } = await supabase
         .from('catalog_items')
-        .update({
-          title: item.title,
-          price: item.price,
-          image_url: item.image_url,
-          category_id: item.category_id
-        })
-        .eq('id', item.id)
+        .update(item)
+        .eq('id', id)
         .select()
         .single();
       if (error) throw error;
@@ -52,9 +46,16 @@ export const useAdminItems = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast({
         title: "הצלחה",
         description: "הפריט עודכן בהצלחה"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בעדכון הפריט"
       });
     }
   });
@@ -69,9 +70,16 @@ export const useAdminItems = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast({
         title: "הצלחה",
         description: "הפריט נמחק בהצלחה"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה במחיקת הפריט"
       });
     }
   });
