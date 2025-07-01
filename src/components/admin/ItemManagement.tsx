@@ -33,13 +33,9 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const { toast } = useToast();
 
   const handleImageUpload = async (file: File, isEditing = false) => {
+    console.log('Uploading single image:', file.name);
     setIsUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      // Upload to a service like Cloudinary, or handle locally
-      // For now, we'll create a local URL
       const imageUrl = URL.createObjectURL(file);
       
       if (isEditing && editingItem) {
@@ -48,14 +44,17 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
         setNewItem({ ...newItem, image_url: imageUrl });
       }
       
+      console.log('Single image uploaded successfully');
       toast({
         title: "הצלחה",
         description: "התמונה הועלתה בהצלחה"
       });
     } catch (error) {
+      console.error('Error uploading single image:', error);
       toast({
         title: "שגיאה",
-        description: "שגיאה בהעלאת התמונה"
+        description: "שגיאה בהעלאת התמונה",
+        variant: "destructive"
       });
     } finally {
       setIsUploading(false);
@@ -63,19 +62,43 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   };
 
   const handleBulkUpload = async (files: FileList) => {
+    console.log('Starting bulk upload with', files.length, 'files');
+    
     if (!newItem.category_id) {
       toast({
         title: "שגיאה",
-        description: "נא לבחור קטגוריה לפני העלאת קבצים"
+        description: "נא לבחור קטגוריה לפני העלאת קבצים",
+        variant: "destructive"
       });
       return;
     }
 
     setIsUploading(true);
+    let successCount = 0;
+    let errorCount = 0;
+
     try {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (file.type.startsWith('image/')) {
+      const imageFiles = Array.from(files).filter(file => {
+        console.log('Checking file:', file.name, 'Type:', file.type);
+        return file.type.startsWith('image/');
+      });
+
+      console.log('Found', imageFiles.length, 'image files out of', files.length, 'total files');
+
+      if (imageFiles.length === 0) {
+        toast({
+          title: "שגיאה",
+          description: "לא נמצאו קבצי תמונה בתיקיה",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      for (let i = 0; i < imageFiles.length; i++) {
+        const file = imageFiles[i];
+        console.log(`Processing file ${i + 1}/${imageFiles.length}:`, file.name);
+        
+        try {
           const imageUrl = URL.createObjectURL(file);
           const fileName = file.name.split('.')[0];
           
@@ -85,19 +108,35 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             price: '',
             image_url: imageUrl
           });
+          
+          successCount++;
+          console.log(`Successfully uploaded: ${file.name}`);
+        } catch (error) {
+          console.error(`Error uploading ${file.name}:`, error);
+          errorCount++;
         }
       }
       
-      toast({
-        title: "הצלחה",
-        description: `${files.length} תמונות הועלו בהצלחה`
-      });
-      
-      setNewItem({ category_id: '', title: '', price: '', image_url: '' });
+      if (successCount > 0) {
+        toast({
+          title: "הצלחה",
+          description: `${successCount} תמונות הועלו בהצלחה${errorCount > 0 ? ` (${errorCount} נכשלו)` : ''}`
+        });
+        
+        setNewItem({ category_id: '', title: '', price: '', image_url: '' });
+      } else {
+        toast({
+          title: "שגיאה",
+          description: "כל התמונות נכשלו בהעלאה",
+          variant: "destructive"
+        });
+      }
     } catch (error) {
+      console.error('Bulk upload error:', error);
       toast({
         title: "שגיאה",
-        description: "שגיאה בהעלאת התמונות"
+        description: "שגיאה בהעלאת התמונות",
+        variant: "destructive"
       });
     } finally {
       setIsUploading(false);
@@ -105,8 +144,16 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   };
 
   const handleCreateItem = () => {
-    if (!newItem.category_id || !newItem.image_url) return;
+    if (!newItem.category_id || !newItem.image_url) {
+      toast({
+        title: "שגיאה",
+        description: "נא לבחור קטגוריה ולהעלות תמונה",
+        variant: "destructive"
+      });
+      return;
+    }
     
+    console.log('Creating single item:', newItem);
     createItemMutation.mutate({
       category_id: newItem.category_id,
       title: newItem.title || '',
@@ -119,6 +166,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const handleUpdateItem = () => {
     if (!editingItem) return;
     
+    console.log('Updating item:', editingItem);
     updateItemMutation.mutate({
       id: editingItem.id,
       category_id: editingItem.category_id,
@@ -131,6 +179,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
 
   const handleDeleteItem = (id: string) => {
     if (confirm('האם אתה בטוח שברצונך למחוק פריט זה?')) {
+      console.log('Deleting item:', id);
       deleteItemMutation.mutate(id);
     }
   };
@@ -194,12 +243,22 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             type="file"
             accept="image/*"
             multiple
-            onChange={(e) => e.target.files && handleBulkUpload(e.target.files)}
+            webkitdirectory=""
+            directory=""
+            onChange={(e) => {
+              console.log('Bulk upload triggered, files:', e.target.files?.length);
+              if (e.target.files && e.target.files.length > 0) {
+                handleBulkUpload(e.target.files);
+              }
+            }}
             className="hidden"
             id="bulk-image-upload"
           />
           <Button
-            onClick={() => document.getElementById('bulk-image-upload')?.click()}
+            onClick={() => {
+              console.log('Bulk upload button clicked');
+              document.getElementById('bulk-image-upload')?.click();
+            }}
             variant="outline"
             disabled={isUploading || !newItem.category_id}
             className="w-full"
@@ -207,6 +266,9 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             <FolderOpen className="h-4 w-4 ml-2" />
             {isUploading ? 'מעלה תיקיה...' : 'העלה תיקיה של תמונות'}
           </Button>
+          {!newItem.category_id && (
+            <p className="text-sm text-red-600 mt-1">נא לבחור קטגוריה לפני העלאת תיקיה</p>
+          )}
         </div>
         
         {newItem.image_url && (

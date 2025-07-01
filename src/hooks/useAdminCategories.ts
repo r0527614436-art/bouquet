@@ -11,19 +11,24 @@ export const useAdminCategories = () => {
     mutationFn: async (name: string) => {
       console.log('Creating category with name:', name);
       
-      const { data, error } = await supabase
-        .from('categories')
-        .insert([{ name }])
-        .select()
-        .single();
-      
-      if (error) {
-        console.error('Error creating category:', error);
+      try {
+        const { data, error } = await supabase
+          .from('categories')
+          .insert([{ name }])
+          .select()
+          .single();
+        
+        if (error) {
+          console.error('Supabase error creating category:', error);
+          throw new Error(error.message || 'שגיאה ביצירת הקטגוריה');
+        }
+        
+        console.log('Category created successfully:', data);
+        return data;
+      } catch (error: any) {
+        console.error('Error in createCategoryMutation:', error);
         throw error;
       }
-      
-      console.log('Category created successfully:', data);
-      return data;
     },
     onSuccess: (data) => {
       console.log('Category mutation successful:', data);
@@ -34,11 +39,12 @@ export const useAdminCategories = () => {
         description: "הקטגוריה נוספה בהצלחה"
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Category mutation error:', error);
       toast({
         title: "שגיאה",
-        description: "שגיאה בהוספת הקטגוריה: " + (error.message || 'שגיאה לא ידועה')
+        description: "שגיאה בהוספת הקטגוריה: " + (error?.message || 'שגיאה לא ידועה'),
+        variant: "destructive"
       });
     }
   });
@@ -47,20 +53,25 @@ export const useAdminCategories = () => {
     mutationFn: async ({ id, name }: { id: string; name: string }) => {
       console.log('Updating category:', id, name);
       
-      const { data, error } = await supabase
-        .from('categories')
-        .update({ name })
-        .eq('id', id)
-        .select()
-        .single();
-      
-      if (error) {
-        console.error('Error updating category:', error);
+      try {
+        const { data, error } = await supabase
+          .from('categories')
+          .update({ name })
+          .eq('id', id)
+          .select()
+          .single();
+        
+        if (error) {
+          console.error('Supabase error updating category:', error);
+          throw new Error(error.message || 'שגיאה בעדכון הקטגוריה');
+        }
+        
+        console.log('Category updated successfully:', data);
+        return data;
+      } catch (error: any) {
+        console.error('Error in updateCategoryMutation:', error);
         throw error;
       }
-      
-      console.log('Category updated successfully:', data);
-      return data;
     },
     onSuccess: (data) => {
       console.log('Update category mutation successful:', data);
@@ -71,11 +82,12 @@ export const useAdminCategories = () => {
         description: "הקטגוריה עודכנה בהצלחה"
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Update category mutation error:', error);
       toast({
         title: "שגיאה",
-        description: "שגיאה בעדכון הקטגוריה: " + (error.message || 'שגיאה לא ידועה')
+        description: "שגיאה בעדכון הקטגוריה: " + (error?.message || 'שגיאה לא ידועה'),
+        variant: "destructive"
       });
     }
   });
@@ -84,17 +96,22 @@ export const useAdminCategories = () => {
     mutationFn: async (id: string) => {
       console.log('Deleting category:', id);
       
-      const { error } = await supabase
-        .from('categories')
-        .delete()
-        .eq('id', id);
-      
-      if (error) {
-        console.error('Error deleting category:', error);
+      try {
+        const { error } = await supabase
+          .from('categories')
+          .delete()
+          .eq('id', id);
+        
+        if (error) {
+          console.error('Supabase error deleting category:', error);
+          throw new Error(error.message || 'שגיאה במחיקת הקטגוריה');
+        }
+        
+        console.log('Category deleted successfully');
+      } catch (error: any) {
+        console.error('Error in deleteCategoryMutation:', error);
         throw error;
       }
-      
-      console.log('Category deleted successfully');
     },
     onSuccess: () => {
       console.log('Delete category mutation successful');
@@ -106,11 +123,12 @@ export const useAdminCategories = () => {
         description: "הקטגוריה נמחקה בהצלחה"
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Delete category mutation error:', error);
       toast({
         title: "שגיאה",
-        description: "שגיאה במחיקת הקטגוריה: " + (error.message || 'שגיאה לא ידועה')
+        description: "שגיאה במחיקת הקטגוריה: " + (error?.message || 'שגיאה לא ידועה'),
+        variant: "destructive"
       });
     }
   });

@@ -52,16 +52,23 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
       setNewCategoryName('');
     } catch (error) {
       console.error('Error saving category:', error);
+      // Error is already handled in the hook
     }
   };
 
   const handleDeleteCategory = async (categoryId: string) => {
-    if (confirm('האם אתה בטוח שברצונך למחוק את הקטגוריה? כל הפריטים בקטגוריה זו יימחקו גם כן.')) {
+    const itemsInCategory = items.filter(item => item.category_id === categoryId).length;
+    const confirmMessage = itemsInCategory > 0 
+      ? `האם אתה בטוח שברצונך למחוק את הקטגוריה? יש ${itemsInCategory} פריטים בקטגוריה זו שיימחקו גם כן.`
+      : 'האם אתה בטוח שברצונך למחוק את הקטגוריה?';
+    
+    if (confirm(confirmMessage)) {
       try {
         console.log('Deleting category:', categoryId);
         await deleteCategoryMutation.mutateAsync(categoryId);
       } catch (error) {
         console.error('Error deleting category:', error);
+        // Error is already handled in the hook
       }
     }
   };
@@ -139,6 +146,7 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
                   handleSaveCategory();
                 }
               }}
+              autoFocus
             />
             <div className="flex space-x-2 rtl:space-x-reverse">
               <Button
