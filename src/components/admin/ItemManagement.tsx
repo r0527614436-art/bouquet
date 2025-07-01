@@ -243,8 +243,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             type="file"
             accept="image/*"
             multiple
-            webkitdirectory=""
-            directory=""
+            {...({ webkitdirectory: "", directory: "" } as any)}
             onChange={(e) => {
               console.log('Bulk upload triggered, files:', e.target.files?.length);
               if (e.target.files && e.target.files.length > 0) {

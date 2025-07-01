@@ -79,7 +79,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handleLogoClick}
               />
             </div>
@@ -150,7 +150,7 @@ const Index = () => {
               בוקט - שזירת פרחים
             </h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות במודיעין עילית ובאזור המרכז.
+              מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות.
               אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
             </p>
           </div>
@@ -162,7 +162,7 @@ const Index = () => {
             </div>
             <div className="text-center p-6 rounded-lg bg-pink-50">
               <h3 className="text-xl font-semibold text-pink-800 mb-3">עיצוב חופות</h3>
-              <p className="text-gray-600">חופות מעוצבות וכיסאות כלה במודיעין עילית ובאזור המרכז</p>
+              <p className="text-gray-600">חופות מעוצבות וכיסאות כלה</p>
             </div>
             <div className="text-center p-6 rounded-lg bg-pink-50">
               <h3 className="text-xl font-semibold text-pink-800 mb-3">מתנות מעוצבות</h3>
@@ -209,14 +209,9 @@ const Index = () => {
       <footer className="bg-pink-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <img 
-              src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-              alt="בוקט לוגו" 
-              className="h-18 w-auto mx-auto mb-4"
-            />
             <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
             <p className="text-pink-200 mb-4">
-              שזירת פרחים מקצועית במודיעין עילית ובאזור המרכז
+              שזירת פרחים מקצועית
             </p>
             <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
               <a href="tel:0527614436" className="text-pink-200 hover:text-white">
