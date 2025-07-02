@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAdminItems } from '@/hooks/useAdminItems';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Category {
   id: string;
@@ -32,11 +33,35 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const { createItemMutation, updateItemMutation, deleteItemMutation } = useAdminItems();
   const { toast } = useToast();
 
+  const uploadImageToStorage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Math.random().toString(36)}.${fileExt}`;
+    const filePath = `images/${fileName}`;
+
+    console.log('Uploading file to storage:', fileName);
+
+    const { error } = await supabase.storage
+      .from('catalog-images')
+      .upload(filePath, file);
+
+    if (error) {
+      console.error('Storage upload error:', error);
+      throw error;
+    }
+
+    const { data } = supabase.storage
+      .from('catalog-images')
+      .getPublicUrl(filePath);
+
+    console.log('File uploaded successfully, public URL:', data.publicUrl);
+    return data.publicUrl;
+  };
+
   const handleImageUpload = async (file: File, isEditing = false) => {
     console.log('Uploading single image:', file.name);
     setIsUploading(true);
     try {
-      const imageUrl = URL.createObjectURL(file);
+      const imageUrl = await uploadImageToStorage(file);
       
       if (isEditing && editingItem) {
         setEditingItem({ ...editingItem, image_url: imageUrl });
@@ -99,12 +124,11 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
         console.log(`Processing file ${i + 1}/${imageFiles.length}:`, file.name);
         
         try {
-          const imageUrl = URL.createObjectURL(file);
-          const fileName = file.name.split('.')[0];
+          const imageUrl = await uploadImageToStorage(file);
           
           await createItemMutation.mutateAsync({
             category_id: newItem.category_id,
-            title: fileName,
+            title: '', // Don't use filename as title to avoid showing names under images
             price: '',
             image_url: imageUrl
           });
