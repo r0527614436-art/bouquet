@@ -75,15 +75,6 @@ const Index = () => {
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-                alt="בוקט לוגו" 
-                className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
-                onClick={handleLogoClick}
-              />
-            </div>
-            
             <nav className="hidden md:flex space-x-8 rtl:space-x-reverse">
               <Link to="/catalog" className="text-pink-600 hover:text-pink-800 font-medium">
                 קטלוג
@@ -92,6 +83,15 @@ const Index = () => {
                 צור קשר
               </a>
             </nav>
+            
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+                alt="בוקט לוגו" 
+                className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                onClick={handleLogoClick}
+              />
+            </div>
           </div>
         </div>
       </header>
