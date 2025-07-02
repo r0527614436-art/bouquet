@@ -102,11 +102,6 @@ const Catalog = () => {
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center text-pink-600 hover:text-pink-700">
-              <ArrowRight className="h-5 w-5 ml-2" />
-              חזרה לעמוד הראשי
-            </Link>
-            
             <div className="flex items-center">
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
@@ -115,6 +110,11 @@ const Catalog = () => {
                 onClick={handleLogoClick}
               />
             </div>
+            
+            <Link to="/" className="flex items-center text-pink-600 hover:text-pink-700">
+              <ArrowRight className="h-5 w-5 ml-2" />
+              חזרה לעמוד הראשי
+            </Link>
           </div>
         </div>
       </header>
