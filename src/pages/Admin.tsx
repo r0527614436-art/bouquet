@@ -9,6 +9,7 @@ import AdminAuth from '@/components/admin/AdminAuth';
 import CategoryManagement from '@/components/admin/CategoryManagement';
 import ItemManagement from '@/components/admin/ItemManagement';
 import PasswordDialog from '@/components/admin/PasswordDialog';
+import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement';
 
 interface Category {
   id: string;
@@ -90,6 +91,7 @@ const Admin = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <HomepageSlideManagement />
         <CategoryManagement categories={categories} items={items} />
         <ItemManagement categories={categories} items={items} />
       </main>

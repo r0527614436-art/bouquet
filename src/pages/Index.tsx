@@ -2,7 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+
+interface HomepageSlide {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string;
+  order_index: number;
+  is_active: boolean;
+}
 
 const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -10,33 +21,65 @@ const Index = () => {
   const [lastClickTime, setLastClickTime] = useState(0);
   const navigate = useNavigate();
 
-  const images = [
+  // Fetch slides from database
+  const { data: slides = [] } = useQuery({
+    queryKey: ['homepage-slides'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('homepage_slides')
+        .select('*')
+        .eq('is_active', true)
+        .order('order_index', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    }
+  });
+
+  // Fallback images if no slides in database
+  const fallbackImages = [
     {
-      src: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
+      id: '1',
+      image_url: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
       title: "זרי כלה",
-      description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם"
+      description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
+      order_index: 1,
+      is_active: true
     },
     {
-      src: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
+      id: '2',
+      image_url: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
       title: "זרי אירוסין",
-      description: "זרי פרחים מרהיבים לחגיגת האירוסין"
+      description: "זרי פרחים מרהיבים לחגיגת האירוסין",
+      order_index: 2,
+      is_active: true
     },
     {
-      src: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
+      id: '3',
+      image_url: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
       title: "סדנאות",
-      description: "סדנאות שזירת פרחים מקצועיות"
+      description: "סדנאות שזירת פרחים מקצועיות",
+      order_index: 3,
+      is_active: true
     },
     {
-      src: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
+      id: '4',
+      image_url: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
       title: "הפקת אירועים",
-      description: "הפקת אירועים דתיים עם עיצוב פרחים מושלם"
+      description: "הפקת אירועים דתיים עם עיצוב פרחים מושלם",
+      order_index: 4,
+      is_active: true
     },
     {
-      src: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
+      id: '5',
+      image_url: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
       title: "עיצוב מתנות",
-      description: "מתנות מעוצבות עם פרחים ושוקולדים"
+      description: "מתנות מעוצבות עם פרחים ושוקולדים",
+      order_index: 5,
+      is_active: true
     }
   ];
+
+  const images = slides.length > 0 ? slides : fallbackImages;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -107,13 +150,13 @@ const Index = () => {
         <div className="relative w-full h-full">
           {images.map((image, index) => (
             <div
-              key={index}
+              key={image.id}
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentImageIndex ? 'opacity-100' : 'opacity-0'
               }`}
             >
               <img
-                src={image.src}
+                src={image.image_url}
                 alt={image.title}
                 className="w-full h-full object-cover"
               />
