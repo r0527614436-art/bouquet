@@ -25,12 +25,12 @@ const Index = () => {
     queryKey: ['homepage-slides'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('homepage_slides' as any)
+        .from('homepage_slides')
         .select('*')
         .eq('is_active', true)
         .order('order_index', { ascending: true });
       if (error) throw error;
-      return (data || []) as HomepageSlide[];
+      return data || [];
     }
   });
 

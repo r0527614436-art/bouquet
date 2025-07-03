@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -32,11 +31,11 @@ const HomepageSlideManagement = () => {
     queryKey: ['homepage-slides'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('homepage_slides' as any)
+        .from('homepage_slides')
         .select('*')
         .order('order_index', { ascending: true });
       if (error) throw error;
-      return (data || []) as HomepageSlide[];
+      return data || [];
     }
   });
 
@@ -60,7 +59,7 @@ const HomepageSlideManagement = () => {
   const addSlideMutation = useMutation({
     mutationFn: async (slideData: { title: string; description: string; image_url: string; order_index: number }) => {
       const { error } = await supabase
-        .from('homepage_slides' as any)
+        .from('homepage_slides')
         .insert([slideData]);
       if (error) throw error;
     },
@@ -77,7 +76,7 @@ const HomepageSlideManagement = () => {
   const updateSlideMutation = useMutation({
     mutationFn: async (slideData: HomepageSlide) => {
       const { error } = await supabase
-        .from('homepage_slides' as any)
+        .from('homepage_slides')
         .update({
           title: slideData.title,
           description: slideData.description,
@@ -101,7 +100,7 @@ const HomepageSlideManagement = () => {
   const deleteSlideMutation = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase
-        .from('homepage_slides' as any)
+        .from('homepage_slides')
         .delete()
         .eq('id', id);
       if (error) throw error;
