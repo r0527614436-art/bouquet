@@ -32,11 +32,11 @@ const HomepageSlideManagement = () => {
     queryKey: ['homepage-slides'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('homepage_slides')
+        .from('homepage_slides' as any)
         .select('*')
         .order('order_index', { ascending: true });
       if (error) throw error;
-      return data || [];
+      return (data || []) as HomepageSlide[];
     }
   });
 
@@ -60,7 +60,7 @@ const HomepageSlideManagement = () => {
   const addSlideMutation = useMutation({
     mutationFn: async (slideData: { title: string; description: string; image_url: string; order_index: number }) => {
       const { error } = await supabase
-        .from('homepage_slides')
+        .from('homepage_slides' as any)
         .insert([slideData]);
       if (error) throw error;
     },
@@ -69,7 +69,7 @@ const HomepageSlideManagement = () => {
       setIsAddDialogOpen(false);
       toast({ title: "התמונה נוספה בהצלחה!" });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       toast({ title: "שגיאה בהוספת התמונה", description: error.message, variant: "destructive" });
     }
   });
@@ -77,7 +77,7 @@ const HomepageSlideManagement = () => {
   const updateSlideMutation = useMutation({
     mutationFn: async (slideData: HomepageSlide) => {
       const { error } = await supabase
-        .from('homepage_slides')
+        .from('homepage_slides' as any)
         .update({
           title: slideData.title,
           description: slideData.description,
@@ -93,7 +93,7 @@ const HomepageSlideManagement = () => {
       setEditingSlide(null);
       toast({ title: "התמונה עודכנה בהצלחה!" });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       toast({ title: "שגיאה בעדכון התמונה", description: error.message, variant: "destructive" });
     }
   });
@@ -101,7 +101,7 @@ const HomepageSlideManagement = () => {
   const deleteSlideMutation = useMutation({
     mutationFn: async (id: string) => {
       const { error } = await supabase
-        .from('homepage_slides')
+        .from('homepage_slides' as any)
         .delete()
         .eq('id', id);
       if (error) throw error;
@@ -110,7 +110,7 @@ const HomepageSlideManagement = () => {
       queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
       toast({ title: "התמונה נמחקה בהצלחה!" });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       toast({ title: "שגיאה במחיקת התמונה", description: error.message, variant: "destructive" });
     }
   });
