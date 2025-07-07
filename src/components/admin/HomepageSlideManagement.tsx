@@ -31,60 +31,99 @@ const HomepageSlideManagement = () => {
   const { data: slides = [], isLoading } = useQuery({
     queryKey: ['homepage-slides'],
     queryFn: async () => {
+      console.log('Fetching homepage slides...');
       const { data, error } = await supabase
         .from('homepage_slides')
         .select('*')
         .order('order_index', { ascending: true });
+      
       if (error) {
         console.error('Error fetching slides:', error);
         throw error;
       }
+      
       console.log('Fetched slides:', data);
       return data || [];
     }
   });
 
   const uploadImage = async (file: File): Promise<string> => {
-    console.log('Starting image upload for file:', file.name);
+    console.log('Starting image upload for file:', file.name, 'Size:', file.size);
     
-    const fileExt = file.name.split('.').pop();
-    const fileName = `slide-${Date.now()}.${fileExt}`;
-    
-    console.log('Uploading to filename:', fileName);
-    
-    const { data: uploadData, error: uploadError } = await supabase.storage
-      .from('homepage-slides')
-      .upload(fileName, file, {
-        cacheControl: '3600',
-        upsert: false
-      });
+    try {
+      // Validate file
+      if (!file.type.startsWith('image/')) {
+        throw new Error('הקובץ חייב להיות תמונה');
+      }
+      
+      if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        throw new Error('התמונה גדולה מדי. מקסימום 5MB');
+      }
 
-    if (uploadError) {
-      console.error('Upload error:', uploadError);
-      throw uploadError;
+      const fileExt = file.name.split('.').pop()?.toLowerCase();
+      if (!fileExt || !['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExt)) {
+        throw new Error('סוג קובץ לא נתמך. השתמש ב-JPG, PNG, WebP או GIF');
+      }
+
+      const fileName = `slide-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      
+      console.log('Uploading to filename:', fileName);
+      
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('homepage-slides')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        throw new Error(`שגיאה בהעלאת התמונה: ${uploadError.message}`);
+      }
+
+      if (!uploadData) {
+        throw new Error('לא הצלחנו להעלות את התמונה');
+      }
+
+      console.log('Upload successful:', uploadData);
+
+      const { data: urlData } = supabase.storage
+        .from('homepage-slides')
+        .getPublicUrl(fileName);
+
+      console.log('Generated public URL:', urlData.publicUrl);
+      
+      if (!urlData.publicUrl) {
+        throw new Error('לא הצלחנו ליצור קישור לתמונה');
+      }
+
+      return urlData.publicUrl;
+    } catch (error: any) {
+      console.error('Image upload failed:', error);
+      throw error;
     }
-
-    console.log('Upload successful:', uploadData);
-
-    const { data: urlData } = supabase.storage
-      .from('homepage-slides')
-      .getPublicUrl(fileName);
-
-    console.log('Generated public URL:', urlData.publicUrl);
-    return urlData.publicUrl;
   };
 
   const addSlideMutation = useMutation({
     mutationFn: async (slideData: { title: string; description: string; image_url: string; order_index: number }) => {
       console.log('Adding slide with data:', slideData);
+      
       const { data, error } = await supabase
         .from('homepage_slides')
-        .insert([slideData])
+        .insert([{
+          title: slideData.title,
+          description: slideData.description,
+          image_url: slideData.image_url,
+          order_index: slideData.order_index,
+          is_active: true
+        }])
         .select();
+        
       if (error) {
         console.error('Error adding slide:', error);
-        throw error;
+        throw new Error(`שגיאה בהוספת התמונה: ${error.message}`);
       }
+      
       console.log('Slide added successfully:', data);
       return data;
     },
@@ -95,13 +134,18 @@ const HomepageSlideManagement = () => {
     },
     onError: (error: any) => {
       console.error('Add slide error:', error);
-      toast({ title: "שגיאה בהוספת התמונה", description: error.message, variant: "destructive" });
+      toast({ 
+        title: "שגיאה בהוספת התמונה", 
+        description: error.message, 
+        variant: "destructive" 
+      });
     }
   });
 
   const updateSlideMutation = useMutation({
     mutationFn: async (slideData: HomepageSlide) => {
       console.log('Updating slide with data:', slideData);
+      
       const { data, error } = await supabase
         .from('homepage_slides')
         .update({
@@ -113,10 +157,12 @@ const HomepageSlideManagement = () => {
         })
         .eq('id', slideData.id)
         .select();
+        
       if (error) {
         console.error('Error updating slide:', error);
-        throw error;
+        throw new Error(`שגיאה בעדכון התמונה: ${error.message}`);
       }
+      
       console.log('Slide updated successfully:', data);
       return data;
     },
@@ -128,21 +174,28 @@ const HomepageSlideManagement = () => {
     },
     onError: (error: any) => {
       console.error('Update slide error:', error);
-      toast({ title: "שגיאה בעדכון התמונה", description: error.message, variant: "destructive" });
+      toast({ 
+        title: "שגיאה בעדכון התמונה", 
+        description: error.message, 
+        variant: "destructive" 
+      });
     }
   });
 
   const deleteSlideMutation = useMutation({
     mutationFn: async (id: string) => {
       console.log('Deleting slide with id:', id);
+      
       const { error } = await supabase
         .from('homepage_slides')
         .delete()
         .eq('id', id);
+        
       if (error) {
         console.error('Error deleting slide:', error);
-        throw error;
+        throw new Error(`שגיאה במחיקת התמונה: ${error.message}`);
       }
+      
       console.log('Slide deleted successfully');
     },
     onSuccess: () => {
@@ -151,7 +204,11 @@ const HomepageSlideManagement = () => {
     },
     onError: (error: any) => {
       console.error('Delete slide error:', error);
-      toast({ title: "שגיאה במחיקת התמונה", description: error.message, variant: "destructive" });
+      toast({ 
+        title: "שגיאה במחיקת התמונה", 
+        description: error.message, 
+        variant: "destructive" 
+      });
     }
   });
 
@@ -162,9 +219,14 @@ const HomepageSlideManagement = () => {
       const imageUrl = await uploadImage(file);
       console.log('Image uploaded successfully:', imageUrl);
       callback(imageUrl);
+      toast({ title: "התמונה הועלתה בהצלחה!" });
     } catch (error: any) {
       console.error('Image upload failed:', error);
-      toast({ title: "שגיאה בהעלאת התמונה", description: error.message, variant: "destructive" });
+      toast({ 
+        title: "שגיאה בהעלאת התמונה", 
+        description: error.message, 
+        variant: "destructive" 
+      });
     } finally {
       setUploading(false);
     }
@@ -178,14 +240,28 @@ const HomepageSlideManagement = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      if (!title || !imageUrl) {
-        toast({ title: "שגיאה", description: "נא למלא כותרת ולהעלות תמונה", variant: "destructive" });
+      
+      if (!title.trim()) {
+        toast({ 
+          title: "שגיאה", 
+          description: "נא למלא כותרת", 
+          variant: "destructive" 
+        });
+        return;
+      }
+      
+      if (!imageUrl) {
+        toast({ 
+          title: "שגיאה", 
+          description: "נא להעלות תמונה", 
+          variant: "destructive" 
+        });
         return;
       }
       
       addSlideMutation.mutate({
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
         image_url: imageUrl,
         order_index: orderIndex
       });
@@ -215,7 +291,7 @@ const HomepageSlideManagement = () => {
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="title">כותרת</Label>
+              <Label htmlFor="title">כותרת *</Label>
               <Input
                 id="title"
                 value={title}
@@ -231,28 +307,43 @@ const HomepageSlideManagement = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="הכנס תיאור..."
+                rows={3}
               />
             </div>
             <div>
-              <Label htmlFor="image">תמונה</Label>
+              <Label htmlFor="image">תמונה *</Label>
               <Input
                 id="image"
                 type="file"
-                accept="image/*"
+                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
-                    console.log('File selected for upload:', file.name);
+                    console.log('File selected for upload:', file.name, 'Type:', file.type, 'Size:', file.size);
                     handleImageUpload(file, setImageUrl);
                   }
                 }}
                 disabled={uploading}
               />
-              {uploading && <p className="text-sm text-gray-500 mt-1">מעלה תמונה...</p>}
+              {uploading && (
+                <p className="text-sm text-blue-600 mt-1 flex items-center">
+                  <span className="animate-spin inline-block w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full ml-2"></span>
+                  מעלה תמונה...
+                </p>
+              )}
               {imageUrl && (
                 <div className="mt-2">
-                  <img src={imageUrl} alt="תצוגה מקדימה" className="w-full h-32 object-cover rounded" />
-                  <p className="text-xs text-green-600 mt-1">תמונה הועלתה בהצלחה!</p>
+                  <img 
+                    src={imageUrl} 
+                    alt="תצוגה מקדימה" 
+                    className="w-full h-32 object-cover rounded border"
+                    onLoad={() => console.log('Preview image loaded successfully')}
+                    onError={(e) => {
+                      console.error('Preview image failed to load:', imageUrl);
+                      e.currentTarget.src = '/placeholder.svg';
+                    }}
+                  />
+                  <p className="text-xs text-green-600 mt-1">✓ תמונה הועלתה בהצלחה!</p>
                 </div>
               )}
             </div>
@@ -264,11 +355,12 @@ const HomepageSlideManagement = () => {
                 value={orderIndex}
                 onChange={(e) => setOrderIndex(parseInt(e.target.value) || 1)}
                 min={1}
+                max={50}
               />
             </div>
             <Button 
               type="submit" 
-              disabled={!title || !imageUrl || uploading || addSlideMutation.isPending}
+              disabled={!title.trim() || !imageUrl || uploading || addSlideMutation.isPending}
               className="w-full"
             >
               {uploading ? 'מעלה תמונה...' : addSlideMutation.isPending ? 'מוסיף...' : 'הוסף תמונה'}
@@ -289,15 +381,29 @@ const HomepageSlideManagement = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      if (!title || !imageUrl) {
-        toast({ title: "שגיאה", description: "נא למלא כותרת ולהעלות תמונה", variant: "destructive" });
+      
+      if (!title.trim()) {
+        toast({ 
+          title: "שגיאה", 
+          description: "נא למלא כותרת", 
+          variant: "destructive" 
+        });
+        return;
+      }
+      
+      if (!imageUrl) {
+        toast({ 
+          title: "שגיאה", 
+          description: "נא להעלות תמונה", 
+          variant: "destructive" 
+        });
         return;
       }
       
       updateSlideMutation.mutate({
         ...editingSlide,
-        title,
-        description,
+        title: title.trim(),
+        description: description.trim(),
         image_url: imageUrl,
         order_index: orderIndex
       });
@@ -311,7 +417,7 @@ const HomepageSlideManagement = () => {
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="edit-title">כותרת</Label>
+              <Label htmlFor="edit-title">כותרת *</Label>
               <Input
                 id="edit-title"
                 value={title}
@@ -327,26 +433,40 @@ const HomepageSlideManagement = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="הכנס תיאור..."
+                rows={3}
               />
             </div>
             <div>
               <Label>תמונה נוכחית</Label>
-              <img src={imageUrl} alt="תמונה נוכחית" className="w-full h-32 object-cover rounded mb-2" />
+              <img 
+                src={imageUrl} 
+                alt="תמונה נוכחית" 
+                className="w-full h-32 object-cover rounded mb-2 border"
+                onError={(e) => {
+                  console.error('Current image failed to load:', imageUrl);
+                  e.currentTarget.src = '/placeholder.svg';
+                }}
+              />
               <Label htmlFor="edit-image">החלף תמונה (אופציונלי)</Label>
               <Input
                 id="edit-image"
                 type="file"
-                accept="image/*"
+                accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
                   if (file) {
-                    console.log('File selected for edit:', file.name);
+                    console.log('File selected for edit:', file.name, 'Type:', file.type, 'Size:', file.size);
                     handleImageUpload(file, setImageUrl);
                   }
                 }}
                 disabled={uploading}
               />
-              {uploading && <p className="text-sm text-gray-500 mt-1">מעלה תמונה...</p>}
+              {uploading && (
+                <p className="text-sm text-blue-600 mt-1 flex items-center">
+                  <span className="animate-spin inline-block w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full ml-2"></span>
+                  מעלה תמונה...
+                </p>
+              )}
             </div>
             <div>
               <Label htmlFor="edit-order">מיקום בסדר</Label>
@@ -356,11 +476,12 @@ const HomepageSlideManagement = () => {
                 value={orderIndex}
                 onChange={(e) => setOrderIndex(parseInt(e.target.value) || 1)}
                 min={1}
+                max={50}
               />
             </div>
             <Button 
               type="submit" 
-              disabled={!title || !imageUrl || uploading || updateSlideMutation.isPending}
+              disabled={!title.trim() || !imageUrl || uploading || updateSlideMutation.isPending}
               className="w-full"
             >
               {uploading ? 'מעלה תמונה...' : updateSlideMutation.isPending ? 'מעדכן...' : 'עדכן תמונה'}
@@ -372,9 +493,11 @@ const HomepageSlideManagement = () => {
   };
 
   if (isLoading) {
-    return <div className="flex justify-center items-center p-8">
-      <div className="text-lg">טוען תמונות...</div>
-    </div>;
+    return (
+      <div className="flex justify-center items-center p-8">
+        <div className="text-lg">טוען תמונות...</div>
+      </div>
+    );
   }
 
   return (
@@ -394,16 +517,18 @@ const HomepageSlideManagement = () => {
                   <img 
                     src={slide.image_url} 
                     alt={slide.title}
-                    className="w-16 h-16 object-cover rounded"
+                    className="w-16 h-16 object-cover rounded border"
                     onError={(e) => {
-                      console.error('Image failed to load:', slide.image_url);
+                      console.error('Slide image failed to load:', slide.image_url);
                       e.currentTarget.src = '/placeholder.svg';
                     }}
                   />
                   <div className="flex-1">
-                    <h3 className="font-semibold">{slide.title}</h3>
-                    <p className="text-sm text-gray-600">{slide.description}</p>
-                    <p className="text-xs text-gray-400">סדר: {slide.order_index}</p>
+                    <h3 className="font-semibold text-right">{slide.title}</h3>
+                    {slide.description && (
+                      <p className="text-sm text-gray-600 text-right">{slide.description}</p>
+                    )}
+                    <p className="text-xs text-gray-400 text-right">סדר: {slide.order_index}</p>
                   </div>
                   <div className="flex space-x-2 rtl:space-x-reverse">
                     <Button
