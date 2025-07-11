@@ -167,7 +167,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
           
           await createItemMutation.mutateAsync({
             category_id: newItem.category_id,
-            title: file.name.split('.')[0], // Use filename as title
+            title: '', // Remove filename from title
             price: '',
             image_url: imageUrl
           });
