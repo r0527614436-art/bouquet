@@ -20,7 +20,6 @@ const Index = () => {
   const [lastClickTime, setLastClickTime] = useState(0);
   const navigate = useNavigate();
 
-  // Fetch slides from database
   const { data: slides = [] } = useQuery({
     queryKey: ['homepage-slides'],
     queryFn: async () => {
@@ -34,45 +33,44 @@ const Index = () => {
     }
   });
 
-  // Fallback images if no slides in database
   const fallbackImages = [
     {
       id: '1',
       image_url: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-      title: "זרי כלה",
-      description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
+      title: "זרי כלה לחתונות דתיות",
+      description: "זרי כלה מעוצבים במיוחד לחתונות דתיות וחרדיות עם רוחי רובינשטיין",
       order_index: 1,
       is_active: true
     },
     {
       id: '2',
       image_url: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
-      title: "זרי אירוסין",
-      description: "זרי פרחים מרהיבים לחגיגת האירוסין",
+      title: "זרי אירוסין מעוצבים",
+      description: "זרי אירוסין מרהיבים לחגיגת האירוסין במודיעין עילית ובמרכז",
       order_index: 2,
       is_active: true
     },
     {
       id: '3',
       image_url: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-      title: "סדנאות",
-      description: "סדנאות שזירת פרחים מקצועיות",
+      title: "סדנאות שזירת פרחים",
+      description: "סדנאות שזירת פרחים מקצועיות עם רוחי רובינשטיין",
       order_index: 3,
       is_active: true
     },
     {
       id: '4',
       image_url: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-      title: "הפקת אירועים",
-      description: "הפקת אירועים דתיים עם עיצוב פרחים מושלם",
+      title: "עיצוב חופות דתיות",
+      description: "עיצוב חופות מרהיבות לחתונות דתיות וחרדיות במודיעין עילית",
       order_index: 4,
       is_active: true
     },
     {
       id: '5',
       image_url: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-      title: "עיצוב מתנות",
-      description: "מתנות מעוצבות עם פרחים ושוקולדים",
+      title: "מתנות לאירועים דתיים",
+      description: "מתנות מעוצבות עם פרחים ושוקולדים לאירועים דתיים",
       order_index: 5,
       is_active: true
     }
@@ -113,7 +111,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
@@ -122,7 +119,7 @@ const Index = () => {
                 to="/catalog" 
                 className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600"
               >
-                קטלוג
+                קטלוג עיצובים
               </Link>
               <a 
                 href="#contact" 
@@ -135,7 +132,7 @@ const Index = () => {
             <div className="flex items-center">
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-                alt="בוקט לוגו" 
+                alt="רוחי רובינשטיין בוקט שזירת פרחים לחתונות דתיות" 
                 className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handleLogoClick}
               />
@@ -144,7 +141,6 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section with Image Carousel */}
       <section className="relative h-96 md:h-[500px] overflow-hidden">
         <div className="relative w-full h-full">
           {images.map((image, index) => (
@@ -156,15 +152,16 @@ const Index = () => {
             >
               <img
                 src={image.image_url}
-                alt={image.title}
+                alt={`${image.title} - רוחי רובינשטיין שזירת פרחים`}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-8">{image.title}</h2>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4">{image.title}</h1>
+                  <p className="text-lg md:text-xl mb-8 max-w-2xl">{image.description}</p>
                   <Link to="/catalog">
                     <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
-                      צפה בקטלוג
+                      צפה בקטלוג העיצובים
                       <ArrowLeft className="mr-2 h-5 w-5" />
                     </Button>
                   </Link>
@@ -174,7 +171,6 @@ const Index = () => {
           ))}
         </div>
 
-        {/* Dots Indicator */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 rtl:space-x-reverse">
           {images.map((_, index) => (
             <button
@@ -185,54 +181,114 @@ const Index = () => {
                   ? 'bg-white' 
                   : 'bg-white bg-opacity-50 hover:bg-opacity-75'
               }`}
+              aria-label={`עבור לתמונה ${index + 1}`}
             />
           ))}
         </div>
       </section>
 
-      {/* About Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
-              בוקט - שזירת פרחים
+              רוחי רובינשטיין - בוקט שזירת פרחים לחתונות דתיות
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות.
-              אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+              מתמחה בשזירת פרחים לחתונות דתיות וחרדיות במודיעין עילית ובאזור המרכז. 
+              אני מציעה זרי כלה מעוצבים, עיצוב חופות מרהיבות, זרי אירוסין וחבילות אירועים שלמות. 
+              כל עיצוב נעשה בהתאמה אישית עם מגע מיוחד ותשומת לב לפרטים הקטנים.
+            </p>
+            <p className="text-md text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              שירות מקצועי ואמין עם משלוחים לכל אזור המרכז - ירושלים, בני ברק, פתח תקווה, רמת גן ועוד.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">זרי כלה מעוצבים</h3>
-              <p className="text-gray-600">זרי כלה במשלוח עם עיצוב אישי והתאמה מושלמת ליום המיוחד</p>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">זרי כלה לחתונות דתיות</h3>
+              <p className="text-gray-600">זרי כלה מעוצבים במיוחד לחתונות דתיות וחרדיות. עיצוב אישי עם התאמה מושלמת ליום המיוחד במחירים נוחים</p>
             </div>
             <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">עיצוב חופות</h3>
-              <p className="text-gray-600">חופות מעוצבות וכיסאות כלה</p>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">עיצוב חופות דתיות</h3>
+              <p className="text-gray-600">חופות מעוצבות לחתונות דתיות וחרדיות, כיסאות כלה מעוצבים וקישוט מושלם לטקס החתונה</p>
             </div>
             <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">מתנות מעוצבות</h3>
-              <p className="text-gray-600">מתנות עם שוקולדים ופרחים, קשתות גיבסניות וזרי חישוק</p>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">מתנות לאירועים דתיים</h3>
+              <p className="text-gray-600">מתנות מעוצבות עם פרחים ושוקולדים, קשתות גיבסניות וזרי חישוק לאירועים דתיים וחרדיים</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-16 bg-white">
+      <section className="py-16 bg-pink-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צור קשר</h2>
-            <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
+              השירותים שלנו במודיעין עילית ובמרכז
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-lg font-semibold text-pink-800 mb-2">זרי אירוסין</h3>
+              <p className="text-gray-600 text-sm">זרי פרחים מרהיבים לחגיגת האירוסין עם עיצוב אישי</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-lg font-semibold text-pink-800 mb-2">עיצוב לבר מצווה</h3>
+              <p className="text-gray-600 text-sm">עיצוב פרחים מיוחד לחגיגות בר ובת מצווה</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-lg font-semibold text-pink-800 mb-2">פרחים לשבת חתן</h3>
+              <p className="text-gray-600 text-sm">עיצוב פרחים מיוחד לשבת חתן וחגיגות קדם חתונה</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-sm">
+              <h3 className="text-lg font-semibold text-pink-800 mb-2">עיצוב לברית מילה</h3>
+              <p className="text-gray-600 text-sm">עיצוב פרחים עדין ומתאים לחגיגת הברית</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
+              איזורי השירות שלנו
+            </h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              רוחי רובינשטיין מעניקה שירותי שזירת פרחים באזור המרכז ומתמחה בחתונות דתיות וחרדיות
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">מודיעין עילית</h3>
+              <p className="text-gray-600">שירות מקצועי למגזר החרדי במודיעין עילית עם הבנה עמוקה של הצרכים המיוחדים</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">ירושלים ובני ברק</h3>
+              <p className="text-gray-600">משלוחים וחופות לחתונות דתיות בירושלים ובני ברק עם התאמה לציבור הדתי</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">פתח תקווה ורמת גן</h3>
+              <p className="text-gray-600">שירותי שזירת פרחים לאירועים דתיים בפתח תקווה, רמת גן ואזור המרכז</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-16 bg-pink-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צרו קשר עם רוחי רובינשטיין</h2>
+            <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם עם שזירת פרחים מקצועית</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto">
             <div className="text-center">
-              <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון</h3>
+              <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון ואימייל</h3>
               <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block mb-4">
-                0527614436
+                052-761-4436
               </a>
               <a href="mailto:r0527614436@gmail.com" className="text-lg text-gray-700 hover:text-pink-600 block">
                 r0527614436@gmail.com
@@ -245,6 +301,7 @@ const Index = () => {
                 onClick={openWhatsApp}
                 className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full p-0 shadow-lg hover:shadow-xl transition-all duration-200"
                 size="icon"
+                aria-label="פנה בוואטסאפ לרוחי רובינשטיין"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -259,31 +316,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-pink-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
+            <h3 className="text-xl font-semibold mb-2">רוחי רובינשטיין - בוקט שזירת פרחים</h3>
             <p className="text-pink-200 mb-4">
-              שזירת פרחים מקצועית
+              שזירת פרחים מקצועית לחתונות דתיות וחרדיות במודיעין עילית ובמרכז
             </p>
             <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
               <a href="tel:0527614436" className="text-pink-200 hover:text-white">
-                0527614436
+                052-761-4436
               </a>
               <a href="mailto:r0527614436@gmail.com" className="text-pink-200 hover:text-white">
                 r0527614436@gmail.com
               </a>
             </div>
             <p className="text-sm text-pink-200">
-              © 2025 כל הזכויות שמורות ל{' '}
+              © 2025 כל הזכויות שמורות לרוחי רובינשטיין - בוקט שזירת פרחים |{' '}
               <a 
                 href="https://c869463294b9.godaddysites.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
               >
-                AD אתרים
+                פיתוח אתרים AD אתרים
               </a>
             </p>
           </div>
