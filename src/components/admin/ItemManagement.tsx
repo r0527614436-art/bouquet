@@ -37,24 +37,28 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
     console.log('Starting image upload for file:', file.name, 'Size:', file.size);
     
     try {
-      // Validate file
+      // Validate file type
       if (!file.type.startsWith('image/')) {
         throw new Error('הקובץ חייב להיות תמונה');
       }
       
-      if (file.size > 10 * 1024 * 1024) { // 10MB limit
+      // Validate file size (10MB limit)
+      if (file.size > 10 * 1024 * 1024) {
         throw new Error('התמונה גדולה מדי. מקסימום 10MB');
       }
 
+      // Get file extension
       const fileExt = file.name.split('.').pop()?.toLowerCase();
       if (!fileExt || !['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExt)) {
         throw new Error('סוג קובץ לא נתמך. השתמש ב-JPG, PNG, WebP או GIF');
       }
 
+      // Generate unique filename
       const fileName = `catalog-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
-      console.log('Uploading to filename:', fileName);
+      console.log('Uploading to catalog-images bucket with filename:', fileName);
       
+      // Upload to Supabase Storage
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('catalog-images')
         .upload(fileName, file, {
@@ -73,6 +77,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
 
       console.log('Upload successful:', uploadData);
 
+      // Get public URL
       const { data: urlData } = supabase.storage
         .from('catalog-images')
         .getPublicUrl(fileName);
@@ -91,8 +96,9 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   };
 
   const handleImageUpload = async (file: File, isEditing = false) => {
-    console.log('Uploading single image:', file.name);
+    console.log('Handling image upload:', file.name);
     setIsUploading(true);
+    
     try {
       const imageUrl = await uploadImageToStorage(file);
       
@@ -102,15 +108,16 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
         setNewItem({ ...newItem, image_url: imageUrl });
       }
       
-      console.log('Single image uploaded successfully');
+      console.log('Image uploaded successfully:', imageUrl);
       toast({
-        title: "התמונה הועלתה בהצלחה!"
+        title: "הצלחה!",
+        description: "התמונה הועלתה בהצלחה"
       });
     } catch (error: any) {
-      console.error('Error uploading single image:', error);
+      console.error('Error uploading image:', error);
       toast({
         title: "שגיאה בהעלאת התמונה",
-        description: error.message,
+        description: error.message || "אירעה שגיאה לא צפויה",
         variant: "destructive"
       });
     } finally {
@@ -136,7 +143,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
 
     try {
       const imageFiles = Array.from(files).filter(file => {
-        console.log('Checking file:', file.name, 'Type:', file.type);
+        console.log('Checking file type:', file.name, file.type);
         return file.type.startsWith('image/');
       });
 
@@ -160,7 +167,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
           
           await createItemMutation.mutateAsync({
             category_id: newItem.category_id,
-            title: '',
+            title: file.name.split('.')[0], // Use filename as title
             price: '',
             image_url: imageUrl
           });
@@ -175,10 +182,11 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
       
       if (successCount > 0) {
         toast({
-          title: "הצלחה",
+          title: "הושלם!",
           description: `${successCount} תמונות הועלו בהצלחה${errorCount > 0 ? ` (${errorCount} נכשלו)` : ''}`
         });
         
+        // Reset form
         setNewItem({ category_id: '', title: '', price: '', image_url: '' });
       } else {
         toast({
@@ -209,7 +217,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
       return;
     }
     
-    console.log('Creating single item:', newItem);
+    console.log('Creating item:', newItem);
     createItemMutation.mutate({
       category_id: newItem.category_id,
       title: newItem.title || '',
@@ -277,12 +285,21 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  console.log('File selected for single upload:', file.name);
+                  handleImageUpload(file);
+                }
+              }}
               className="hidden"
               id="single-image-upload"
             />
             <Button
-              onClick={() => document.getElementById('single-image-upload')?.click()}
+              onClick={() => {
+                console.log('Single upload button clicked');
+                document.getElementById('single-image-upload')?.click();
+              }}
               variant="outline"
               disabled={isUploading}
               className="flex-1"
@@ -301,9 +318,10 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
             multiple
             {...({ webkitdirectory: "", directory: "" } as any)}
             onChange={(e) => {
-              console.log('Bulk upload triggered, files:', e.target.files?.length);
-              if (e.target.files && e.target.files.length > 0) {
-                handleBulkUpload(e.target.files);
+              const files = e.target.files;
+              if (files && files.length > 0) {
+                console.log('Files selected for bulk upload:', files.length);
+                handleBulkUpload(files);
               }
             }}
             className="hidden"
@@ -338,7 +356,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
           className="bg-pink-600 hover:bg-pink-700"
         >
           <Plus className="h-4 w-4 ml-2" />
-          הוסף פריט
+          {createItemMutation.isPending ? 'מוסיף...' : 'הוסף פריט'}
         </Button>
       </div>
 
@@ -393,7 +411,13 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0], true)}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          console.log('File selected for edit:', file.name);
+                          handleImageUpload(file, true);
+                        }
+                      }}
                       className="hidden"
                       id={`edit-image-${item.id}`}
                     />
@@ -405,7 +429,12 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
                     >
                       <Upload className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" onClick={handleUpdateItem} className="bg-green-600 hover:bg-green-700">
+                    <Button 
+                      size="sm" 
+                      onClick={handleUpdateItem} 
+                      className="bg-green-600 hover:bg-green-700"
+                      disabled={updateItemMutation.isPending}
+                    >
                       <Save className="h-4 w-4" />
                     </Button>
                     <Button size="sm" variant="outline" onClick={() => setEditingItem(null)}>
@@ -425,7 +454,12 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
                     <Button size="sm" variant="outline" onClick={() => setEditingItem(item)}>
                       <Edit className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="destructive" onClick={() => handleDeleteItem(item.id)}>
+                    <Button 
+                      size="sm" 
+                      variant="destructive" 
+                      onClick={() => handleDeleteItem(item.id)}
+                      disabled={deleteItemMutation.isPending}
+                    >
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
