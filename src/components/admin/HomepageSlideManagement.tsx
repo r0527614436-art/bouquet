@@ -56,8 +56,8 @@ const HomepageSlideManagement = () => {
         throw new Error('הקובץ חייב להיות תמונה');
       }
       
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        throw new Error('התמונה גדולה מדי. מקסימום 5MB');
+      if (file.size > 10 * 1024 * 1024) { // 10MB limit
+        throw new Error('התמונה גדולה מדי. מקסימום 10MB');
       }
 
       const fileExt = file.name.split('.').pop()?.toLowerCase();

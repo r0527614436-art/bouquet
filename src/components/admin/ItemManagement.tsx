@@ -34,27 +34,60 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const { toast } = useToast();
 
   const uploadImageToStorage = async (file: File): Promise<string> => {
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random().toString(36)}.${fileExt}`;
-    const filePath = `images/${fileName}`;
+    console.log('Starting image upload for file:', file.name, 'Size:', file.size);
+    
+    try {
+      // Validate file
+      if (!file.type.startsWith('image/')) {
+        throw new Error('הקובץ חייב להיות תמונה');
+      }
+      
+      if (file.size > 10 * 1024 * 1024) { // 10MB limit
+        throw new Error('התמונה גדולה מדי. מקסימום 10MB');
+      }
 
-    console.log('Uploading file to storage:', fileName);
+      const fileExt = file.name.split('.').pop()?.toLowerCase();
+      if (!fileExt || !['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExt)) {
+        throw new Error('סוג קובץ לא נתמך. השתמש ב-JPG, PNG, WebP או GIF');
+      }
 
-    const { error } = await supabase.storage
-      .from('catalog-images')
-      .upload(filePath, file);
+      const fileName = `catalog-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      
+      console.log('Uploading to filename:', fileName);
+      
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('catalog-images')
+        .upload(fileName, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
-    if (error) {
-      console.error('Storage upload error:', error);
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        throw new Error(`שגיאה בהעלאת התמונה: ${uploadError.message}`);
+      }
+
+      if (!uploadData) {
+        throw new Error('לא הצלחנו להעלות את התמונה');
+      }
+
+      console.log('Upload successful:', uploadData);
+
+      const { data: urlData } = supabase.storage
+        .from('catalog-images')
+        .getPublicUrl(fileName);
+
+      console.log('Generated public URL:', urlData.publicUrl);
+      
+      if (!urlData.publicUrl) {
+        throw new Error('לא הצלחנו ליצור קישור לתמונה');
+      }
+
+      return urlData.publicUrl;
+    } catch (error: any) {
+      console.error('Image upload failed:', error);
       throw error;
     }
-
-    const { data } = supabase.storage
-      .from('catalog-images')
-      .getPublicUrl(filePath);
-
-    console.log('File uploaded successfully, public URL:', data.publicUrl);
-    return data.publicUrl;
   };
 
   const handleImageUpload = async (file: File, isEditing = false) => {
@@ -71,14 +104,13 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
       
       console.log('Single image uploaded successfully');
       toast({
-        title: "הצלחה",
-        description: "התמונה הועלתה בהצלחה"
+        title: "התמונה הועלתה בהצלחה!"
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading single image:', error);
       toast({
-        title: "שגיאה",
-        description: "שגיאה בהעלאת התמונה",
+        title: "שגיאה בהעלאת התמונה",
+        description: error.message,
         variant: "destructive"
       });
     } finally {
@@ -128,7 +160,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
           
           await createItemMutation.mutateAsync({
             category_id: newItem.category_id,
-            title: '', // Don't use filename as title to avoid showing names under images
+            title: '',
             price: '',
             image_url: imageUrl
           });
@@ -313,82 +345,95 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
       {/* Items List */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">פריטים קיימים</h3>
-        {items.map((item) => (
-          <div key={item.id} className="flex items-center space-x-4 rtl:space-x-reverse p-4 border rounded-lg">
-            <img src={item.image_url} alt={item.title} className="w-16 h-16 object-cover rounded" />
-            
-            {editingItem?.id === item.id ? (
-              <>
-                <div className="flex-1 grid md:grid-cols-3 gap-2">
-                  <Select value={editingItem.category_id} onValueChange={(value) => setEditingItem({...editingItem, category_id: value})}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories.map((category) => (
-                        <SelectItem key={category.id} value={category.id}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+        {items.length === 0 ? (
+          <p className="text-gray-500 text-center py-8">אין פריטים בקטלוג</p>
+        ) : (
+          items.map((item) => (
+            <div key={item.id} className="flex items-center space-x-4 rtl:space-x-reverse p-4 border rounded-lg">
+              <img 
+                src={item.image_url} 
+                alt={item.title} 
+                className="w-16 h-16 object-cover rounded"
+                onError={(e) => {
+                  console.error('Item image failed to load:', item.image_url);
+                  e.currentTarget.src = '/placeholder.svg';
+                }}
+              />
+              
+              {editingItem?.id === item.id ? (
+                <>
+                  <div className="flex-1 grid md:grid-cols-3 gap-2">
+                    <Select value={editingItem.category_id} onValueChange={(value) => setEditingItem({...editingItem, category_id: value})}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    
+                    <Input
+                      placeholder="כותרת (אופציונלי)"
+                      value={editingItem.title}
+                      onChange={(e) => setEditingItem({...editingItem, title: e.target.value})}
+                    />
+                    
+                    <Input
+                      placeholder="מחיר"
+                      value={editingItem.price}
+                      onChange={(e) => setEditingItem({...editingItem, price: e.target.value})}
+                    />
+                  </div>
                   
-                  <Input
-                    placeholder="כותרת (אופציונלי)"
-                    value={editingItem.title}
-                    onChange={(e) => setEditingItem({...editingItem, title: e.target.value})}
-                  />
+                  <div className="flex space-x-2 rtl:space-x-reverse">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0], true)}
+                      className="hidden"
+                      id={`edit-image-${item.id}`}
+                    />
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => document.getElementById(`edit-image-${item.id}`)?.click()}
+                      disabled={isUploading}
+                    >
+                      <Upload className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" onClick={handleUpdateItem} className="bg-green-600 hover:bg-green-700">
+                      <Save className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={() => setEditingItem(null)}>
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex-1">
+                    <p className="font-medium">{categories.find(c => c.id === item.category_id)?.name}</p>
+                    {item.title && <p className="text-sm text-gray-600">{item.title}</p>}
+                    {item.price && <p className="text-sm font-bold text-pink-600">₪{item.price}</p>}
+                  </div>
                   
-                  <Input
-                    placeholder="מחיר"
-                    value={editingItem.price}
-                    onChange={(e) => setEditingItem({...editingItem, price: e.target.value})}
-                  />
-                </div>
-                
-                <div className="flex space-x-2 rtl:space-x-reverse">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0], true)}
-                    className="hidden"
-                    id={`edit-image-${item.id}`}
-                  />
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => document.getElementById(`edit-image-${item.id}`)?.click()}
-                  >
-                    <Upload className="h-4 w-4" />
-                  </Button>
-                  <Button size="sm" onClick={handleUpdateItem} className="bg-green-600 hover:bg-green-700">
-                    <Save className="h-4 w-4" />
-                  </Button>
-                  <Button size="sm" variant="outline" onClick={() => setEditingItem(null)}>
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="flex-1">
-                  <p className="font-medium">{categories.find(c => c.id === item.category_id)?.name}</p>
-                  {item.title && <p className="text-sm text-gray-600">{item.title}</p>}
-                  {item.price && <p className="text-sm font-bold text-pink-600">₪{item.price}</p>}
-                </div>
-                
-                <div className="flex space-x-2 rtl:space-x-reverse">
-                  <Button size="sm" variant="outline" onClick={() => setEditingItem(item)}>
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button size="sm" variant="destructive" onClick={() => handleDeleteItem(item.id)}>
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
-        ))}
+                  <div className="flex space-x-2 rtl:space-x-reverse">
+                    <Button size="sm" variant="outline" onClick={() => setEditingItem(item)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button size="sm" variant="destructive" onClick={() => handleDeleteItem(item.id)}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
