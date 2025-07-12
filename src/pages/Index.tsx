@@ -211,41 +211,14 @@ const Index = () => {
               אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
             </p>
             
-            {/* Delivery Information */}
+            {/* Delivery Information Only */}
             <div className="bg-pink-50 rounded-lg p-6 mb-8">
               <h3 className="text-xl font-semibold text-pink-800 mb-3">
                 משלוחים לכל אזור המרכז
               </h3>
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700">
                 אנו מספקים משלוחי פרחים איכותיים לכל אזור המרכז - ירושלים, מודיעין עילית, בני ברק, פתח תקווה ועוד
               </p>
-              
-              {/* Address and Navigation */}
-              <div className="flex flex-col items-center space-y-4">
-                <div className="flex items-center text-gray-700">
-                  <MapPin className="h-5 w-5 ml-2 text-pink-600" />
-                  <span className="font-medium">שערי תשובה 14, מודיעין עילית</span>
-                </div>
-                
-                <div className="flex space-x-4 rtl:space-x-reverse">
-                  <Button
-                    onClick={openGoogleMaps}
-                    variant="outline"
-                    className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
-                  >
-                    <Navigation className="h-4 w-4 ml-2" />
-                    Google Maps
-                  </Button>
-                  <Button
-                    onClick={openWaze}
-                    variant="outline"
-                    className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
-                  >
-                    <Navigation className="h-4 w-4 ml-2" />
-                    Waze
-                  </Button>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -272,6 +245,35 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צור קשר</h2>
             <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
+          </div>
+
+          {/* Address Section */}
+          <div className="text-center mb-8">
+            <div className="bg-pink-50 rounded-lg p-6 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center text-gray-700 mb-4">
+                <MapPin className="h-5 w-5 ml-2 text-pink-600" />
+                <span className="font-medium text-lg">שערי תשובה 14, מודיעין עילית</span>
+              </div>
+              
+              <div className="flex justify-center space-x-4 rtl:space-x-reverse">
+                <Button
+                  onClick={openGoogleMaps}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                >
+                  <Navigation className="h-4 w-4 ml-2" />
+                  Google Maps
+                </Button>
+                <Button
+                  onClick={openWaze}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                >
+                  <Navigation className="h-4 w-4 ml-2" />
+                  Waze
+                </Button>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto">
