@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Phone } from 'lucide-react';
+import { ArrowLeft, Phone, MapPin, Navigation } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -111,6 +112,14 @@ const Index = () => {
     window.open('https://wa.me/972527614436', '_blank');
   };
 
+  const openGoogleMaps = () => {
+    window.open('https://maps.google.com/?q=שערי תשובה 14, מודיעין עילית', '_blank');
+  };
+
+  const openWaze = () => {
+    window.open('https://waze.com/ul?q=שערי תשובה 14, מודיעין עילית', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* Header */}
@@ -197,10 +206,47 @@ const Index = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
               בוקט - שזירת פרחים
             </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
               מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות.
               אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
             </p>
+            
+            {/* Delivery Information */}
+            <div className="bg-pink-50 rounded-lg p-6 mb-8">
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">
+                משלוחים לכל אזור המרכז
+              </h3>
+              <p className="text-gray-700 mb-4">
+                אנו מספקים משלוחי פרחים איכותיים לכל אזור המרכז - ירושלים, מודיעין עילית, בני ברק, פתח תקווה ועוד
+              </p>
+              
+              {/* Address and Navigation */}
+              <div className="flex flex-col items-center space-y-4">
+                <div className="flex items-center text-gray-700">
+                  <MapPin className="h-5 w-5 ml-2 text-pink-600" />
+                  <span className="font-medium">שערי תשובה 14, מודיעין עילית</span>
+                </div>
+                
+                <div className="flex space-x-4 rtl:space-x-reverse">
+                  <Button
+                    onClick={openGoogleMaps}
+                    variant="outline"
+                    className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  >
+                    <Navigation className="h-4 w-4 ml-2" />
+                    Google Maps
+                  </Button>
+                  <Button
+                    onClick={openWaze}
+                    variant="outline"
+                    className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  >
+                    <Navigation className="h-4 w-4 ml-2" />
+                    Waze
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
