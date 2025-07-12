@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Phone, MapPin, Navigation } from 'lucide-react';
+import { ArrowLeft, Phone, MapPin } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -113,7 +113,7 @@ const Index = () => {
   };
 
   const openGoogleMaps = () => {
-    window.open('https://maps.google.com/?q=שערי תשובה 14, מודיעין עילית', '_blank');
+    window.open('https://g.co/kgs/73xK7aS', '_blank');
   };
 
   const openWaze = () => {
@@ -259,18 +259,32 @@ const Index = () => {
                 <Button
                   onClick={openGoogleMaps}
                   variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
                 >
-                  <Navigation className="h-4 w-4 ml-2" />
-                  Google Maps
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M19.527 4.799c1.212 2.608.937 5.678-.827 8.134l-9.301 12.709c-.42.572-1.376.572-1.796 0L-1.098 12.933c-1.764-2.456-2.039-5.526-.827-8.134C.175 1.988 2.766.593 5.516.593s5.341 1.395 6.441 4.206l.068.135.068-.135c1.1-2.811 3.691-4.206 6.441-4.206s5.341 1.395 6.441 4.206zm-8.021.584c-.888-2.278-2.826-3.739-4.99-3.739s-4.102 1.461-4.99 3.739c-.967 2.478-.63 5.274.985 7.496L12 24.845l9.489-12.966c1.615-2.222 1.952-5.018.985-7.496z"/>
+                    <circle cx="12" cy="9" r="2.5"/>
+                  </svg>
                 </Button>
                 <Button
                   onClick={openWaze}
                   variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
                 >
-                  <Navigation className="h-4 w-4 ml-2" />
-                  Waze
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M23.184 10.653c-.817-5.936-5.89-10.42-12.01-10.42S-.653 4.717-1.47 10.653c-.104.756-.104 1.527 0 2.283.817 5.936 5.89 10.42 12.01 10.42s11.193-4.484 12.01-10.42c.104-.756.104-1.527 0-2.283zM12 20.72c-4.817 0-8.72-3.903-8.72-8.72S7.183 3.28 12 3.28s8.72 3.903 8.72 8.72-3.903 8.72-8.72 8.72z"/>
+                    <path d="M16.5 8.5c0 .828-.672 1.5-1.5 1.5s-1.5-.672-1.5-1.5.672-1.5 1.5-1.5 1.5.672 1.5 1.5zm-7 0c0 .828-.672 1.5-1.5 1.5S6.5 9.328 6.5 8.5 7.172 7 8 7s1.5.672 1.5 1.5zm7.44 5.44c-.293.293-.768.293-1.061 0l-1.379-1.379-1.379 1.379c-.293.293-.768.293-1.061 0s-.293-.768 0-1.061L12.939 12l-.879-.879c-.293-.293-.293-.768 0-1.061s.768-.293 1.061 0L14.5 11.439l1.379-1.379c.293-.293.768-.293 1.061 0s.293.768 0 1.061L15.561 12l1.379 1.379c.293.293.293.768 0 1.061z"/>
+                  </svg>
                 </Button>
               </div>
             </div>
