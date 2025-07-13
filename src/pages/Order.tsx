@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
@@ -51,7 +50,7 @@ const Order = () => {
     { value: 'cash', label: 'מזומן' },
     { value: 'bit', label: 'ביט' },
     { value: 'bank_transfer', label: 'העברה בנקאית' },
-    { value: 'ashkaei', label: 'אשקואי' }
+    { value: 'credit', label: 'אשראי' }
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {

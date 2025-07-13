@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone, MapPin } from 'lucide-react';
@@ -113,7 +112,7 @@ const Index = () => {
   };
 
   const openGoogleMaps = () => {
-    window.open('https://g.co/kgs/73xK7aS', '_blank');
+    window.open('https://maps.google.com/?q=שערי+תשובה+14+מודיעין+עילית', '_blank');
   };
 
   const openWaze = () => {
@@ -247,53 +246,7 @@ const Index = () => {
             <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
           </div>
 
-          {/* Address Section */}
-          <div className="text-center mb-8">
-            <div className="bg-pink-50 rounded-lg p-6 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center text-gray-700 mb-4">
-                <MapPin className="h-5 w-5 ml-2 text-pink-600" />
-                <span className="font-medium text-lg">שערי תשובה 14, מודיעין עילית</span>
-              </div>
-              
-              <div className="flex justify-center space-x-4 rtl:space-x-reverse">
-                <Button
-                  onClick={openGoogleMaps}
-                  variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
-                  size="icon"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    className="h-8 w-8 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M200,224H56a8,8,0,0,1-6.88-12.07L120,37.86a8,8,0,0,1,13.76,0l70.88,174.07A8,8,0,0,1,200,224ZM62.44,208H193.56L128,64Z"/>
-                    <path d="M128,144a24,24,0,1,1,24-24A24,24,0,0,1,128,144Zm0-32a8,8,0,1,0,8,8A8,8,0,0,0,128,112Z"/>
-                    <circle cx="128" cy="120" r="24" fill="#EA4335"/>
-                    <path d="M128,32a88,88,0,0,0-88,88c0,28.81,20.92,60.54,62.18,94.33a8,8,0,0,0,9.64,0C153.08,180.54,216,148.81,216,120A88,88,0,0,0,128,32Z" fill="#4285F4"/>
-                  </svg>
-                </Button>
-                <Button
-                  onClick={openWaze}
-                  variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
-                  size="icon"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    className="h-8 w-8 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M200,132a72,72,0,0,1-144,0c0-32.34,26.29-52.47,46.58-67.36C120.43,53.43,136,44.73,136,32c0-8.84-7.16-16-16-16s-16,7.16-16,16c0,6.63-8,12.24-16,12.24S72,38.63,72,32c0-26.51,21.49-48,48-48s48,21.49,48,48c0,29.67-33.29,45.84-50.69,58.08C100.1,103.84,88,115.66,88,132a32,32,0,0,0,64,0c0-5.65,6.69-12.45,13.66-19.76C180.07,97.83,200,81.66,200,132Z" fill="#00D9FF"/>
-                    <circle cx="120" cy="80" r="8" fill="#FFF"/>
-                    <circle cx="96" cy="96" r="6" fill="#FFF"/>
-                  </svg>
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto mb-8">
             <div className="text-center">
               <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון</h3>
               <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block mb-4">
@@ -319,6 +272,49 @@ const Index = () => {
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"/>
                 </svg>
               </Button>
+            </div>
+          </div>
+
+          {/* Address Section with Navigation - moved under contact details */}
+          <div className="text-center mb-8">
+            <div className="bg-pink-50 rounded-lg p-6 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center text-gray-700 mb-4">
+                <MapPin className="h-5 w-5 ml-2 text-pink-600" />
+                <span className="font-medium text-lg">שערי תשובה 14, מודיעין עילית</span>
+              </div>
+              
+              <div className="flex justify-center space-x-4 rtl:space-x-reverse">
+                <Button
+                  onClick={openGoogleMaps}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
+                >
+                  <svg
+                    viewBox="0 0 256 256"
+                    className="h-8 w-8 fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M128,16a88,88,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88,88,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z" fill="#4285f4"/>
+                    <circle cx="128" cy="104" r="32" fill="#ea4335"/>
+                  </svg>
+                </Button>
+                <Button
+                  onClick={openWaze}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#00d9ff"/>
+                    <circle cx="12" cy="9" r="2.5" fill="#fff"/>
+                  </svg>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

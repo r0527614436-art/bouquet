@@ -113,16 +113,9 @@ const Catalog = () => {
           <p className="text-lg text-gray-700">בחרו מתוך מגוון הפרחים והעיצובים שלנו</p>
         </div>
 
-        {/* Category Filter */}
+        {/* Category Filter - Removed "כל הקטגוריות" button */}
         <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              variant={selectedCategory === 'all' ? 'default' : 'outline'}
-              onClick={() => setSelectedCategory('all')}
-              className={selectedCategory === 'all' ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
-            >
-              כל הקטגוריות
-            </Button>
             {categories.map((category) => (
               <Button
                 key={category.id}
@@ -139,7 +132,7 @@ const Catalog = () => {
         {/* Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
               <div className="aspect-square overflow-hidden">
                 <img
                   src={item.image_url}
@@ -152,13 +145,18 @@ const Catalog = () => {
                 {item.price && (
                   <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
                 )}
-                <Button
+                
+                {/* Small cart icon button in corner */}
+                <button
                   onClick={() => handleAddToCart(item)}
-                  className="w-full bg-pink-600 hover:bg-pink-700 text-white"
+                  className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                  title="הוסף לעגלה"
                 >
-                  <Plus className="h-4 w-4 ml-2" />
-                  הוסף לעגלה
-                </Button>
+                  <div className="flex items-center">
+                    <ShoppingCart className="h-4 w-4" />
+                    <Plus className="h-3 w-3 -ml-1" />
+                  </div>
+                </button>
               </div>
             </div>
           ))}
@@ -169,6 +167,20 @@ const Catalog = () => {
             <p className="text-gray-500 text-lg">אין פריטים בקטגוריה זו</p>
           </div>
         )}
+
+        {/* Cart button at bottom of page */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <Link to="/cart">
+            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 relative">
+              <ShoppingCart className="h-6 w-6" />
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
+              )}
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
