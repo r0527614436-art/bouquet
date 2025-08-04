@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -27,6 +27,24 @@ const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const { addToCart, getTotalItems } = useCart();
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const clickCount = useRef(0);
+  const clickTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleLogoClick = () => {
+    clickCount.current += 1;
+    
+    if (clickTimer.current) {
+      clearTimeout(clickTimer.current);
+    }
+    
+    clickTimer.current = setTimeout(() => {
+      if (clickCount.current === 3) {
+        navigate('/admin');
+      }
+      clickCount.current = 0;
+    }, 500);
+  };
 
   const { data: categories = [] } = useQuery({
     queryKey: ['categories'],
@@ -100,7 +118,8 @@ const Catalog = () => {
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-24 w-auto"
+                className="h-24 w-auto cursor-pointer"
+                onClick={handleLogoClick}
               />
             </div>
           </div>

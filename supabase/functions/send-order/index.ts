@@ -1,5 +1,8 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { Resend } from "npm:resend@2.0.0";
+
+const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -77,9 +80,18 @@ const handler = async (req: Request): Promise<Response> => {
     `;
 
     console.log('Order received:', orderData);
-    console.log('Email content created successfully');
+    
+    // Send email using Resend
+    const emailResponse = await resend.emails.send({
+      from: "בוקט הזמנות <onboarding@resend.dev>",
+      to: ["r0527614436@gmail.com"],
+      subject: `הזמנה חדשה מ-${orderData.customer_name}`,
+      html: emailContent,
+    });
 
-    return new Response(JSON.stringify({ success: true }), {
+    console.log("Email sent successfully:", emailResponse);
+
+    return new Response(JSON.stringify({ success: true, message: 'Order received and email sent successfully' }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
