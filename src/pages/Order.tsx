@@ -20,11 +20,13 @@ const Order = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [selectedOrderType, setSelectedOrderType] = useState<'price-inquiry' | 'full-order' | null>(null);
   
   // Form state
   const [eventDate, setEventDate] = useState<Date>();
   const [name, setName] = useState('');
   const [eventPhone, setEventPhone] = useState('');
+  const [email, setEmail] = useState(''); // For price inquiry
   const [mechutanPhone, setMechutanPhone] = useState('');
   const [dayOfWeek, setDayOfWeek] = useState('');
   const [city, setCity] = useState('');
@@ -53,7 +55,59 @@ const Order = () => {
     { value: 'credit', label: 'אשראי' }
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handlePriceInquiry = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!name || !eventPhone) {
+      toast({
+        title: "שגיאה",
+        description: "אנא מלאו את השם והטלפון",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const inquiryData = {
+        type: 'price-inquiry',
+        customer_name: name,
+        phone: eventPhone,
+        email: email || null,
+        items: JSON.stringify(items),
+        notes: notes || null,
+        created_at: new Date().toISOString()
+      };
+
+      // Send price inquiry via Supabase edge function
+      const { error } = await supabase.functions.invoke('send-order', {
+        body: inquiryData
+      });
+
+      if (error) throw error;
+
+      setOrderSubmitted(true);
+      clearCart();
+      
+      toast({
+        title: "בקשת בירור מחיר נשלחה",
+        description: "הבקשה נשלחה בהצלחה! ניצור איתכם קשר בקרוב עם הצעת מחיר",
+      });
+
+    } catch (error) {
+      console.error('Error submitting price inquiry:', error);
+      toast({
+        title: "שגיאה",
+        description: "אירעה שגיאה בשליחת הבקשה. אנא נסו שוב",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleFullOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!eventDate || !name || !eventPhone || !dayOfWeek || !city || !street || !building || !paymentMethod) {
@@ -69,6 +123,7 @@ const Order = () => {
 
     try {
       const orderData = {
+        type: 'full-order',
         event_date: eventDate.toISOString(),
         customer_name: name,
         event_phone: eventPhone,
@@ -200,52 +255,55 @@ const Order = () => {
           </div>
         </div>
 
-        {/* Order Form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
-          {/* Event Date */}
-          <div className="space-y-2">
-            <Label htmlFor="eventDate" className="text-right block">תאריך האירוע *</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !eventDate && "text-muted-foreground"
-                  )}
-                >
-                  <Calendar className="ml-2 h-4 w-4" />
-                  {eventDate ? format(eventDate, "PPP", { locale: he }) : "בחרו תאריך"}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <CalendarComponent
-                  mode="single"
-                  selected={eventDate}
-                  onSelect={setEventDate}
-                  initialFocus
-                  className="pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+        {/* Order Type Selection */}
+        {!selectedOrderType ? (
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">בחרו סוג פעולה</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Button
+                onClick={() => setSelectedOrderType('price-inquiry')}
+                className="h-24 bg-blue-600 hover:bg-blue-700 text-white text-lg"
+              >
+                בירור מחיר
+              </Button>
+              <Button
+                onClick={() => setSelectedOrderType('full-order')}
+                className="h-24 bg-pink-600 hover:bg-pink-700 text-white text-lg"
+              >
+                ביצוע הזמנה
+              </Button>
+            </div>
           </div>
+        ) : selectedOrderType === 'price-inquiry' ? (
+          /* Price Inquiry Form */
+          <form onSubmit={handlePriceInquiry} className="bg-white rounded-lg shadow-md p-6 space-y-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-bold text-gray-800">בירור מחיר</h2>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setSelectedOrderType(null)}
+                className="text-sm"
+              >
+                חזרה לבחירה
+              </Button>
+            </div>
 
-          {/* Name */}
-          <div className="space-y-2">
-            <Label htmlFor="name">שם *</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="שם מלא"
-              required
-            />
-          </div>
-
-          {/* Phone Numbers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="eventPhone">טלפון זמין ביום האירוע *</Label>
+              <Label htmlFor="name">שם *</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="שם מלא"
+                required
+              />
+            </div>
+
+            {/* Phone */}
+            <div className="space-y-2">
+              <Label htmlFor="eventPhone">טלפון *</Label>
               <Input
                 id="eventPhone"
                 value={eventPhone}
@@ -254,130 +312,248 @@ const Order = () => {
                 required
               />
             </div>
+
+            {/* Email */}
             <div className="space-y-2">
-              <Label htmlFor="mechutanPhone">טלפון מחותנת</Label>
+              <Label htmlFor="email">מייל (אופציונלי)</Label>
               <Input
-                id="mechutanPhone"
-                value={mechutanPhone}
-                onChange={(e) => setMechutanPhone(e.target.value)}
-                placeholder="05X-XXXXXXX"
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="example@email.com"
               />
             </div>
-          </div>
 
-          {/* Day of Week */}
-          <div className="space-y-2">
-            <Label>יום בשבוע *</Label>
-            <RadioGroup value={dayOfWeek} onValueChange={setDayOfWeek} className="grid grid-cols-4 gap-4">
-              {daysOfWeek.map((day) => (
-                <div key={day.value} className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <RadioGroupItem value={day.value} id={day.value} />
-                  <Label htmlFor={day.value}>{day.label}</Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
-
-          {/* Delivery Address */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800">כתובת למשלוח</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="city">עיר *</Label>
-                <Input
-                  id="city"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="שם העיר"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="street">רחוב *</Label>
-                <Input
-                  id="street"
-                  value={street}
-                  onChange={(e) => setStreet(e.target.value)}
-                  placeholder="שם הרחוב"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="building">בניין *</Label>
-                <Input
-                  id="building"
-                  value={building}
-                  onChange={(e) => setBuilding(e.target.value)}
-                  placeholder="מספר בניין"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="entrance">כניסה (אופציונלי)</Label>
-                <Input
-                  id="entrance"
-                  value={entrance}
-                  onChange={(e) => setEntrance(e.target.value)}
-                  placeholder="מספר כניסה"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="floor">קומה (אופציונלי)</Label>
-                <Input
-                  id="floor"
-                  value={floor}
-                  onChange={(e) => setFloor(e.target.value)}
-                  placeholder="מספר קומה"
-                />
-              </div>
+            {/* Notes */}
+            <div className="space-y-2">
+              <Label htmlFor="notes">הערות (אופציונלי)</Label>
+              <Textarea
+                id="notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                placeholder="הערות נוספות לבירור המחיר"
+                rows={4}
+              />
             </div>
-          </div>
 
-          {/* Dress Color */}
-          <div className="space-y-2">
-            <Label htmlFor="dressColor">גוון שמלת כלה (אופציונלי)</Label>
-            <Input
-              id="dressColor"
-              value={dressColor}
-              onChange={(e) => setDressColor(e.target.value)}
-              placeholder="תיאור גוון השמלה"
-            />
-          </div>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
+            >
+              {isSubmitting ? 'שולח בקשה...' : 'שלח בקשת בירור מחיר'}
+            </Button>
+          </form>
+        ) : (
+          /* Full Order Form */
+          <div className="space-y-6">
+            {/* Warning Message */}
+            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">לתשומת ליבך לפני הזמנה</h3>
+              <p className="text-yellow-700 mb-2">
+                הזמנה מחייבת בירור מחיר מראש — אנא חזור ובחר באופציית בירור מחיר.
+              </p>
+              <p className="text-yellow-700 mb-2">
+                אין לבצע הזמנה לפני קבלת הצעת מחיר.
+              </p>
+              <p className="text-yellow-700">
+                שימו ❤️: סוגי הפרחים משתנים לפי עונות השנה ואין התחייבות לסוג מדויק.
+              </p>
+            </div>
 
-          {/* Payment Method */}
-          <div className="space-y-2">
-            <Label>אמצעי תשלום *</Label>
-            <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid grid-cols-2 gap-4">
-              {paymentMethods.map((method) => (
-                <div key={method.value} className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <RadioGroupItem value={method.value} id={method.value} />
-                  <Label htmlFor={method.value}>{method.label}</Label>
+            <form onSubmit={handleFullOrder} className="bg-white rounded-lg shadow-md p-6 space-y-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-800">ביצוע הזמנה מלאה</h2>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setSelectedOrderType(null)}
+                  className="text-sm"
+                >
+                  חזרה לבחירה
+                </Button>
+              </div>
+
+              {/* Event Date */}
+              <div className="space-y-2">
+                <Label htmlFor="eventDate" className="text-right block">תאריך האירוע *</Label>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !eventDate && "text-muted-foreground"
+                      )}
+                    >
+                      <Calendar className="ml-2 h-4 w-4" />
+                      {eventDate ? format(eventDate, "PPP", { locale: he }) : "בחרו תאריך"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={eventDate}
+                      onSelect={setEventDate}
+                      initialFocus
+                      className="pointer-events-auto"
+                    />
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              {/* Name */}
+              <div className="space-y-2">
+                <Label htmlFor="name">שם *</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="שם מלא"
+                  required
+                />
+              </div>
+
+              {/* Phone Numbers */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="eventPhone">טלפון זמין ביום האירוע *</Label>
+                  <Input
+                    id="eventPhone"
+                    value={eventPhone}
+                    onChange={(e) => setEventPhone(e.target.value)}
+                    placeholder="05X-XXXXXXX"
+                    required
+                  />
                 </div>
-              ))}
-            </RadioGroup>
-          </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mechutanPhone">טלפון מחותנת</Label>
+                  <Input
+                    id="mechutanPhone"
+                    value={mechutanPhone}
+                    onChange={(e) => setMechutanPhone(e.target.value)}
+                    placeholder="05X-XXXXXXX"
+                  />
+                </div>
+              </div>
 
-          {/* Notes */}
-          <div className="space-y-2">
-            <Label htmlFor="notes">הערות (אופציונלי)</Label>
-            <Textarea
-              id="notes"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="הערות נוספות להזמנה"
-              rows={4}
-            />
-          </div>
+              {/* Day of Week */}
+              <div className="space-y-2">
+                <Label>יום בשבוע *</Label>
+                <RadioGroup value={dayOfWeek} onValueChange={setDayOfWeek} className="grid grid-cols-4 gap-4">
+                  {daysOfWeek.map((day) => (
+                    <div key={day.value} className="flex items-center space-x-2 rtl:space-x-reverse">
+                      <RadioGroupItem value={day.value} id={day.value} />
+                      <Label htmlFor={day.value}>{day.label}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
 
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 text-lg"
-          >
-            {isSubmitting ? 'שולח הזמנה...' : 'שלח הזמנה'}
-          </Button>
-        </form>
+              {/* Delivery Address */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800">כתובת למשלוח</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="city">עיר *</Label>
+                    <Input
+                      id="city"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="שם העיר"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="street">רחוב *</Label>
+                    <Input
+                      id="street"
+                      value={street}
+                      onChange={(e) => setStreet(e.target.value)}
+                      placeholder="שם הרחוב"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="building">בניין *</Label>
+                    <Input
+                      id="building"
+                      value={building}
+                      onChange={(e) => setBuilding(e.target.value)}
+                      placeholder="מספר בניין"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="entrance">כניסה (אופציונלי)</Label>
+                    <Input
+                      id="entrance"
+                      value={entrance}
+                      onChange={(e) => setEntrance(e.target.value)}
+                      placeholder="מספר כניסה"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="floor">קומה (אופציונלי)</Label>
+                    <Input
+                      id="floor"
+                      value={floor}
+                      onChange={(e) => setFloor(e.target.value)}
+                      placeholder="מספר קומה"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Dress Color */}
+              <div className="space-y-2">
+                <Label htmlFor="dressColor">גוון שמלת כלה (אופציונלי)</Label>
+                <Input
+                  id="dressColor"
+                  value={dressColor}
+                  onChange={(e) => setDressColor(e.target.value)}
+                  placeholder="תיאור גוון השמלה"
+                />
+              </div>
+
+              {/* Payment Method */}
+              <div className="space-y-2">
+                <Label>אמצעי תשלום *</Label>
+                <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="grid grid-cols-2 gap-4">
+                  {paymentMethods.map((method) => (
+                    <div key={method.value} className="flex items-center space-x-2 rtl:space-x-reverse">
+                      <RadioGroupItem value={method.value} id={method.value} />
+                      <Label htmlFor={method.value}>{method.label}</Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              {/* Notes */}
+              <div className="space-y-2">
+                <Label htmlFor="notes">הערות (אופציונלי)</Label>
+                <Textarea
+                  id="notes"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="הערות נוספות להזמנה"
+                  rows={4}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-pink-600 hover:bg-pink-700 text-white py-3 text-lg"
+              >
+                {isSubmitting ? 'שולח הזמנה...' : 'שלח הזמנה'}
+              </Button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
