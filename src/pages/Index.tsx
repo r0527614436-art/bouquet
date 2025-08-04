@@ -291,14 +291,11 @@ const Index = () => {
                   className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
                   size="icon"
                 >
-                  <svg
-                    viewBox="0 0 256 256"
-                    className="h-8 w-8 fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M128,16a88,88,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88,88,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z" fill="#4285f4"/>
-                    <circle cx="128" cy="104" r="32" fill="#ea4335"/>
-                  </svg>
+                  <img 
+                    src="/lovable-uploads/fd24647a-2b32-46d8-9868-413519b08b8a.png" 
+                    alt="Google Maps" 
+                    className="h-8 w-8 object-contain"
+                  />
                 </Button>
                 <Button
                   onClick={openWaze}
