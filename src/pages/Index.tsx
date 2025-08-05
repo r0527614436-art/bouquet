@@ -4,6 +4,8 @@ import { ArrowLeft, Phone, MapPin } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import wazeIcon from '@/assets/waze-icon.png';
 
 interface HomepageSlide {
@@ -20,6 +22,17 @@ const Index = () => {
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
   const navigate = useNavigate();
+
+  // Refs for animation triggers
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
+  const servicesRef = useRef(null);
+  
+  const isHeroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const isAboutInView = useInView(aboutRef, { once: true, margin: "-100px" });
+  const isContactInView = useInView(contactRef, { once: true, margin: "-100px" });
+  const isServicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
 
   // Fetch slides from database
   const { data: slides = [] } = useQuery({
@@ -154,7 +167,13 @@ const Index = () => {
       </header>
 
       {/* Hero Section with Image Carousel */}
-      <section className="relative h-96 md:h-[500px] overflow-hidden">
+      <motion.section 
+        ref={heroRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative h-96 md:h-[500px] overflow-hidden"
+      >
         <div className="relative w-full h-full">
           {images.map((image, index) => (
             <div
@@ -197,10 +216,16 @@ const Index = () => {
             />
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* About Section */}
-      <section className="py-16 bg-white">
+      <motion.section 
+        ref={aboutRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isAboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="py-16 bg-white"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
@@ -237,10 +262,17 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16 bg-white">
+      <motion.section 
+        id="contact" 
+        ref={contactRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        className="py-16 bg-white"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צור קשר</h2>
@@ -313,7 +345,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <footer className="bg-pink-800 text-white py-8">
