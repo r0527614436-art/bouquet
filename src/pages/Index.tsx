@@ -334,7 +334,7 @@ const Index = () => {
             <p className="text-sm text-pink-200">
               © 2025 כל הזכויות שמורות ל{' '}
               <a 
-                href="https://c869463294b9.godaddysites.com/" 
+                href="https://hebrew-web-craft-hub.lovable.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
