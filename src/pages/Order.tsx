@@ -264,16 +264,16 @@ const Order = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Button
                 onClick={() => setSelectedOrderType('price-inquiry')}
-                className="relative group h-28 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
+                variant="outline"
+                className="relative group h-28 bg-transparent border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10">בירור מחיר</span>
               </Button>
               <Button
                 onClick={() => setSelectedOrderType('full-order')}
-                className="relative group h-28 bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
+                variant="outline"
+                className="relative group h-28 bg-transparent border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10">ביצוע הזמנה</span>
               </Button>
             </div>
