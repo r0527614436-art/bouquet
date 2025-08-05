@@ -257,20 +257,24 @@ const Order = () => {
 
         {/* Order Type Selection */}
         {!selectedOrderType ? (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">בחרו סוג פעולה</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow-md p-8">
+            <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-pink-600 to-pink-800 bg-clip-text text-transparent">
+              בחרו סוג פעולה
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Button
                 onClick={() => setSelectedOrderType('price-inquiry')}
-                className="h-24 bg-blue-600 hover:bg-blue-700 text-white text-lg"
+                className="relative group h-28 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
               >
-                בירור מחיר
+                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">בירור מחיר</span>
               </Button>
               <Button
                 onClick={() => setSelectedOrderType('full-order')}
-                className="h-24 bg-pink-600 hover:bg-pink-700 text-white text-lg"
+                className="relative group h-28 bg-gradient-to-br from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0"
               >
-                ביצוע הזמנה
+                <div className="absolute inset-0 bg-white/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">ביצוע הזמנה</span>
               </Button>
             </div>
           </div>
