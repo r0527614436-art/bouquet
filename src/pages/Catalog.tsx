@@ -85,7 +85,7 @@ const Catalog = () => {
     
     toast({
       title: "נוסף לעגלה",
-      description: `${item.title} נוסף לעגלת הקניות`,
+      description: `${item.title} נוסף לסל המוצרים`,
     });
   };
 
@@ -105,7 +105,7 @@ const Catalog = () => {
                 className="flex items-center text-pink-600 hover:text-pink-800 relative"
               >
                 <ShoppingCart className="h-5 w-5 ml-2" />
-                עגלת קניות
+                סל המוצרים
                 {getTotalItems() > 0 && (
                   <span className="absolute -top-2 -right-2 bg-pink-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                     {getTotalItems()}

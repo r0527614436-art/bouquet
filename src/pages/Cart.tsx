@@ -42,10 +42,10 @@ const Cart = () => {
           <div className="text-center">
             <ShoppingBag className="h-24 w-24 text-gray-300 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-700 mb-4">העגלה ריקה</h2>
-            <p className="text-gray-500 mb-8">אין פריטים בעגלת הקניות שלכם</p>
+            <p className="text-gray-500 mb-8">אין פריטים בסל המוצרים שלכם</p>
             <Link to="/catalog">
               <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3">
-                התחילו לקנות
+                התחילו להזמנה
               </Button>
             </Link>
           </div>
@@ -78,7 +78,7 @@ const Cart = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-pink-800 mb-2">עגלת קניות</h1>
+          <h1 className="text-3xl font-bold text-pink-800 mb-2">סל המוצרים</h1>
           <p className="text-gray-600">{getTotalItems()} פריטים בעגלה</p>
         </div>
 

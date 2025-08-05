@@ -92,7 +92,7 @@ const Order = () => {
       
       toast({
         title: "בקשת בירור מחיר נשלחה",
-        description: "הבקשה נשלחה בהצלחה! ניצור איתכם קשר בקרוב עם הצעת מחיר",
+        description: "בקשת בירור מחיר התקבלה! נחזור אליך בהקדם עם הצעת מחיר מותאמת",
       });
 
     } catch (error) {
@@ -190,7 +190,7 @@ const Order = () => {
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-800 mb-4">ההזמנה נשלחה בהצלחה!</h2>
           <p className="text-gray-600 mb-6">
-            תודה על ההזמנה. ניצור איתכם קשר בקרוב לגבי פרטי התשלום והמשלוח.
+            בקשת בירור מחיר התקבלה! נחזור אליך בהקדם עם הצעת מחיר מותאמת.
           </p>
           <div className="space-y-3">
             <Link to="/catalog" className="block">

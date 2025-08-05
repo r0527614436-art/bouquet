@@ -40,40 +40,40 @@ const Index = () => {
     {
       id: '1',
       image_url: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-      title: "זרי כלה",
-      description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
+      title: "זרי אירוסין",
+      description: "זרי פרחים מרהיבים לחגיגת האירוסין",
       order_index: 1,
       is_active: true
     },
     {
       id: '2',
       image_url: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
-      title: "זרי אירוסין",
-      description: "זרי פרחים מרהיבים לחגיגת האירוסין",
+      title: "סדנאות",
+      description: "סדנאות שזירת פרחים מקצועיות",
       order_index: 2,
       is_active: true
     },
     {
       id: '3',
       image_url: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-      title: "סדנאות",
-      description: "סדנאות שזירת פרחים מקצועיות",
+      title: "זרי כלה",
+      description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
       order_index: 3,
       is_active: true
     },
     {
       id: '4',
       image_url: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-      title: "הפקת אירועים",
-      description: "הפקת אירועים דתיים עם עיצוב פרחים מושלם",
+      title: "עיצוב מתנות",
+      description: "מתנות מעוצבות עם פרחים ושוקולדים",
       order_index: 4,
       is_active: true
     },
     {
       id: '5',
       image_url: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-      title: "עיצוב מתנות",
-      description: "מתנות מעוצבות עם פרחים ושוקולדים",
+      title: "כיסאות כלה",
+      description: "כיסאות כלה מעוצבים במיוחד",
       order_index: 5,
       is_active: true
     }
