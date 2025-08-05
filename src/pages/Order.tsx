@@ -265,7 +265,7 @@ const Order = () => {
               <Button
                 onClick={() => setSelectedOrderType('price-inquiry')}
                 variant="outline"
-                className="relative group h-28 bg-transparent border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                className="relative group h-28 bg-transparent border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white text-xl font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
                 <span className="relative z-10">בירור מחיר</span>
               </Button>
