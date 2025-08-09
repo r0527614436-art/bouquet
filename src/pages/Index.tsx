@@ -169,9 +169,9 @@ const Index = () => {
       {/* Hero Section with Image Carousel */}
       <motion.section 
         ref={heroRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isHeroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        initial={{ opacity: 0, x: -100 }}
+        animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
         className="relative h-96 md:h-[500px] overflow-hidden"
       >
         <div className="relative w-full h-full">
@@ -221,9 +221,9 @@ const Index = () => {
       {/* About Section */}
       <motion.section 
         ref={aboutRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isAboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        initial={{ opacity: 0, x: 100 }}
+        animate={isAboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -268,9 +268,9 @@ const Index = () => {
       <motion.section 
         id="contact" 
         ref={contactRef}
-        initial={{ opacity: 0, y: 50 }}
-        animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        initial={{ opacity: 0, x: -100 }}
+        animate={isContactInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+        transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
