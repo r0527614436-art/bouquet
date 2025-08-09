@@ -63,8 +63,7 @@ const Catalog = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('catalog_items')
-        .select('*, categories!inner(name)')
-        .order('categories.name', { ascending: true })
+        .select('*')
         .order('created_at', { ascending: false });
       if (error) throw error;
       return data || [];
