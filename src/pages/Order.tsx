@@ -190,7 +190,7 @@ const Order = () => {
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-800 mb-4">ההזמנה נשלחה בהצלחה!</h2>
           <p className="text-gray-600 mb-6">
-            בקשת בירור מחיר התקבלה! נחזור אליך בהקדם עם הצעת מחיר מותאמת.
+            הזמנתך התקבלה! נחזור אליכם לביצוע התשלום
           </p>
           <div className="space-y-3">
             <Link to="/catalog" className="block">
