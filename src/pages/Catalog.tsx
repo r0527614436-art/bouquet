@@ -1,13 +1,13 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShoppingCart, Plus } from 'lucide-react';
+import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import { ImageViewer } from '@/components/ui/image-viewer';
 
 interface Category {
   id: string;
@@ -27,7 +27,7 @@ interface CatalogItem {
 }
 
 const Catalog = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
   const { addToCart, getTotalItems } = useCart();
@@ -63,6 +63,13 @@ const Catalog = () => {
     }
   });
 
+  // Set the first category as selected when categories are loaded
+  useEffect(() => {
+    if (!selectedCategory && categories.length > 0) {
+      setSelectedCategory(categories[0].id);
+    }
+  }, [categories, selectedCategory]);
+
   const { data: items = [] } = useQuery({
     queryKey: ['catalog-items', 'categories'],
     queryFn: async () => {
@@ -88,9 +95,9 @@ const Catalog = () => {
     return categoryIndexA - categoryIndexB;
   });
 
-  const filteredItems = selectedCategory === 'all' 
-    ? sortedItems 
-    : sortedItems.filter(item => item.category_id === selectedCategory);
+  const filteredItems = selectedCategory 
+    ? sortedItems.filter(item => item.category_id === selectedCategory)
+    : sortedItems;
 
   const handleAddToCart = (item: CatalogItem) => {
     addToCart({
@@ -127,6 +134,8 @@ const Catalog = () => {
       setCurrentImageItem(filteredItems[currentIndex + 1]);
     }
   };
+
+  const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
 
   const getCategoryByItem = (item: CatalogItem) => {
     return categories.find(cat => cat.id === item.category_id);
