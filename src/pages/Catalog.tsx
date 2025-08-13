@@ -7,10 +7,13 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
+import { ImageViewer } from '@/components/ui/image-viewer';
 
 interface Category {
   id: string;
   name: string;
+  subtitle: string | null;
+  allow_cart: boolean;
   created_at: string;
 }
 
@@ -25,6 +28,8 @@ interface CatalogItem {
 
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [imageViewerOpen, setImageViewerOpen] = useState(false);
+  const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
   const { addToCart, getTotalItems } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -102,6 +107,31 @@ const Catalog = () => {
     });
   };
 
+  const handleImageClick = (item: CatalogItem) => {
+    setCurrentImageItem(item);
+    setImageViewerOpen(true);
+  };
+
+  const handlePreviousImage = () => {
+    if (!currentImageItem) return;
+    const currentIndex = filteredItems.findIndex(item => item.id === currentImageItem.id);
+    if (currentIndex > 0) {
+      setCurrentImageItem(filteredItems[currentIndex - 1]);
+    }
+  };
+
+  const handleNextImage = () => {
+    if (!currentImageItem) return;
+    const currentIndex = filteredItems.findIndex(item => item.id === currentImageItem.id);
+    if (currentIndex < filteredItems.length - 1) {
+      setCurrentImageItem(filteredItems[currentIndex + 1]);
+    }
+  };
+
+  const getCategoryByItem = (item: CatalogItem) => {
+    return categories.find(cat => cat.id === item.category_id);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* Header */}
@@ -145,53 +175,71 @@ const Catalog = () => {
           <p className="text-lg text-gray-700">בחרו מתוך מגוון הפרחים והעיצובים שלנו</p>
         </div>
 
-        {/* Category Filter - Removed "כל הקטגוריות" button */}
+        {/* Category Filter */}
         <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant={selectedCategory === category.id ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory(category.id)}
-                className={selectedCategory === category.id ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
-              >
-                {category.name}
-              </Button>
+              <div key={category.id} className="text-center">
+                <Button
+                  variant={selectedCategory === category.id ? 'default' : 'outline'}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={selectedCategory === category.id ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
+                >
+                  {category.name}
+                </Button>
+                {category.subtitle && selectedCategory === category.id && (
+                  <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
+                )}
+              </div>
             ))}
           </div>
         </div>
 
         {/* Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
-              <div className="aspect-square overflow-hidden">
-                <img
-                  src={item.image_url}
-                  alt={item.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
+          {filteredItems.map((item) => {
+            const category = getCategoryByItem(item);
+            const allowCart = category?.allow_cart !== false;
+            
+            return (
+              <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
+                <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
+                  <img
+                    src={item.image_url}
+                    alt={item.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
+                  {item.price && (
+                    <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                  )}
+                  
+                  {/* Cart button - only show if category allows cart */}
+                  {allowCart && (
+                    <button
+                      onClick={() => handleAddToCart(item)}
+                      className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                      title="הוסף לעגלה"
+                    >
+                      <div className="flex items-center">
+                        <ShoppingCart className="h-4 w-4" />
+                        <Plus className="h-3 w-3 -ml-1" />
+                      </div>
+                    </button>
+                  )}
+
+                  {/* Display only indicator */}
+                  {!allowCart && (
+                    <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
+                      <span className="text-xs font-medium">תצוגה</span>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
-                {item.price && (
-                  <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
-                )}
-                
-                {/* Small cart icon button in corner */}
-                <button
-                  onClick={() => handleAddToCart(item)}
-                  className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
-                  title="הוסף לעגלה"
-                >
-                  <div className="flex items-center">
-                    <ShoppingCart className="h-4 w-4" />
-                    <Plus className="h-3 w-3 -ml-1" />
-                  </div>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {filteredItems.length === 0 && (
@@ -213,6 +261,16 @@ const Catalog = () => {
             </Button>
           </Link>
         </div>
+
+        {/* Image Viewer Modal */}
+        <ImageViewer
+          isOpen={imageViewerOpen}
+          onClose={() => setImageViewerOpen(false)}
+          currentItem={currentImageItem}
+          items={filteredItems}
+          onPrevious={handlePreviousImage}
+          onNext={handleNextImage}
+        />
       </div>
     </div>
   );

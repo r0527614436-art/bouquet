@@ -1,14 +1,18 @@
-
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { useAdminCategories } from '@/hooks/useAdminCategories';
 
 interface Category {
   id: string;
   name: string;
+  subtitle: string | null;
+  allow_cart: boolean;
 }
 
 interface CategoryManagementProps {
@@ -20,6 +24,8 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
   const [showCategoryDialog, setShowCategoryDialog] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategorySubtitle, setNewCategorySubtitle] = useState('');
+  const [newCategoryAllowCart, setNewCategoryAllowCart] = useState(true);
 
   const {
     createCategoryMutation,
@@ -27,32 +33,49 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
     deleteCategoryMutation
   } = useAdminCategories();
 
-  const handleSaveCategory = async () => {
-    console.log('Saving category:', { editingCategory, newCategoryName });
-    
-    if (!newCategoryName.trim()) {
-      console.log('Category name is empty');
-      return;
-    }
-
-    try {
-      if (editingCategory) {
-        console.log('Updating category:', editingCategory.id, newCategoryName);
-        await updateCategoryMutation.mutateAsync({
-          id: editingCategory.id,
-          name: newCategoryName.trim()
-        });
-      } else {
-        console.log('Creating new category:', newCategoryName);
-        await createCategoryMutation.mutateAsync(newCategoryName.trim());
-      }
-      
+  const handleCreateCategory = () => {
+    if (newCategoryName.trim()) {
+      createCategoryMutation.mutate({
+        name: newCategoryName.trim(),
+        subtitle: newCategorySubtitle.trim() || null,
+        allow_cart: newCategoryAllowCart
+      });
+      setNewCategoryName('');
+      setNewCategorySubtitle('');
+      setNewCategoryAllowCart(true);
       setShowCategoryDialog(false);
+    }
+  };
+
+  const handleEditCategory = (category: Category) => {
+    setEditingCategory(category);
+    setNewCategoryName(category.name);
+    setNewCategorySubtitle(category.subtitle || '');
+    setNewCategoryAllowCart(category.allow_cart);
+    setShowCategoryDialog(true);
+  };
+
+  const handleUpdateCategory = () => {
+    if (editingCategory && newCategoryName.trim()) {
+      updateCategoryMutation.mutate({
+        id: editingCategory.id,
+        name: newCategoryName.trim(),
+        subtitle: newCategorySubtitle.trim() || null,
+        allow_cart: newCategoryAllowCart
+      });
       setEditingCategory(null);
       setNewCategoryName('');
-    } catch (error) {
-      console.error('Error saving category:', error);
-      // Error is already handled in the hook
+      setNewCategorySubtitle('');
+      setNewCategoryAllowCart(true);
+      setShowCategoryDialog(false);
+    }
+  };
+
+  const handleSaveCategory = () => {
+    if (editingCategory) {
+      handleUpdateCategory();
+    } else {
+      handleCreateCategory();
     }
   };
 
@@ -63,14 +86,16 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
       : 'האם אתה בטוח שברצונך למחוק את הקטגוריה?';
     
     if (confirm(confirmMessage)) {
-      try {
-        console.log('Deleting category:', categoryId);
-        await deleteCategoryMutation.mutateAsync(categoryId);
-      } catch (error) {
-        console.error('Error deleting category:', error);
-        // Error is already handled in the hook
-      }
+      deleteCategoryMutation.mutate(categoryId);
     }
+  };
+
+  const resetForm = () => {
+    setEditingCategory(null);
+    setNewCategoryName('');
+    setNewCategorySubtitle('');
+    setNewCategoryAllowCart(true);
+    setShowCategoryDialog(false);
   };
 
   return (
@@ -79,9 +104,7 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
         <h2 className="text-2xl font-bold text-pink-800">קטגוריות</h2>
         <Button
           onClick={() => {
-            console.log('Opening add category dialog');
-            setEditingCategory(null);
-            setNewCategoryName('');
+            resetForm();
             setShowCategoryDialog(true);
           }}
           className="bg-pink-600 hover:bg-pink-700"
@@ -95,17 +118,17 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
         {categories.map((category) => (
           <div key={category.id} className="bg-white p-4 rounded-lg shadow-md">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">{category.name}</h3>
+              <div>
+                <h3 className="text-lg font-semibold">{category.name}</h3>
+                {category.subtitle && (
+                  <p className="text-sm text-gray-600">{category.subtitle}</p>
+                )}
+              </div>
               <div className="flex space-x-2 rtl:space-x-reverse">
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => {
-                    console.log('Editing category:', category);
-                    setEditingCategory(category);
-                    setNewCategoryName(category.name);
-                    setShowCategoryDialog(true);
-                  }}
+                  onClick={() => handleEditCategory(category)}
                 >
                   <Edit className="h-4 w-4" />
                 </Button>
@@ -119,9 +142,16 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
                 </Button>
               </div>
             </div>
-            <p className="text-sm text-gray-600 mt-2">
-              {items.filter(item => item.category_id === category.id).length} פריטים
-            </p>
+            <div className="mt-2 flex justify-between items-center">
+              <p className="text-sm text-gray-600">
+                {items.filter(item => item.category_id === category.id).length} פריטים
+              </p>
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <span className={`text-xs px-2 py-1 rounded ${category.allow_cart ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>
+                  {category.allow_cart ? 'ניתן להזמנה' : 'תצוגה בלבד'}
+                </span>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -134,20 +164,42 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
-            <Input
-              placeholder="שם הקטגוריה"
-              value={newCategoryName}
-              onChange={(e) => {
-                console.log('Category name changed:', e.target.value);
-                setNewCategoryName(e.target.value);
-              }}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleSaveCategory();
-                }
-              }}
-              autoFocus
-            />
+            <div>
+              <Label htmlFor="categoryName">שם הקטגוריה</Label>
+              <Input
+                id="categoryName"
+                placeholder="שם הקטגוריה"
+                value={newCategoryName}
+                onChange={(e) => setNewCategoryName(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSaveCategory();
+                  }
+                }}
+                autoFocus
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="categorySubtitle">כותרת משנה (אופציונלי)</Label>
+              <Textarea
+                id="categorySubtitle"
+                placeholder="כותרת משנה לקטגוריה"
+                value={newCategorySubtitle}
+                onChange={(e) => setNewCategorySubtitle(e.target.value)}
+                rows={2}
+              />
+            </div>
+
+            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+              <Switch
+                id="allowCart"
+                checked={newCategoryAllowCart}
+                onCheckedChange={setNewCategoryAllowCart}
+              />
+              <Label htmlFor="allowCart">אפשר הוספה לסל</Label>
+            </div>
+            
             <div className="flex space-x-2 rtl:space-x-reverse">
               <Button
                 onClick={handleSaveCategory}
@@ -158,11 +210,7 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => {
-                  setShowCategoryDialog(false);
-                  setEditingCategory(null);
-                  setNewCategoryName('');
-                }}
+                onClick={resetForm}
               >
                 ביטול
               </Button>

@@ -72,19 +72,25 @@ export type Database = {
       }
       categories: {
         Row: {
+          allow_cart: boolean
           created_at: string
           id: string
           name: string
+          subtitle: string | null
         }
         Insert: {
+          allow_cart?: boolean
           created_at?: string
           id?: string
           name: string
+          subtitle?: string | null
         }
         Update: {
+          allow_cart?: boolean
           created_at?: string
           id?: string
           name?: string
+          subtitle?: string | null
         }
         Relationships: []
       }
