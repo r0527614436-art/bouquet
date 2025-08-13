@@ -59,20 +59,33 @@ const Catalog = () => {
   });
 
   const { data: items = [] } = useQuery({
-    queryKey: ['catalog-items'],
+    queryKey: ['catalog-items', 'categories'],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('catalog_items')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .select('*');
       if (error) throw error;
       return data || [];
     }
   });
 
+  // Sort items by category order (same order as categories appear)
+  const sortedItems = items.sort((a, b) => {
+    const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
+    const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
+    
+    // If categories are the same, sort by creation date (newest first)
+    if (categoryIndexA === categoryIndexB) {
+      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    }
+    
+    // Sort by category order
+    return categoryIndexA - categoryIndexB;
+  });
+
   const filteredItems = selectedCategory === 'all' 
-    ? items 
-    : items.filter(item => item.category_id === selectedCategory);
+    ? sortedItems 
+    : sortedItems.filter(item => item.category_id === selectedCategory);
 
   const handleAddToCart = (item: CatalogItem) => {
     addToCart({
