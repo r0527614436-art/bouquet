@@ -52,7 +52,7 @@ const Catalog = () => {
       const { data, error } = await supabase
         .from('categories')
         .select('*')
-        .order('name');
+        .order('created_at', { ascending: true });
       if (error) throw error;
       return data || [];
     }
