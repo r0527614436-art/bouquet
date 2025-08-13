@@ -74,9 +74,9 @@ const Catalog = () => {
     const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
     const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
     
-    // If categories are the same, sort by creation date (newest first)
+    // If categories are the same, sort by creation date (oldest first, newest last)
     if (categoryIndexA === categoryIndexB) {
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     }
     
     // Sort by category order
