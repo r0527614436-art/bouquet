@@ -189,7 +189,16 @@ const Index = () => {
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <div className="text-center text-white">
-                  <h2 className="text-4xl md:text-6xl font-bold mb-8">{image.title}</h2>
+                  <h2 
+                    key={`${image.id}-${currentImageIndex}`}
+                    className="text-4xl md:text-6xl font-playfair font-black mb-8 animate-text-fade-in"
+                    style={{
+                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                      letterSpacing: '0.02em'
+                    }}
+                  >
+                    {image.title}
+                  </h2>
                   <Link to="/catalog">
                     <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
                       צפה בקטלוג
