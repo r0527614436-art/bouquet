@@ -47,7 +47,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl w-full h-[90vh] p-0 overflow-hidden" onKeyDown={handleKeyDown}>
+      <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 overflow-hidden" onKeyDown={handleKeyDown}>
         <div className="relative w-full h-full bg-black">
           {/* Close button */}
           <Button
@@ -84,11 +84,12 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           )}
 
           {/* Main image */}
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center p-4">
             <img
               src={currentItem.image_url}
               alt={currentItem.title}
               className="max-w-full max-h-full object-contain"
+              style={{ maxHeight: 'calc(100vh - 8rem)' }}
             />
           </div>
 

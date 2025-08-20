@@ -63,10 +63,10 @@ const Catalog = () => {
     }
   });
 
-  // Set the first category as selected when categories are loaded
+  // Set empty (all) as selected when categories are loaded
   useEffect(() => {
-    if (!selectedCategory && categories.length > 0) {
-      setSelectedCategory(categories[0].id);
+    if (selectedCategory === null && categories.length > 0) {
+      setSelectedCategory('');
     }
   }, [categories, selectedCategory]);
 
@@ -180,13 +180,21 @@ const Catalog = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">קטלוג המוצרים</h1>
-          <p className="text-lg text-gray-700">בחרו מתוך מגוון הפרחים והעיצובים שלנו</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">קטלוג</h1>
         </div>
 
         {/* Category Filter */}
         <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-4">
+            <div className="text-center">
+              <Button
+                variant={selectedCategory === '' ? 'default' : 'outline'}
+                onClick={() => setSelectedCategory('')}
+                className={selectedCategory === '' ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
+              >
+                הכל
+              </Button>
+            </div>
             {categories.map((category) => (
               <div key={category.id} className="text-center">
                 <Button
@@ -205,8 +213,72 @@ const Catalog = () => {
         </div>
 
         {/* Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredItems.map((item) => {
+        <div className="space-y-12">
+          {selectedCategory === '' ? (
+            /* Show all categories with their items */
+            categories.map((category) => {
+              const categoryItems = sortedItems.filter(item => item.category_id === category.id);
+              if (categoryItems.length === 0) return null;
+              
+              return (
+                <div key={category.id} className="space-y-6">
+                  <div className="text-center">
+                    <h2 className="text-2xl font-bold text-pink-800">{category.name}</h2>
+                    {category.subtitle && (
+                      <p className="text-gray-600 mt-1">{category.subtitle}</p>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {categoryItems.map((item) => {
+                      const allowCart = category?.allow_cart !== false;
+                      
+                      return (
+                        <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
+                          <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
+                            <img
+                              src={item.image_url}
+                              alt={item.title}
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
+                            {item.price && (
+                              <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                            )}
+                            
+                            {/* Cart button - only show if category allows cart */}
+                            {allowCart && (
+                              <button
+                                onClick={() => handleAddToCart(item)}
+                                className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                                title="הוסף לעגלה"
+                              >
+                                <div className="flex items-center">
+                                  <ShoppingCart className="h-4 w-4" />
+                                  <Plus className="h-3 w-3 -ml-1" />
+                                </div>
+                              </button>
+                            )}
+
+                            {/* Display only indicator */}
+                            {!allowCart && (
+                              <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
+                                <span className="text-xs font-medium">דוגמה</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            /* Show single category items */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredItems.map((item) => {
             const category = getCategoryByItem(item);
             const allowCart = category?.allow_cart !== false;
             
@@ -242,13 +314,15 @@ const Catalog = () => {
                   {/* Display only indicator */}
                   {!allowCart && (
                     <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
-                      <span className="text-xs font-medium">תצוגה</span>
+                      <span className="text-xs font-medium">דוגמה</span>
                     </div>
                   )}
                 </div>
               </div>
             );
           })}
+            </div>
+          )}
         </div>
 
         {filteredItems.length === 0 && (

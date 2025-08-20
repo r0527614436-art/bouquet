@@ -78,10 +78,16 @@ const Admin = () => {
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <Link to="/" className="flex items-center text-pink-600 hover:text-pink-700">
-              <ArrowRight className="h-5 w-5 ml-2" />
-              חזרה לעמוד הראשי
-            </Link>
+            <div className="flex items-center space-x-4 rtl:space-x-reverse">
+              <Link to="/" className="flex items-center text-pink-600 hover:text-pink-700">
+                <ArrowRight className="h-5 w-5 ml-2" />
+                חזרה לעמוד הראשי
+              </Link>
+              <Link to="/catalog" className="flex items-center text-pink-600 hover:text-pink-700">
+                <ArrowRight className="h-5 w-5 ml-2" />
+                חזרה לקטלוג
+              </Link>
+            </div>
             
             <h1 className="text-2xl font-bold text-pink-800">פאנל ניהול</h1>
             
