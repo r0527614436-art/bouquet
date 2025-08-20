@@ -199,12 +199,6 @@ const Index = () => {
                   >
                     {image.title}
                   </h2>
-                  <Link to="/catalog">
-                    <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
-                      צפה בקטלוג
-                      <ArrowLeft className="mr-2 h-5 w-5" />
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
