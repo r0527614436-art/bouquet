@@ -380,7 +380,7 @@ const HomepageSlideManagement = () => {
                 </SelectContent>
               </Select>
             </div>
-            <Button 
+            <Button
               type="submit" 
               disabled={!title.trim() || !imageUrl || uploading || addSlideMutation.isPending}
               className="w-full"
@@ -493,17 +493,6 @@ const HomepageSlideManagement = () => {
               )}
             </div>
             <div>
-              <Label htmlFor="edit-order">מיקום בסדר</Label>
-              <Input
-                id="edit-order"
-                type="number"
-                value={orderIndex}
-                onChange={(e) => setOrderIndex(parseInt(e.target.value) || 1)}
-                min={1}
-                max={50}
-              />
-            </div>
-            <div>
               <Label htmlFor="edit-font">בחר גופן</Label>
               <Select value={fontFamily} onValueChange={setFontFamily}>
                 <SelectTrigger>
@@ -517,6 +506,17 @@ const HomepageSlideManagement = () => {
                   <SelectItem value="font-assistant">Assistant - גופן נקי</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            <div>
+              <Label htmlFor="edit-order">מיקום בסדר</Label>
+              <Input
+                id="edit-order"
+                type="number"
+                value={orderIndex}
+                onChange={(e) => setOrderIndex(parseInt(e.target.value) || 1)}
+                min={1}
+                max={50}
+              />
             </div>
             <Button 
               type="submit" 
