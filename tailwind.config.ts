@@ -20,8 +20,6 @@ export default {
 		extend: {
 			fontFamily: {
 				'playfair': ['Playfair Display', 'serif'],
-				'heebo': ['Heebo', 'sans-serif'],
-				'assistant': ['Assistant', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

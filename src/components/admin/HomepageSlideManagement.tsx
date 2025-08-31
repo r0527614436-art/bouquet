@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Edit, Trash2, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -19,7 +18,6 @@ interface HomepageSlide {
   image_url: string;
   order_index: number;
   is_active: boolean;
-  font_family: string;
 }
 
 const HomepageSlideManagement = () => {
@@ -107,7 +105,7 @@ const HomepageSlideManagement = () => {
   };
 
   const addSlideMutation = useMutation({
-    mutationFn: async (slideData: { title: string; description: string; image_url: string; order_index: number; font_family: string }) => {
+    mutationFn: async (slideData: { title: string; description: string; image_url: string; order_index: number }) => {
       console.log('Adding slide with data:', slideData);
       
       const { data, error } = await supabase
@@ -117,7 +115,6 @@ const HomepageSlideManagement = () => {
           description: slideData.description,
           image_url: slideData.image_url,
           order_index: slideData.order_index,
-          font_family: slideData.font_family,
           is_active: true
         }])
         .select();
@@ -156,7 +153,6 @@ const HomepageSlideManagement = () => {
           description: slideData.description,
           image_url: slideData.image_url,
           order_index: slideData.order_index,
-          font_family: slideData.font_family,
           updated_at: new Date().toISOString()
         })
         .eq('id', slideData.id)
@@ -241,7 +237,6 @@ const HomepageSlideManagement = () => {
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [orderIndex, setOrderIndex] = useState(slides.length + 1);
-    const [fontFamily, setFontFamily] = useState('font-sans');
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -268,8 +263,7 @@ const HomepageSlideManagement = () => {
         title: title.trim(),
         description: description.trim(),
         image_url: imageUrl,
-        order_index: orderIndex,
-        font_family: fontFamily
+        order_index: orderIndex
       });
     };
 
@@ -278,7 +272,6 @@ const HomepageSlideManagement = () => {
       setDescription('');
       setImageUrl('');
       setOrderIndex(slides.length + 1);
-      setFontFamily('font-sans');
     };
 
     return (
@@ -365,22 +358,7 @@ const HomepageSlideManagement = () => {
                 max={50}
               />
             </div>
-            <div>
-              <Label htmlFor="font">בחר גופן</Label>
-              <Select value={fontFamily} onValueChange={setFontFamily}>
-                <SelectTrigger>
-                  <SelectValue placeholder="בחר גופן" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="font-sans">Arial - גופן רגיל</SelectItem>
-                  <SelectItem value="font-serif">Times - גופן עם קפיצות</SelectItem>
-                  <SelectItem value="font-playfair">Playfair - גופן מרשים</SelectItem>
-                  <SelectItem value="font-heebo">Heebo - גופן עברי</SelectItem>
-                  <SelectItem value="font-assistant">Assistant - גופן נקי</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <Button
+            <Button 
               type="submit" 
               disabled={!title.trim() || !imageUrl || uploading || addSlideMutation.isPending}
               className="w-full"
@@ -400,7 +378,6 @@ const HomepageSlideManagement = () => {
     const [description, setDescription] = useState(editingSlide.description || '');
     const [imageUrl, setImageUrl] = useState(editingSlide.image_url);
     const [orderIndex, setOrderIndex] = useState(editingSlide.order_index);
-    const [fontFamily, setFontFamily] = useState(editingSlide.font_family || 'font-sans');
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -428,8 +405,7 @@ const HomepageSlideManagement = () => {
         title: title.trim(),
         description: description.trim(),
         image_url: imageUrl,
-        order_index: orderIndex,
-        font_family: fontFamily
+        order_index: orderIndex
       });
     };
 
@@ -493,21 +469,6 @@ const HomepageSlideManagement = () => {
               )}
             </div>
             <div>
-              <Label htmlFor="edit-font">בחר גופן</Label>
-              <Select value={fontFamily} onValueChange={setFontFamily}>
-                <SelectTrigger>
-                  <SelectValue placeholder="בחר גופן" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="font-sans">Arial - גופן רגיל</SelectItem>
-                  <SelectItem value="font-serif">Times - גופן עם קפיצות</SelectItem>
-                  <SelectItem value="font-playfair">Playfair - גופן מרשים</SelectItem>
-                  <SelectItem value="font-heebo">Heebo - גופן עברי</SelectItem>
-                  <SelectItem value="font-assistant">Assistant - גופן נקי</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
               <Label htmlFor="edit-order">מיקום בסדר</Label>
               <Input
                 id="edit-order"
@@ -568,7 +529,6 @@ const HomepageSlideManagement = () => {
                       <p className="text-sm text-gray-600 text-right">{slide.description}</p>
                     )}
                     <p className="text-xs text-gray-400 text-right">סדר: {slide.order_index}</p>
-                    <p className="text-xs text-gray-400 text-right">גופן: {slide.font_family || 'font-sans'}</p>
                   </div>
                   <div className="flex space-x-2 rtl:space-x-reverse">
                     <Button
