@@ -15,6 +15,7 @@ interface HomepageSlide {
   image_url: string;
   order_index: number;
   is_active: boolean;
+  font_family: string;
 }
 
 const Index = () => {
@@ -56,7 +57,8 @@ const Index = () => {
       title: "זרי אירוסין",
       description: "זרי פרחים מרהיבים לחגיגת האירוסין",
       order_index: 1,
-      is_active: true
+      is_active: true,
+      font_family: 'font-sans'
     },
     {
       id: '2',
@@ -64,7 +66,8 @@ const Index = () => {
       title: "סדנאות",
       description: "סדנאות שזירת פרחים מקצועיות",
       order_index: 2,
-      is_active: true
+      is_active: true,
+      font_family: 'font-sans'
     },
     {
       id: '3',
@@ -72,7 +75,8 @@ const Index = () => {
       title: "זרי כלה",
       description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
       order_index: 3,
-      is_active: true
+      is_active: true,
+      font_family: 'font-sans'
     },
     {
       id: '4',
@@ -80,7 +84,8 @@ const Index = () => {
       title: "עיצוב מתנות",
       description: "מתנות מעוצבות עם פרחים ושוקולדים",
       order_index: 4,
-      is_active: true
+      is_active: true,
+      font_family: 'font-sans'
     },
     {
       id: '5',
@@ -88,7 +93,8 @@ const Index = () => {
       title: "כיסאות כלה",
       description: "כיסאות כלה מעוצבים במיוחד",
       order_index: 5,
-      is_active: true
+      is_active: true,
+      font_family: 'font-sans'
     }
   ];
 
@@ -191,7 +197,7 @@ const Index = () => {
                 <div className="text-center text-white">
                   <h2 
                     key={`${image.id}-${currentImageIndex}`}
-                    className="text-4xl md:text-6xl font-playfair font-black mb-8 animate-text-fade-in"
+                    className={`text-4xl md:text-6xl font-black mb-8 animate-text-fade-in ${image.font_family || 'font-sans'}`}
                     style={{
                       textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                       letterSpacing: '0.02em'
@@ -199,12 +205,6 @@ const Index = () => {
                   >
                     {image.title}
                   </h2>
-                  <Link to="/catalog">
-                    <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3 text-lg">
-                      צפה בקטלוג
-                      <ArrowLeft className="mr-2 h-5 w-5" />
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
