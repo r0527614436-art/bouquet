@@ -42,6 +42,7 @@ export type Database = {
           id: string
           image_url: string
           price: string | null
+          subcategory: string | null
           title: string
         }
         Insert: {
@@ -50,6 +51,7 @@ export type Database = {
           id?: string
           image_url: string
           price?: string | null
+          subcategory?: string | null
           title: string
         }
         Update: {
@@ -58,6 +60,7 @@ export type Database = {
           id?: string
           image_url?: string
           price?: string | null
+          subcategory?: string | null
           title?: string
         }
         Relationships: [
