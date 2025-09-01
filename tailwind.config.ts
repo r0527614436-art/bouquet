@@ -22,6 +22,8 @@ export default {
 				'playfair': ['Playfair Display', 'serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 				'assistant': ['Assistant', 'sans-serif'],
+				'varela-round': ['Varela Round', 'sans-serif'],
+				'amatic-sc': ['Amatic SC', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

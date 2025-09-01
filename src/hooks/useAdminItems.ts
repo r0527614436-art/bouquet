@@ -8,10 +8,10 @@ export const useAdminItems = () => {
   const queryClient = useQueryClient();
 
   const createItemMutation = useMutation({
-    mutationFn: async (item: { category_id: string; title: string; price: string; image_url: string }) => {
+    mutationFn: async (item: { category_id: string; title?: string; price: string; image_url: string; subcategory?: string }) => {
       const { data, error } = await supabase
         .from('catalog_items')
-        .insert([item])
+        .insert([{ ...item, title: item.title || '' }])
         .select()
         .single();
       if (error) throw error;
@@ -34,7 +34,7 @@ export const useAdminItems = () => {
   });
 
   const updateItemMutation = useMutation({
-    mutationFn: async ({ id, ...item }: { id: string; category_id: string; title: string; price: string; image_url: string }) => {
+    mutationFn: async ({ id, ...item }: { id: string; category_id: string; title: string; price: string; image_url: string; subcategory?: string }) => {
       const { data, error } = await supabase
         .from('catalog_items')
         .update(item)

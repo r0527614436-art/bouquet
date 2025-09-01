@@ -24,6 +24,7 @@ interface CatalogItem {
   price: string | null;
   category_id: string;
   created_at: string;
+  subcategory?: string;
 }
 
 const Catalog = () => {
@@ -220,58 +221,76 @@ const Catalog = () => {
               const categoryItems = sortedItems.filter(item => item.category_id === category.id);
               if (categoryItems.length === 0) return null;
               
+              // Group items by subcategory
+              const groupedItems = categoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
+                const key = item.subcategory || 'main';
+                if (!groups[key]) groups[key] = [];
+                groups[key].push(item);
+                return groups;
+              }, {});
+              
               return (
-                <div key={category.id} className="space-y-6">
+                <div key={category.id} className="space-y-8">
                   <div className="text-center">
                     <h2 className="text-2xl font-bold text-pink-800">{category.name}</h2>
                     {category.subtitle && (
                       <p className="text-gray-600 mt-1">{category.subtitle}</p>
                     )}
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {categoryItems.map((item) => {
-                      const allowCart = category?.allow_cart !== false;
-                      
-                      return (
-                        <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
-                          <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
-                            <img
-                              src={item.image_url}
-                              alt={item.title}
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                          <div className="p-4">
-                            <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
-                            {item.price && (
-                              <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
-                            )}
-                            
-                            {/* Cart button - only show if category allows cart */}
-                            {allowCart && (
-                              <button
-                                onClick={() => handleAddToCart(item)}
-                                className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
-                                title="הוסף לעגלה"
-                              >
-                                <div className="flex items-center">
-                                  <ShoppingCart className="h-4 w-4" />
-                                  <Plus className="h-3 w-3 -ml-1" />
-                                </div>
-                              </button>
-                            )}
-
-                            {/* Display only indicator */}
-                            {!allowCart && (
-                              <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
-                                <span className="text-xs font-medium">דוגמה</span>
-                              </div>
-                            )}
-                          </div>
+                  
+                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => (
+                    <div key={subcategoryKey} className="space-y-4">
+                      {subcategoryKey !== 'main' && (
+                        <div className="text-center">
+                          <h3 className="text-xl font-semibold text-pink-700">{subcategoryKey}</h3>
                         </div>
-                      );
-                    })}
-                  </div>
+                      )}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {items.map((item) => {
+                          const allowCart = category?.allow_cart !== false;
+                          
+                          return (
+                            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
+                              <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
+                                <img
+                                  src={item.image_url}
+                                  alt={item.title}
+                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                              <div className="p-4">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
+                                {item.price && (
+                                  <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                                )}
+                                
+                                {/* Cart button - only show if category allows cart */}
+                                {allowCart && (
+                                  <button
+                                    onClick={() => handleAddToCart(item)}
+                                    className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                                    title="הוסף לעגלה"
+                                  >
+                                    <div className="flex items-center">
+                                      <ShoppingCart className="h-4 w-4" />
+                                      <Plus className="h-3 w-3 -ml-1" />
+                                    </div>
+                                  </button>
+                                )}
+
+                                {/* Display only indicator */}
+                                {!allowCart && (
+                                  <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
+                                    <span className="text-xs font-medium">דוגמה</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               );
             })

@@ -11,8 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/amatic-sc": "^5.2.6",
     "@fontsource/assistant": "^5.2.7",
     "@fontsource/heebo": "^5.2.6",
+    "@fontsource/varela-round": "^5.2.6",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
