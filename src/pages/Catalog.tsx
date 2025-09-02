@@ -25,6 +25,7 @@ interface CatalogItem {
   category_id: string;
   created_at: string;
   subcategory?: string;
+  display_order?: number;
 }
 
 const Catalog = () => {
@@ -82,13 +83,18 @@ const Catalog = () => {
     }
   });
 
-  // Sort items by category order (same order as categories appear)
+  // Sort items by category order and display_order
   const sortedItems = items.sort((a, b) => {
     const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
     const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
     
-    // If categories are the same, sort by creation date (oldest first, newest last)
+    // If categories are the same, sort by display_order then creation date
     if (categoryIndexA === categoryIndexB) {
+      // First by display_order
+      if (a.display_order !== b.display_order) {
+        return (a.display_order || 0) - (b.display_order || 0);
+      }
+      // Then by creation date
       return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     }
     
@@ -242,7 +248,9 @@ const Catalog = () => {
                     <div key={subcategoryKey} className="space-y-4">
                       {subcategoryKey !== 'main' && (
                         <div className="text-center">
-                          <h3 className="text-xl font-semibold text-pink-700">{subcategoryKey}</h3>
+                          <h3 className="text-lg font-semibold text-pink-600 bg-pink-50 py-2 px-4 rounded-lg inline-block">
+                            {subcategoryKey}
+                          </h3>
                         </div>
                       )}
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -295,52 +303,79 @@ const Catalog = () => {
               );
             })
           ) : (
-            /* Show single category items */
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredItems.map((item) => {
-            const category = getCategoryByItem(item);
-            const allowCart = category?.allow_cart !== false;
-            
-            return (
-              <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
-                <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
-                  <img
-                    src={item.image_url}
-                    alt={item.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
-                  {item.price && (
-                    <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
-                  )}
-                  
-                  {/* Cart button - only show if category allows cart */}
-                  {allowCart && (
-                    <button
-                      onClick={() => handleAddToCart(item)}
-                      className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
-                      title="הוסף לעגלה"
-                    >
-                      <div className="flex items-center">
-                        <ShoppingCart className="h-4 w-4" />
-                        <Plus className="h-3 w-3 -ml-1" />
-                      </div>
-                    </button>
-                  )}
+            /* Show single category items with subcategories */
+            (() => {
+              const selectedCategoryItems = sortedItems.filter(item => item.category_id === selectedCategory);
+              
+              // Group items by subcategory
+              const groupedItems = selectedCategoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
+                const key = item.subcategory || 'main';
+                if (!groups[key]) groups[key] = [];
+                groups[key].push(item);
+                return groups;
+              }, {});
 
-                  {/* Display only indicator */}
-                  {!allowCart && (
-                    <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
-                      <span className="text-xs font-medium">דוגמה</span>
+              return (
+                <div className="space-y-8">
+                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => (
+                    <div key={subcategoryKey} className="space-y-4">
+                      {subcategoryKey !== 'main' && (
+                        <div className="text-center">
+                          <h3 className="text-lg font-semibold text-pink-600 bg-pink-50 py-2 px-4 rounded-lg inline-block">
+                            {subcategoryKey}
+                          </h3>
+                        </div>
+                      )}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {items.map((item) => {
+                          const category = getCategoryByItem(item);
+                          const allowCart = category?.allow_cart !== false;
+                          
+                          return (
+                            <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
+                              <div className="aspect-square overflow-hidden cursor-pointer" onClick={() => handleImageClick(item)}>
+                                <img
+                                  src={item.image_url}
+                                  alt={item.title}
+                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                              <div className="p-4">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
+                                {item.price && (
+                                  <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                                )}
+                                
+                                {/* Cart button - only show if category allows cart */}
+                                {allowCart && (
+                                  <button
+                                    onClick={() => handleAddToCart(item)}
+                                    className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                                    title="הוסף לעגלה"
+                                  >
+                                    <div className="flex items-center">
+                                      <ShoppingCart className="h-4 w-4" />
+                                      <Plus className="h-3 w-3 -ml-1" />
+                                    </div>
+                                  </button>
+                                )}
+
+                                {/* Display only indicator */}
+                                {!allowCart && (
+                                  <div className="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
+                                    <span className="text-xs font-medium">דוגמה</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  )}
+                  ))}
                 </div>
-              </div>
-            );
-          })}
-            </div>
+              );
+            })()
           )}
         </div>
 

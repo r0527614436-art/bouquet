@@ -39,6 +39,7 @@ export type Database = {
         Row: {
           category_id: string
           created_at: string
+          display_order: number | null
           id: string
           image_url: string
           price: string | null
@@ -48,6 +49,7 @@ export type Database = {
         Insert: {
           category_id: string
           created_at?: string
+          display_order?: number | null
           id?: string
           image_url: string
           price?: string | null
@@ -57,6 +59,7 @@ export type Database = {
         Update: {
           category_id?: string
           created_at?: string
+          display_order?: number | null
           id?: string
           image_url?: string
           price?: string | null
@@ -138,7 +141,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_item_display_order: {
+        Args: { item_id: string; new_order: number }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

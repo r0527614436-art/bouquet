@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, Upload, FolderOpen } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Upload, FolderOpen, ChevronUp, ChevronDown, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,6 +20,7 @@ interface Item {
   title: string;
   price: string;
   subcategory?: string;
+  display_order?: number;
 }
 
 interface ItemManagementProps {
@@ -31,7 +32,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const [newItem, setNewItem] = useState({ category_id: '', title: '', price: '', image_url: '', subcategory: '' });
   const [editingItem, setEditingItem] = useState<Item | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const { createItemMutation, updateItemMutation, deleteItemMutation } = useAdminItems();
+  const { createItemMutation, updateItemMutation, deleteItemMutation, updateItemOrderMutation, removeFromSubcategoryMutation } = useAdminItems();
   const { toast } = useToast();
 
   const uploadImageToStorage = async (file: File): Promise<string> => {
@@ -252,6 +253,26 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
     }
   };
 
+  const handleMoveItem = (item: Item, direction: 'up' | 'down') => {
+    const itemsInGroup = items.filter(i => 
+      i.category_id === item.category_id && 
+      ((i.subcategory || null) === (item.subcategory || null))
+    ).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+    
+    const currentIndex = itemsInGroup.findIndex(i => i.id === item.id);
+    const newOrder = direction === 'up' ? 
+      (itemsInGroup[currentIndex - 1]?.display_order || 0) :
+      (itemsInGroup[currentIndex + 1]?.display_order || currentIndex + 2);
+    
+    updateItemOrderMutation.mutate({ id: item.id, newOrder });
+  };
+
+  const handleRemoveFromSubcategory = (id: string) => {
+    if (confirm('האם אתה בטוח שברצונך להסיר פריט זה מתת-הקטגוריה?')) {
+      removeFromSubcategoryMutation.mutate(id);
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-8">
       <h2 className="text-2xl font-bold text-pink-800 mb-6">ניהול פריטים</h2>
@@ -376,114 +397,171 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
         {items.length === 0 ? (
           <p className="text-gray-500 text-center py-8">אין פריטים בקטלוג</p>
         ) : (
-          items.map((item) => (
-            <div key={item.id} className="flex items-center space-x-4 rtl:space-x-reverse p-4 border rounded-lg">
-              <img 
-                src={item.image_url} 
-                alt={item.title} 
-                className="w-16 h-16 object-cover rounded"
-                onError={(e) => {
-                  console.error('Item image failed to load:', item.image_url);
-                  e.currentTarget.src = '/placeholder.svg';
-                }}
-              />
+          items
+            .sort((a, b) => {
+              // Sort by category order, then by display_order
+              const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
+              const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
               
-              {editingItem?.id === item.id ? (
-                <>
-                  <div className="flex-1 grid md:grid-cols-4 gap-2">
-                    <Select value={editingItem.category_id} onValueChange={(value) => setEditingItem({...editingItem, category_id: value})}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories.map((category) => (
-                          <SelectItem key={category.id} value={category.id}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+              if (categoryIndexA !== categoryIndexB) {
+                return categoryIndexA - categoryIndexB;
+              }
+              
+              return (a.display_order || 0) - (b.display_order || 0);
+            })
+            .map((item) => {
+              const itemsInGroup = items.filter(i => 
+                i.category_id === item.category_id && 
+                ((i.subcategory || null) === (item.subcategory || null))
+              ).sort((a, b) => (a.display_order || 0) - (b.display_order || 0));
+              
+              const currentIndex = itemsInGroup.findIndex(i => i.id === item.id);
+              const canMoveUp = currentIndex > 0;
+              const canMoveDown = currentIndex < itemsInGroup.length - 1;
+              
+              return (
+                <div key={item.id} className="flex items-center space-x-4 rtl:space-x-reverse p-4 border rounded-lg">
+                  <img 
+                    src={item.image_url} 
+                    alt={item.title} 
+                    className="w-16 h-16 object-cover rounded"
+                    onError={(e) => {
+                      console.error('Item image failed to load:', item.image_url);
+                      e.currentTarget.src = '/placeholder.svg';
+                    }}
+                  />
+                  
+                  {editingItem?.id === item.id ? (
+                    <>
+                      <div className="flex-1 grid md:grid-cols-4 gap-2">
+                        <Select value={editingItem.category_id} onValueChange={(value) => setEditingItem({...editingItem, category_id: value})}>
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {categories.map((category) => (
+                              <SelectItem key={category.id} value={category.id}>
+                                {category.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
 
-                    <Input
-                      placeholder="תת-קטגוריה"
-                      value={editingItem.subcategory || ''}
-                      onChange={(e) => setEditingItem({...editingItem, subcategory: e.target.value || undefined})}
-                    />
-                    
-                    <Input
-                      placeholder="כותרת"
-                      value={editingItem.title}
-                      onChange={(e) => setEditingItem({...editingItem, title: e.target.value})}
-                    />
-                    
-                    <Input
-                      placeholder="מחיר"
-                      value={editingItem.price}
-                      onChange={(e) => setEditingItem({...editingItem, price: e.target.value})}
-                    />
-                  </div>
-                  
-                  <div className="flex space-x-2 rtl:space-x-reverse">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          console.log('File selected for edit:', file.name);
-                          handleImageUpload(file, true);
-                        }
-                      }}
-                      className="hidden"
-                      id={`edit-image-${item.id}`}
-                    />
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => document.getElementById(`edit-image-${item.id}`)?.click()}
-                      disabled={isUploading}
-                    >
-                      <Upload className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      onClick={handleUpdateItem} 
-                      className="bg-green-600 hover:bg-green-700"
-                      disabled={updateItemMutation.isPending}
-                    >
-                      <Save className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={() => setEditingItem(null)}>
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex-1">
-                    <p className="font-medium">{categories.find(c => c.id === item.category_id)?.name}</p>
-                    {item.subcategory && <p className="text-xs text-blue-600">תת-קטגוריה: {item.subcategory}</p>}
-                    {item.title && <p className="text-sm text-gray-600">{item.title}</p>}
-                    {item.price && <p className="text-sm font-bold text-pink-600">₪{item.price}</p>}
-                  </div>
-                  
-                  <div className="flex space-x-2 rtl:space-x-reverse">
-                    <Button size="sm" variant="outline" onClick={() => setEditingItem(item)}>
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="destructive" 
-                      onClick={() => handleDeleteItem(item.id)}
-                      disabled={deleteItemMutation.isPending}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </>
-              )}
-            </div>
-          ))
+                        <Input
+                          placeholder="תת-קטגוריה"
+                          value={editingItem.subcategory || ''}
+                          onChange={(e) => setEditingItem({...editingItem, subcategory: e.target.value || undefined})}
+                        />
+                        
+                        <Input
+                          placeholder="כותרת"
+                          value={editingItem.title}
+                          onChange={(e) => setEditingItem({...editingItem, title: e.target.value})}
+                        />
+                        
+                        <Input
+                          placeholder="מחיר"
+                          value={editingItem.price}
+                          onChange={(e) => setEditingItem({...editingItem, price: e.target.value})}
+                        />
+                      </div>
+                      
+                      <div className="flex space-x-2 rtl:space-x-reverse">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              console.log('File selected for edit:', file.name);
+                              handleImageUpload(file, true);
+                            }
+                          }}
+                          className="hidden"
+                          id={`edit-image-${item.id}`}
+                        />
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => document.getElementById(`edit-image-${item.id}`)?.click()}
+                          disabled={isUploading}
+                        >
+                          <Upload className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          onClick={handleUpdateItem} 
+                          className="bg-green-600 hover:bg-green-700"
+                          disabled={updateItemMutation.isPending}
+                        >
+                          <Save className="h-4 w-4" />
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={() => setEditingItem(null)}>
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex-1">
+                        <p className="font-medium">{categories.find(c => c.id === item.category_id)?.name}</p>
+                        {item.subcategory && <p className="text-xs text-blue-600">תת-קטגוריה: {item.subcategory}</p>}
+                        {item.title && <p className="text-sm text-gray-600">{item.title}</p>}
+                        {item.price && <p className="text-sm font-bold text-pink-600">₪{item.price}</p>}
+                      </div>
+                      
+                      <div className="flex space-x-2 rtl:space-x-reverse">
+                        {/* Move up/down buttons */}
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => handleMoveItem(item, 'up')}
+                          disabled={!canMoveUp || updateItemOrderMutation.isPending}
+                          title="הזז למעלה"
+                        >
+                          <ChevronUp className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          onClick={() => handleMoveItem(item, 'down')}
+                          disabled={!canMoveDown || updateItemOrderMutation.isPending}
+                          title="הזז למטה"
+                        >
+                          <ChevronDown className="h-4 w-4" />
+                        </Button>
+                        
+                        {/* Remove from subcategory button */}
+                        {item.subcategory && (
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            onClick={() => handleRemoveFromSubcategory(item.id)}
+                            disabled={removeFromSubcategoryMutation.isPending}
+                            title="הסר מתת-קטגוריה"
+                            className="text-orange-600 hover:text-orange-700"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </Button>
+                        )}
+                        
+                        <Button size="sm" variant="outline" onClick={() => setEditingItem(item)}>
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          variant="destructive" 
+                          onClick={() => handleDeleteItem(item.id)}
+                          disabled={deleteItemMutation.isPending}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              );
+            })
         )}
       </div>
     </div>

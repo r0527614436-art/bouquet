@@ -84,9 +84,62 @@ export const useAdminItems = () => {
     }
   });
 
+  const updateItemOrderMutation = useMutation({
+    mutationFn: async ({ id, newOrder }: { id: string; newOrder: number }) => {
+      const { error } = await supabase.rpc('update_item_display_order', {
+        item_id: id,
+        new_order: newOrder
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      toast({
+        title: "הצลחה",
+        description: "סדר הפריטים עודכן בהצלחה"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בעדכון סדר הפריטים"
+      });
+    }
+  });
+
+  const removeFromSubcategoryMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { data, error } = await supabase
+        .from('catalog_items')
+        .update({ subcategory: null })
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
+      toast({
+        title: "הצלחה",
+        description: "הפריט הוסר מתת-הקטגוריה בהצלחה"
+      });
+    },
+    onError: () => {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהסרת הפריט מתת-הקטגוריה"
+      });
+    }
+  });
+
   return {
     createItemMutation,
     updateItemMutation,
-    deleteItemMutation
+    deleteItemMutation,
+    updateItemOrderMutation,
+    removeFromSubcategoryMutation
   };
 };
