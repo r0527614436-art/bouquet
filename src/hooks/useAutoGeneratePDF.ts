@@ -6,18 +6,18 @@ export const useAutoGeneratePDF = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    const generatePDF = async () => {
+    const generateHTML = async () => {
       try {
-        console.log('Auto-generating catalog PDF...');
-        await supabase.functions.invoke('generate-catalog-pdf');
-        console.log('PDF generated successfully');
+        console.log('Auto-generating catalog HTML...');
+        await supabase.functions.invoke('generate-catalog-html');
+        console.log('HTML generated successfully');
       } catch (error) {
-        console.error('Error auto-generating PDF:', error);
+        console.error('Error auto-generating HTML:', error);
       }
     };
 
-    // Generate PDF on mount
-    generatePDF();
+    // Generate HTML on mount
+    generateHTML();
 
     // Set up real-time subscriptions for changes
     const itemsSubscription = supabase
@@ -25,8 +25,8 @@ export const useAutoGeneratePDF = () => {
       .on('postgres_changes', 
         { event: '*', schema: 'public', table: 'catalog_items' }, 
         () => {
-          console.log('Catalog items changed, regenerating PDF...');
-          generatePDF();
+          console.log('Catalog items changed, regenerating HTML...');
+          generateHTML();
         }
       )
       .subscribe();
@@ -36,8 +36,8 @@ export const useAutoGeneratePDF = () => {
       .on('postgres_changes', 
         { event: '*', schema: 'public', table: 'categories' }, 
         () => {
-          console.log('Categories changed, regenerating PDF...');
-          generatePDF();
+          console.log('Categories changed, regenerating HTML...');
+          generateHTML();
         }
       )
       .subscribe();

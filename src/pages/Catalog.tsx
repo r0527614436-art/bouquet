@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import { downloadCatalogPDF } from '@/utils/catalogPdf';
 
 interface Category {
   id: string;
@@ -42,19 +41,31 @@ const Catalog = () => {
   const handleDownloadCatalog = async () => {
     try {
       toast({
-        title: "מכין קטלוג",
-        description: "אנא המתן, הקטלוג מתכונן להורדה...",
+        title: "מוריד קטלוג",
+        description: "הקטלוג מוכן להורדה...",
       });
 
-      const success = await downloadCatalogPDF(items, categories);
-      
-      if (success) {
+      // Get the HTML file from storage
+      const { data } = supabase.storage
+        .from('catalog-pdfs')
+        .getPublicUrl('catalog-bouquet.html');
+
+      if (data?.publicUrl) {
+        // Create a download link
+        const link = document.createElement('a');
+        link.href = data.publicUrl;
+        link.download = 'קטלוג בוקט.html';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג הורד בהצלחה",
         });
       } else {
-        throw new Error('Failed to generate PDF');
+        throw new Error('No catalog URL available');
       }
     } catch (error) {
       console.error('Error downloading catalog:', error);
