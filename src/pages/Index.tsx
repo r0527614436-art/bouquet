@@ -409,7 +409,7 @@ const Index = () => {
             <p className="text-sm text-pink-200">
               © 2025 כל הזכויות שמורות ל{' '}
               <a 
-                href="https://hebrew-web-craft-hub.lovable.app/" 
+                href="https://jobclic.com/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-white underline"
