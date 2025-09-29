@@ -448,23 +448,23 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
                           </SelectContent>
                         </Select>
 
-                        <Select value={editingItem.subcategory || ""} onValueChange={(value) => setEditingItem({...editingItem, subcategory: value || undefined})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="בחר קטגוריית משנה" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="">ללא קטגוריית משנה</SelectItem>
-                            {(() => {
-                              const selectedCategory = categories.find(c => c.id === editingItem.category_id);
-                              const subcategories = selectedCategory?.subcategories || [];
-                              return Array.isArray(subcategories) ? subcategories.map((subcat) => (
-                                <SelectItem key={subcat} value={subcat}>
-                                  {subcat}
-                                </SelectItem>
-                              )) : [];
-                            })()}
-                          </SelectContent>
-                        </Select>
+                         <Select value={editingItem.subcategory || "no-subcategory"} onValueChange={(value) => setEditingItem({...editingItem, subcategory: value === "no-subcategory" ? undefined : value})}>
+                           <SelectTrigger>
+                             <SelectValue placeholder="בחר קטגוריית משנה" />
+                           </SelectTrigger>
+                           <SelectContent>
+                             <SelectItem value="no-subcategory">ללא קטגוריית משנה</SelectItem>
+                             {(() => {
+                               const selectedCategory = categories.find(c => c.id === editingItem.category_id);
+                               const subcategories = selectedCategory?.subcategories || [];
+                               return Array.isArray(subcategories) ? subcategories.filter(subcat => subcat && subcat.trim() !== '').map((subcat) => (
+                                 <SelectItem key={subcat} value={subcat}>
+                                   {subcat}
+                                 </SelectItem>
+                               )) : [];
+                             })()}
+                           </SelectContent>
+                         </Select>
                         
                         <Input
                           placeholder="כותרת"

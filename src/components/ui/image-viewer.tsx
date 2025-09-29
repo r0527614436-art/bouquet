@@ -1,8 +1,12 @@
 import React from 'react';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import { downloadCatalogPDF } from '@/utils/catalogPdf';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface CatalogItem {
   id: string;
@@ -30,11 +34,49 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   onPrevious,
   onNext,
 }) => {
+  const { toast } = useToast();
+  
+  const { data: categories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    }
+  });
+
   if (!currentItem) return null;
 
   const currentIndex = items.findIndex(item => item.id === currentItem.id);
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === items.length - 1;
+  
+  const handleDownloadCatalog = async () => {
+    try {
+      const success = await downloadCatalogPDF(items, categories);
+      if (success) {
+        toast({
+          title: "הורדת קטלוג",
+          description: "הקטלוג הורד בהצלחה",
+        });
+      } else {
+        toast({
+          title: "שגיאה",
+          description: "שגיאה בהורדת הקטלוג",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהורדת הקטלוג",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft' && !isLast) {
@@ -62,6 +104,17 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             className="absolute top-4 right-4 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
           >
             <X className="h-5 w-5" />
+          </Button>
+
+          {/* Download catalog button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleDownloadCatalog}
+            className="absolute top-4 left-4 z-50 text-primary-foreground bg-accent/80 hover:bg-accent/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-accent/30 transition-all duration-300 hover:scale-105"
+            title="הורד קטלוג PDF"
+          >
+            <Download className="h-5 w-5" />
           </Button>
 
           {/* Previous button */}
