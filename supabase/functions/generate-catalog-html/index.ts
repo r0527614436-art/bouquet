@@ -135,229 +135,69 @@ function generateCatalogHTML(items: any[], categories: any[]): string {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>קטלוג בוקט - רוחי רובינשטיין עיצוב אירועים</title>
+      <title>קטלוג - בוקט</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
-        
-        * { box-sizing: border-box; }
-        
-        body {
-          font-family: 'Heebo', Arial, sans-serif;
-          margin: 0;
-          padding: 20px;
-          background: linear-gradient(135deg, #fdf2f8 0%, #ffffff 100%);
-          color: #333;
-          direction: rtl;
-          line-height: 1.6;
-        }
-        
-        .container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        
-        .header {
-          text-align: center;
-          margin-bottom: 40px;
-          padding: 30px;
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-          border: 2px solid #fce7f3;
-        }
-        
-        .header h1 {
-          color: #be185d;
-          font-size: 3em;
-          margin: 0 0 10px 0;
-          font-weight: 700;
-          text-shadow: 2px 2px 4px rgba(190, 24, 93, 0.1);
-        }
-        
-        .header .subtitle {
-          color: #ec4899;
-          font-size: 1.3em;
-          font-weight: 500;
-          margin-bottom: 15px;
-        }
-        
-        .header .date {
-          color: #6b7280;
-          font-size: 1em;
-          background: #fdf2f8;
-          padding: 8px 20px;
-          border-radius: 25px;
-          display: inline-block;
-        }
-        
-        .category {
-          margin-bottom: 50px;
-          background: white;
-          border-radius: 20px;
-          padding: 30px;
-          box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-          border: 1px solid #fce7f3;
-        }
-        
-        .category-title {
-          color: #be185d;
-          font-size: 2.2em;
-          font-weight: 600;
-          margin-bottom: 20px;
-          text-align: center;
-          border-bottom: 3px solid #fce7f3;
-          padding-bottom: 15px;
-          position: relative;
-        }
-        
-        .category-title::after {
-          content: '';
-          position: absolute;
-          bottom: -3px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(90deg, #be185d, #ec4899);
-          border-radius: 2px;
-        }
-        
-        .category-subtitle {
-          text-align: center;
-          color: #6b7280;
-          font-size: 1.1em;
-          margin-bottom: 25px;
-          font-style: italic;
-        }
-        
-        .subcategory {
-          margin: 30px 0;
-        }
-        
-        .subcategory-title {
-          color: #ec4899;
-          font-size: 1.5em;
-          font-weight: 500;
-          margin-bottom: 20px;
-          text-align: center;
-          background: linear-gradient(135deg, #fdf2f8, #fce7f3);
-          padding: 12px 25px;
-          border-radius: 30px;
-          display: inline-block;
-          border: 1px solid #f9a8d4;
-        }
-        
-        .items-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 25px;
-          margin-top: 20px;
-        }
-        
-        .item {
-          text-align: center;
-          background: linear-gradient(135deg, #fafafa, #f8fafc);
-          border-radius: 15px;
-          padding: 20px;
-          border: 2px solid #f1f5f9;
-          transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .item::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #be185d, #ec4899, #f472b6);
-        }
-        
-        .item:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 35px rgba(190, 24, 93, 0.15);
-          border-color: #fce7f3;
-        }
-        
-        .item img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 10px;
-          margin-bottom: 15px;
-          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .item-title {
-          font-weight: 600;
-          color: #374151;
-          margin-bottom: 8px;
-          font-size: 1.1em;
-        }
-        
-        .item-price {
-          color: #be185d;
-          font-weight: 700;
-          font-size: 1.3em;
-          background: linear-gradient(135deg, #fdf2f8, #fce7f3);
-          padding: 8px 15px;
-          border-radius: 20px;
-          display: inline-block;
-          border: 1px solid #f9a8d4;
-        }
-        
-        .footer {
-          text-align: center;
-          margin-top: 60px;
-          padding: 30px;
-          background: linear-gradient(135deg, #be185d, #ec4899);
-          color: white;
-          border-radius: 20px;
-          box-shadow: 0 10px 30px rgba(190, 24, 93, 0.3);
-        }
-        
-        .footer h3 {
-          margin: 0 0 15px 0;
-          font-size: 1.8em;
-          font-weight: 600;
-        }
-        
-        .footer p {
-          margin: 8px 0;
-          font-size: 1.1em;
-          opacity: 0.95;
-        }
-        
-        .contact-info {
-          background: rgba(255,255,255,0.1);
-          padding: 20px;
-          border-radius: 15px;
-          margin-top: 20px;
-        }
-        
-        @media print {
-          body { background: white; }
-          .category, .header { break-inside: avoid; page-break-inside: avoid; }
-          .item { break-inside: avoid; }
-        }
-        
-        @media (max-width: 768px) {
-          .header h1 { font-size: 2.2em; }
-          .category-title { font-size: 1.8em; }
-          .items-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-          body { padding: 15px; }
-        }
+        body { font-family: 'Heebo', sans-serif; }
+        .bg-gradient-to-b { background: linear-gradient(to bottom, #fdf2f8, #ffffff); }
+        .text-pink-600 { color: #db2777; }
+        .text-pink-700 { color: #be185d; }
+        .text-pink-800 { color: #9d174d; }
+        .bg-pink-50 { background-color: #fdf2f8; }
+        .bg-pink-600 { background-color: #db2777; }
+        .border-pink-100 { border-color: #fce7f3; }
+        .border-pink-600 { border-color: #db2777; }
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .hover\\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .transition-shadow { transition-property: box-shadow; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .hover\\:scale-105:hover { transform: scale(1.05); }
+        .aspect-square { aspect-ratio: 1 / 1; }
+        .object-cover { object-fit: cover; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-full { border-radius: 9999px; }
+        .overflow-hidden { overflow: hidden; }
+        .duration-300 { transition-duration: 300ms; }
+        .print\\:hidden { display: none !important; }
+        @media print { .print\\:hidden { display: none !important; } }
       </style>
     </head>
     <body>
-      <div class="container">
-        <div class="header">
-          <h1>קטלוג בוקט</h1>
-          <div class="subtitle">רוחי רובינשטיין עיצוב אירועים</div>
-          <div class="date">עודכן ב: ${new Date().toLocaleDateString('he-IL')}</div>
-        </div>
+      <div class="min-h-screen bg-gradient-to-b from-pink-50 to-white" id="catalog-page">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b border-pink-100">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+              <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                <div class="flex items-center text-pink-600">
+                  <svg class="h-5 w-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                  עמוד הקטלוג
+                </div>
+              </div>
+              
+              <div class="flex items-center">
+                <img 
+                  src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+                  alt="בוקט לוגו" 
+                  class="h-24 w-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-pink-800 mb-4">קטלוג</h1>
+          </div>
+
+          <!-- Items Grid -->
+          <div class="space-y-12">
   `;
 
   // Group items by category
@@ -365,12 +205,19 @@ function generateCatalogHTML(items: any[], categories: any[]): string {
     const categoryItems = sortedItems.filter(item => item.category_id === category.id);
     if (categoryItems.length === 0) return;
 
-    html += `<div class="category">`;
-    html += `<h2 class="category-title">${category.name}</h2>`;
+    html += `
+            <!-- Category: ${category.name} -->
+            <div class="space-y-8">
+              <div class="text-center">
+                <h2 class="text-2xl font-bold text-pink-800">${category.name}</h2>`;
     
     if (category.subtitle) {
-      html += `<div class="category-subtitle">${category.subtitle}</div>`;
+      html += `
+                <p class="text-gray-600 mt-1">${category.subtitle}</p>`;
     }
+    
+    html += `
+              </div>`;
 
     // Group by subcategory
     const groupedItems = categoryItems.reduce((groups: Record<string, any[]>, item) => {
@@ -381,39 +228,69 @@ function generateCatalogHTML(items: any[], categories: any[]): string {
     }, {});
 
     Object.entries(groupedItems).forEach(([subcategoryKey, items]) => {
-      html += `<div class="subcategory">`;
+      html += `
+              <div class="space-y-4">`;
       
       if (subcategoryKey !== 'main') {
-        html += `<h3 class="subcategory-title">${subcategoryKey}</h3>`;
+        html += `
+                <div class="text-center">
+                  <h3 class="text-lg font-semibold text-pink-600 bg-pink-50 py-2 px-4 rounded-lg inline-block">
+                    ${subcategoryKey}
+                  </h3>
+                </div>`;
       }
       
-      html += `<div class="items-grid">`;
+      html += `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">`;
       
       items.forEach(item => {
         html += `
-          <div class="item">
-            <img src="${item.image_url}" alt="${item.title}" loading="lazy" />
-            <div class="item-title">${item.title}</div>
-            ${item.price ? `<div class="item-price">₪${item.price}</div>` : ''}
-          </div>
-        `;
+                  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow relative">
+                    <div class="aspect-square overflow-hidden">
+                      <img
+                        src="${item.image_url}"
+                        alt="${item.title}"
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div class="p-4">
+                      <h3 class="text-lg font-semibold text-gray-800 mb-2">${item.title}</h3>`;
+        
+        if (item.price) {
+          html += `
+                      <p class="text-pink-600 font-bold text-xl mb-3">₪${item.price}</p>`;
+        }
+        
+        // Add cart indicator if category allows cart
+        if (category.allow_cart !== false) {
+          html += `
+                      <div class="absolute top-4 right-4 bg-pink-600 text-white p-2 rounded-full shadow-lg">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5L12 21l7.5-3L17 13"></path>
+                        </svg>
+                      </div>`;
+        } else {
+          html += `
+                      <div class="absolute top-4 right-4 bg-gray-600 text-white p-2 rounded-full shadow-lg">
+                        <span class="text-xs font-medium">דוגמה</span>
+                      </div>`;
+        }
+        
+        html += `
+                    </div>
+                  </div>`;
       });
       
-      html += `</div></div>`;
+      html += `
+                </div>
+              </div>`;
     });
 
-    html += `</div>`;
+    html += `
+            </div>`;
   });
 
   html += `
-        <div class="footer">
-          <h3>ליצירת קשר</h3>
-          <div class="contact-info">
-            <p><strong>רוחי רובינשטיין</strong></p>
-            <p>עיצוב אירועים וחתונות חרדיות</p>
-            <p>מודיעין עלית והסביבה | בני ברק והסביבה</p>
-            <p>ירושלים והסביבה | בית שמש והסביבה</p>
-            <p>זרי אירוסין | זרי כלה | בוקט | כסאות כלה | חופות | הפקת אירועים</p>
           </div>
         </div>
       </div>
