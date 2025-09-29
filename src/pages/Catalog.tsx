@@ -191,18 +191,6 @@ const Catalog = () => {
                 <Download className="h-4 w-4 ml-2" />
                 הורד קטלוג
               </Button>
-              <Link 
-                to="/cart" 
-                className="flex items-center text-pink-600 hover:text-pink-800 relative"
-              >
-                <ShoppingCart className="h-5 w-5 ml-2" />
-                סל המוצרים
-                {getTotalItems() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-pink-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
-                    {getTotalItems()}
-                  </span>
-                )}
-              </Link>
             </div>
             
             <div className="flex items-center">
@@ -420,10 +408,10 @@ const Catalog = () => {
         {/* Cart button at bottom of page */}
         <div className="fixed bottom-6 right-6 z-50">
           <Link to="/cart">
-            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200 relative">
-              <ShoppingCart className="h-6 w-6" />
+            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative scale-150">
+              <ShoppingCart className="h-9 w-9" />
               {getTotalItems() > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-6 h-6 flex items-center justify-center">
+                <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full text-sm w-9 h-9 flex items-center justify-center font-bold">
                   {getTotalItems()}
                 </span>
               )}
