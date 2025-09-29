@@ -66,9 +66,9 @@ serve(async (req) => {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${supabaseServiceKey}`,
-          'Content-Type': 'application/pdf',
+          // Content-Type is inferred from Blob
         },
-        body: pdfContent,
+        body: new Blob([pdfContent.buffer.slice(pdfContent.byteOffset, pdfContent.byteOffset + pdfContent.byteLength) as ArrayBuffer], { type: 'application/pdf' }),
       }
     );
 
@@ -101,7 +101,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({ 
         error: 'Failed to generate catalog PDF',
-        details: error.message 
+        details: (error && typeof error === 'object' && 'message' in error) ? (error as any).message : String(error)
       }),
       { 
         status: 500,
