@@ -41,25 +41,62 @@ const Catalog = () => {
 
   const handleDownloadCatalog = async () => {
     try {
-      const success = await downloadCatalogPDF(items, categories);
-      if (success) {
+      // First try to get existing PDF from storage
+      const { data: files } = await supabase.storage
+        .from('catalog-pdfs')
+        .list('', { limit: 1, sortBy: { column: 'created_at', order: 'desc' } });
+
+      let pdfUrl = null;
+
+      if (files && files.length > 0) {
+        // Use existing PDF
+        const { data } = supabase.storage
+          .from('catalog-pdfs')
+          .getPublicUrl(files[0].name);
+        pdfUrl = data.publicUrl;
+      } else {
+        // Generate new PDF via edge function
+        const { data, error } = await supabase.functions.invoke('generate-catalog-pdf');
+        
+        if (error) throw error;
+        pdfUrl = data.url;
+      }
+
+      if (pdfUrl) {
+        // Download the PDF
+        const link = document.createElement('a');
+        link.href = pdfUrl;
+        link.download = 'קטלוג בוקט.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג הורד בהצלחה",
         });
-      } else {
+      }
+    } catch (error) {
+      console.error('Error downloading catalog:', error);
+      
+      // Fallback to client-side PDF generation
+      try {
+        const success = await downloadCatalogPDF(items, categories);
+        if (success) {
+          toast({
+            title: "הורדת קטלוג",
+            description: "הקטלוג הורד בהצלחה",
+          });
+        } else {
+          throw new Error('Client-side PDF generation failed');
+        }
+      } catch (fallbackError) {
         toast({
           title: "שגיאה",
           description: "שגיאה בהורדת הקטלוג",
           variant: "destructive",
         });
       }
-    } catch (error) {
-      toast({
-        title: "שגיאה",
-        description: "שגיאה בהורדת הקטלוג",
-        variant: "destructive",
-      });
     }
   };
 

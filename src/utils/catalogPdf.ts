@@ -139,7 +139,7 @@ export const generateCatalogPDF = async (items: CatalogItem[], categories: Categ
 export const downloadCatalogPDF = async (items: CatalogItem[], categories: Category[]) => {
   try {
     const pdf = await generateCatalogPDF(items, categories);
-    const fileName = `קטלוג-${new Date().toLocaleDateString('he-IL')}.pdf`;
+    const fileName = `קטלוג בוקט.pdf`;
     pdf.save(fileName);
     return true;
   } catch (error) {

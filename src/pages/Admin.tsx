@@ -11,6 +11,7 @@ import CategoryOrderManagement from '@/components/admin/CategoryOrderManagement'
 import ItemManagement from '@/components/admin/ItemManagement';
 import PasswordDialog from '@/components/admin/PasswordDialog';
 import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement';
+import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
 
 interface Category {
   id: string;
@@ -31,6 +32,9 @@ interface Item {
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  
+  // Auto-generate PDF when admin panel is accessed
+  useAutoGeneratePDF();
 
   useEffect(() => {
     const auth = sessionStorage.getItem('admin_auth');
