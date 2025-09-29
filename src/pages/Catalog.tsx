@@ -41,51 +41,37 @@ const Catalog = () => {
   const handleDownloadCatalog = async () => {
     try {
       toast({
-        title: "מכין קטלוג",
-        description: "בודק אם יש גרסה מעודכנת להורדה...",
+        title: "מוריד קטלוג",
+        description: "הקטלוג יורד כעת...",
       });
 
       const { data } = supabase.storage
         .from('catalog-pdfs')
         .getPublicUrl('catalog-bouquet.html');
 
-      let finalUrl = data?.publicUrl || '';
-      let exists = false;
+      if (data?.publicUrl) {
+        // Force download with proper file name
+        const res = await fetch(data.publicUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to fetch catalog file');
+        const htmlText = await res.text();
+        const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+        const blobUrl = URL.createObjectURL(blob);
 
-      if (finalUrl) {
-        try {
-          const head = await fetch(finalUrl, { method: 'HEAD', cache: 'no-store' });
-          exists = head.ok;
-        } catch (_) {
-          exists = false;
-        }
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'קטלוג בוקט.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+
+        toast({
+          title: "הורדת קטלוג",
+          description: "הקטלוג הורד בהצלחה",
+        });
+      } else {
+        throw new Error('No catalog URL available');
       }
-
-      if (!exists) {
-        const { data: genData, error } = await supabase.functions.invoke('generate-catalog-html');
-        if (error) throw error;
-        finalUrl = genData.url;
-      }
-
-      // Force download with proper file name
-      const res = await fetch(finalUrl, { cache: 'no-store' });
-      if (!res.ok) throw new Error('Failed to fetch catalog file');
-      const htmlText = await res.text();
-      const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
-      const blobUrl = URL.createObjectURL(blob);
-
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = 'קטלוג בוקט.html';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(blobUrl);
-
-      toast({
-        title: "הורדת קטלוג",
-        description: "הקטלוג הורד בהצלחה",
-      });
     } catch (error) {
       console.error('Error downloading catalog:', error);
       toast({
