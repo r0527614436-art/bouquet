@@ -41,32 +41,51 @@ const Catalog = () => {
   const handleDownloadCatalog = async () => {
     try {
       toast({
-        title: "מוריד קטלוג",
-        description: "הקטלוג מוכן להורדה...",
+        title: "מכין קטלוג",
+        description: "בודק אם יש גרסה מעודכנת להורדה...",
       });
 
-      // Get the HTML file from storage
       const { data } = supabase.storage
         .from('catalog-pdfs')
         .getPublicUrl('catalog-bouquet.html');
 
-      if (data?.publicUrl) {
-        // Create a download link
-        const link = document.createElement('a');
-        link.href = data.publicUrl;
-        link.download = 'קטלוג בוקט.html';
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      let finalUrl = data?.publicUrl || '';
+      let exists = false;
 
-        toast({
-          title: "הורדת קטלוג",
-          description: "הקטלוג הורד בהצלחה",
-        });
-      } else {
-        throw new Error('No catalog URL available');
+      if (finalUrl) {
+        try {
+          const head = await fetch(finalUrl, { method: 'HEAD', cache: 'no-store' });
+          exists = head.ok;
+        } catch (_) {
+          exists = false;
+        }
       }
+
+      if (!exists) {
+        const { data: genData, error } = await supabase.functions.invoke('generate-catalog-html');
+        if (error) throw error;
+        finalUrl = genData.url;
+      }
+
+      // Force download with proper file name
+      const res = await fetch(finalUrl, { cache: 'no-store' });
+      if (!res.ok) throw new Error('Failed to fetch catalog file');
+      const htmlText = await res.text();
+      const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'קטלוג בוקט.html';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+
+      toast({
+        title: "הורדת קטלוג",
+        description: "הקטלוג הורד בהצלחה",
+      });
     } catch (error) {
       console.error('Error downloading catalog:', error);
       toast({

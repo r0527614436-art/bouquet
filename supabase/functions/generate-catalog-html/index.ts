@@ -65,6 +65,7 @@ serve(async (req) => {
         headers: {
           'Authorization': `Bearer ${supabaseServiceKey}`,
           'Content-Type': 'text/html; charset=utf-8',
+          'x-upsert': 'true',
         },
         body: htmlContent,
       }
