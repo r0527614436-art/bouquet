@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Phone, MapPin } from 'lucide-react';
+import { ArrowLeft, Phone, MapPin, Menu, X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -22,6 +22,7 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   // Refs for animation triggers
@@ -145,6 +146,7 @@ const Index = () => {
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 rtl:space-x-reverse">
               <Link 
                 to="/catalog" 
@@ -159,6 +161,16 @@ const Index = () => {
                 צור קשר
               </a>
             </nav>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-pink-600 hover:bg-pink-50"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
             
             <div className="flex items-center">
               <img 
@@ -169,6 +181,28 @@ const Index = () => {
               />
             </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-pink-100 py-4">
+              <nav className="flex flex-col space-y-2">
+                <Link 
+                  to="/catalog" 
+                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  קטלוג
+                </Link>
+                <a 
+                  href="#contact" 
+                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  צור קשר
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
