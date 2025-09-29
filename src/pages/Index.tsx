@@ -141,7 +141,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white overflow-x-hidden">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -165,11 +165,11 @@ const Index = () => {
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
-              size="icon"
-              className="md:hidden text-pink-600 hover:bg-pink-50"
+              size="lg"
+              className="md:hidden text-pink-600 hover:bg-pink-50 w-12 h-12"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
             </Button>
             
             <div className="flex items-center">
@@ -209,9 +209,9 @@ const Index = () => {
       {/* Hero Section with Image Carousel */}
       <motion.section 
         ref={heroRef}
-        initial={{ opacity: 0, x: -100 }}
-        animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        initial={{ opacity: 0, x: 0 }}
+        animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative h-96 md:h-[500px] overflow-hidden"
       >
         <div className="relative w-full h-full">
@@ -264,9 +264,9 @@ const Index = () => {
       {/* About Section */}
       <motion.section 
         ref={aboutRef}
-        initial={{ opacity: 0, x: 100 }}
-        animate={isAboutInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isAboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -311,9 +311,9 @@ const Index = () => {
       <motion.section 
         id="contact" 
         ref={contactRef}
-        initial={{ opacity: 0, x: -100 }}
-        animate={isContactInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
-        transition={{ duration: 1.2, ease: "easeOut", delay: 0.6 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
