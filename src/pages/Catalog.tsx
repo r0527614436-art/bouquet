@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
+import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
 
 interface Category {
   id: string;
@@ -35,6 +36,9 @@ const Catalog = () => {
   const { addToCart, getTotalItems } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
+  
+  // Auto-generate HTML catalog when changes occur
+  useAutoGeneratePDF();
   const clickCount = useRef(0);
   const clickTimer = useRef<NodeJS.Timeout | null>(null);
 
