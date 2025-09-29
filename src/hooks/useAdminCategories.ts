@@ -8,7 +8,7 @@ export const useAdminCategories = () => {
   const queryClient = useQueryClient();
 
   const createCategoryMutation = useMutation({
-    mutationFn: async (category: { name: string; subtitle: string | null; allow_cart: boolean }) => {
+    mutationFn: async (category: { name: string; subtitle: string | null; allow_cart: boolean; subcategories?: string[] }) => {
       console.log('Creating category with data:', category);
       
       try {
@@ -50,13 +50,13 @@ export const useAdminCategories = () => {
   });
 
   const updateCategoryMutation = useMutation({
-    mutationFn: async ({ id, name, subtitle, allow_cart }: { id: string; name: string; subtitle: string | null; allow_cart: boolean }) => {
+    mutationFn: async ({ id, name, subtitle, allow_cart, subcategories }: { id: string; name: string; subtitle: string | null; allow_cart: boolean; subcategories?: string[] }) => {
       console.log('Updating category:', id, { name, subtitle, allow_cart });
       
       try {
         const { data, error } = await supabase
           .from('categories')
-          .update({ name, subtitle, allow_cart })
+          .update({ name, subtitle, allow_cart, subcategories })
           .eq('id', id)
           .select()
           .single();

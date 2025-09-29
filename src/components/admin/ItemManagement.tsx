@@ -11,6 +11,7 @@ import { supabase } from '@/integrations/supabase/client';
 interface Category {
   id: string;
   name: string;
+  subcategories?: any;
 }
 
 interface Item {
@@ -447,11 +448,23 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
                           </SelectContent>
                         </Select>
 
-                        <Input
-                          placeholder="תת-קטגוריה"
-                          value={editingItem.subcategory || ''}
-                          onChange={(e) => setEditingItem({...editingItem, subcategory: e.target.value || undefined})}
-                        />
+                        <Select value={editingItem.subcategory || ""} onValueChange={(value) => setEditingItem({...editingItem, subcategory: value || undefined})}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="בחר קטגוריית משנה" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="">ללא קטגוריית משנה</SelectItem>
+                            {(() => {
+                              const selectedCategory = categories.find(c => c.id === editingItem.category_id);
+                              const subcategories = selectedCategory?.subcategories || [];
+                              return Array.isArray(subcategories) ? subcategories.map((subcat) => (
+                                <SelectItem key={subcat} value={subcat}>
+                                  {subcat}
+                                </SelectItem>
+                              )) : [];
+                            })()}
+                          </SelectContent>
+                        </Select>
                         
                         <Input
                           placeholder="כותרת"

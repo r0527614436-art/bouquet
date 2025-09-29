@@ -82,6 +82,7 @@ export type Database = {
           created_at: string
           id: string
           name: string
+          subcategories: Json | null
           subtitle: string | null
         }
         Insert: {
@@ -89,6 +90,7 @@ export type Database = {
           created_at?: string
           id?: string
           name: string
+          subcategories?: Json | null
           subtitle?: string | null
         }
         Update: {
@@ -96,6 +98,7 @@ export type Database = {
           created_at?: string
           id?: string
           name?: string
+          subcategories?: Json | null
           subtitle?: string | null
         }
         Relationships: []

@@ -15,6 +15,9 @@ import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement'
 interface Category {
   id: string;
   name: string;
+  subtitle: string | null;
+  allow_cart: boolean;
+  subcategories?: any;
 }
 
 interface Item {
@@ -109,8 +112,8 @@ const Admin = () => {
           categories={categories} 
           onReorderCategories={handleReorderCategories}
         />
-        <CategoryManagement categories={categories} items={items} />
-        <ItemManagement categories={categories} items={items} />
+        <CategoryManagement categories={categories as any} items={items} />
+        <ItemManagement categories={categories as any} items={items} />
       </main>
 
       <PasswordDialog 

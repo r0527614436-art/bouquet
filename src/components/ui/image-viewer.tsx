@@ -47,16 +47,16 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 overflow-hidden" onKeyDown={handleKeyDown}>
-        <div className="relative w-full h-full bg-black">
+      <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 overflow-hidden bg-gradient-to-br from-background/95 via-primary/5 to-secondary/20 backdrop-blur-sm border-primary/20" onKeyDown={handleKeyDown}>
+        <div className="relative w-full h-full bg-gradient-to-b from-background/90 to-background/95">
           {/* Close button */}
           <Button
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="absolute top-4 right-4 z-50 text-white bg-black/50 hover:bg-black/70 rounded-full p-2"
+            className="absolute top-4 right-4 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
           >
-            <X className="h-4 w-4" />
+            <X className="h-5 w-5" />
           </Button>
 
           {/* Previous button */}
@@ -65,7 +65,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
               variant="ghost"
               size="sm"
               onClick={onPrevious}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 text-white bg-black/50 hover:bg-black/70 rounded-full p-2"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
@@ -77,32 +77,42 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
               variant="ghost"
               size="sm"
               onClick={onNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 text-white bg-black/50 hover:bg-black/70 rounded-full p-2"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
           )}
 
           {/* Main image */}
-          <div className="w-full h-full flex items-center justify-center p-4">
-            <img
-              src={currentItem.image_url}
-              alt={currentItem.title}
-              className="max-w-full max-h-full object-contain"
-              style={{ maxHeight: 'calc(100vh - 8rem)' }}
-            />
+          <div className="w-full h-full flex items-center justify-center p-6">
+            <div className="relative max-w-full max-h-full">
+              <img
+                src={currentItem.image_url}
+                alt={currentItem.title}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border-2 border-primary/20"
+                style={{ maxHeight: 'calc(100vh - 12rem)' }}
+              />
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary/10 via-transparent to-transparent pointer-events-none"></div>
+            </div>
           </div>
 
           {/* Item info overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-            <div className="text-white">
-              <h3 className="text-xl font-semibold mb-2">{currentItem.title}</h3>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/80 to-transparent backdrop-blur-sm border-t border-primary/20 p-6">
+            <div className="text-foreground">
+              <h3 className="text-2xl font-bold mb-2 text-primary bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{currentItem.title}</h3>
               {currentItem.price && (
-                <p className="text-lg font-bold text-pink-300">₪{currentItem.price}</p>
+                <p className="text-xl font-bold text-accent mb-2">₪{currentItem.price}</p>
               )}
-              <p className="text-sm text-gray-300 mt-2">
-                {currentIndex + 1} מתוך {items.length}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-muted-foreground bg-secondary/20 px-3 py-1 rounded-full">
+                  {currentIndex + 1} מתוך {items.length}
+                </p>
+                <div className="flex gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-150"></div>
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-300"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
