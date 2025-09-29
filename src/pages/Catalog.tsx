@@ -408,7 +408,7 @@ const Catalog = () => {
         {/* Cart button at bottom of page */}
         <div className="fixed bottom-6 right-6 z-50">
           <Link to="/cart">
-            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative scale-150">
+            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative scale-[1.3]">
               <ShoppingCart className="h-9 w-9" />
               {getTotalItems() > 0 && (
                 <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full text-sm w-9 h-9 flex items-center justify-center font-bold">
