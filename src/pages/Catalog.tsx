@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import { downloadCatalogPDF } from '@/utils/catalogPdf';
+import { downloadCatalogFromPage } from '@/utils/catalogPdf';
 
 interface Category {
   id: string;
@@ -41,62 +41,28 @@ const Catalog = () => {
 
   const handleDownloadCatalog = async () => {
     try {
-      // First try to get existing PDF from storage
-      const { data: files } = await supabase.storage
-        .from('catalog-pdfs')
-        .list('', { limit: 1, sortBy: { column: 'created_at', order: 'desc' } });
+      toast({
+        title: "מכין קטלוג",
+        description: "אנא המתן, הקטלוג מתכונן להורדה...",
+      });
 
-      let pdfUrl = null;
-
-      if (files && files.length > 0) {
-        // Use existing PDF
-        const { data } = supabase.storage
-          .from('catalog-pdfs')
-          .getPublicUrl(files[0].name);
-        pdfUrl = data.publicUrl;
-      } else {
-        // Generate new PDF via edge function
-        const { data, error } = await supabase.functions.invoke('generate-catalog-pdf');
-        
-        if (error) throw error;
-        pdfUrl = data.url;
-      }
-
-      if (pdfUrl) {
-        // Download the PDF
-        const link = document.createElement('a');
-        link.href = pdfUrl;
-        link.download = 'קטלוג בוקט.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
+      const success = await downloadCatalogFromPage();
+      
+      if (success) {
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג הורד בהצלחה",
         });
+      } else {
+        throw new Error('Failed to generate PDF from page');
       }
     } catch (error) {
       console.error('Error downloading catalog:', error);
-      
-      // Fallback to client-side PDF generation
-      try {
-        const success = await downloadCatalogPDF(items, categories);
-        if (success) {
-          toast({
-            title: "הורדת קטלוג",
-            description: "הקטלוג הורד בהצלחה",
-          });
-        } else {
-          throw new Error('Client-side PDF generation failed');
-        }
-      } catch (fallbackError) {
-        toast({
-          title: "שגיאה",
-          description: "שגיאה בהורדת הקטלוג",
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהורדת הקטלוג",
+        variant: "destructive",
+      });
     }
   };
 
@@ -211,7 +177,7 @@ const Catalog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white" id="catalog-page">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
