@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
@@ -163,6 +163,9 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
             <DialogTitle>
               {editingCategory ? 'ערוך קטגוריה' : 'הוסף קטגוריה חדשה'}
             </DialogTitle>
+            <DialogDescription>
+              {editingCategory ? 'ערוך את פרטי הקטגוריה הקיימת' : 'צור קטגוריה חדשה למוצרים שלך'}
+            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div>

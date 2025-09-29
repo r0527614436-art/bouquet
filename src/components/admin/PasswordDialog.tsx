@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useAdminPassword } from '@/hooks/useAdminPassword';
 
@@ -26,6 +26,7 @@ const PasswordDialog = ({ showPasswordDialog, setShowPasswordDialog }: PasswordD
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>שנה סיסמה</DialogTitle>
+          <DialogDescription>הזן את הסיסמה החדשה למערכת הניהול</DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
           <Input

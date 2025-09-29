@@ -1,7 +1,8 @@
 import React from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface CatalogItem {
   id: string;
@@ -48,6 +49,10 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 overflow-hidden bg-gradient-to-br from-background/95 via-primary/5 to-secondary/20 backdrop-blur-sm border-primary/20" onKeyDown={handleKeyDown}>
+        <VisuallyHidden>
+          <DialogTitle>תצוגת תמונה: {currentItem.title}</DialogTitle>
+          <DialogDescription>תצוגה מורחבת של התמונה עם אפשרות ניווט</DialogDescription>
+        </VisuallyHidden>
         <div className="relative w-full h-full bg-gradient-to-b from-background/90 to-background/95">
           {/* Close button */}
           <Button
