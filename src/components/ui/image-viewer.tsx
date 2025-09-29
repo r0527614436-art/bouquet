@@ -106,16 +106,6 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             <X className="h-5 w-5" />
           </Button>
 
-          {/* Download catalog button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleDownloadCatalog}
-            className="absolute top-4 left-4 z-50 text-primary-foreground bg-accent/80 hover:bg-accent/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-accent/30 transition-all duration-300 hover:scale-105"
-            title="הורד קטלוג PDF"
-          >
-            <Download className="h-5 w-5" />
-          </Button>
 
           {/* Previous button */}
           {!isFirst && (

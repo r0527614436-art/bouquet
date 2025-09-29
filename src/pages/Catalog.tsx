@@ -1,13 +1,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
+import { downloadCatalogPDF } from '@/utils/catalogPdf';
 
 interface Category {
   id: string;
@@ -37,6 +38,30 @@ const Catalog = () => {
   const navigate = useNavigate();
   const clickCount = useRef(0);
   const clickTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleDownloadCatalog = async () => {
+    try {
+      const success = await downloadCatalogPDF(items, categories);
+      if (success) {
+        toast({
+          title: "הורדת קטלוג",
+          description: "הקטלוג הורד בהצלחה",
+        });
+      } else {
+        toast({
+          title: "שגיאה",
+          description: "שגיאה בהורדת הקטלוג",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהורדת הקטלוג",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleLogoClick = () => {
     clickCount.current += 1;
@@ -159,6 +184,13 @@ const Catalog = () => {
                 <ArrowRight className="h-5 w-5 ml-2" />
                 חזרה לעמוד הבית
               </Link>
+              <Button
+                onClick={handleDownloadCatalog}
+                className="flex items-center bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6 py-2.5"
+              >
+                <Download className="h-4 w-4 ml-2" />
+                הורד קטלוג
+              </Button>
               <Link 
                 to="/cart" 
                 className="flex items-center text-pink-600 hover:text-pink-800 relative"
