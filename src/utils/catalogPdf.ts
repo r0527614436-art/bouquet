@@ -1,5 +1,4 @@
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 interface CatalogItem {
   id: string;
@@ -15,97 +14,6 @@ interface Category {
   name: string;
   subtitle?: string | null;
 }
-
-export const generateCatalogFromPage = async () => {
-  try {
-    // Hide navigation elements that shouldn't be in the PDF
-    const elementsToHide = [
-      'header', // Navigation header
-      '.fixed', // Fixed cart button
-      '[data-html2canvas-ignore]' // Any element with this attribute
-    ];
-    
-    const hiddenElements: HTMLElement[] = [];
-    
-    elementsToHide.forEach(selector => {
-      const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
-        const htmlEl = el as HTMLElement;
-        if (htmlEl.style.display !== 'none') {
-          hiddenElements.push(htmlEl);
-          htmlEl.style.display = 'none';
-        }
-      });
-    });
-
-    // Get the catalog content
-    const catalogContent = document.querySelector('main') || document.body;
-    
-    // Create a clean version for PDF
-    const canvas = await html2canvas(catalogContent as HTMLElement, {
-      scale: 2, // High quality
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: '#ffffff',
-      width: catalogContent.scrollWidth,
-      height: catalogContent.scrollHeight,
-      scrollX: 0,
-      scrollY: 0,
-    });
-
-    // Restore hidden elements
-    hiddenElements.forEach(el => {
-      el.style.display = '';
-    });
-
-    // Create PDF
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const imgWidth = 210; // A4 width in mm
-    const pageHeight = 295; // A4 height in mm
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    // Add title page
-    pdf.setFontSize(24);
-    pdf.text('קטלוג בוקט', 105, 30, { align: 'center' });
-    pdf.setFontSize(16);
-    pdf.text('רוחי רובינשטיין עיצוב אירועים', 105, 50, { align: 'center' });
-    pdf.setFontSize(12);
-    pdf.text(`עודכן ב: ${new Date().toLocaleDateString('he-IL')}`, 105, 70, { align: 'center' });
-    
-    // Add catalog content
-    pdf.addPage();
-    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    // Add new pages if content is longer than one page
-    while (heightLeft >= 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    return pdf;
-  } catch (error) {
-    console.error('Error generating PDF from page:', error);
-    throw error;
-  }
-};
-
-export const downloadCatalogFromPage = async () => {
-  try {
-    const pdf = await generateCatalogFromPage();
-    pdf.save('קטלוג בוקט.pdf');
-    return true;
-  } catch (error) {
-    console.error('Error downloading PDF:', error);
-    return false;
-  }
-};
-
-// Keep original functions as fallback
 export const generateCatalogPDF = async (items: CatalogItem[], categories: Category[]) => {
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pageWidth = pdf.internal.pageSize.getWidth();
@@ -121,7 +29,7 @@ export const generateCatalogPDF = async (items: CatalogItem[], categories: Categ
   // Header
   pdf.setFontSize(24);
   pdf.setFont('Arial', 'bold');
-  pdf.text('קטלוג מוצרים', pageWidth / 2, currentY, { align: 'center' });
+  pdf.text('קטלוג בוקט', pageWidth / 2, currentY, { align: 'center' });
   
   // Add logo area (placeholder for now)
   currentY += 20;

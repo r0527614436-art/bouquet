@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
-import { downloadCatalogFromPage } from '@/utils/catalogPdf';
+import { downloadCatalogPDF } from '@/utils/catalogPdf';
 
 interface Category {
   id: string;
@@ -46,7 +46,7 @@ const Catalog = () => {
         description: "אנא המתן, הקטלוג מתכונן להורדה...",
       });
 
-      const success = await downloadCatalogFromPage();
+      const success = await downloadCatalogPDF(items, categories);
       
       if (success) {
         toast({
@@ -54,7 +54,7 @@ const Catalog = () => {
           description: "הקטלוג הורד בהצלחה",
         });
       } else {
-        throw new Error('Failed to generate PDF from page');
+        throw new Error('Failed to generate PDF');
       }
     } catch (error) {
       console.error('Error downloading catalog:', error);
