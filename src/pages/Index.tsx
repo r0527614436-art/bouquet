@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Phone, MapPin, Menu, X } from 'lucide-react';
+import { ArrowLeft, Phone, MapPin, Menu, X, ChevronLeft, ChevronRight, Heart, Gift, Crown, Sparkles, Camera } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -141,61 +141,90 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white overflow-x-hidden">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-pink-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6 rtl:space-x-reverse">
-              <Link 
-                to="/catalog" 
-                className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600"
-              >
-                קטלוג
-              </Link>
-              <a 
-                href="#contact" 
-                className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600"
-              >
-                צור קשר
-              </a>
-            </nav>
+    <div className="min-h-screen bg-white overflow-x-hidden">
+      {/* Fixed WhatsApp Button */}
+      <Button 
+        onClick={openWhatsApp}
+        className="fixed left-4 top-1/2 transform -translate-y-1/2 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full p-0 shadow-2xl"
+        size="icon"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-7 w-7 fill-current"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"/>
+        </svg>
+      </Button>
 
+      {/* Header */}
+      <header className="bg-white shadow-sm sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-3">
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
-              size="lg"
-              className="md:hidden text-pink-600 hover:bg-pink-50 w-12 h-12"
+              size="sm"
+              className="md:hidden"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
+              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
             
+            {/* Logo */}
             <div className="flex items-center">
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handleLogoClick}
               />
             </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex space-x-6 rtl:space-x-reverse">
+              <Link 
+                to="/catalog" 
+                className="px-4 py-2 hover:text-primary font-medium transition-colors"
+              >
+                קטלוג
+              </Link>
+              <a 
+                href="#about" 
+                className="px-4 py-2 hover:text-primary font-medium transition-colors"
+              >
+                אודות
+              </a>
+              <a 
+                href="#contact" 
+                className="px-4 py-2 hover:text-primary font-medium transition-colors"
+              >
+                צור קשר
+              </a>
+            </nav>
           </div>
 
           {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden border-t border-pink-100 py-4">
+            <div className="md:hidden border-t py-4">
               <nav className="flex flex-col space-y-2">
                 <Link 
                   to="/catalog" 
-                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
+                  className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   קטלוג
                 </Link>
                 <a 
+                  href="#about" 
+                  className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  אודות
+                </a>
+                <a 
                   href="#contact" 
-                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
+                  className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   צור קשר
@@ -206,13 +235,13 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section with Image Carousel */}
+      {/* Hero Section with Large Title */}
       <motion.section 
         ref={heroRef}
-        initial={{ opacity: 0, x: 0 }}
-        animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative h-96 md:h-[500px] overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8 }}
+        className="relative h-[60vh] md:h-[70vh] overflow-hidden"
       >
         <div className="relative w-full h-full">
           {images.map((image, index) => (
@@ -227,81 +256,278 @@ const Index = () => {
                 alt={image.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <h2 
-                    key={`${image.id}-${currentImageIndex}`}
-                    className={`text-4xl md:text-6xl font-black mb-8 animate-text-fade-in ${image.font_family || 'font-sans'}`}
-                    style={{
-                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-                      letterSpacing: '0.02em'
-                    }}
-                  >
-                    {image.title}
-                  </h2>
-                </div>
-              </div>
             </div>
           ))}
+          
+          {/* Overlay with Title */}
+          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+            <h1 className="font-amatic-sc text-[120px] md:text-[180px] lg:text-[220px] font-bold text-white mb-4" style={{ textShadow: '3px 3px 6px rgba(0,0,0,0.5)' }}>
+              בוקט
+            </h1>
+            <p className="font-assistant text-lg md:text-xl text-white text-center px-4 mb-8">
+              מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע
+            </p>
+            
+            {/* Navigation Arrows */}
+            <div className="flex gap-4">
+              <button
+                onClick={() => setCurrentImageIndex((prev) => prev === 0 ? images.length - 1 : prev - 1)}
+                className="w-12 h-12 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors"
+              >
+                <ChevronRight className="h-6 w-6" />
+              </button>
+              <button
+                onClick={() => setCurrentImageIndex((prev) => prev === images.length - 1 ? 0 : prev + 1)}
+                className="w-12 h-12 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors"
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Dots Indicator */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 rtl:space-x-reverse">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2">
           {images.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentImageIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all ${
+              className={`w-2 h-2 rounded-full transition-all ${
                 index === currentImageIndex 
-                  ? 'bg-white' 
-                  : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                  ? 'bg-white w-8' 
+                  : 'bg-white/50 hover:bg-white/75'
               }`}
             />
           ))}
         </div>
       </motion.section>
 
+      {/* Gallery Section with Center Focus */}
+      <section className="py-16 bg-black">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="relative">
+            {/* Main centered image */}
+            <div className="flex justify-center items-center gap-4">
+              <button
+                onClick={() => setCurrentImageIndex((prev) => prev === 0 ? images.length - 1 : prev - 1)}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center transition-colors"
+              >
+                <ChevronRight className="h-5 w-5 text-white" />
+              </button>
+              
+              <div className="relative w-64 h-80 md:w-80 md:h-96 rounded-lg overflow-hidden shadow-2xl">
+                <img
+                  src={images[currentImageIndex]?.image_url}
+                  alt={images[currentImageIndex]?.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-white py-3 text-center">
+                  <p className="font-assistant font-semibold text-lg">
+                    {images[currentImageIndex]?.title}
+                  </p>
+                </div>
+              </div>
+              
+              <button
+                onClick={() => setCurrentImageIndex((prev) => prev === images.length - 1 ? 0 : prev + 1)}
+                className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center transition-colors"
+              >
+                <ChevronLeft className="h-5 w-5 text-white" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <motion.section 
+        id="about"
         ref={aboutRef}
         initial={{ opacity: 0, y: 20 }}
         animate={isAboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-        className="py-16 bg-white"
+        transition={{ duration: 0.8 }}
+        className="py-16 bg-stone-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
-              בוקט - שזירת פרחים
-            </h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
-              מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות.
-              אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
-            </p>
-            
-            {/* Delivery Information Only */}
-            <div className="bg-pink-50 rounded-lg p-6 mb-8">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">
-                משלוחים לכל אזור המרכז
-              </h3>
-              <p className="text-gray-700">
-                אנו מספקים משלוחי פרחים איכותיים לכל אזור המרכז - ירושלים, מודיעין עילית, בני ברק, פתח תקווה ועוד
-              </p>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Images */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="w-32 h-32 rounded-full overflow-hidden mx-auto">
+                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
+              </div>
+              <div className="space-y-4">
+                <div className="w-24 h-24 rounded-lg overflow-hidden">
+                  <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-24 h-24 rounded-lg overflow-hidden">
+                  <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+
+            {/* Text Content */}
+            <div>
+              <h2 className="font-assistant text-4xl font-bold mb-6">אודות</h2>
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <p>
+                  ברוכים הבאים לבוקט - עולם שזירת הפרחים המקצועי שלנו!
+                </p>
+                <p>
+                  אנו מתמחים בעיצוב וביצוע זרי כלה מרהיבים, עיצוב חופות חלומיות, 
+                  והפקת אירועים מושלמים. כל פרח נבחר בקפידה, כל עיצוב נוצר באהבה.
+                </p>
+                <p>
+                  המומחיות שלנו משתרעת על פני מגוון רחב של שירותים: 
+                  מזרי אירוסין מרשימים ועד מתנות מעוצבות בקפידה עם שוקולדים ופרחים.
+                </p>
+                <p className="font-semibold">
+                  כל יצירה היא ייחודית ומותאמת אישית ליום המיוחד שלכם! 🌸
+                </p>
+              </div>
             </div>
           </div>
+        </div>
+      </motion.section>
 
+      {/* Services Icons Section */}
+      <section className="py-16 bg-black">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+            {[
+              { icon: Heart, text: 'זרי כלה' },
+              { icon: Crown, text: 'כיסאות כלה' },
+              { icon: Sparkles, text: 'עיצוב חופות' },
+              { icon: Gift, text: 'מתנות מעוצבות' },
+              { icon: Camera, text: 'אירועים' }
+            ].map((service, idx) => (
+              <div key={idx} className="flex flex-col items-center text-center">
+                <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center mb-3">
+                  <service.icon className="h-10 w-10 text-black" />
+                </div>
+                <p className="text-white font-assistant">{service.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Grid Section */}
+      <section className="py-16 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="font-assistant text-4xl font-bold text-center mb-12">הגלריה שלנו</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {images.slice(0, 4).map((image, idx) => (
+              <div key={idx} className="aspect-square rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                <img src={image.image_url} alt={image.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Catalog Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="font-assistant text-4xl font-bold text-center mb-12">קטלוג</h2>
+          
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <Link to="/catalog" className="relative h-64 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+              <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <h3 className="text-white font-assistant text-3xl font-bold">זרי אירוסין</h3>
+              </div>
+            </Link>
+            
+            <Link to="/catalog" className="relative h-64 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+              <img src="/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png" alt="כיסאות כלה" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <h3 className="text-white font-assistant text-3xl font-bold">כיסאות כלה</h3>
+              </div>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <Link to="/catalog" className="relative h-64 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+              <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="אירועים פרחים" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <h3 className="text-white font-assistant text-3xl font-bold">אירועים פרחים</h3>
+              </div>
+            </Link>
+            
+            <Link to="/catalog" className="relative h-64 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+              <img src="/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png" alt="פינת מתנות" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <h3 className="text-white font-assistant text-3xl font-bold">פינת מתנות</h3>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-16 bg-stone-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="font-assistant text-4xl font-bold text-center mb-12">איך זה עובד?</h2>
+          
+          <div className="space-y-8">
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-bold text-xl flex-shrink-0">1</div>
+                <div>
+                  <h3 className="font-assistant text-xl font-semibold mb-2">בחירת סגנון</h3>
+                  <p className="text-gray-600">בחרו מתוך מגוון עיצובים בקטלוג שלנו או בואו עם רעיון משלכם. אנחנו כאן כדי להגשים את החזון שלכם.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-bold text-xl flex-shrink-0">2</div>
+                <div>
+                  <h3 className="font-assistant text-xl font-semibold mb-2">התאמה אישית</h3>
+                  <p className="text-gray-600">נתאים את העיצוב לצרכים שלכם - צבעים, סגנון, גודל ותקציב. כל פרט חשוב לנו.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-bold text-xl flex-shrink-0">3</div>
+                <div>
+                  <h3 className="font-assistant text-xl font-semibold mb-2">יצירה ומשלוח</h3>
+                  <p className="text-gray-600">אנחנו יוצרים את העיצוב במיומנות ובקפידה, ומספקים אותו אליכם בזמן ובמצב מושלם.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <motion.section 
+        ref={servicesRef}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isServicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.8 }}
+        className="py-16 bg-black text-white"
+      >
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="font-assistant text-4xl font-bold text-center mb-12">למה לבחור בנו?</h2>
+          
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">זרי כלה מעוצבים</h3>
-              <p className="text-gray-600">זרי כלה במשלוח עם עיצוב אישי והתאמה מושלמת ליום המיוחד</p>
+            <div className="bg-white/5 rounded-lg p-8 text-center">
+              <h3 className="font-assistant text-2xl font-semibold mb-4">ניסיון עשיר</h3>
+              <p className="text-gray-300">שנים של ניסיון בעיצוב אירועים ושזירת פרחים מקצועית</p>
             </div>
-            <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">עיצוב חופות</h3>
-              <p className="text-gray-600">חופות מעוצבות וכיסאות כלה</p>
+
+            <div className="bg-white/5 rounded-lg p-8 text-center">
+              <h3 className="font-assistant text-2xl font-semibold mb-4">איכות מעולה</h3>
+              <p className="text-gray-300">שימוש בפרחים הטריים ביותר ובחומרים האיכותיים ביותר</p>
             </div>
-            <div className="text-center p-6 rounded-lg bg-pink-50">
-              <h3 className="text-xl font-semibold text-pink-800 mb-3">מתנות מעוצבות</h3>
-              <p className="text-gray-600">מתנות עם שוקולדים ופרחים, קשתות גיבסניות וזרי חישוק</p>
+
+            <div className="bg-white/5 rounded-lg p-8 text-center">
+              <h3 className="font-assistant text-2xl font-semibold mb-4">שירות אישי</h3>
+              <p className="text-gray-300">ליווי צמוד ותשומת לב לכל פרט כדי להבטיח את שביעות רצונכם</p>
             </div>
           </div>
         </div>
@@ -313,75 +539,53 @@ const Index = () => {
         ref={contactRef}
         initial={{ opacity: 0, y: 20 }}
         animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-        className="py-16 bg-white"
+        transition={{ duration: 0.8 }}
+        className="py-16 bg-stone-50"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צור קשר</h2>
-            <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
+            <h2 className="font-assistant text-4xl font-bold mb-4">יצירת קשר</h2>
+            <p className="text-lg text-gray-700">נשמח לעזור לכם להפוך את החלום שלכם למציאות</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto mb-8">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון</h3>
-              <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block mb-4">
-                0527614436
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="bg-white rounded-lg p-6 text-center shadow-md">
+              <Phone className="h-12 w-12 mx-auto mb-4 text-primary" />
+              <h3 className="font-assistant text-xl font-semibold mb-4">טלפון</h3>
+              <a href="tel:0527614436" className="text-lg text-primary hover:underline block mb-2">
+                052-761-4436
               </a>
-              <a href="mailto:r0527614436@gmail.com" className="text-lg text-gray-700 hover:text-pink-600 block">
+              <a href="mailto:r0527614436@gmail.com" className="text-gray-600 hover:text-primary hover:underline block">
                 r0527614436@gmail.com
               </a>
             </div>
 
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-pink-800 mb-4">וואטסאפ</h3>
-              <Button 
-                onClick={openWhatsApp}
-                className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full p-0 shadow-lg hover:shadow-xl transition-all duration-200"
-                size="icon"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-8 w-8 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"/>
-                </svg>
-              </Button>
-            </div>
-          </div>
-
-          {/* Address Section with Navigation - moved under contact details */}
-          <div className="text-center mb-8">
-            <div className="bg-pink-50 rounded-lg p-6 max-w-2xl mx-auto">
-              <div className="flex items-center justify-center text-gray-700 mb-4">
-                <MapPin className="h-5 w-5 ml-2 text-pink-600" />
-                <span className="font-medium text-lg">שערי תשובה 14, מודיעין עילית</span>
-              </div>
+            <div className="bg-white rounded-lg p-6 text-center shadow-md">
+              <MapPin className="h-12 w-12 mx-auto mb-4 text-primary" />
+              <h3 className="font-assistant text-xl font-semibold mb-4">כתובת</h3>
+              <p className="text-gray-700 mb-4">שערי תשובה 14, מודיעין עילית</p>
               
-              <div className="flex justify-center space-x-4 rtl:space-x-reverse">
+              <div className="flex justify-center gap-4">
                 <Button
                   onClick={openGoogleMaps}
                   variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
-                  size="icon"
+                  size="sm"
                 >
                   <img 
                     src="/lovable-uploads/fd24647a-2b32-46d8-9868-413519b08b8a.png" 
                     alt="Google Maps" 
-                    className="h-8 w-8 object-contain"
+                    className="h-5 w-5"
                   />
                 </Button>
                 <Button
                   onClick={openWaze}
                   variant="outline"
-                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
-                  size="icon"
+                  size="sm"
                 >
                   <img 
                     src={wazeIcon} 
                     alt="Waze" 
-                    className="h-8 w-8 object-contain"
+                    className="h-5 w-5"
                   />
                 </Button>
               </div>
@@ -391,22 +595,27 @@ const Index = () => {
       </motion.section>
 
       {/* Footer */}
-      <footer className="bg-pink-800 text-white py-8">
+      <footer className="bg-black text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
-            <p className="text-pink-200 mb-4">
-              שזירת פרחים מקצועית
+            <img 
+              src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+              alt="בוקט לוגו" 
+              className="h-24 w-auto mx-auto mb-4 brightness-0 invert"
+            />
+            <h3 className="font-assistant text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
+            <p className="text-gray-400 mb-4">
+              שזירת פרחים מקצועית לכל אירוע
             </p>
-            <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
-              <a href="tel:0527614436" className="text-pink-200 hover:text-white">
-                0527614436
+            <div className="flex justify-center gap-6 mb-4 text-sm">
+              <a href="tel:0527614436" className="text-gray-400 hover:text-white transition-colors">
+                052-761-4436
               </a>
-              <a href="mailto:r0527614436@gmail.com" className="text-pink-200 hover:text-white">
+              <a href="mailto:r0527614436@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                 r0527614436@gmail.com
               </a>
             </div>
-            <p className="text-sm text-pink-200">
+            <p className="text-sm text-gray-500">
               © 2025 כל הזכויות שמורות ל{' '}
               <a 
                 href="https://jobclic.com/" 
