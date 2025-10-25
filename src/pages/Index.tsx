@@ -141,22 +141,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Header - Minimalist with Logo */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white overflow-x-hidden">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3">
+          <div className="flex justify-between items-center py-4">
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-6 rtl:space-x-reverse">
               <Link 
                 to="/catalog" 
-                className="px-4 py-2 text-gray-800 hover:text-pink-600 font-medium transition-colors"
+                className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600"
               >
                 קטלוג
               </Link>
               <a 
                 href="#contact" 
-                className="px-4 py-2 text-gray-800 hover:text-pink-600 font-medium transition-colors"
+                className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600"
               >
                 צור קשר
               </a>
@@ -166,17 +166,17 @@ const Index = () => {
             <Button
               variant="ghost"
               size="lg"
-              className="md:hidden text-gray-800 hover:bg-gray-100 w-10 h-10"
+              className="md:hidden text-pink-600 hover:bg-pink-50 w-12 h-12"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
             </Button>
             
             <div className="flex items-center">
               <img 
                 src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                 alt="בוקט לוגו" 
-                className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-36 w-auto cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={handleLogoClick}
               />
             </div>
@@ -184,18 +184,18 @@ const Index = () => {
 
           {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden border-t border-gray-200 py-4">
+            <div className="md:hidden border-t border-pink-100 py-4">
               <nav className="flex flex-col space-y-2">
                 <Link 
                   to="/catalog" 
-                  className="px-4 py-2 text-gray-800 hover:text-pink-600 font-medium text-center"
+                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   קטלוג
                 </Link>
                 <a 
                   href="#contact" 
-                  className="px-4 py-2 text-gray-800 hover:text-pink-600 font-medium text-center"
+                  className="px-4 py-2 text-pink-600 hover:text-white hover:bg-pink-600 font-medium rounded-lg transition-all duration-200 border border-pink-600 text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   צור קשר
@@ -206,163 +206,102 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section - Black Background with Logo */}
+      {/* Hero Section with Image Carousel */}
       <motion.section 
         ref={heroRef}
-        initial={{ opacity: 0 }}
-        animate={isHeroInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative bg-black text-white py-20"
+        initial={{ opacity: 0, x: 0 }}
+        animate={isHeroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative h-96 md:h-[500px] overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-wider">
-            בוקט
-          </h1>
-          <p className="text-xl md:text-2xl mb-12 text-gray-300">
-            שזירת פרחים מקצועית
-          </p>
-          
-          {/* Quick Links */}
-          <div className="flex justify-center gap-4 flex-wrap">
-            <Link 
-              to="/catalog"
-              className="bg-white text-black px-6 py-3 rounded-full hover:bg-gray-200 transition-colors font-medium"
+        <div className="relative w-full h-full">
+          {images.map((image, index) => (
+            <div
+              key={image.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
             >
-              קטלוג
-            </Link>
-            <a 
-              href="#about"
-              className="border border-white text-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors font-medium"
-            >
-              אודות
-            </a>
-            <a 
-              href="#contact"
-              className="border border-white text-white px-6 py-3 rounded-full hover:bg-white hover:text-black transition-colors font-medium"
-            >
-              צור קשר
-            </a>
-          </div>
+              <img
+                src={image.image_url}
+                alt={image.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h2 
+                    key={`${image.id}-${currentImageIndex}`}
+                    className={`text-4xl md:text-6xl font-black mb-8 animate-text-fade-in ${image.font_family || 'font-sans'}`}
+                    style={{
+                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                      letterSpacing: '0.02em'
+                    }}
+                  >
+                    {image.title}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Dots Indicator */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 rtl:space-x-reverse">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentImageIndex 
+                  ? 'bg-white' 
+                  : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+              }`}
+            />
+          ))}
         </div>
       </motion.section>
 
       {/* About Section */}
       <motion.section 
-        id="about"
         ref={aboutRef}
         initial={{ opacity: 0, y: 20 }}
         animate={isAboutInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-8">
-              אודות בוקט
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">
+              בוקט - שזירת פרחים
             </h2>
-          </div>
-
-          {/* Services List */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="bg-black text-white p-8 rounded-lg">
-              <h3 className="text-2xl font-bold mb-6 text-center">השירותים שלנו</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-bold mb-3 text-xl">זרי כלה</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li>• זר כלה קלאסי</li>
-                    <li>• זר כלה מודרני</li>
-                    <li>• זר כלה מינימליסטי</li>
-                    <li>• זר כלה רומנטי</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-xl">עיצוב אירועים</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li>• חופות מעוצבות</li>
-                    <li>• כיסאות כלה</li>
-                    <li>• עיצוב שולחנות</li>
-                    <li>• קישוטי אולם</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-xl">מתנות</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li>• סידורי פרחים לאירועים</li>
-                    <li>• מתנות עם שוקולדים</li>
-                    <li>• קשתות גיבסניות</li>
-                    <li>• זרי חישוק</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-bold mb-3 text-xl">אירועים</h4>
-                  <ul className="space-y-2 text-gray-300">
-                    <li>• זרי אירוסין</li>
-                    <li>• עיצוב חתונות</li>
-                    <li>• הפקת אירועים דתיים</li>
-                    <li>• משלוחים לכל המרכז</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Delivery Information */}
-          <div className="text-center mb-12">
-            <div className="bg-gray-50 rounded-lg p-8 max-w-3xl mx-auto">
-              <h3 className="text-2xl font-bold text-black mb-4">
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+              מתמחים בשזירת פרחים לאירוסין, זרי כלה מעוצבים, עיצוב חופות.
+              אנו מציעים הפקת אירועים דתיים, עיצוב מתנות לאירועים, ושירותי משלוח פרחים איכותיים.
+            </p>
+            
+            {/* Delivery Information Only */}
+            <div className="bg-pink-50 rounded-lg p-6 mb-8">
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">
                 משלוחים לכל אזור המרכז
               </h3>
-              <p className="text-gray-700 leading-relaxed">
-                אנו מספקים משלוחי פרחים איכותיים לכל אזור המרכז - ירושלים, מודיעין עילית, בני ברק, פתח תקווה, רעננה, כפר סבא, רמת גן ועוד. השירות שלנו כולל הובלה בטוחה ומקצועית כדי להבטיח שהפרחים יגיעו במצב מושלם.
+              <p className="text-gray-700">
+                אנו מספקים משלוחי פרחים איכותיים לכל אזור המרכז - ירושלים, מודיעין עילית, בני ברק, פתח תקווה ועוד
               </p>
             </div>
           </div>
-        </div>
-      </motion.section>
 
-      {/* Gallery Section with Carousel Images */}
-      <motion.section 
-        ref={servicesRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={isServicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.8 }}
-        className="py-16 bg-gray-50"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-black text-center mb-12">
-            הגלריה שלנו
-          </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {images.slice(0, 5).map((image, index) => (
-              <div 
-                key={image.id}
-                className="aspect-square overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                onClick={() => setCurrentImageIndex(index)}
-              >
-                <img
-                  src={image.image_url}
-                  alt={image.title}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Featured Image with Title */}
-          <div className="mt-12 text-center">
-            <div className="relative max-w-4xl mx-auto">
-              <img
-                src={images[currentImageIndex]?.image_url}
-                alt={images[currentImageIndex]?.title}
-                className="w-full h-96 object-cover rounded-lg shadow-2xl"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                <h3 className="text-3xl font-bold text-white">
-                  {images[currentImageIndex]?.title}
-                </h3>
-              </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6 rounded-lg bg-pink-50">
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">זרי כלה מעוצבים</h3>
+              <p className="text-gray-600">זרי כלה במשלוח עם עיצוב אישי והתאמה מושלמת ליום המיוחד</p>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-pink-50">
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">עיצוב חופות</h3>
+              <p className="text-gray-600">חופות מעוצבות וכיסאות כלה</p>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-pink-50">
+              <h3 className="text-xl font-semibold text-pink-800 mb-3">מתנות מעוצבות</h3>
+              <p className="text-gray-600">מתנות עם שוקולדים ופרחים, קשתות גיבסניות וזרי חישוק</p>
             </div>
           </div>
         </div>
@@ -374,127 +313,110 @@ const Index = () => {
         ref={contactRef}
         initial={{ opacity: 0, y: 20 }}
         animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         className="py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">צור קשר</h2>
-            <p className="text-lg text-gray-600">נשמח לעזור לכם בתכנון האירוע המושלם</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">צור קשר</h2>
+            <p className="text-lg text-gray-700">נשמח לעזור לכם בתכנון האירוע המושלם</p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            {/* Contact Info Grid */}
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <Phone className="h-10 w-10 mx-auto mb-4 text-pink-600" />
-                <h3 className="text-xl font-semibold text-black mb-3">טלפון</h3>
-                <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block">
-                  0527614436
-                </a>
-              </div>
-
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <div className="flex justify-center mb-4">
-                  <Button 
-                    onClick={openWhatsApp}
-                    className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full p-0 shadow-lg"
-                    size="icon"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-8 w-8 fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"/>
-                    </svg>
-                  </Button>
-                </div>
-                <h3 className="text-xl font-semibold text-black mb-3">וואטסאפ</h3>
-                <p className="text-gray-600">שלחו הודעה</p>
-              </div>
-
-              <div className="text-center p-6 bg-gray-50 rounded-lg">
-                <MapPin className="h-10 w-10 mx-auto mb-4 text-pink-600" />
-                <h3 className="text-xl font-semibold text-black mb-3">כתובת</h3>
-                <p className="text-gray-700 mb-3">שערי תשובה 14<br />מודיעין עילית</p>
-                <div className="flex justify-center gap-2">
-                  <Button
-                    onClick={openGoogleMaps}
-                    variant="outline"
-                    size="sm"
-                    className="border-gray-300 hover:border-pink-600 hover:text-pink-600"
-                  >
-                    <img 
-                      src="/lovable-uploads/fd24647a-2b32-46d8-9868-413519b08b8a.png" 
-                      alt="Google Maps" 
-                      className="h-5 w-5"
-                    />
-                  </Button>
-                  <Button
-                    onClick={openWaze}
-                    variant="outline"
-                    size="sm"
-                    className="border-gray-300 hover:border-pink-600 hover:text-pink-600"
-                  >
-                    <img 
-                      src={wazeIcon} 
-                      alt="Waze" 
-                      className="h-5 w-5"
-                    />
-                  </Button>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 gap-8 justify-center max-w-2xl mx-auto mb-8">
+            <div className="text-center">
+              <h3 className="text-xl font-semibold text-pink-800 mb-4">טלפון</h3>
+              <a href="tel:0527614436" className="text-lg text-gray-700 hover:text-pink-600 block mb-4">
+                0527614436
+              </a>
+              <a href="mailto:r0527614436@gmail.com" className="text-lg text-gray-700 hover:text-pink-600 block">
+                r0527614436@gmail.com
+              </a>
             </div>
 
-            {/* Email */}
             <div className="text-center">
-              <a 
-                href="mailto:r0527614436@gmail.com" 
-                className="text-lg text-gray-700 hover:text-pink-600 inline-flex items-center gap-2"
+              <h3 className="text-xl font-semibold text-pink-800 mb-4">וואטסאפ</h3>
+              <Button 
+                onClick={openWhatsApp}
+                className="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full p-0 shadow-lg hover:shadow-xl transition-all duration-200"
+                size="icon"
               >
-                <span>r0527614436@gmail.com</span>
-              </a>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-8 w-8 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.085"/>
+                </svg>
+              </Button>
+            </div>
+          </div>
+
+          {/* Address Section with Navigation - moved under contact details */}
+          <div className="text-center mb-8">
+            <div className="bg-pink-50 rounded-lg p-6 max-w-2xl mx-auto">
+              <div className="flex items-center justify-center text-gray-700 mb-4">
+                <MapPin className="h-5 w-5 ml-2 text-pink-600" />
+                <span className="font-medium text-lg">שערי תשובה 14, מודיעין עילית</span>
+              </div>
+              
+              <div className="flex justify-center space-x-4 rtl:space-x-reverse">
+                <Button
+                  onClick={openGoogleMaps}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
+                >
+                  <img 
+                    src="/lovable-uploads/fd24647a-2b32-46d8-9868-413519b08b8a.png" 
+                    alt="Google Maps" 
+                    className="h-8 w-8 object-contain"
+                  />
+                </Button>
+                <Button
+                  onClick={openWaze}
+                  variant="outline"
+                  className="border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white w-16 h-16 rounded-full p-0"
+                  size="icon"
+                >
+                  <img 
+                    src={wazeIcon} 
+                    alt="Waze" 
+                    className="h-8 w-8 object-contain"
+                  />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </motion.section>
 
-      {/* Footer - Black with Logo */}
-      <footer className="bg-black text-white py-12">
+      {/* Footer */}
+      <footer className="bg-pink-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <img 
-              src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-              alt="בוקט לוגו" 
-              className="h-32 w-auto mx-auto mb-6 opacity-90"
-            />
-            <h3 className="text-2xl font-bold mb-3">בוקט - שזירת פרחים</h3>
-            <p className="text-gray-400 mb-6">
-              שזירת פרחים מקצועית | עיצוב אירועים | זרי כלה
+            <h3 className="text-xl font-semibold mb-2">בוקט - שזירת פרחים</h3>
+            <p className="text-pink-200 mb-4">
+              שזירת פרחים מקצועית
             </p>
-            <div className="flex justify-center gap-6 mb-6 flex-wrap">
-              <a href="tel:0527614436" className="text-gray-400 hover:text-white transition-colors">
+            <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
+              <a href="tel:0527614436" className="text-pink-200 hover:text-white">
                 0527614436
               </a>
-              <span className="text-gray-600">|</span>
-              <a href="mailto:r0527614436@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:r0527614436@gmail.com" className="text-pink-200 hover:text-white">
                 r0527614436@gmail.com
               </a>
             </div>
-            <div className="border-t border-gray-800 pt-6">
-              <p className="text-sm text-gray-500">
-                © 2025 כל הזכויות שמורות ל{' '}
-                <a 
-                  href="https://jobclic.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors underline"
-                >
-                  AD אתרים
-                </a>
-              </p>
-            </div>
+            <p className="text-sm text-pink-200">
+              © 2025 כל הזכויות שמורות ל{' '}
+              <a 
+                href="https://jobclic.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white underline"
+              >
+                AD אתרים
+              </a>
+            </p>
           </div>
         </div>
       </footer>
