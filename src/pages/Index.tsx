@@ -330,9 +330,9 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="flex-[2] text-right min-h-[500px] flex flex-col justify-center">
+            <div className="flex-[2] text-right min-h-[500px] flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
-              <div className="relative mb-8">
+              <div className="relative mb-6">
                 <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
@@ -340,7 +340,7 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-16">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-10">
                 <p>
                   כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
                 </p>
@@ -353,7 +353,7 @@ const Index = () => {
               </div>
 
               {/* More About Button */}
-              <div className="mt-12">
+              <div className="mt-6">
                 <Link to="/about">
                   <button className="flex items-center gap-4 hover:scale-105 transition-transform">
                     <span className="font-assistant text-2xl font-bold text-gray-800">עוד עלינו</span>
