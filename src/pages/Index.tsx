@@ -255,7 +255,7 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-10">
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
           {/* White circle background - behind the button */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 bg-white rounded-b-full shadow-lg -z-10" />
           
@@ -271,7 +271,7 @@ const Index = () => {
       </section>
 
       {/* Black Gallery Section with Center Focus */}
-      <section className="relative py-16 z-20" style={{ 
+      <section className="relative py-16" style={{ 
         background: 'radial-gradient(circle at 96px 0px, transparent 64px, #314020 64px)'
       }}>
         <div className="max-w-7xl mx-auto px-4">
