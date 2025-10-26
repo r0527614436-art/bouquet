@@ -324,7 +324,7 @@ const Index = () => {
                 </div>
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[600px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
+              <div className="w-64 h-[600px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" className="w-full h-full object-cover" />
               </div>
             </div>
