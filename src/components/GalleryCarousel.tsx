@@ -68,11 +68,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
                   className="flex-shrink-0"
                   style={{
-                    width: isSelected ? '500px' : '320px',
+                    width: isSelected ? '480px' : '320px',
                     transformOrigin: 'center center',
                     zIndex: zIndex,
                     transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                    transform: isSelected ? 'scale(1.15)' : 'scale(0.88)',
+                    transform: isSelected ? 'scale(1.2)' : 'scale(1)',
                     marginLeft: index === 0 ? '0' : '-100px',
                     marginRight: index === slides.length - 1 ? '0' : '-100px'
                   }}
