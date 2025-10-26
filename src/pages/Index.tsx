@@ -330,7 +330,7 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-6 bottom-0 translate-y-1/2 z-50">
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-50">
           {/* White circle background - behind the button */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 bg-white rounded-b-full shadow-lg -z-10" />
           
@@ -344,13 +344,13 @@ const Index = () => {
               <img 
                 src={downloadCatalogBtn} 
                 alt="" 
-                className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply"
+                className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20"
               />
               {/* Static arrow in center */}
               <img 
                 src={downloadArrow} 
                 alt="להורדת הקטלוג הדיגיטלי שלנו" 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-30"
               />
             </div>
           </button>
