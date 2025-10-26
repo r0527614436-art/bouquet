@@ -24,7 +24,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       containScroll: false,
       dragFree: false,
       slidesToScroll: 1,
-      duration: 30
+      duration: 30,
+      startIndex: 0
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
@@ -56,24 +57,24 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       <div className="relative flex flex-col items-center justify-center max-w-7xl mx-auto">
         {/* Carousel */}
         <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center" style={{ padding: '0 100px' }}>
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               const distanceFromSelected = Math.abs(index - selectedIndex);
-              const zIndex = isSelected ? 100 : 50 - distanceFromSelected;
+              const zIndex = isSelected ? 200 : 100 - (distanceFromSelected * 10);
               
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
                   className="flex-shrink-0"
                   style={{
-                    width: isSelected ? '450px' : '300px',
+                    width: isSelected ? '500px' : '320px',
                     transformOrigin: 'center center',
                     zIndex: zIndex,
                     transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                    transform: isSelected ? 'scale(1.1)' : 'scale(0.85)',
-                    marginLeft: index === 0 ? '0' : isSelected ? '-60px' : '-80px',
-                    marginRight: isSelected ? '-60px' : '0'
+                    transform: isSelected ? 'scale(1.15)' : 'scale(0.88)',
+                    marginLeft: index === 0 ? '0' : '-100px',
+                    marginRight: index === slides.length - 1 ? '0' : '-100px'
                   }}
                 >
                   <div className={`relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 ${
