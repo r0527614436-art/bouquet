@@ -54,10 +54,10 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
 
   return (
     <div className="relative w-full mx-auto py-16" style={{ backgroundColor: '#314020' }}>
-      <div className="relative flex flex-col items-center justify-center max-w-7xl mx-auto">
+      <div className="relative flex flex-col items-center justify-center w-full">
         {/* Carousel */}
-        <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center justify-center" style={{ padding: '0 100px' }}>
+        <div className="overflow-visible w-full max-w-[1400px] mb-8 mx-auto" ref={emblaRef}>
+          <div className="flex items-center justify-start">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               const distanceFromSelected = Math.abs(index - selectedIndex);
