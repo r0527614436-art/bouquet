@@ -58,6 +58,15 @@ All colors MUST be HSL.
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Ploni Black';
+  src: url('/src/assets/fonts/ploni-black.eot');
+  src: url('/src/assets/fonts/ploni-black.eot?#iefix') format('embedded-opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -153,6 +162,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Ploni Black', sans-serif;
     /* Prevent horizontal scrolling on mobile */
     overflow-x: hidden;
   }
