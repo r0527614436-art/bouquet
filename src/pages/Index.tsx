@@ -333,13 +333,13 @@ const Index = () => {
       <div className="relative">
         <button
           onClick={handleDownloadCatalog}
-          className="fixed left-8 top-[65vh] z-40 hover:scale-105 transition-transform duration-300"
+          className="fixed left-8 top-[65vh] z-40 hover:scale-110 transition-transform duration-300 group"
           aria-label="להורדת הקטלוג הדיגיטלי שלנו"
         >
           <img 
             src={downloadCatalogBtn} 
             alt="להורדת הקטלוג הדיגיטלי שלנו" 
-            className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl"
+            className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl animate-spin-slow mix-blend-multiply"
           />
         </button>
       </div>
