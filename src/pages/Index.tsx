@@ -192,15 +192,15 @@ const Index = () => {
             </div>)}
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center pr-12 md:pr-20">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
             textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-          }} className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+          }} className="font-gloria text-[100px] sm:text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }} className="font-ploni-ultralight text-base text-green-900 text-center mr-[15%] mx-[620px] md:text-3xl font-normal">כשהפרחים הופכים לרגעים של קסם</p>
+          }} className="font-ploni-ultralight text-xl sm:text-2xl md:text-4xl text-green-900 text-center max-w-[90%] md:max-w-none md:mr-[10%] font-normal">כשהפרחים הופכים לרגעים של קסם</p>
             
             {/* Navigation Arrows - only show if multiple images */}
             {images.length > 1 && <div className="flex gap-3 mt-6">
