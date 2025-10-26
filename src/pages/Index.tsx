@@ -218,7 +218,7 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-visible">
         <div className="relative w-full h-full">
           {images.map((image, index) => <div key={image.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.image_url} alt={image.title} className="w-full h-full object-cover" />
@@ -267,6 +267,13 @@ const Index = () => {
               <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-30" />
             </div>
           </button>
+        </div>
+        
+        {/* Curved bottom edge */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white overflow-hidden">
+          <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+            <path d="M 0,0 L 0,100 L 520,100 Q 600,0 680,100 L 1200,100 L 1200,0 Z" fill="white"/>
+          </svg>
         </div>
       </section>
 
