@@ -204,11 +204,11 @@ const Index = () => {
       </div>
 
       {/* Logo - Fixed Position */}
-      <div className="fixed left-4 top-8 z-40">
+      <div className="fixed left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-lg p-3">
         <img 
           src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
           alt="בוקט לוגו" 
-          className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
+          className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
           onClick={handleLogoClick} 
         />
       </div>
