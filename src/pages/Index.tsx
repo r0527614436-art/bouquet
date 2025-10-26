@@ -313,18 +313,18 @@ const Index = () => {
             <div className="flex gap-6">
               {/* Second smaller image - now leftmost */}
               <div className="flex flex-col justify-end h-[500px]">
-                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
+                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
                   <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Single smaller image */}
               <div className="flex flex-col justify-end h-[500px]">
-                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
+                <div className="w-48 h-48 rounded-2xl overflow-hidden">
                   <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
+              <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" className="w-full h-full object-cover" />
               </div>
             </div>
