@@ -397,22 +397,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Grid Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-4 items-end justify-center">
-            {[
-              { img: '/lovable-uploads/gallery-new-3.png', height: 'h-64' },
-              { img: '/lovable-uploads/gallery-new-4.png', height: 'h-80' },
-              { img: '/lovable-uploads/gallery-new-2.png', height: 'h-96' },
-              { img: '/lovable-uploads/gallery-new-1.png', height: 'h-80' }
-            ].map((item, idx) => (
-              <div key={idx} className={`${item.height} w-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}>
-                <img src={item.img} alt={`גלריה ${idx + 1}`} className="w-full h-full object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Gallery Full Width Image */}
+      <section className="w-full">
+        <img src="/lovable-uploads/gallery-full.png" alt="גלריה" className="w-full h-auto object-cover" />
       </section>
 
       {/* Catalog Section */}
