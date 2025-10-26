@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
+import heroImage from '@/assets/hero-image.jpg';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 interface HomepageSlide {
@@ -45,50 +46,21 @@ const Index = () => {
     }
   });
 
-  // Fallback images if no slides in database
+  // Single hero image
   const fallbackImages = [{
     id: '1',
-    image_url: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-    title: "זרי אירוסין",
-    description: "זרי פרחים מרהיבים לחגיגת האירוסין",
+    image_url: heroImage,
+    title: "בוקט",
+    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
     order_index: 1,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '2',
-    image_url: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
-    title: "סדנאות",
-    description: "סדנאות שזירת פרחים מקצועיות",
-    order_index: 2,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '3',
-    image_url: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-    title: "זרי כלה",
-    description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
-    order_index: 3,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '4',
-    image_url: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-    title: "עיצוב מתנות",
-    description: "מתנות מעוצבות עם פרחים ושוקולדים",
-    order_index: 4,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '5',
-    image_url: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-    title: "כיסאות כלה",
-    description: "כיסאות כלה מעוצבים במיוחד",
-    order_index: 5,
     is_active: true,
     font_family: 'font-sans'
   }];
   const images = slides.length > 0 ? slides : fallbackImages;
+  // Auto-slide only if there are multiple images
   useEffect(() => {
+    if (images.length <= 1) return;
+    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => prevIndex === images.length - 1 ? 0 : prevIndex + 1);
     }, 4000);
@@ -237,22 +209,26 @@ const Index = () => {
               מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע
             </p>
             
-            {/* Navigation Arrows */}
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                <ChevronRight className="h-5 w-5 text-gray-800" />
-              </button>
-              <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                <ChevronLeft className="h-5 w-5 text-gray-800" />
-              </button>
-            </div>
+            {/* Navigation Arrows - only show if multiple images */}
+            {images.length > 1 && (
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                  <ChevronRight className="h-5 w-5 text-gray-800" />
+                </button>
+                <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                  <ChevronLeft className="h-5 w-5 text-gray-800" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Dots Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/60 hover:bg-white/80 w-2'}`} />)}
-        </div>
+        {/* Dots Indicator - only show if multiple images */}
+        {images.length > 1 && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/60 hover:bg-white/80 w-2'}`} />)}
+          </div>
+        )}
 
         {/* Download Catalog Button - Positioned at section boundary */}
         <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
