@@ -200,7 +200,7 @@ const Index = () => {
             </h1>
             <p style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }} className="font-assistant text-base text-green-900 font-extrabold md:text-3xl pr-8 md:pr-12">כשהפרחים הופכים לרגעים של קסם</p>
+          }} className="font-assistant text-base text-green-900 font-extrabold md:text-3xl text-center mr-[15%]">כשהפרחים הופכים לרגעים של קסם</p>
             
             {/* Navigation Arrows - only show if multiple images */}
             {images.length > 1 && <div className="flex gap-3 mt-6">
