@@ -269,16 +269,22 @@ const Index = () => {
           </button>
         </div>
         
-        {/* Curved bottom edge */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white overflow-hidden">
+        {/* Curved bottom edge with transparent cutout */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white overflow-visible pointer-events-none">
           <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
-            <path d="M 0,0 L 0,100 L 520,100 Q 600,0 680,100 L 1200,100 L 1200,0 Z" fill="white"/>
+            <defs>
+              <mask id="curve-mask">
+                <rect width="1200" height="100" fill="white"/>
+                <ellipse cx="600" cy="0" rx="80" ry="100" fill="black"/>
+              </mask>
+            </defs>
+            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="white" mask="url(#curve-mask)"/>
           </svg>
         </div>
       </section>
 
       {/* Black Gallery Section with Center Focus */}
-      <section className="relative py-16 bg-[#314020]">
+      <section className="relative py-16 bg-[#314020] mt-0">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
             <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
