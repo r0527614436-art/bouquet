@@ -331,8 +331,8 @@ const Index = () => {
 
         {/* Download Catalog Button - Positioned at section boundary */}
         <div className="absolute left-4 bottom-0 translate-y-1/2 z-40">
-          {/* White semicircle background */}
-          <div className="absolute inset-0 w-20 h-20 -left-3 -top-3 bg-white rounded-full shadow-lg" />
+          {/* White semicircle background pointing down */}
+          <div className="absolute -left-3 -top-3 w-20 h-12 bg-white rounded-b-full shadow-lg" />
           
           <button
             onClick={handleDownloadCatalog}
