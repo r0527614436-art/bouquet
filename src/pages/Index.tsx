@@ -330,7 +330,7 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="flex-[2] text-right min-h-[500px] flex flex-col justify-start pt-12">
+            <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
                 <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
