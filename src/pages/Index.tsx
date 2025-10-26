@@ -373,23 +373,23 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
-              icon: Heart,
+              icon: '/lovable-uploads/icon-bouquet.png',
               text: 'זרי כלה'
             }, {
-              icon: Crown,
+              icon: '/lovable-uploads/icon-flower.png',
               text: 'כיסאות כלה'
             }, {
-              icon: Sparkles,
+              icon: '/lovable-uploads/icon-flower.png',
               text: 'עיצוב חופות'
             }, {
-              icon: Gift,
+              icon: '/lovable-uploads/icon-gift.png',
               text: 'מתנות מעוצבות'
             }, {
-              icon: Camera,
+              icon: '/lovable-uploads/icon-delivery.png',
               text: 'הפקת אירועים'
             }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-105 transition-transform">
-                  <service.icon className="h-12 w-12 text-black" />
+                <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
+                  <img src={service.icon} alt={service.text} className="h-12 w-12 object-contain" />
                 </div>
                 <p className="text-white font-assistant text-sm md:text-base font-medium">{service.text}</p>
               </div>)}
