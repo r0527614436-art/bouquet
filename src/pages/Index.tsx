@@ -404,36 +404,32 @@ const Index = () => {
 
       {/* Catalog Section */}
       <section className="py-20 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">קטלוג</h2>
-          <p className="text-center text-gray-600 mb-8 text-lg">
-            גלו את המגוון המלא שלנו - מזרי כלה מרהיבים ועד עיצובי אירועים מושלמים
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[{
-              img: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-              title: "זרי אירוסין"
-            }, {
-              img: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-              title: "זרי כלה"
-            }, {
-              img: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-              title: "כיסאות כלה"
-            }, {
-              img: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-              title: "אירועים"
-            }].map((item, idx) => <Link key={idx} to="/catalog" className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
-                <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-8">
-                  <h3 className="font-assistant text-3xl font-bold text-white">{item.title}</h3>
-                </div>
-              </Link>)}
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          {/* Title with layered effect */}
+          <div className="relative mb-8 flex justify-center">
+            <div className="relative">
+              <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                Catalog
+              </h2>
+              <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
+                קטלוג
+              </h2>
+            </div>
           </div>
-          <div className="text-center mt-8">
+          
+          <p className="text-gray-700 text-xl leading-relaxed font-ploni-ultralight mb-8 mt-12">
+            כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
+          </p>
+
+          {/* Button with Arrow */}
+          <div className="mt-8">
             <Link to="/catalog">
-              <Button size="lg" className="px-12 py-6 text-lg">
-                לקטלוג המלא
-              </Button>
+              <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
+                <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
+                <div className="w-12 h-12">
+                  <img src={arrowCircle} alt="לכל העיצובים" className="w-full h-full" />
+                </div>
+              </button>
             </Link>
           </div>
         </div>
