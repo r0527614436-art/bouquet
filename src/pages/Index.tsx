@@ -328,13 +328,11 @@ const Index = () => {
             />
           ))}
         </div>
-      </section>
 
-      {/* Download Catalog Button - Between sections */}
-      <div className="relative">
+        {/* Download Catalog Button - Positioned at section boundary */}
         <button
           onClick={handleDownloadCatalog}
-          className="fixed left-4 top-[calc(50%+5rem)] z-40 hover:scale-110 transition-transform duration-300 group"
+          className="absolute left-4 bottom-0 translate-y-1/2 z-40 hover:scale-110 transition-transform duration-300 group"
           aria-label="להורדת הקטלוג הדיגיטלי שלנו"
         >
           <div className="relative w-14 h-14">
@@ -352,7 +350,7 @@ const Index = () => {
             />
           </div>
         </button>
-      </div>
+      </section>
 
       {/* Black Gallery Section with Center Focus */}
       <section className="py-16 bg-black">
