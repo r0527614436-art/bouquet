@@ -260,7 +260,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
               textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-            }} className="font-gloria text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+            }} className="font-ploni-black-2 text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
@@ -333,10 +333,10 @@ const Index = () => {
             <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
-                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
@@ -409,10 +409,10 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
                   Catalog
                 </h2>
-                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
+                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
                   קטלוג
                 </h2>
               </div>
@@ -458,6 +458,69 @@ const Index = () => {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Right Side - Sticky Title */}
+            <div className="lg:sticky lg:top-20 lg:self-start">
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative">
+                  <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                    work
+                  </h2>
+                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap">
+                    איך זה עובד אצלינו?
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            {/* Left Side - Content */}
+            <div className="space-y-12">
+              {/* Step 01 */}
+              <div className="space-y-4">
+                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                  <span className="font-ploni-black-2 text-2xl">01</span>
+                </div>
+                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                  שיחת מיקוד להבנת הצרכים
+                </h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפגש הראשונה של אושר משותף לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין
+                </p>
+              </div>
+
+              {/* Step 02 */}
+              <div className="space-y-4">
+                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                  <span className="font-ploni-black-2 text-2xl">02</span>
+                </div>
+                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                  בחירה והזמנה
+                </h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין.
+                </p>
+              </div>
+
+              {/* Step 03 */}
+              <div className="space-y-4">
+                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                  <span className="font-ploni-black-2 text-2xl">03</span>
+                </div>
+                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                  הכנה ומשלוח
+                </h3>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפנש הראשונה של אושר משותף לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

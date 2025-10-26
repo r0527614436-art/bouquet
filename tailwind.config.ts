@@ -24,6 +24,7 @@ export default {
 				'ploni': ['Ploni', 'sans-serif'],
 				'ploni-ultralight': ['Ploni Ultralight', 'sans-serif'],
 				'ploni-black': ['Ploni Black', 'sans-serif'],
+				'ploni-black-2': ['Ploni Black 2', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 				'assistant': ['Assistant', 'sans-serif'],

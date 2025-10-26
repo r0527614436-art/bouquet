@@ -67,6 +67,15 @@ All colors MUST be HSL.
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Ploni Black 2';
+  src: url('/src/assets/fonts/ploni-black-2.eot');
+  src: url('/src/assets/fonts/ploni-black-2.eot?#iefix') format('embedded-opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

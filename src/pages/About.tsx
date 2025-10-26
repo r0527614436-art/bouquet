@@ -46,10 +46,10 @@ const About = () => {
             <div className="flex-1 text-right min-h-[500px] flex flex-col justify-center">
               {/* Title with layered effect */}
               <div className="relative mb-8">
-                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
-                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
