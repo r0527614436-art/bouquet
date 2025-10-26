@@ -51,57 +51,54 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full mx-auto px-4 py-8">
+    <div className="relative w-full mx-auto px-4 py-16">
       <div className="relative flex flex-col items-center justify-center">
         {/* Carousel */}
-        <div className="overflow-hidden w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center gap-4">
+        <div className="overflow-visible w-full mb-8" ref={emblaRef}>
+          <div className="flex items-center gap-6">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               
               return (
                 <div
                   key={`${slide.id}-${index}`}
-                  className="flex-[0_0_20%] min-w-[250px] relative"
+                  className={`flex-[0_0_300px] transition-all duration-700 ease-in-out ${
+                    isSelected ? 'scale-125 z-20' : 'scale-90 z-10'
+                  }`}
+                  style={{
+                    minWidth: '300px'
+                  }}
                 >
-                  {/* Base container - always rounded rectangle */}
-                  <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-lg">
+                  <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
                     <img
                       src={slide.image_url}
                       alt={slide.title}
-                      className="w-full h-full object-cover transition-all duration-500"
+                      className={`w-full h-full object-cover transition-all duration-700 ${
+                        isSelected ? 'brightness-100' : 'brightness-50'
+                      }`}
                     />
+                    
                     {/* Dark blur overlay for non-selected slides */}
                     <div 
-                      className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-all duration-500 ${
+                      className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-all duration-700 ${
                         isSelected ? 'opacity-0' : 'opacity-100'
                       }`} 
                     />
-                  </div>
 
-                  {/* Selected image with dome top - overlays the base */}
-                  {isSelected && (
-                    <div className="absolute inset-0 animate-fade-in z-10">
-                      <div className="relative w-full aspect-[3/4] rounded-3xl rounded-t-[100px] overflow-hidden shadow-2xl">
-                        <img
-                          src={slide.image_url}
-                          alt={slide.title}
-                          className="w-full h-full object-cover"
-                        />
-                        {/* Title overlay at bottom */}
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center">
-                          <h3 className="font-assistant text-white text-2xl font-bold">
-                            {slide.title}
-                          </h3>
-                          {slide.description && (
-                            <p className="font-assistant text-white/90 text-sm mt-2">
-                              {slide.description}
-                            </p>
-                          )}
-                        </div>
+                    {/* Title overlay - only show on selected */}
+                    {isSelected && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 text-center animate-fade-in">
+                        <h3 className="font-assistant text-white text-2xl font-bold drop-shadow-lg">
+                          {slide.title}
+                        </h3>
+                        {slide.description && (
+                          <p className="font-assistant text-white/90 text-sm mt-2 drop-shadow-md">
+                            {slide.description}
+                          </p>
+                        )}
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               );
             })}
