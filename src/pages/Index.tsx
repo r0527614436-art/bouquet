@@ -359,9 +359,6 @@ const Index = () => {
 
       {/* Black Gallery Section with Center Focus */}
       <section className="relative py-16 bg-[#314020]">
-        {/* Curved notch for the button */}
-        <div className="absolute top-0 left-0 right-0 h-16 bg-white">
-        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
             <button
