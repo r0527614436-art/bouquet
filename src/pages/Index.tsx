@@ -9,6 +9,7 @@ import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
+import arrowCircle from '@/assets/arrow-circle.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 interface HomepageSlide {
@@ -349,6 +350,18 @@ const Index = () => {
                 <p>
                   לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
                 </p>
+              </div>
+
+              {/* More About Button */}
+              <div className="mt-12">
+                <Link to="/about">
+                  <button className="flex items-center gap-4 hover:scale-105 transition-transform">
+                    <span className="font-assistant text-2xl font-bold text-gray-800">עוד עלינו</span>
+                    <div className="w-12 h-12">
+                      <img src={arrowCircle} alt="עוד עלינו" className="w-full h-full" />
+                    </div>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
