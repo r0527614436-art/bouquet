@@ -311,7 +311,7 @@ const Index = () => {
             {/* Images - Right Side */}
             <div className="flex gap-6">
               {/* Two smaller images, stacked */}
-              <div className="flex flex-col gap-6 pt-20">
+              <div className="flex flex-col gap-6 pt-20 justify-between h-[500px]">
                 <div className="w-48 h-48 rounded-b-[60px] overflow-hidden shadow-xl">
                   <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
                 </div>
