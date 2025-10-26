@@ -339,7 +339,7 @@ const Index = () => {
             className="relative hover:scale-110 transition-transform duration-300 group"
             aria-label="להורדת הקטלוג הדיגיטלי שלנו"
           >
-            <div className="relative w-21 h-21">
+            <div className="relative w-14 h-14">
               {/* Rotating text circle */}
               <img 
                 src={downloadCatalogBtn} 
@@ -350,7 +350,7 @@ const Index = () => {
               <img 
                 src={downloadArrow} 
                 alt="להורדת הקטלוג הדיגיטלי שלנו" 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6"
               />
             </div>
           </button>
@@ -358,7 +358,13 @@ const Index = () => {
       </section>
 
       {/* Black Gallery Section with Center Focus */}
-      <section className="py-16 bg-black">
+      <section className="relative py-16 bg-[#314020]">
+        {/* Curved notch for the button */}
+        <div className="absolute top-0 left-0 right-0 h-16 bg-white">
+          <div className="absolute left-8 top-0 w-32 h-32 translate-x-0 -translate-y-1/2">
+            <div className="w-full h-full rounded-full bg-[#314020]" />
+          </div>
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
             <button
