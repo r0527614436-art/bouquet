@@ -19,6 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'gloria': ['Gloria', 'serif'],
+				'ploni': ['Ploni', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 				'assistant': ['Assistant', 'sans-serif'],
