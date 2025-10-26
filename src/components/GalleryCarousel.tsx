@@ -51,7 +51,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full mx-auto px-4 py-16">
+    <div className="relative w-full mx-auto py-16" style={{ backgroundColor: '#314020' }}>
       <div className="relative flex flex-col items-center justify-center" style={{ perspective: '1000px' }}>
         {/* Carousel */}
         <div className="overflow-visible w-full mb-8" ref={emblaRef}>
