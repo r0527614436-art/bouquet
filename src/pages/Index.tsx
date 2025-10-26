@@ -434,14 +434,14 @@ const Index = () => {
           </div>
 
           {/* Catalog Images Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mt-16">
+          <div className="grid grid-cols-4 gap-0 w-full mt-16">
             {[
-              { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' },
-              { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
+              { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' },
               { img: '/lovable-uploads/catalog-bouquet.png', title: 'זרי אירוסין' },
-              { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' }
+              { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
+              { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' }
             ].map((item, idx) => (
-              <Link key={idx} to="/catalog" className="group relative overflow-hidden rounded-2xl aspect-[3/4] shadow-lg hover:shadow-2xl transition-all">
+              <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[3/4]">
                 <img 
                   src={item.img} 
                   alt={item.title} 
