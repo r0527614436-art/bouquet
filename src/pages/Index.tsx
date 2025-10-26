@@ -61,74 +61,50 @@ const Index = () => {
   // Gallery slides - all images including new ones
   const gallerySlides = [{
     id: '1',
-    image_url: heroImage,
-    title: "בוקט",
-    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
+    image_url: '/lovable-uploads/bouquet-1.jpg',
+    title: "זר כלה אלגנטי",
+    description: "שילוב של ורדים ופרחים לבנים וורודים",
     order_index: 1,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '2',
-    image_url: '/lovable-uploads/gallery-1.jpg',
+    image_url: '/lovable-uploads/bouquet-2.jpg',
     title: "זר כלה לבן",
-    description: "עיצוב אלגנטי ומרהיב",
+    description: "עיצוב טהור ואלגנטי",
     order_index: 2,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '3',
-    image_url: '/lovable-uploads/gallery-2.jpg',
-    title: "זר כלה קלאסי",
-    description: "פשטות וייחודיות",
+    image_url: '/lovable-uploads/bouquet-3.jpg',
+    title: "בוקט שמנת",
+    description: "גוונים חמים של שמנת וצהוב",
     order_index: 3,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '4',
-    image_url: '/lovable-uploads/gallery-3.jpg',
-    title: "בוקט צבעוני",
-    description: "מגוון צבעים ופרחים",
+    image_url: '/lovable-uploads/bouquet-4.jpg',
+    title: "זר רומנטי",
+    description: "שילוב עדין של פרחים בגוונים פסטליים",
     order_index: 4,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '5',
-    image_url: '/lovable-uploads/gallery-4.jpg',
-    title: "זר כלה מושלם",
-    description: "יופי וחן לכלה",
+    image_url: '/lovable-uploads/bouquet-5.jpg',
+    title: "בוקט ורוד",
+    description: "עיצוב רומנטי בגוונים של ורוד",
     order_index: 5,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '6',
-    image_url: '/lovable-uploads/gallery-5.jpg',
-    title: "פרחים לבנים",
-    description: "טוהר ואלגנטיות",
+    image_url: '/lovable-uploads/bouquet-6.jpg',
+    title: "זר כלה מרהיב",
+    description: "שילוב מושלם של צבעים ופרחים",
     order_index: 6,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '7',
-    image_url: '/lovable-uploads/gallery-6.jpg',
-    title: "זר עדין",
-    description: "פרחים עדינים ומרהיבים",
-    order_index: 7,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '8',
-    image_url: '/lovable-uploads/gallery-7.jpg',
-    title: "בוקט מיוחד",
-    description: "שילוב צבעים מדהים",
-    order_index: 8,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '9',
-    image_url: '/lovable-uploads/gallery-8.jpg',
-    title: "עיצוב לשבת",
-    description: "סידור פרחים לשבת ומועדים",
-    order_index: 9,
     is_active: true,
     font_family: 'font-sans'
   }];
