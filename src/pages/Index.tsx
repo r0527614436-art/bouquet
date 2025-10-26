@@ -272,10 +272,6 @@ const Index = () => {
 
       {/* Black Gallery Section with Center Focus */}
       <section className="relative py-16 bg-[#314020]">
-        {/* White semicircle background for button */}
-        <div className="absolute left-4 top-0 translate-y-0 z-0">
-          <div className="w-32 h-16 bg-white rounded-b-full shadow-lg" />
-        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
             <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
