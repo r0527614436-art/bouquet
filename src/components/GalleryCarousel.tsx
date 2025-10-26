@@ -21,8 +21,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       loop: true,
       align: 'center',
       skipSnaps: false,
-      containScroll: 'trimSnaps',
-      dragFree: false
+      containScroll: false,
+      dragFree: false,
+      slidesToScroll: 1
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
@@ -53,15 +54,15 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
     <div className="relative w-full max-w-7xl mx-auto px-4 py-8">
       <div className="relative flex flex-col items-center justify-center">
         {/* Carousel */}
-        <div className="overflow-hidden max-w-5xl w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center justify-center gap-6">
+        <div className="overflow-hidden w-full mb-8" ref={emblaRef}>
+          <div className="flex items-center gap-4">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               
               return (
                 <div
                   key={slide.id}
-                  className="flex-[0_0_35%] min-w-0 relative"
+                  className="flex-[0_0_25%] min-w-0 relative"
                 >
                   {/* Base container - always rounded rectangle */}
                   <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-lg">
