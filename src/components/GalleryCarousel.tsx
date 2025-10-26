@@ -51,7 +51,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 py-8">
+    <div className="relative w-full mx-auto px-4 py-8">
       <div className="relative flex flex-col items-center justify-center">
         {/* Carousel */}
         <div className="overflow-hidden w-full mb-8" ref={emblaRef}>
@@ -61,8 +61,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               
               return (
                 <div
-                  key={slide.id}
-                  className="flex-[0_0_25%] min-w-0 relative"
+                  key={`${slide.id}-${index}`}
+                  className="flex-[0_0_20%] min-w-[250px] relative"
                 >
                   {/* Base container - always rounded rectangle */}
                   <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-lg">
@@ -81,7 +81,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
 
                   {/* Selected image with dome top - overlays the base */}
                   {isSelected && (
-                    <div className="absolute inset-0 animate-fade-in">
+                    <div className="absolute inset-0 animate-fade-in z-10">
                       <div className="relative w-full aspect-[3/4] rounded-3xl rounded-t-[100px] overflow-hidden shadow-2xl">
                         <img
                           src={slide.image_url}
