@@ -59,89 +59,79 @@ const Index = () => {
   };
 
   // Gallery slides - all images including new ones
-  const gallerySlides = [
-    {
-      id: '1',
-      image_url: heroImage,
-      title: "בוקט",
-      description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
-      order_index: 1,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '2',
-      image_url: '/lovable-uploads/gallery-1.jpg',
-      title: "זר כלה לבן",
-      description: "עיצוב אלגנטי ומרהיב",
-      order_index: 2,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '3',
-      image_url: '/lovable-uploads/gallery-2.jpg',
-      title: "זר כלה קלאסי",
-      description: "פשטות וייחודיות",
-      order_index: 3,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '4',
-      image_url: '/lovable-uploads/gallery-3.jpg',
-      title: "בוקט צבעוני",
-      description: "מגוון צבעים ופרחים",
-      order_index: 4,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '5',
-      image_url: '/lovable-uploads/gallery-4.jpg',
-      title: "זר כלה מושלם",
-      description: "יופי וחן לכלה",
-      order_index: 5,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '6',
-      image_url: '/lovable-uploads/gallery-5.jpg',
-      title: "פרחים לבנים",
-      description: "טוהר ואלגנטיות",
-      order_index: 6,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '7',
-      image_url: '/lovable-uploads/gallery-6.jpg',
-      title: "זר עדין",
-      description: "פרחים עדינים ומרהיבים",
-      order_index: 7,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '8',
-      image_url: '/lovable-uploads/gallery-7.jpg',
-      title: "בוקט מיוחד",
-      description: "שילוב צבעים מדהים",
-      order_index: 8,
-      is_active: true,
-      font_family: 'font-sans'
-    },
-    {
-      id: '9',
-      image_url: '/lovable-uploads/gallery-8.jpg',
-      title: "עיצוב לשבת",
-      description: "סידור פרחים לשבת ומועדים",
-      order_index: 9,
-      is_active: true,
-      font_family: 'font-sans'
-    }
-  ];
+  const gallerySlides = [{
+    id: '1',
+    image_url: heroImage,
+    title: "בוקט",
+    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
+    order_index: 1,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '2',
+    image_url: '/lovable-uploads/gallery-1.jpg',
+    title: "זר כלה לבן",
+    description: "עיצוב אלגנטי ומרהיב",
+    order_index: 2,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '3',
+    image_url: '/lovable-uploads/gallery-2.jpg',
+    title: "זר כלה קלאסי",
+    description: "פשטות וייחודיות",
+    order_index: 3,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '4',
+    image_url: '/lovable-uploads/gallery-3.jpg',
+    title: "בוקט צבעוני",
+    description: "מגוון צבעים ופרחים",
+    order_index: 4,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '5',
+    image_url: '/lovable-uploads/gallery-4.jpg',
+    title: "זר כלה מושלם",
+    description: "יופי וחן לכלה",
+    order_index: 5,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '6',
+    image_url: '/lovable-uploads/gallery-5.jpg',
+    title: "פרחים לבנים",
+    description: "טוהר ואלגנטיות",
+    order_index: 6,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '7',
+    image_url: '/lovable-uploads/gallery-6.jpg',
+    title: "זר עדין",
+    description: "פרחים עדינים ומרהיבים",
+    order_index: 7,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '8',
+    image_url: '/lovable-uploads/gallery-7.jpg',
+    title: "בוקט מיוחד",
+    description: "שילוב צבעים מדהים",
+    order_index: 8,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '9',
+    image_url: '/lovable-uploads/gallery-8.jpg',
+    title: "עיצוב לשבת",
+    description: "סידור פרחים לשבת ומועדים",
+    order_index: 9,
+    is_active: true,
+    font_family: 'font-sans'
+  }];
 
   // Use database slides if available, otherwise use gallery slides
   const carouselImages = slides.length > 0 ? slides : gallerySlides;
@@ -218,18 +208,10 @@ const Index = () => {
   };
   return <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Side Navigation Bar - Full Height */}
-      <div 
-        className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${
-          isMenuOpen ? 'w-80' : 'w-20'
-        }`}
-        onMouseEnter={() => setIsMenuOpen(true)}
-        onMouseLeave={() => setIsMenuOpen(false)}
-      >
+      <div className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${isMenuOpen ? 'w-80' : 'w-20'}`} onMouseEnter={() => setIsMenuOpen(true)} onMouseLeave={() => setIsMenuOpen(false)}>
         <div className="flex flex-col h-full py-8">
           {/* Hamburger Icon */}
-          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${
-            isMenuOpen ? 'opacity-0' : 'opacity-100'
-          }`}>
+          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
             <div className="flex flex-col gap-1.5 cursor-pointer">
               <div className="w-8 h-0.5 bg-white"></div>
               <div className="w-8 h-0.5 bg-white"></div>
@@ -239,47 +221,44 @@ const Index = () => {
 
           {/* Navigation Items */}
           <nav className="flex-1 flex flex-col justify-start gap-12 px-4">
-            {[
-              { num: '01', label: 'בית', href: '#', isLink: false },
-              { num: '02', label: 'אודות', href: '#about', isLink: false },
-              { num: '03', label: 'קטלוג', href: '/catalog', isLink: true },
-              { num: '04', label: 'צור קשר', href: '#contact', isLink: false }
-            ].map((item) => (
-              <div key={item.num} className="flex items-center gap-4">
+            {[{
+            num: '01',
+            label: 'בית',
+            href: '#',
+            isLink: false
+          }, {
+            num: '02',
+            label: 'אודות',
+            href: '#about',
+            isLink: false
+          }, {
+            num: '03',
+            label: 'קטלוג',
+            href: '/catalog',
+            isLink: true
+          }, {
+            num: '04',
+            label: 'צור קשר',
+            href: '#contact',
+            isLink: false
+          }].map(item => <div key={item.num} className="flex items-center gap-4">
                 {/* Collapsed State - Number and Dot */}
-                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${
-                  isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'
-                }`}>
+                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'}`}>
                   <span className="font-assistant text-white text-base font-medium whitespace-nowrap">{item.num}</span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
                 </div>
 
                 {/* Expanded State - Full Menu */}
-                <div className={`flex items-center gap-4 transition-opacity duration-300 ${
-                  isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'
-                }`}>
+                <div className={`flex items-center gap-4 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'}`}>
                   <span className="font-assistant text-white text-xl font-light min-w-[3rem]">{item.num}</span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                  {item.isLink ? (
-                    <Link 
-                      to={item.href}
-                      className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                  {item.isLink ? <Link to={item.href} className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
                       {item.label}
-                    </Link>
-                  ) : (
-                    <a 
-                      href={item.href}
-                      className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                    </Link> : <a href={item.href} className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
                       {item.label}
-                    </a>
-                  )}
+                    </a>}
                 </div>
-              </div>
-            ))}
+              </div>)}
           </nav>
         </div>
       </div>
@@ -290,13 +269,8 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
         {/* Logo - Absolute Position in Hero */}
-        <div className="absolute left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3">
-          <img 
-            src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-            alt="בוקט לוגו" 
-            className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
-            onClick={handleLogoClick} 
-          />
+        <div className="absolute left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3 my-[10px] mx-[30px] py-[33px] px-[24px]">
+          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
         </div>
         
         <div className="relative w-full h-full">
@@ -308,13 +282,13 @@ const Index = () => {
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
-            textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-          }} className="font-gloria text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+              textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
+            }} className="font-gloria text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }} className="font-ploni-ultralight text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12 font-normal">כשהפרחים הופכים לרגעים של קסם</p>
+              textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+            }} className="font-ploni-ultralight text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12 font-normal">כשהפרחים הופכים לרגעים של קסם</p>
           </div>
         </div>
 
@@ -401,21 +375,21 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
-            icon: Heart,
-            text: 'זרי כלה'
-          }, {
-            icon: Crown,
-            text: 'כיסאות כלה'
-          }, {
-            icon: Sparkles,
-            text: 'עיצוב חופות'
-          }, {
-            icon: Gift,
-            text: 'מתנות מעוצבות'
-          }, {
-            icon: Camera,
-            text: 'הפקת אירועים'
-          }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
+              icon: Heart,
+              text: 'זרי כלה'
+            }, {
+              icon: Crown,
+              text: 'כיסאות כלה'
+            }, {
+              icon: Sparkles,
+              text: 'עיצוב חופות'
+            }, {
+              icon: Gift,
+              text: 'מתנות מעוצבות'
+            }, {
+              icon: Camera,
+              text: 'הפקת אירועים'
+            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-105 transition-transform">
                   <service.icon className="h-12 w-12 text-black" />
                 </div>
@@ -446,18 +420,18 @@ const Index = () => {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[{
-            img: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-            title: "זרי אירוסין"
-          }, {
-            img: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-            title: "זרי כלה"
-          }, {
-            img: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-            title: "כיסאות כלה"
-          }, {
-            img: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-            title: "אירועים"
-          }].map((item, idx) => <Link key={idx} to="/catalog" className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
+              img: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
+              title: "זרי אירוסין"
+            }, {
+              img: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
+              title: "זרי כלה"
+            }, {
+              img: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
+              title: "כיסאות כלה"
+            }, {
+              img: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
+              title: "אירועים"
+            }].map((item, idx) => <Link key={idx} to="/catalog" className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
                 <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-8">
                   <h3 className="font-assistant text-3xl font-bold text-white">{item.title}</h3>
@@ -525,15 +499,15 @@ const Index = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[{
-            title: "ניסיון עשיר",
-            text: "שנות ניסיון בעיצוב אירועים ושזירת פרחים ברמה הגבוהה ביותר. עבדנו עם מאות זוגות ויצרנו אירועים בלתי נשכחים."
-          }, {
-            title: "התאמה אישית",
-            text: "כל עיצוב מותאם במיוחד עבורכם. אנו מקשיבים לחזון שלכם ומתרגמים אותו למציאות פרחונית מדהימה."
-          }, {
-            title: "איכות ללא פשרות",
-            text: "רק הפרחים הטריים והאיכותיים ביותר. אנו בוחרים בקפידה כל פרח ומתחייבים לשירות ואיכות ללא פשרות."
-          }].map((item, idx) => <div key={idx} className="bg-white p-8 rounded-2xl shadow-xl">
+              title: "ניסיון עשיר",
+              text: "שנות ניסיון בעיצוב אירועים ושזירת פרחים ברמה הגבוהה ביותר. עבדנו עם מאות זוגות ויצרנו אירועים בלתי נשכחים."
+            }, {
+              title: "התאמה אישית",
+              text: "כל עיצוב מותאם במיוחד עבורכם. אנו מקשיבים לחזון שלכם ומתרגמים אותו למציאות פרחונית מדהימה."
+            }, {
+              title: "איכות ללא פשרות",
+              text: "רק הפרחים הטריים והאיכותיים ביותר. אנו בוחרים בקפידה כל פרח ומתחייבים לשירות ואיכות ללא פשרות."
+            }].map((item, idx) => <div key={idx} className="bg-white p-8 rounded-2xl shadow-xl">
                 <h3 className="font-assistant text-2xl font-bold mb-4 text-gray-800 text-center">{item.title}</h3>
                 <p className="text-gray-700 leading-relaxed text-center">{item.text}</p>
               </div>)}
@@ -592,6 +566,6 @@ const Index = () => {
         </div>
       </footer>
       </div>
-    </div>
+    </div>;
 };
 export default Index;
