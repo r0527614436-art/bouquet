@@ -360,7 +360,7 @@ const Index = () => {
       {/* Black Gallery Section with Center Focus */}
       <section className="relative py-16 bg-[#314020]">
         {/* White semicircle background for button */}
-        <div className="absolute left-8 top-0 translate-y-0 z-10">
+        <div className="absolute left-4 top-0 translate-y-0 z-10">
           <div className="w-32 h-16 bg-white rounded-b-full shadow-lg" />
         </div>
         <div className="max-w-7xl mx-auto px-4">
