@@ -4,6 +4,7 @@ import { Menu, X, ChevronLeft, ChevronRight, Heart, Gift, Crown, Sparkles, Camer
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { GalleryCarousel } from '@/components/GalleryCarousel';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
@@ -280,28 +281,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Black Gallery Section with Center Focus */}
-      <section className="relative py-16 bg-[#314020] mt-0">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex justify-center items-center gap-6">
-            <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-              <ChevronRight className="h-6 w-6 text-white" />
-            </button>
-            
-            <div className="relative w-72 h-96 md:w-96 md:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-              <img src={images[currentImageIndex]?.image_url} alt={images[currentImageIndex]?.title} className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 bg-white/95 py-4 text-center">
-                <p className="font-assistant font-bold text-xl text-gray-800">
-                  {images[currentImageIndex]?.title}
-                </p>
-              </div>
-            </div>
-            
-            <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
-              <ChevronLeft className="h-6 w-6 text-white" />
-            </button>
-          </div>
-        </div>
+      {/* Gallery Carousel Section */}
+      <section className="relative py-16 bg-[#1a1a1a] mt-0">
+        <h2 className="font-assistant text-5xl font-bold text-center mb-8 text-white">הגלריה שלנו</h2>
+        <GalleryCarousel slides={images} />
       </section>
 
       {/* About Section */}
