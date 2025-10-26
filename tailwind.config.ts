@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				'gloria': ['Gloria', 'serif'],
 				'ploni': ['Ploni', 'sans-serif'],
+				'ploni-ultralight': ['Ploni Ultralight', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 				'assistant': ['Assistant', 'sans-serif'],

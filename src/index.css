@@ -49,6 +49,15 @@ All colors MUST be HSL.
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Ploni Ultralight';
+  src: url('/src/assets/fonts/ploni-ultralight.eot');
+  src: url('/src/assets/fonts/ploni-ultralight.eot?#iefix') format('embedded-opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
