@@ -195,7 +195,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center pr-12 md:pr-20">
             <h1 style={{
             textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-          }} className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider mx-[650px] my-[2px] px-[50px] py-0">
+          }} className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider my-[2px] px-[50px] py-0 mx-[620px]">
               בוקט
             </h1>
             <p style={{
