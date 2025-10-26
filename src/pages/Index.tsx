@@ -204,21 +204,21 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Logo - Fixed Position */}
-      <div className="fixed left-4 top-0 z-50 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3">
-        <img 
-          src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-          alt="בוקט לוגו" 
-          className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
-          onClick={handleLogoClick} 
-        />
-      </div>
-
       {/* Main Content - Add padding to prevent overlap with sidebar */}
       <div className="pr-20">
 
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
+        {/* Logo - Absolute Position in Hero */}
+        <div className="absolute left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3">
+          <img 
+            src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+            alt="בוקט לוגו" 
+            className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
+            onClick={handleLogoClick} 
+          />
+        </div>
+        
         <div className="relative w-full h-full">
           {images.map((image, index) => <div key={image.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
               <img src={image.image_url} alt={image.title} className="w-full h-full object-cover scale-110" />
@@ -525,6 +525,6 @@ const Index = () => {
         </div>
       </footer>
       </div>
-    </div>;
+    </div>
 };
 export default Index;
