@@ -55,26 +55,26 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
     <div className="relative w-full mx-auto py-16" style={{ backgroundColor: '#314020' }}>
       <div className="relative flex flex-col items-center justify-center max-w-7xl mx-auto" style={{ perspective: '1000px' }}>
         {/* Carousel */}
-        <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center justify-center -space-x-40">
+        <div className="overflow-visible w-full mb-8 h-[600px] relative" ref={emblaRef}>
+          <div className="flex items-center justify-center h-full relative">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               const distanceFromSelected = Math.abs(index - selectedIndex);
-              const zIndex = isSelected ? 50 : 30 - distanceFromSelected;
+              const zIndex = isSelected ? 100 : 10 - distanceFromSelected;
               
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
-                  className={`${
-                    isSelected ? 'flex-[0_0_450px] scale-100' : 'flex-[0_0_300px] scale-100'
-                  }`}
+                  className="absolute"
                   style={{
-                    minWidth: isSelected ? '450px' : '300px',
+                    width: isSelected ? '450px' : '300px',
                     transformOrigin: 'center center',
                     zIndex: zIndex,
                     transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-                    marginLeft: isSelected ? '80px' : '0',
-                    marginRight: isSelected ? '80px' : '0'
+                    left: '50%',
+                    transform: `translateX(calc(-50% + ${(index - selectedIndex) * 280}px)) ${isSelected ? 'scale(1)' : 'scale(0.9)'}`,
+                    opacity: Math.abs(index - selectedIndex) > 2 ? 0 : 1,
+                    pointerEvents: Math.abs(index - selectedIndex) > 2 ? 'none' : 'auto'
                   }}
                 >
                   <div className={`relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 ${
