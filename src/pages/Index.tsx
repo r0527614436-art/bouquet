@@ -324,21 +324,20 @@ const Index = () => {
             </div>
 
             {/* Text Content */}
-            <div>
-              <h2 className="font-assistant text-5xl font-bold mb-6 text-gray-800">אודות</h2>
-              <div className="space-y-5 text-gray-700 text-lg leading-relaxed">
+            <div className="text-right">
+              <h2 className="font-gloria text-6xl font-semibold mb-6 text-gray-800">
+                אודות
+                <span className="block text-4xl mt-2 opacity-70">About</span>
+              </h2>
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight">
                 <p>
-                  ברוכים הבאים לבוקט - עולם שזירת הפרחים המקצועי שלנו! 
-                  אנו מתמחים בעיצוב וביצוע זרי כלה מרהיבים, עיצוב חופות חלומיות, 
-                  והפקת אירועים מושלמים.
+                  כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
+                </p>
+                <p className="font-semibold">
+                  המטרה שלי ברורה:
                 </p>
                 <p>
-                  כל פרח נבחר בקפידה, כל עיצוב נוצר באהבה. 
-                  המומחיות שלנו משתרעת על פני מגוון רחב של שירותים: 
-                  מזרי אירוסין מרשימים ועד מתנות מעוצבות בקפידה עם שוקולדים ופרחים.
-                </p>
-                <p className="font-semibold text-xl">
-                  כל יצירה היא ייחודית ומותאמת אישית ליום המיוחד שלכם!
+                  לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
                 </p>
               </div>
             </div>
