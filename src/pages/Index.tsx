@@ -195,12 +195,12 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-start justify-center pl-12 md:pl-20">
             <h1 style={{
             textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-          }} className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider">
+          }} className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider mr-auto">
               בוקט
             </h1>
             <p style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }} className="font-assistant text-base text-green-900 font-extrabold md:text-3xl">כשהפרחים הופכים לרגעים של קסם</p>
+          }} className="font-assistant text-base text-green-900 font-extrabold md:text-3xl pl-8 md:pl-12">כשהפרחים הופכים לרגעים של קסם</p>
             
             {/* Navigation Arrows - only show if multiple images */}
             {images.length > 1 && <div className="flex gap-3 mt-6">
