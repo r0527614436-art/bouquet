@@ -21,9 +21,10 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       loop: true,
       align: 'center',
       skipSnaps: false,
-      containScroll: 'trimSnaps',
+      containScroll: false,
       dragFree: false,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      duration: 30
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
@@ -74,7 +75,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                     transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
                   }}
                 >
-                  <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300">
+                  <div className={`relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 ${
+                    isSelected ? 'rounded-t-[100px] rounded-b-2xl' : 'rounded-2xl'
+                  }`}>
                     <img
                       src={slide.image_url}
                       alt={slide.title}
