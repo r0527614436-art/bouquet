@@ -330,7 +330,7 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-8 bottom-0 translate-y-1/2 z-40">
+        <div className="absolute left-8 bottom-0 translate-y-1/2 z-50">
           {/* White circle background */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white rounded-full shadow-lg z-10" />
           
