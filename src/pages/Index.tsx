@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
+import heroImage from '@/assets/hero-image.jpg';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 interface HomepageSlide {
@@ -45,50 +46,21 @@ const Index = () => {
     }
   });
 
-  // Fallback images if no slides in database
+  // Single hero image
   const fallbackImages = [{
     id: '1',
-    image_url: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
-    title: "זרי אירוסין",
-    description: "זרי פרחים מרהיבים לחגיגת האירוסין",
+    image_url: heroImage,
+    title: "בוקט",
+    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
     order_index: 1,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '2',
-    image_url: "/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png",
-    title: "סדנאות",
-    description: "סדנאות שזירת פרחים מקצועיות",
-    order_index: 2,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '3',
-    image_url: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
-    title: "זרי כלה",
-    description: "זרי כלה מעוצבים במיוחד ליום המיוחד שלכם",
-    order_index: 3,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '4',
-    image_url: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
-    title: "עיצוב מתנות",
-    description: "מתנות מעוצבות עם פרחים ושוקולדים",
-    order_index: 4,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '5',
-    image_url: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
-    title: "כיסאות כלה",
-    description: "כיסאות כלה מעוצבים במיוחד",
-    order_index: 5,
     is_active: true,
     font_family: 'font-sans'
   }];
   const images = slides.length > 0 ? slides : fallbackImages;
+  // Auto-slide only if there are multiple images
   useEffect(() => {
+    if (images.length <= 1) return;
+    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => prevIndex === images.length - 1 ? 0 : prevIndex + 1);
     }, 4000);
@@ -203,7 +175,9 @@ const Index = () => {
           {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && <div className="md:hidden border-t py-4">
               <nav className="flex flex-col space-y-2">
-                <Link to="/catalog" onClick={() => setIsMobileMenuOpen(false)} className="hover:bg-secondary rounded-lg text-center text-green-950 font-semibold my-[4px] py-[7px] px-[51px] mx-[79px] text-4xl">כשהפרחים הופכים לרגעים של קסם</Link>
+                <Link to="/catalog" className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center" onClick={() => setIsMobileMenuOpen(false)}>
+                  קטלוג
+                </Link>
                 <a href="#about" className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center" onClick={() => setIsMobileMenuOpen(false)}>
                   אודות
                 </a>
@@ -216,44 +190,48 @@ const Index = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-visible">
         <div className="relative w-full h-full">
           {images.map((image, index) => <div key={image.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-              <img src={image.image_url} alt={image.title} className="w-full h-full object-cover" />
+              <img src={image.image_url} alt={image.title} className="w-full h-full object-cover scale-110" />
             </div>)}
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center">
-            <h1 className="font-gloria text-[140px] md:text-[200px] font-bold text-primary mb-2" style={{
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center pr-12 md:pr-20">
+            <h1 className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider" style={{
             textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
           }}>
               בוקט
             </h1>
-            <p className="font-assistant text-base md:text-lg text-white text-center px-4" style={{
+            <p className="font-assistant text-base md:text-lg text-white text-right px-4" style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
           }}>
               מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע
             </p>
             
-            {/* Navigation Arrows */}
-            <div className="flex gap-3 mt-6">
-              <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                <ChevronRight className="h-5 w-5 text-gray-800" />
-              </button>
-              <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                <ChevronLeft className="h-5 w-5 text-gray-800" />
-              </button>
-            </div>
+            {/* Navigation Arrows - only show if multiple images */}
+            {images.length > 1 && (
+              <div className="flex gap-3 mt-6">
+                <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                  <ChevronRight className="h-5 w-5 text-gray-800" />
+                </button>
+                <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
+                  <ChevronLeft className="h-5 w-5 text-gray-800" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Dots Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/60 hover:bg-white/80 w-2'}`} />)}
-        </div>
+        {/* Dots Indicator - only show if multiple images */}
+        {images.length > 1 && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
+            {images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/60 hover:bg-white/80 w-2'}`} />)}
+          </div>
+        )}
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-50">
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
           {/* White circle background - behind the button */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 bg-white rounded-b-full shadow-lg -z-10" />
           
@@ -262,18 +240,27 @@ const Index = () => {
               {/* Rotating text circle */}
               <img src={downloadCatalogBtn} alt="" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
               {/* Static arrow in center */}
-              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-30" />
+              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-30" />
             </div>
           </button>
+        </div>
+        
+        {/* Curved bottom edge with transparent cutout */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white overflow-visible pointer-events-none">
+          <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
+            <defs>
+              <mask id="curve-mask">
+                <rect width="1200" height="100" fill="white"/>
+                <ellipse cx="600" cy="0" rx="80" ry="100" fill="black"/>
+              </mask>
+            </defs>
+            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="white" mask="url(#curve-mask)"/>
+          </svg>
         </div>
       </section>
 
       {/* Black Gallery Section with Center Focus */}
-      <section className="relative py-16 bg-[#314020]">
-        {/* White semicircle background for button */}
-        <div className="absolute left-4 top-0 translate-y-0 z-0">
-          <div className="w-32 h-16 bg-white rounded-b-full shadow-lg" />
-        </div>
+      <section className="relative py-16 bg-[#314020] mt-0">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
             <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
