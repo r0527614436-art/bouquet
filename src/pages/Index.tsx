@@ -95,6 +95,51 @@ const Index = () => {
       order_index: 4,
       is_active: true,
       font_family: 'font-sans'
+    },
+    {
+      id: '5',
+      image_url: '/lovable-uploads/gallery-4.jpg',
+      title: "זר כלה מושלם",
+      description: "יופי וחן לכלה",
+      order_index: 5,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '6',
+      image_url: '/lovable-uploads/gallery-5.jpg',
+      title: "פרחים לבנים",
+      description: "טוהר ואלגנטיות",
+      order_index: 6,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '7',
+      image_url: '/lovable-uploads/gallery-6.jpg',
+      title: "זר עדין",
+      description: "פרחים עדינים ומרהיבים",
+      order_index: 7,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '8',
+      image_url: '/lovable-uploads/gallery-7.jpg',
+      title: "בוקט מיוחד",
+      description: "שילוב צבעים מדהים",
+      order_index: 8,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '9',
+      image_url: '/lovable-uploads/gallery-8.jpg',
+      title: "עיצוב לשבת",
+      description: "סידור פרחים לשבת ומועדים",
+      order_index: 9,
+      is_active: true,
+      font_family: 'font-sans'
     }
   ];
 
