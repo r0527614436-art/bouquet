@@ -398,16 +398,16 @@ const Index = () => {
       </section>
 
       {/* Gallery Grid Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white -mt-32 relative z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-4 items-end justify-center">
             {[
-              { img: '/lovable-uploads/gallery-new-3.png', height: 'h-64' },
-              { img: '/lovable-uploads/gallery-new-4.png', height: 'h-80' },
-              { img: '/lovable-uploads/gallery-new-2.png', height: 'h-96' },
-              { img: '/lovable-uploads/gallery-new-1.png', height: 'h-80' }
+              { img: '/lovable-uploads/gallery-new-3.png', height: 'h-64', rotation: '-rotate-6' },
+              { img: '/lovable-uploads/gallery-new-4.png', height: 'h-80', rotation: 'rotate-3' },
+              { img: '/lovable-uploads/gallery-new-2.png', height: 'h-96', rotation: '-rotate-3' },
+              { img: '/lovable-uploads/gallery-new-1.png', height: 'h-80', rotation: 'rotate-6' }
             ].map((item, idx) => (
-              <div key={idx} className={`${item.height} w-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}>
+              <div key={idx} className={`${item.height} w-64 ${item.rotation} rounded-xl overflow-hidden shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300`}>
                 <img src={item.img} alt={`גלריה ${idx + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}
