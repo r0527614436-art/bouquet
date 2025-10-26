@@ -52,24 +52,25 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
 
   return (
     <div className="relative w-full mx-auto px-4 py-16">
-      <div className="relative flex flex-col items-center justify-center">
+      <div className="relative flex flex-col items-center justify-center" style={{ perspective: '1000px' }}>
         {/* Carousel */}
         <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
-                  className={`flex-[0_0_300px] transition-all duration-700 ease-in-out ${
-                    isSelected ? 'scale-125 z-20' : 'scale-90 z-10'
+                  className={`flex-[0_0_220px] transition-all duration-700 ease-in-out ${
+                    isSelected ? 'scale-150 z-30 mx-12' : 'scale-75 z-10'
                   }`}
                   style={{
-                    minWidth: '300px'
+                    minWidth: '220px',
+                    transformOrigin: 'center center'
                   }}
                 >
-                  <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-gray-200">
+                  <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300">
                     <img
                       src={slide.image_url}
                       alt={slide.title}
@@ -79,25 +80,25 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                         e.currentTarget.style.display = 'none';
                       }}
                       className={`w-full h-full object-cover transition-all duration-700 ${
-                        isSelected ? 'brightness-100' : 'brightness-50'
+                        isSelected ? 'brightness-110 saturate-110' : 'brightness-40 saturate-50'
                       }`}
                     />
                     
                     {/* Dark blur overlay for non-selected slides */}
                     <div 
-                      className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-all duration-700 ${
+                      className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-all duration-700 ${
                         isSelected ? 'opacity-0' : 'opacity-100'
                       }`} 
                     />
 
                     {/* Title overlay - only show on selected */}
                     {isSelected && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 text-center animate-fade-in">
-                        <h3 className="font-assistant text-white text-2xl font-bold drop-shadow-lg">
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 text-center animate-fade-in">
+                        <h3 className="font-assistant text-white text-2xl font-bold drop-shadow-2xl">
                           {slide.title}
                         </h3>
                         {slide.description && (
-                          <p className="font-assistant text-white/90 text-sm mt-2 drop-shadow-md">
+                          <p className="font-assistant text-white/90 text-sm mt-2 drop-shadow-lg">
                             {slide.description}
                           </p>
                         )}
