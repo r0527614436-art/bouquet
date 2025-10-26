@@ -136,72 +136,65 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Side Navigation Menu */}
+      {/* Side Navigation Bar - Full Height */}
       <div 
-        className="fixed right-4 top-8 z-50 flex flex-col items-center gap-6"
+        className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${
+          isMenuOpen ? 'w-80' : 'w-20'
+        }`}
         onMouseEnter={() => setIsMenuOpen(true)}
         onMouseLeave={() => setIsMenuOpen(false)}
       >
-        {/* Hamburger Icon */}
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="flex flex-col gap-1.5 cursor-pointer bg-primary/90 p-3 rounded-lg hover:bg-primary transition-colors"
-          aria-label="תפריט ניווט"
-        >
-          <div className="w-8 h-0.5 bg-white"></div>
-          <div className="w-8 h-0.5 bg-white"></div>
-          <div className="w-8 h-0.5 bg-white"></div>
-        </button>
-
-        {/* Navigation Numbers */}
-        <div className="flex flex-col gap-6 items-center">
-          {[
-            { num: '01', label: 'בית', href: '#' },
-            { num: '02', label: 'אודות', href: '#about' },
-            { num: '03', label: 'קטלוג', href: '/catalog' },
-            { num: '04', label: 'צור קשר', href: '#contact' }
-          ].map((item) => (
-            <div key={item.num} className="flex flex-col items-center gap-1.5">
-              <span className="font-assistant text-white text-sm font-medium">{item.num}</span>
-              <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
+        <div className="flex flex-col h-full py-8">
+          {/* Hamburger Icon */}
+          <div className="flex justify-center mb-12">
+            <div className="flex flex-col gap-1.5 cursor-pointer">
+              <div className="w-8 h-0.5 bg-white"></div>
+              <div className="w-8 h-0.5 bg-white"></div>
+              <div className="w-8 h-0.5 bg-white"></div>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Expanded Menu */}
-        <div 
-          className={`absolute right-0 top-0 bg-primary/95 backdrop-blur-sm rounded-lg shadow-2xl transition-all duration-300 ${
-            isMenuOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-4 pointer-events-none'
-          }`}
-          style={{ minWidth: '280px' }}
-        >
-          <nav className="p-8 flex flex-col gap-8">
+          {/* Navigation Items */}
+          <nav className="flex-1 flex flex-col justify-start gap-12 px-4">
             {[
               { num: '01', label: 'בית', href: '#', isLink: false },
               { num: '02', label: 'אודות', href: '#about', isLink: false },
               { num: '03', label: 'קטלוג', href: '/catalog', isLink: true },
               { num: '04', label: 'צור קשר', href: '#contact', isLink: false }
             ].map((item) => (
-              <div key={item.num} className="flex items-center gap-6 group">
-                <span className="font-assistant text-white text-2xl font-light">{item.num}</span>
-                <div className="w-2 h-2 rounded-full bg-[#89a86c] group-hover:scale-150 transition-transform"></div>
-                {item.isLink ? (
-                  <Link 
-                    to={item.href}
-                    className="font-assistant text-white text-2xl font-medium hover:text-[#89a86c] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <a 
-                    href={item.href}
-                    className="font-assistant text-white text-2xl font-medium hover:text-[#89a86c] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                )}
+              <div key={item.num} className="flex items-center gap-4">
+                {/* Collapsed State - Number and Dot */}
+                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${
+                  isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'
+                }`}>
+                  <span className="font-assistant text-white text-base font-medium whitespace-nowrap">{item.num}</span>
+                  <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
+                </div>
+
+                {/* Expanded State - Full Menu */}
+                <div className={`flex items-center gap-4 transition-opacity duration-300 ${
+                  isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'
+                }`}>
+                  <span className="font-assistant text-white text-xl font-light min-w-[3rem]">{item.num}</span>
+                  <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
+                  {item.isLink ? (
+                    <Link 
+                      to={item.href}
+                      className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={item.href}
+                      className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </nav>
@@ -209,7 +202,7 @@ const Index = () => {
       </div>
 
       {/* Logo - Fixed Position */}
-      <div className="fixed left-4 top-8 z-50">
+      <div className="fixed left-4 top-8 z-40">
         <img 
           src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
           alt="בוקט לוגו" 
@@ -217,6 +210,9 @@ const Index = () => {
           onClick={handleLogoClick} 
         />
       </div>
+
+      {/* Main Content - Add padding to prevent overlap with sidebar */}
+      <div className="pr-20">
 
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
@@ -543,6 +539,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      </div>
     </div>;
 };
 export default Index;
