@@ -270,7 +270,7 @@ const Index = () => {
       <section className="relative h-[70vh] overflow-visible">
         {/* Logo - Absolute Position in Hero */}
         <div className="absolute left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3 my-[10px] mx-[30px] py-[33px] px-[24px]">
-          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
+          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
         </div>
         
         <div className="relative w-full h-full">
