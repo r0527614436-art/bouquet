@@ -23,7 +23,7 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const {
     toast
@@ -136,53 +136,87 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Fixed WhatsApp Button */}
-      
+      {/* Side Navigation Menu */}
+      <div 
+        className="fixed right-4 top-8 z-50 flex flex-col items-center gap-6"
+        onMouseEnter={() => setIsMenuOpen(true)}
+        onMouseLeave={() => setIsMenuOpen(false)}
+      >
+        {/* Hamburger Icon */}
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex flex-col gap-1.5 cursor-pointer bg-primary/90 p-3 rounded-lg hover:bg-primary transition-colors"
+          aria-label="תפריט ניווט"
+        >
+          <div className="w-8 h-0.5 bg-white"></div>
+          <div className="w-8 h-0.5 bg-white"></div>
+          <div className="w-8 h-0.5 bg-white"></div>
+        </button>
 
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3">
-            {/* Mobile Menu Button */}
-            <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-            
-            {/* Logo */}
-            <div className="flex items-center">
-              <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
+        {/* Navigation Numbers */}
+        <div className="flex flex-col gap-6 items-center">
+          {[
+            { num: '01', label: 'בית', href: '#' },
+            { num: '02', label: 'אודות', href: '#about' },
+            { num: '03', label: 'קטלוג', href: '/catalog' },
+            { num: '04', label: 'צור קשר', href: '#contact' }
+          ].map((item) => (
+            <div key={item.num} className="flex flex-col items-center gap-1.5">
+              <span className="font-assistant text-white text-sm font-medium">{item.num}</span>
+              <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
             </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6 rtl:space-x-reverse">
-              <Link to="/catalog" className="px-4 py-2 hover:text-primary font-medium transition-colors">
-                קטלוג
-              </Link>
-              <a href="#about" className="px-4 py-2 hover:text-primary font-medium transition-colors">
-                אודות
-              </a>
-              <a href="#contact" className="px-4 py-2 hover:text-primary font-medium transition-colors">
-                צור קשר
-              </a>
-            </nav>
-          </div>
-
-          {/* Mobile Navigation Menu */}
-          {isMobileMenuOpen && <div className="md:hidden border-t py-4">
-              <nav className="flex flex-col space-y-2">
-                <Link to="/catalog" className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  קטלוג
-                </Link>
-                <a href="#about" className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  אודות
-                </a>
-                <a href="#contact" className="px-4 py-2 hover:bg-secondary rounded-lg font-medium text-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  צור קשר
-                </a>
-              </nav>
-            </div>}
+          ))}
         </div>
-      </header>
+
+        {/* Expanded Menu */}
+        <div 
+          className={`absolute right-0 top-0 bg-primary/95 backdrop-blur-sm rounded-lg shadow-2xl transition-all duration-300 ${
+            isMenuOpen ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-4 pointer-events-none'
+          }`}
+          style={{ minWidth: '280px' }}
+        >
+          <nav className="p-8 flex flex-col gap-8">
+            {[
+              { num: '01', label: 'בית', href: '#', isLink: false },
+              { num: '02', label: 'אודות', href: '#about', isLink: false },
+              { num: '03', label: 'קטלוג', href: '/catalog', isLink: true },
+              { num: '04', label: 'צור קשר', href: '#contact', isLink: false }
+            ].map((item) => (
+              <div key={item.num} className="flex items-center gap-6 group">
+                <span className="font-assistant text-white text-2xl font-light">{item.num}</span>
+                <div className="w-2 h-2 rounded-full bg-[#89a86c] group-hover:scale-150 transition-transform"></div>
+                {item.isLink ? (
+                  <Link 
+                    to={item.href}
+                    className="font-assistant text-white text-2xl font-medium hover:text-[#89a86c] transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a 
+                    href={item.href}
+                    className="font-assistant text-white text-2xl font-medium hover:text-[#89a86c] transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )}
+              </div>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Logo - Fixed Position */}
+      <div className="fixed left-4 top-8 z-50">
+        <img 
+          src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+          alt="בוקט לוגו" 
+          className="h-16 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
+          onClick={handleLogoClick} 
+        />
+      </div>
 
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
