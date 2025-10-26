@@ -306,7 +306,6 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 bg-[#1a1a1a] mt-0">
-        <h2 className="font-assistant text-5xl font-bold text-center mb-8 text-white">הגלריה שלנו</h2>
         <GalleryCarousel slides={carouselImages} />
       </section>
 

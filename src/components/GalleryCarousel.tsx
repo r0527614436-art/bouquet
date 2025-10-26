@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import arrowCircle from '@/assets/arrow-circle.png';
 
 interface GallerySlide {
   id: string;
@@ -50,27 +50,10 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto px-4 py-16">
-      <div className="relative flex items-center justify-center">
-        {/* Navigation Buttons */}
-        <button
-          onClick={scrollPrev}
-          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="h-6 w-6 text-white" />
-        </button>
-
-        <button
-          onClick={scrollNext}
-          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="h-6 w-6 text-white" />
-        </button>
-
+    <div className="relative w-full max-w-7xl mx-auto px-4 py-8">
+      <div className="relative flex flex-col items-center justify-center">
         {/* Carousel */}
-        <div className="overflow-hidden max-w-5xl" ref={emblaRef}>
+        <div className="overflow-hidden max-w-5xl w-full mb-8" ref={emblaRef}>
           <div className="flex items-center justify-center gap-6">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
@@ -122,6 +105,33 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               );
             })}
           </div>
+        </div>
+
+        {/* Navigation Buttons - Below Carousel */}
+        <div className="flex items-center justify-center gap-8 mt-4">
+          <button
+            onClick={scrollPrev}
+            className="w-16 h-16 hover:scale-110 transition-transform"
+            aria-label="Previous slide"
+          >
+            <img 
+              src={arrowCircle} 
+              alt="Previous" 
+              className="w-full h-full rotate-180"
+            />
+          </button>
+
+          <button
+            onClick={scrollNext}
+            className="w-16 h-16 hover:scale-110 transition-transform"
+            aria-label="Next slide"
+          >
+            <img 
+              src={arrowCircle} 
+              alt="Next" 
+              className="w-full h-full"
+            />
+          </button>
         </div>
       </div>
     </div>
