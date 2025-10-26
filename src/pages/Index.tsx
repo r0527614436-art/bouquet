@@ -330,16 +330,16 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-40">
-          {/* White semicircle background pointing down */}
-          <div className="absolute -left-3 -top-3 w-20 h-12 bg-white rounded-b-full shadow-lg" />
+        <div className="absolute left-8 bottom-0 translate-y-1/2 z-40">
+          {/* White circle background */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white rounded-full shadow-lg" />
           
           <button
             onClick={handleDownloadCatalog}
             className="relative hover:scale-110 transition-transform duration-300 group"
             aria-label="להורדת הקטלוג הדיגיטלי שלנו"
           >
-            <div className="relative w-14 h-14">
+            <div className="relative w-21 h-21">
               {/* Rotating text circle */}
               <img 
                 src={downloadCatalogBtn} 
@@ -350,7 +350,7 @@ const Index = () => {
               <img 
                 src={downloadArrow} 
                 alt="להורדת הקטלוג הדיגיטלי שלנו" 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9"
               />
             </div>
           </button>
