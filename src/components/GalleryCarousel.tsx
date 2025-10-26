@@ -21,7 +21,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       loop: true,
       align: 'center',
       skipSnaps: false,
-      containScroll: false,
+      containScroll: 'trimSnaps',
       dragFree: false,
       slidesToScroll: 1
     },
