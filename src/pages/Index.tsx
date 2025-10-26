@@ -255,7 +255,7 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-50">
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
           {/* White circle background - behind the button */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 bg-white rounded-b-full shadow-lg -z-10" />
           
