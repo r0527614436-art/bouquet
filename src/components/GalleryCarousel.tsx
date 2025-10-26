@@ -55,19 +55,22 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       <div className="relative flex flex-col items-center justify-center" style={{ perspective: '1000px' }}>
         {/* Carousel */}
         <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center -space-x-32">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
+              const distanceFromSelected = Math.abs(index - selectedIndex);
+              const zIndex = isSelected ? 50 : 30 - distanceFromSelected;
               
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
                   className={`flex-[0_0_330px] transition-all duration-700 ease-in-out ${
-                    isSelected ? 'scale-150 z-30 mx-12' : 'scale-75 z-10'
+                    isSelected ? 'scale-150 mx-32' : 'scale-75'
                   }`}
                   style={{
                     minWidth: '330px',
-                    transformOrigin: 'center center'
+                    transformOrigin: 'center center',
+                    zIndex: zIndex
                   }}
                 >
                   <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300">
