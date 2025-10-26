@@ -264,7 +264,7 @@ const Index = () => {
               {/* Rotating text circle */}
               <img src={downloadCatalogBtn} alt="" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
               {/* Static arrow in center */}
-              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 z-30" />
+              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 z-30" />
             </div>
           </button>
         </div>
