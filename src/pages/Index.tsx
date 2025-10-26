@@ -193,7 +193,7 @@ const Index = () => {
       <section className="relative h-[70vh] overflow-visible">
         <div className="relative w-full h-full">
           {images.map((image, index) => <div key={image.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-              <img src={image.image_url} alt={image.title} className="w-full h-full object-cover" />
+              <img src={image.image_url} alt={image.title} className="w-full h-full object-cover scale-110" />
             </div>)}
           
           {/* Overlay with Title */}
