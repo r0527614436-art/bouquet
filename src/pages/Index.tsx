@@ -205,7 +205,7 @@ const Index = () => {
       </div>
 
       {/* Logo - Fixed Position */}
-      <div className="fixed left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3">
+      <div className="fixed left-4 top-0 z-50 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3">
         <img 
           src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
           alt="בוקט לוגו" 
