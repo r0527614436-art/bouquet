@@ -336,10 +336,10 @@ const Index = () => {
           
           <button
             onClick={handleDownloadCatalog}
-            className="relative hover:scale-110 transition-transform duration-300 group"
+            className="relative z-20 hover:scale-110 transition-transform duration-300 group"
             aria-label="להורדת הקטלוג הדיגיטלי שלנו"
           >
-            <div className="relative w-14 h-14">
+            <div className="relative w-20 h-20">
               {/* Rotating text circle */}
               <img 
                 src={downloadCatalogBtn} 
@@ -350,7 +350,7 @@ const Index = () => {
               <img 
                 src={downloadArrow} 
                 alt="להורדת הקטלוג הדיגיטלי שלנו" 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8"
               />
             </div>
           </button>
