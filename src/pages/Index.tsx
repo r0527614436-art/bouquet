@@ -307,8 +307,32 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Images */}
+          <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
+            {/* Text Content - Right Side */}
+            <div className="flex-1 text-right">
+              {/* Title with layered effect */}
+              <div className="relative mb-8">
+                <h2 className="font-gloria text-[120px] md:text-[150px] font-semibold text-gray-200 opacity-30 leading-none select-none">
+                  About
+                </h2>
+                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                  אודות
+                </h2>
+              </div>
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-16">
+                <p>
+                  כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
+                </p>
+                <p className="font-semibold">
+                  המטרה שלי ברורה:
+                </p>
+                <p>
+                  לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
+                </p>
+              </div>
+            </div>
+
+            {/* Images - Left Side */}
             <div className="flex gap-4">
               <div className="w-40 h-40 rounded-full overflow-hidden flex-shrink-0 shadow-lg">
                 <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
@@ -320,25 +344,6 @@ const Index = () => {
                 <div className="w-32 h-32 rounded-lg overflow-hidden shadow-lg">
                   <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
                 </div>
-              </div>
-            </div>
-
-            {/* Text Content */}
-            <div className="text-right">
-              <h2 className="font-gloria text-6xl font-semibold mb-6 text-gray-800">
-                אודות
-                <span className="block text-4xl mt-2 opacity-70">About</span>
-              </h2>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight">
-                <p>
-                  כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
-                </p>
-                <p className="font-semibold">
-                  המטרה שלי ברורה:
-                </p>
-                <p>
-                  לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
-                </p>
               </div>
             </div>
           </div>
