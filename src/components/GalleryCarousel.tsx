@@ -64,13 +64,14 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
-                  className={`transition-all duration-700 ease-in-out ${
+                  className={`${
                     isSelected ? 'flex-[0_0_450px] scale-100 mx-20' : 'flex-[0_0_300px] scale-100'
                   }`}
                   style={{
                     minWidth: isSelected ? '450px' : '300px',
                     transformOrigin: 'center center',
-                    zIndex: zIndex
+                    zIndex: zIndex,
+                    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
                   }}
                 >
                   <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300">
@@ -82,16 +83,22 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                         console.error('Failed to load image:', slide.image_url);
                         e.currentTarget.style.display = 'none';
                       }}
-                      className={`w-full h-full object-cover transition-all duration-700 ${
+                      style={{
+                        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
+                      className={`w-full h-full object-cover ${
                         isSelected ? 'brightness-110 saturate-110' : 'brightness-40 saturate-50'
                       }`}
                     />
                     
                     {/* Dark blur overlay for non-selected slides */}
                     <div 
-                      className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-all duration-700 ${
+                      className={`absolute inset-0 bg-black/60 backdrop-blur-[2px] ${
                         isSelected ? 'opacity-0' : 'opacity-100'
-                      }`} 
+                      }`}
+                      style={{
+                        transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+                      }}
                     />
 
                     {/* Title overlay - only show on selected */}
