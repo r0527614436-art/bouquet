@@ -361,9 +361,6 @@ const Index = () => {
       <section className="relative py-16 bg-[#314020]">
         {/* Curved notch for the button */}
         <div className="absolute top-0 left-0 right-0 h-16 bg-white">
-          <div className="absolute left-8 top-0 w-32 h-32 translate-x-0 -translate-y-1/2">
-            <div className="w-full h-full rounded-full bg-[#314020]" />
-          </div>
         </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-6">
