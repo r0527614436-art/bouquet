@@ -404,36 +404,38 @@ const Index = () => {
 
       {/* Catalog Section */}
       <section className="py-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          {/* Title with layered effect */}
-          <div className="relative mb-8 flex justify-center">
-            <div className="relative">
-              <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
-                Catalog
-              </h2>
-              <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
-                קטלוג
-              </h2>
+        <div className="text-center">
+          <div className="max-w-4xl mx-auto px-4">
+            {/* Title with layered effect */}
+            <div className="relative mb-8 flex justify-center">
+              <div className="relative">
+                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                  Catalog
+                </h2>
+                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
+                  קטלוג
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-gray-700 text-xl leading-relaxed font-ploni-ultralight mb-8 mt-12">
+              כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
+            </p>
+
+            {/* Button with Arrow */}
+            <div className="mt-8 mb-12">
+              <Link to="/catalog">
+                <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
+                  <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
+                  <div className="w-12 h-12">
+                    <img src={arrowCircle} alt="לכל העיצובים" className="w-full h-full" />
+                  </div>
+                </button>
+              </Link>
             </div>
           </div>
-          
-          <p className="text-gray-700 text-xl leading-relaxed font-ploni-ultralight mb-8 mt-12">
-            כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
-          </p>
 
-          {/* Button with Arrow */}
-          <div className="mt-8 mb-12">
-            <Link to="/catalog">
-              <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
-                <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
-                <div className="w-12 h-12">
-                  <img src={arrowCircle} alt="לכל העיצובים" className="w-full h-full" />
-                </div>
-              </button>
-            </Link>
-          </div>
-
-          {/* Catalog Images Grid */}
+          {/* Catalog Images Grid - Full Width */}
           <div className="grid grid-cols-4 gap-0 w-full mt-16">
             {[
               { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' },
@@ -441,7 +443,11 @@ const Index = () => {
               { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
               { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' }
             ].map((item, idx) => (
-              <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[3/4]">
+              <Link 
+                key={idx} 
+                to="/catalog" 
+                className={`group relative overflow-hidden aspect-[3/4] ${idx === 3 ? 'rounded-l-3xl' : ''}`}
+              >
                 <img 
                   src={item.img} 
                   alt={item.title} 
