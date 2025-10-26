@@ -146,7 +146,9 @@ const Index = () => {
       >
         <div className="flex flex-col h-full py-8">
           {/* Hamburger Icon */}
-          <div className="flex justify-center mb-12">
+          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${
+            isMenuOpen ? 'opacity-0' : 'opacity-100'
+          }`}>
             <div className="flex flex-col gap-1.5 cursor-pointer">
               <div className="w-8 h-0.5 bg-white"></div>
               <div className="w-8 h-0.5 bg-white"></div>
