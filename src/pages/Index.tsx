@@ -330,26 +330,31 @@ const Index = () => {
         </div>
 
         {/* Download Catalog Button - Positioned at section boundary */}
-        <button
-          onClick={handleDownloadCatalog}
-          className="absolute left-4 bottom-0 translate-y-1/2 z-40 hover:scale-110 transition-transform duration-300 group"
-          aria-label="להורדת הקטלוג הדיגיטלי שלנו"
-        >
-          <div className="relative w-14 h-14">
-            {/* Rotating text circle */}
-            <img 
-              src={downloadCatalogBtn} 
-              alt="" 
-              className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply"
-            />
-            {/* Static arrow in center */}
-            <img 
-              src={downloadArrow} 
-              alt="להורדת הקטלוג הדיגיטלי שלנו" 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6"
-            />
-          </div>
-        </button>
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-40">
+          {/* White semicircle background */}
+          <div className="absolute inset-0 w-20 h-20 -left-3 -top-3 bg-white rounded-full shadow-lg" />
+          
+          <button
+            onClick={handleDownloadCatalog}
+            className="relative hover:scale-110 transition-transform duration-300 group"
+            aria-label="להורדת הקטלוג הדיגיטלי שלנו"
+          >
+            <div className="relative w-14 h-14">
+              {/* Rotating text circle */}
+              <img 
+                src={downloadCatalogBtn} 
+                alt="" 
+                className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply"
+              />
+              {/* Static arrow in center */}
+              <img 
+                src={downloadArrow} 
+                alt="להורדת הקטלוג הדיגיטלי שלנו" 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6"
+              />
+            </div>
+          </button>
+        </div>
       </section>
 
       {/* Black Gallery Section with Center Focus */}
