@@ -260,7 +260,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
               textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-            }} className="font-ploni-black-2 text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+            }} className="font-gloria text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
@@ -312,35 +312,35 @@ const Index = () => {
             {/* Images - Right Side */}
             <div className="flex gap-6">
               {/* Second smaller image - now leftmost */}
-              <div className="flex flex-col justify-end h-[600px]">
-                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
-                  <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" className="w-full h-full object-cover" />
+              <div className="flex flex-col justify-end h-[500px]">
+                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
+                  <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Single smaller image */}
-              <div className="flex flex-col justify-end h-[600px]">
-                <div className="w-48 h-48 rounded-2xl overflow-hidden">
-                  <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" className="w-full h-full object-cover" />
+              <div className="flex flex-col justify-end h-[500px]">
+                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
+                  <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[600px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" className="w-full h-full object-cover" />
+              <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
+                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full text-right flex flex-col justify-start pt-12">
+            <div className="flex-[2] text-right min-h-[500px] flex flex-col justify-center">
               {/* Title with layered effect */}
-              <div className="relative mb-6">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+              <div className="relative mb-8">
+                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-10">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-16">
                 <p>
                   כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
                 </p>
@@ -353,7 +353,7 @@ const Index = () => {
               </div>
 
               {/* More About Button */}
-              <div className="mt-6">
+              <div className="mt-12">
                 <Link to="/about">
                   <button className="flex items-center gap-4 hover:scale-105 transition-transform">
                     <span className="font-assistant text-2xl font-bold text-gray-800">עוד עלינו</span>
@@ -373,154 +373,75 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
-              icon: '/lovable-uploads/icon-flower.png',
-              text: 'פרחים טריים\nיום-יום'
+              icon: Heart,
+              text: 'זרי כלה'
             }, {
-              icon: '/lovable-uploads/icon-bouquet.png',
-              text: 'מגוון עיצובים\nמקוריים'
+              icon: Crown,
+              text: 'כיסאות כלה'
             }, {
-              icon: '/lovable-uploads/icon-gift.png',
-              text: 'עיצוב מתנות\nופרחים'
+              icon: Sparkles,
+              text: 'עיצוב חופות'
             }, {
-              icon: '/lovable-uploads/icon-delivery.png',
-              text: 'משלוחים\nבפריסה ארצית'
+              icon: Gift,
+              text: 'מתנות מעוצבות'
             }, {
-              icon: '/lovable-uploads/icon-time.png',
-              text: 'עמידה\nבזמנים'
+              icon: Camera,
+              text: 'הפקת אירועים'
             }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  <img src={service.icon} alt={service.text} className="h-12 w-12 object-contain" />
+                <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-105 transition-transform">
+                  <service.icon className="h-12 w-12 text-black" />
                 </div>
-                <p className="text-white font-ploni text-sm md:text-base font-black whitespace-pre-line">{service.text}</p>
+                <p className="text-white font-assistant text-sm md:text-base font-medium">{service.text}</p>
               </div>)}
           </div>
         </div>
       </section>
 
-      {/* Gallery Full Width Image */}
-      <section className="w-full">
-        <img src="/lovable-uploads/gallery-full.png" alt="גלריה" className="w-full h-auto object-cover" />
-      </section>
-
-      {/* Catalog Section */}
-      <section className="py-20 bg-stone-50">
-        <div className="text-center">
-          <div className="max-w-4xl mx-auto px-4">
-            {/* Title with layered effect */}
-            <div className="relative mb-8 flex justify-center">
-              <div className="relative">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
-                  Catalog
-                </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
-                  קטלוג
-                </h2>
-              </div>
-            </div>
-
-            <p className="text-gray-700 text-xl leading-relaxed font-ploni-ultralight mb-8 mt-12">
-              כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
-            </p>
-
-            {/* Button with Arrow */}
-            <div className="mt-8 mb-12">
-              <Link to="/catalog">
-                <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
-                  <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
-                  <div className="w-12 h-12">
-                    <img src={arrowCircle} alt="לכל העיצובים" className="w-full h-full" />
-                  </div>
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Catalog Images Grid - Full Width */}
-          <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-16">
-            {[
-              { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' },
-              { img: '/lovable-uploads/catalog-bouquet.png', title: 'זרי אירוסין' },
-              { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
-              { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' }
-            ].map((item, idx) => (
-              <Link 
-                key={idx} 
-                to="/catalog" 
-                className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}
-              >
-                <img 
-                  src={item.img} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
-                  <h3 className="font-assistant text-xl md:text-2xl font-bold text-white">{item.title}</h3>
-                </div>
-              </Link>
-            ))}
+      {/* Gallery Grid Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">הגלריה שלנו</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {carouselImages.slice(0, 4).map((image, idx) => <div key={idx} className="aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                <img src={image.image_url} alt={image.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+              </div>)}
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-white">
+      {/* Catalog Section */}
+      <section className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Right Side - Sticky Title */}
-            <div className="lg:sticky lg:top-20 lg:self-start">
-              <div className="relative flex justify-center lg:justify-end">
-                <div className="relative">
-                  <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
-                    work
-                  </h2>
-                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap">
-                    איך זה עובד אצלינו?
-                  </h2>
+          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">קטלוג</h2>
+          <p className="text-center text-gray-600 mb-8 text-lg">
+            גלו את המגוון המלא שלנו - מזרי כלה מרהיבים ועד עיצובי אירועים מושלמים
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[{
+              img: "/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png",
+              title: "זרי אירוסין"
+            }, {
+              img: "/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png",
+              title: "זרי כלה"
+            }, {
+              img: "/lovable-uploads/ee57dae4-8c40-4ab9-97f5-0ccfd85001ee.png",
+              title: "כיסאות כלה"
+            }, {
+              img: "/lovable-uploads/ece817b9-a53c-4ab8-a2b0-654f1256f4af.png",
+              title: "אירועים"
+            }].map((item, idx) => <Link key={idx} to="/catalog" className="relative h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group">
+                <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-8">
+                  <h3 className="font-assistant text-3xl font-bold text-white">{item.title}</h3>
                 </div>
-              </div>
-            </div>
-
-            {/* Left Side - Content */}
-            <div className="space-y-12">
-              {/* Step 01 */}
-              <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">01</span>
-                </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
-                  שיחת מיקוד להבנת הצרכים
-                </h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפגש הראשונה של אושר משותף לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין
-                </p>
-              </div>
-
-              {/* Step 02 */}
-              <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">02</span>
-                </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
-                  בחירה והזמנה
-                </h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין.
-                </p>
-              </div>
-
-              {/* Step 03 */}
-              <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">03</span>
-                </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
-                  הכנה ומשלוח
-                </h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  בנקודת המפגש הראשונה של אושר משותף, לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין. בנקודת המפנש הראשונה של אושר משותף לצד התרגשות נואה, שבירת צלחת ורגעי חוויה קסומים מבשר את בשורת השמחה - זר האירוסין.
-                </p>
-              </div>
-            </div>
+              </Link>)}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/catalog">
+              <Button size="lg" className="px-12 py-6 text-lg">
+                לקטלוג המלא
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -605,12 +526,7 @@ const Index = () => {
               </a>
             </div>
             
-            <div className="flex items-center justify-center gap-4 text-lg">
-              <Mail className="h-6 w-6 text-primary" />
-              <a href="mailto:info@bouquet.co.il" className="hover:text-primary transition-colors font-medium">
-                info@bouquet.co.il
-              </a>
-            </div>
+            
             
             <div className="flex items-center justify-center gap-4 text-lg text-center">
               <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
@@ -619,7 +535,7 @@ const Index = () => {
 
             <div className="flex justify-center gap-4 pt-4">
               <Button onClick={openWaze} variant="outline" className="gap-2">
-                <img src={wazeIcon} alt="Waze" className="h-5 w-5" />
+                
                 נווט בווייז
               </Button>
               <Button onClick={openGoogleMaps} variant="outline" className="gap-2">
@@ -634,12 +550,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-black py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col items-center">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-20 w-auto mb-6 brightness-0 invert" />
-            <p className="text-white/60 text-sm text-center">
-              © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
-            </p>
-          </div>
+          
         </div>
       </footer>
       </div>
