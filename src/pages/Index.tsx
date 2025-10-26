@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
+import downloadArrow from '@/assets/download-arrow.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 
@@ -336,11 +337,20 @@ const Index = () => {
           className="fixed left-8 top-[65vh] z-40 hover:scale-110 transition-transform duration-300 group"
           aria-label="להורדת הקטלוג הדיגיטלי שלנו"
         >
-          <img 
-            src={downloadCatalogBtn} 
-            alt="להורדת הקטלוג הדיגיטלי שלנו" 
-            className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl animate-spin-slow mix-blend-multiply"
-          />
+          <div className="relative w-32 h-32 md:w-40 md:h-40">
+            {/* Rotating text circle */}
+            <img 
+              src={downloadCatalogBtn} 
+              alt="" 
+              className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply"
+            />
+            {/* Static arrow in center */}
+            <img 
+              src={downloadArrow} 
+              alt="להורדת הקטלוג הדיגיטלי שלנו" 
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16"
+            />
+          </div>
         </button>
       </div>
 
