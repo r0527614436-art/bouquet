@@ -373,25 +373,25 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
+              icon: '/lovable-uploads/icon-flower.png',
+              text: 'פרחים טריים\nיום-יום'
+            }, {
               icon: '/lovable-uploads/icon-bouquet.png',
-              text: 'זרי כלה'
-            }, {
-              icon: '/lovable-uploads/icon-flower.png',
-              text: 'כיסאות כלה'
-            }, {
-              icon: '/lovable-uploads/icon-flower.png',
-              text: 'עיצוב חופות'
+              text: 'מגוון עיצובים\nמקוריים'
             }, {
               icon: '/lovable-uploads/icon-gift.png',
-              text: 'מתנות מעוצבות'
+              text: 'עיצוב מתנות\nופרחים'
             }, {
               icon: '/lovable-uploads/icon-delivery.png',
-              text: 'הפקת אירועים'
+              text: 'משלוחים\nבפריסה ארצית'
+            }, {
+              icon: '/lovable-uploads/icon-time.png',
+              text: 'עמידה\nבזמנים'
             }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
+                <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
                   <img src={service.icon} alt={service.text} className="h-12 w-12 object-contain" />
                 </div>
-                <p className="text-white font-assistant text-sm md:text-base font-medium">{service.text}</p>
+                <p className="text-white font-ploni text-sm md:text-base font-black whitespace-pre-line">{service.text}</p>
               </div>)}
           </div>
         </div>
