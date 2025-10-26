@@ -436,7 +436,7 @@ const Index = () => {
           </div>
 
           {/* Catalog Images Grid - Full Width */}
-          <div className="grid grid-cols-4 gap-0 w-full mt-16 pl-4">
+          <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-8">
             {[
               { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' },
               { img: '/lovable-uploads/catalog-bouquet.png', title: 'זרי אירוסין' },
@@ -446,7 +446,7 @@ const Index = () => {
               <Link 
                 key={idx} 
                 to="/catalog" 
-                className={`group relative overflow-hidden aspect-[3/4] ${idx === 3 ? 'rounded-l-3xl' : ''}`}
+                className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}
               >
                 <img 
                   src={item.img} 
