@@ -21,7 +21,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       loop: true,
       align: 'center',
       skipSnaps: false,
-      containScroll: 'trimSnaps'
+      containScroll: 'trimSnaps',
+      dragFree: false
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
   );
@@ -50,11 +51,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
 
   return (
     <div className="relative w-full max-w-7xl mx-auto px-4 py-16">
-      <div className="relative">
+      <div className="relative flex items-center justify-center">
         {/* Navigation Buttons */}
         <button
           onClick={scrollPrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
+          className="absolute left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
           aria-label="Previous slide"
         >
           <ChevronLeft className="h-6 w-6 text-white" />
@@ -62,22 +63,22 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
 
         <button
           onClick={scrollNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
+          className="absolute right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 flex items-center justify-center transition-all"
           aria-label="Next slide"
         >
           <ChevronRight className="h-6 w-6 text-white" />
         </button>
 
         {/* Carousel */}
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex items-center gap-6">
+        <div className="overflow-hidden max-w-5xl" ref={emblaRef}>
+          <div className="flex items-center justify-center gap-6">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               
               return (
                 <div
                   key={slide.id}
-                  className="flex-[0_0_40%] min-w-0 relative"
+                  className="flex-[0_0_35%] min-w-0 relative"
                 >
                   {/* Base container - always rounded rectangle */}
                   <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-lg">

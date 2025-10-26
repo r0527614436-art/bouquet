@@ -48,15 +48,44 @@ const Index = () => {
   });
 
   // Single hero image
-  const fallbackImages = [{
-    id: '1',
-    image_url: heroImage,
-    title: "בוקט",
-    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
-    order_index: 1,
-    is_active: true,
-    font_family: 'font-sans'
-  }];
+  const fallbackImages = [
+    {
+      id: '1',
+      image_url: heroImage,
+      title: "בוקט",
+      description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
+      order_index: 1,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '2',
+      image_url: '/lovable-uploads/gallery-1.jpg',
+      title: "זר כלה לבן",
+      description: "עיצוב אלגנטי ומרהיב",
+      order_index: 2,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '3',
+      image_url: '/lovable-uploads/gallery-2.jpg',
+      title: "זר כלה קלאסי",
+      description: "פשטות וייחודיות",
+      order_index: 3,
+      is_active: true,
+      font_family: 'font-sans'
+    },
+    {
+      id: '4',
+      image_url: '/lovable-uploads/gallery-3.jpg',
+      title: "בוקט צבעוני",
+      description: "מגוון צבעים ופרחים",
+      order_index: 4,
+      is_active: true,
+      font_family: 'font-sans'
+    }
+  ];
   const images = slides.length > 0 ? slides : fallbackImages;
   // Auto-slide only if there are multiple images
   useEffect(() => {
