@@ -400,11 +400,17 @@ const Index = () => {
       {/* Gallery Grid Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">הגלריה שלנו</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {carouselImages.slice(0, 4).map((image, idx) => <div key={idx} className="aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                <img src={image.image_url} alt={image.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
-              </div>)}
+          <div className="flex gap-4 items-end justify-center">
+            {[
+              { img: '/lovable-uploads/gallery-new-3.png', height: 'h-64' },
+              { img: '/lovable-uploads/gallery-new-4.png', height: 'h-80' },
+              { img: '/lovable-uploads/gallery-new-2.png', height: 'h-96' },
+              { img: '/lovable-uploads/gallery-new-1.png', height: 'h-80' }
+            ].map((item, idx) => (
+              <div key={idx} className={`${item.height} w-64 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}>
+                <img src={item.img} alt={`גלריה ${idx + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
