@@ -61,7 +61,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               
               return (
                 <div
-                  key={`${slide.id}-${index}`}
+                  key={`slide-${slide.id}-${index}-${slide.image_url}`}
                   className={`flex-[0_0_300px] transition-all duration-700 ease-in-out ${
                     isSelected ? 'scale-125 z-20' : 'scale-90 z-10'
                   }`}
@@ -69,10 +69,15 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                     minWidth: '300px'
                   }}
                 >
-                  <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
+                  <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl bg-gray-200">
                     <img
                       src={slide.image_url}
                       alt={slide.title}
+                      loading="eager"
+                      onError={(e) => {
+                        console.error('Failed to load image:', slide.image_url);
+                        e.currentTarget.style.display = 'none';
+                      }}
                       className={`w-full h-full object-cover transition-all duration-700 ${
                         isSelected ? 'brightness-100' : 'brightness-50'
                       }`}
