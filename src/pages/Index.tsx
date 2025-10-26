@@ -271,7 +271,7 @@ const Index = () => {
       </section>
 
       {/* Black Gallery Section with Center Focus */}
-      <section className="relative py-16 bg-[#314020]">
+      <section className="relative py-16 bg-gradient-to-b from-transparent via-[#314020] to-[#314020]" style={{ paddingTop: '4rem' }}>
         {/* White semicircle background for button */}
         <div className="absolute left-4 top-0 translate-y-0 z-0">
           <div className="w-32 h-16 bg-white rounded-b-full shadow-lg" />
