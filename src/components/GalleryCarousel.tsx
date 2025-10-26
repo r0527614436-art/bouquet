@@ -55,7 +55,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
       <div className="relative flex flex-col items-center justify-center" style={{ perspective: '1000px' }}>
         {/* Carousel */}
         <div className="overflow-visible w-full mb-8" ref={emblaRef}>
-          <div className="flex items-center -space-x-32">
+          <div className="flex items-center -space-x-40">
             {slides.map((slide, index) => {
               const isSelected = index === selectedIndex;
               const distanceFromSelected = Math.abs(index - selectedIndex);
@@ -64,11 +64,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
-                  className={`flex-[0_0_330px] transition-all duration-700 ease-in-out ${
-                    isSelected ? 'scale-150 mx-32' : 'scale-75'
+                  className={`transition-all duration-700 ease-in-out ${
+                    isSelected ? 'flex-[0_0_450px] scale-100 mx-20' : 'flex-[0_0_300px] scale-100'
                   }`}
                   style={{
-                    minWidth: '330px',
+                    minWidth: isSelected ? '450px' : '300px',
                     transformOrigin: 'center center',
                     zIndex: zIndex
                   }}
