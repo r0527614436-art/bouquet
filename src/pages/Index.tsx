@@ -422,7 +422,7 @@ const Index = () => {
           </p>
 
           {/* Button with Arrow */}
-          <div className="mt-8">
+          <div className="mt-8 mb-12">
             <Link to="/catalog">
               <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
                 <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
@@ -431,6 +431,27 @@ const Index = () => {
                 </div>
               </button>
             </Link>
+          </div>
+
+          {/* Catalog Images Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mt-16">
+            {[
+              { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' },
+              { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
+              { img: '/lovable-uploads/catalog-bouquet.png', title: 'זרי אירוסין' },
+              { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' }
+            ].map((item, idx) => (
+              <Link key={idx} to="/catalog" className="group relative overflow-hidden rounded-2xl aspect-[3/4] shadow-lg hover:shadow-2xl transition-all">
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
+                  <h3 className="font-assistant text-xl md:text-2xl font-bold text-white">{item.title}</h3>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
