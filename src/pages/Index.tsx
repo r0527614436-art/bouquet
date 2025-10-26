@@ -197,13 +197,13 @@ const Index = () => {
             </div>)}
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center">
-            <h1 className="font-gloria text-[140px] md:text-[200px] font-bold text-primary mb-2" style={{
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center pr-12 md:pr-20">
+            <h1 className="font-gloria text-[140px] md:text-[200px] font-semibold text-primary mb-2 tracking-wider" style={{
             textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
           }}>
               בוקט
             </h1>
-            <p className="font-assistant text-base md:text-lg text-white text-center px-4" style={{
+            <p className="font-assistant text-base md:text-lg text-white text-right px-4" style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
           }}>
               מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע
