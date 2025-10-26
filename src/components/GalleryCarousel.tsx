@@ -62,11 +62,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
               return (
                 <div
                   key={`slide-${slide.id}-${index}-${slide.image_url}`}
-                  className={`flex-[0_0_220px] transition-all duration-700 ease-in-out ${
+                  className={`flex-[0_0_330px] transition-all duration-700 ease-in-out ${
                     isSelected ? 'scale-150 z-30 mx-12' : 'scale-75 z-10'
                   }`}
                   style={{
-                    minWidth: '220px',
+                    minWidth: '330px',
                     transformOrigin: 'center center'
                   }}
                 >
