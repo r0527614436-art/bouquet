@@ -5,6 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import wazeIcon from '@/assets/waze-icon.png';
+import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
+import { downloadCatalogPDF } from '@/utils/catalogPdf';
+import { useToast } from '@/hooks/use-toast';
 
 interface HomepageSlide {
   id: string;
@@ -22,6 +25,7 @@ const Index = () => {
   const [lastClickTime, setLastClickTime] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   // Fetch slides from database
   const { data: slides = [] } = useQuery({
@@ -125,6 +129,48 @@ const Index = () => {
 
   const openWaze = () => {
     window.open('https://waze.com/ul?q=שערי תשובה 14, מודיעין עילית', '_blank');
+  };
+
+  // Fetch categories and items for PDF download
+  const { data: categories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .order('order_index', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    }
+  });
+
+  const { data: items = [] } = useQuery({
+    queryKey: ['catalog-items'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('catalog_items')
+        .select('*')
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data || [];
+    }
+  });
+
+  const handleDownloadCatalog = async () => {
+    try {
+      await downloadCatalogPDF(items, categories);
+      toast({
+        title: "הקטלוג הורד בהצלחה",
+        description: "הקטלוג הדיגיטלי שלנו הורד למחשב שלך",
+      });
+    } catch (error) {
+      console.error('Error downloading catalog:', error);
+      toast({
+        title: "שגיאה בהורדת הקטלוג",
+        description: "אנא נסה שוב מאוחר יותר",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -282,6 +328,21 @@ const Index = () => {
           ))}
         </div>
       </section>
+
+      {/* Download Catalog Button - Between sections */}
+      <div className="relative">
+        <button
+          onClick={handleDownloadCatalog}
+          className="fixed left-8 top-[65vh] z-40 hover:scale-105 transition-transform duration-300"
+          aria-label="להורדת הקטלוג הדיגיטלי שלנו"
+        >
+          <img 
+            src={downloadCatalogBtn} 
+            alt="להורדת הקטלוג הדיגיטלי שלנו" 
+            className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl"
+          />
+        </button>
+      </div>
 
       {/* Black Gallery Section with Center Focus */}
       <section className="py-16 bg-black">
