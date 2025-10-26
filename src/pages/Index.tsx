@@ -310,10 +310,6 @@ const Index = () => {
           <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
             {/* Images - Right Side */}
             <div className="flex gap-6">
-              {/* Large image with left side rounded */}
-              <div className="w-64 h-80 rounded-tl-[120px] rounded-bl-[120px] overflow-hidden flex-shrink-0 shadow-xl">
-                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
-              </div>
               {/* Two smaller images, stacked */}
               <div className="flex flex-col gap-6 pt-20">
                 <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
@@ -322,6 +318,10 @@ const Index = () => {
                 <div className="w-48 h-48 rounded-b-[60px] overflow-hidden shadow-xl">
                   <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
                 </div>
+              </div>
+              {/* Large image with top-left rounded */}
+              <div className="w-64 h-80 rounded-tl-[120px] overflow-hidden flex-shrink-0 shadow-xl">
+                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
               </div>
             </div>
 
