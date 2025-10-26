@@ -310,21 +310,21 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
             {/* Images - Right Side */}
-            <div className="flex gap-6 items-end">
+            <div className="flex gap-6">
               {/* Second smaller image - now leftmost */}
-              <div className="flex flex-col justify-end">
+              <div className="flex flex-col justify-end h-[500px]">
                 <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
                   <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Single smaller image */}
-              <div className="flex flex-col justify-end">
+              <div className="flex flex-col justify-end h-[500px]">
                 <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
                   <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-full rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
+              <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
                 <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -333,10 +333,10 @@ const Index = () => {
             <div className="flex-[2] text-right min-h-[500px] flex flex-col justify-center">
               {/* Title with layered effect */}
               <div className="relative mb-8">
-                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6 mx-[26px] py-[32px] my-[14px]">
+                <h2 className="font-gloria text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
-                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none px-[17px] py-[13px] mx-[10px] my-0">
+                <h2 className="font-gloria text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
