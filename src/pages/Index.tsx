@@ -47,8 +47,19 @@ const Index = () => {
     }
   });
 
-  // Single hero image
-  const fallbackImages = [
+  // Hero image - single static image
+  const heroImageData = {
+    id: '1',
+    image_url: heroImage,
+    title: "בוקט",
+    description: "מתמחים בשזירת פרחים לאירוסין ולחתונות של רגע",
+    order_index: 1,
+    is_active: true,
+    font_family: 'font-sans'
+  };
+
+  // Gallery slides - all images including new ones
+  const gallerySlides = [
     {
       id: '1',
       image_url: heroImage,
@@ -86,15 +97,10 @@ const Index = () => {
       font_family: 'font-sans'
     }
   ];
-  const images = slides.length > 0 ? slides : fallbackImages;
-  // Auto-slide only if there are multiple images
-  useEffect(() => {
-    if (images.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex(prevIndex => prevIndex === images.length - 1 ? 0 : prevIndex + 1);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [images.length]);
+
+  // Use database slides if available, otherwise use gallery slides
+  const carouselImages = slides.length > 0 ? slides : gallerySlides;
+  // No auto-slide for hero section - only static image
   const handleLogoClick = () => {
     const currentTime = Date.now();
     if (currentTime - lastClickTime > 1000) {
@@ -249,9 +255,10 @@ const Index = () => {
         </div>
         
         <div className="relative w-full h-full">
-          {images.map((image, index) => <div key={image.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}>
-              <img src={image.image_url} alt={image.title} className="w-full h-full object-cover scale-110" />
-            </div>)}
+          {/* Single hero image - no carousel */}
+          <div className="absolute inset-0">
+            <img src={heroImageData.image_url} alt={heroImageData.title} className="w-full h-full object-cover scale-110" />
+          </div>
           
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
@@ -263,23 +270,10 @@ const Index = () => {
             <p style={{
             textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
           }} className="font-ploni-ultralight text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12 font-normal">כשהפרחים הופכים לרגעים של קסם</p>
-            
-            {/* Navigation Arrows - only show if multiple images */}
-            {images.length > 1 && <div className="flex gap-3 mt-6">
-                <button onClick={() => setCurrentImageIndex(prev => prev === 0 ? images.length - 1 : prev - 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                  <ChevronRight className="h-5 w-5 text-gray-800" />
-                </button>
-                <button onClick={() => setCurrentImageIndex(prev => prev === images.length - 1 ? 0 : prev + 1)} className="w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors shadow-lg">
-                  <ChevronLeft className="h-5 w-5 text-gray-800" />
-                </button>
-              </div>}
           </div>
         </div>
 
-        {/* Dots Indicator - only show if multiple images */}
-        {images.length > 1 && <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2">
-            {images.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`h-2 rounded-full transition-all ${index === currentImageIndex ? 'bg-white w-8' : 'bg-white/60 hover:bg-white/80 w-2'}`} />)}
-          </div>}
+        {/* Dots Indicator - removed as we only have single image */}
 
         {/* Download Catalog Button - Positioned at section boundary */}
         <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
@@ -313,7 +307,7 @@ const Index = () => {
       {/* Gallery Carousel Section */}
       <section className="relative py-16 bg-[#1a1a1a] mt-0">
         <h2 className="font-assistant text-5xl font-bold text-center mb-8 text-white">הגלריה שלנו</h2>
-        <GalleryCarousel slides={images} />
+        <GalleryCarousel slides={carouselImages} />
       </section>
 
       {/* About Section */}
@@ -392,7 +386,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">הגלריה שלנו</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {images.slice(0, 4).map((image, idx) => <div key={idx} className="aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+            {carouselImages.slice(0, 4).map((image, idx) => <div key={idx} className="aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
                 <img src={image.image_url} alt={image.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
               </div>)}
           </div>
