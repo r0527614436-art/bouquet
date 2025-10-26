@@ -310,7 +310,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
             {/* Images - Right Side */}
-            <div className="flex gap-6">
+            <div className="flex gap-6 items-end">
               {/* Second smaller image - now leftmost */}
               <div className="flex flex-col justify-end h-[500px]">
                 <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
