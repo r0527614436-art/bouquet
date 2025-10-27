@@ -277,7 +277,7 @@ const Index = () => {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 bg-white rounded-b-full shadow-lg -z-10" />
           
           <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
-            <div className="relative w-24 h-24 hover:scale-110 transition-transform duration-300 mx-[13px] px-0 my-0">
+            <div className="relative w-24 h-24 hover:scale-110 transition-transform duration-300 mx-[59px] py-0 px-0 my-0 rounded-full">
               {/* Rotating text circle */}
               <img src={downloadCatalogBtn} alt="" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
               {/* Static arrow in center */}
@@ -437,30 +437,24 @@ const Index = () => {
 
           {/* Catalog Images Grid - Full Width */}
           <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-16">
-            {[
-              { img: '/lovable-uploads/catalog-engagement.png', title: 'עיצוב אירועים' },
-              { img: '/lovable-uploads/catalog-bouquet.png', title: 'זרי אירוסין' },
-              { img: '/lovable-uploads/catalog-chairs.png', title: 'כסאות וזרי כלה' },
-              { img: '/lovable-uploads/catalog-hair.png', title: 'קישוטי שיער' }
-            ].map((item, idx) => (
-              <Link 
-                key={idx} 
-                to="/catalog" 
-                className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}
-              >
-                <img 
-                  src={item.img} 
-                  alt={item.title}
-                  width="600"
-                  height="900"
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
-                />
+            {[{
+              img: '/lovable-uploads/catalog-engagement.png',
+              title: 'עיצוב אירועים'
+            }, {
+              img: '/lovable-uploads/catalog-bouquet.png',
+              title: 'זרי אירוסין'
+            }, {
+              img: '/lovable-uploads/catalog-chairs.png',
+              title: 'כסאות וזרי כלה'
+            }, {
+              img: '/lovable-uploads/catalog-hair.png',
+              title: 'קישוטי שיער'
+            }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
+                <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-assistant text-xl md:text-2xl font-bold text-white">{item.title}</h3>
                 </div>
-              </Link>
-            ))}
+              </Link>)}
           </div>
         </div>
       </section>
@@ -474,10 +468,10 @@ const Index = () => {
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative text-right">
                   <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-tight select-none -mt-4">
-                    Work<br/>process
+                    Work<br />process
                   </h2>
                   <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
-                    איך זה<br/>עובד אצלינו?
+                    איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
               </div>
