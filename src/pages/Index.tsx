@@ -523,47 +523,13 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-4 text-gray-800">איך זה עובד?</h2>
-          <div className="bg-black text-white p-8 rounded-2xl shadow-xl">
-            <p className="text-lg leading-relaxed text-center">
-              התהליך שלנו פשוט ונעים: תתקשרו אלינו או שלחו הודעה בוואטסאפ, 
-              נקבע פגישה להתייעצות, נבחר יחד את הפרחים והעיצוב המושלם עבורכם, 
-              ונדאג שהכל יגיע במועד ובמצב מושלם ליום המיוחד שלכם.
-            </p>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Flower Selection Section */}
-      <section className="py-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-4 text-gray-800">בחירת הפרחים</h2>
-          <div className="bg-white border-2 border-gray-200 p-8 rounded-2xl shadow-lg">
-            <p className="text-lg leading-relaxed text-center text-gray-700">
-              אנו עובדים עם הפרחים הטריים והאיכותיים ביותר. 
-              כל זר מעוצב בקפידה רבה, עם תשומת לב לכל פרט. 
-              נייעץ לכם בבחירת הפרחים המתאימים ביותר לאירוע שלכם, 
-              תוך התחשבות בעונה, בסגנון ובתקציב.
-            </p>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Presentation Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-4 text-gray-800">הצגת והמשלוח</h2>
-          <div className="bg-black text-white p-8 rounded-2xl shadow-xl">
-            <p className="text-lg leading-relaxed text-center">
-              לפני האירוע, נציג לכם את העיצוב הסופי לאישור. 
-              ביום האירוע, נדאג למשלוח מהיר ובטוח, ונוודא שהכל מושלם. 
-              השירות שלנו כולל התקנה במקום האירוע והקפדה על כל פרט.
-            </p>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-black">
