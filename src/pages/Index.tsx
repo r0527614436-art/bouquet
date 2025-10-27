@@ -633,7 +633,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
-            <p className="text-white/60 text-sm text-center">
+            <p className="text-white/60 text-sm text-center font-extrabold">
               © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
             </p>
           </div>
