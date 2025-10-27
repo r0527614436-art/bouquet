@@ -186,7 +186,7 @@ const Index = () => {
   return <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Side Navigation Bar - Full Height */}
       <div className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${isMenuOpen ? 'w-80' : 'w-20'}`} onMouseEnter={() => setIsMenuOpen(true)} onMouseLeave={() => setIsMenuOpen(false)}>
-        <div className="flex flex-col h-full py-8">
+        <div className="flex flex-col h-full py-8 bg-[#11150d]">
           {/* Hamburger Icon */}
           <div className={`flex justify-center mb-12 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
             <div className="flex flex-col gap-1.5 cursor-pointer">
@@ -197,7 +197,7 @@ const Index = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-start gap-12 px-4">
+          <nav className="flex-1 flex flex-col justify-start gap-12 px-4 bg-[#11150d]">
             {[{
             num: '01',
             label: 'בית',
