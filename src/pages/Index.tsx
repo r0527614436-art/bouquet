@@ -469,13 +469,13 @@ const Index = () => {
             {/* Right Side - Sticky Title */}
             <div className="lg:sticky lg:top-20 lg:self-start">
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative">
-                  <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
-                    work
+                <div className="relative text-right">
+                  <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-none select-none">
+                    Work<br/>process
                   </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none whitespace-nowrap">
-                  איך זה עובד אצלינו?
-                </h2>
+                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[60%] right-0 -translate-y-1/2 leading-tight">
+                    איך זה<br/>עובד אצלינו?
+                  </h2>
                 </div>
               </div>
             </div>
