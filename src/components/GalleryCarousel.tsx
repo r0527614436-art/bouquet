@@ -83,7 +83,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ slides }) => {
                     <img
                       src={slide.image_url}
                       alt={slide.title}
-                      loading="eager"
+                      width="1920"
+                      height="719"
+                      loading={index === 0 ? "eager" : "lazy"}
                       onError={(e) => {
                         console.error('Failed to load image:', slide.image_url);
                         e.currentTarget.style.display = 'none';

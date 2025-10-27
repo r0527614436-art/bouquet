@@ -247,13 +247,13 @@ const Index = () => {
       <section className="relative h-[70vh] overflow-visible">
         {/* Logo - Absolute Position in Hero */}
         <div className="absolute left-4 top-8 z-40 bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px]">
-          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
+          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
         </div>
         
         <div className="relative w-full h-full">
           {/* Single hero image - no carousel */}
           <div className="absolute inset-0">
-            <img src={heroImageData.image_url} alt={heroImageData.title} className="w-full h-full object-cover scale-110" />
+            <img src={heroImageData.image_url} alt={heroImageData.title} fetchPriority="high" className="w-full h-full object-cover scale-110" />
           </div>
           
           {/* Overlay with Title */}
@@ -314,18 +314,18 @@ const Index = () => {
               {/* Second smaller image - now leftmost */}
               <div className="flex flex-col justify-end h-[600px]">
                 <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
-                  <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Single smaller image */}
               <div className="flex flex-col justify-end h-[600px]">
                 <div className="w-48 h-48 rounded-2xl overflow-hidden">
-                  <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Large image with top-left rounded */}
               <div className="w-64 h-[600px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="600" loading="lazy" className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -389,7 +389,7 @@ const Index = () => {
               text: 'עמידה\nבזמנים'
             }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  <img src={service.icon} alt={service.text} className="h-12 w-12 object-contain" />
+                  <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" className="h-12 w-12 object-contain" />
                 </div>
                 <p className="text-white font-ploni text-sm md:text-base font-black whitespace-pre-line">{service.text}</p>
               </div>)}
@@ -399,7 +399,7 @@ const Index = () => {
 
       {/* Gallery Full Width Image */}
       <section className="w-full">
-        <img src="/lovable-uploads/gallery-full.png" alt="גלריה" className="w-full h-auto object-cover" />
+        <img src="/lovable-uploads/gallery-full.png" alt="גלריה" width="1920" height="600" loading="lazy" className="w-full h-auto object-cover" />
       </section>
 
       {/* Catalog Section */}
@@ -450,7 +450,10 @@ const Index = () => {
               >
                 <img 
                   src={item.img} 
-                  alt={item.title} 
+                  alt={item.title}
+                  width="600"
+                  height="900"
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
@@ -619,7 +622,7 @@ const Index = () => {
 
             <div className="flex justify-center gap-4 pt-4">
               <Button onClick={openWaze} variant="outline" className="gap-2">
-                <img src={wazeIcon} alt="Waze" className="h-5 w-5" />
+                <img src={wazeIcon} alt="Waze" width="200" height="200" loading="lazy" className="h-5 w-5" />
                 נווט בווייז
               </Button>
               <Button onClick={openGoogleMaps} variant="outline" className="gap-2">
@@ -635,7 +638,7 @@ const Index = () => {
       <footer className="bg-black py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-20 w-auto mb-6 brightness-0 invert" />
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
             <p className="text-white/60 text-sm text-center">
               © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
             </p>
