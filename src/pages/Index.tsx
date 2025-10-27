@@ -467,13 +467,13 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Right Side - Sticky Title */}
-            <div className="lg:sticky lg:top-20 lg:self-start pr-4">
+            <div className="lg:sticky lg:top-20 lg:self-start pr-8">
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative text-right">
                   <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-tight select-none -mt-4">
                     Work<br/>process
                   </h2>
-                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-0 -translate-y-1/2 leading-tight whitespace-nowrap">
+                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
                     איך זה<br/>עובד אצלינו?
                   </h2>
                 </div>
