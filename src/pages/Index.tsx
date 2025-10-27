@@ -186,7 +186,7 @@ const Index = () => {
   return <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Side Navigation Bar - Full Height */}
       <div className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${isMenuOpen ? 'w-80' : 'w-20'}`} onMouseEnter={() => setIsMenuOpen(true)} onMouseLeave={() => setIsMenuOpen(false)}>
-        <div className="flex flex-col h-full py-8 bg-[#11150d]">
+        <div className="flex flex-col h-full py-8">
           {/* Hamburger Icon */}
           <div className={`flex justify-center mb-12 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
             <div className="flex flex-col gap-1.5 cursor-pointer">
@@ -197,7 +197,7 @@ const Index = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-start gap-12 px-4 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col justify-start gap-12 px-4">
             {[{
             num: '01',
             label: 'בית',
@@ -257,7 +257,7 @@ const Index = () => {
           </div>
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20 bg-transparent">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
               textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
             }} className="font-ploni-black-2 text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
@@ -301,8 +301,8 @@ const Index = () => {
       </section>
 
       {/* Gallery Carousel Section */}
-      <section className="relative py-16 mt-0 bg-[#11150d]">
-        <GalleryCarousel slides={carouselImages} className="bg-[#11150d]" />
+      <section className="relative py-16 bg-[#1a1a1a] mt-0">
+        <GalleryCarousel slides={carouselImages} className="rounded-full bg-[V#11150D] bg-[#11150d]" />
       </section>
 
       {/* About Section */}
@@ -369,7 +369,7 @@ const Index = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16 bg-[#11150d]">
+      <section className="py-16 bg-black">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
@@ -566,7 +566,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-[#11150d]">
+      <section className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-white">
             זה הזמן שתאהבו לבלע נו
@@ -629,11 +629,11 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-[#11150d]">
+      <footer className="bg-black py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
-            <p className="text-white/60 text-sm text-center font-extrabold">
+            <p className="text-white/60 text-sm text-center">
               © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
             </p>
           </div>
