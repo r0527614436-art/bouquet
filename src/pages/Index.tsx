@@ -566,7 +566,7 @@ const Index = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-black">
+      <section className="py-20 bg-[#11150d]">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-white">
             זה הזמן שתאהבו לבלע נו
@@ -629,7 +629,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black py-12">
+      <footer className="py-12 bg-[#11150d]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
