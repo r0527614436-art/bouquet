@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { GalleryCarousel } from '@/components/GalleryCarousel';
+import Testimonials from '@/components/Testimonials';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
@@ -302,8 +303,11 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 bg-[#1a1a1a] mt-0">
-        <GalleryCarousel slides={carouselImages} className="rounded-full bg-[V#11150D] bg-[#11150d]" />
+        <GalleryCarousel slides={carouselImages} />
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
