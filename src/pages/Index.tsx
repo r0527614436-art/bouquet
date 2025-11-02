@@ -370,7 +370,7 @@ const Index = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-[#11150d]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
