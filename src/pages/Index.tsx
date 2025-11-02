@@ -601,8 +601,8 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
-            {/* Right Side - Title and Contact Info */}
+          <div className="flex flex-col md:flex-row gap-12 items-start">
+            {/* Left Side - Title and Contact Info */}
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
@@ -648,19 +648,19 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Left Side - Contact Form */}
+            {/* Right Side - Contact Form */}
             <div className="w-full md:w-1/2">
-              <form onSubmit={handleContactSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+              <form onSubmit={handleContactSubmit} className="space-y-8 p-8">
                 <div className="space-y-2 text-right">
                   <label htmlFor="name" className="block text-sm font-ploni-medium text-gray-700">
                     שם מלא
                   </label>
-                  <Input
+                  <input
                     id="name"
                     type="text"
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className="text-right"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
                     required
                   />
                 </div>
@@ -669,12 +669,12 @@ const Index = () => {
                   <label htmlFor="phone" className="block text-sm font-ploni-medium text-gray-700">
                     טלפון
                   </label>
-                  <Input
+                  <input
                     id="phone"
                     type="tel"
                     value={contactForm.phone}
                     onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    className="text-right"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
                     required
                   />
                 </div>
@@ -683,12 +683,12 @@ const Index = () => {
                   <label htmlFor="email" className="block text-sm font-ploni-medium text-gray-700">
                     אימייל
                   </label>
-                  <Input
+                  <input
                     id="email"
                     type="email"
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className="text-right"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
                     required
                   />
                 </div>
@@ -697,22 +697,22 @@ const Index = () => {
                   <label htmlFor="message" className="block text-sm font-ploni-medium text-gray-700">
                     הודעה
                   </label>
-                  <Textarea
+                  <textarea
                     id="message"
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="text-right min-h-[120px]"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight min-h-[80px] resize-none"
                     required
                   />
                 </div>
 
-                <Button 
+                <button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 text-white font-ploni-medium text-lg py-6"
+                  className="w-full bg-[#11150d] hover:bg-[#11150d]/90 text-white font-ploni-medium text-lg py-4 rounded-full transition-all duration-300 disabled:opacity-50"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'שולח...' : 'שליחה'}
-                </Button>
+                </button>
               </form>
             </div>
           </div>
