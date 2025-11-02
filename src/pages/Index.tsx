@@ -4,6 +4,8 @@ import { Menu, X, ChevronLeft, ChevronRight, Heart, Gift, Crown, Sparkles, Camer
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { GalleryCarousel } from '@/components/GalleryCarousel';
 import Testimonials from '@/components/Testimonials';
 import wazeIcon from '@/assets/waze-icon.png';
@@ -27,6 +29,13 @@ const Index = () => {
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const {
     toast
@@ -182,6 +191,60 @@ const Index = () => {
         description: "אנא נסה שוב מאוחר יותר",
         variant: "destructive"
       });
+    }
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!contactForm.name.trim() || !contactForm.phone.trim() || !contactForm.email.trim() || !contactForm.message.trim()) {
+      toast({
+        title: "שגיאה",
+        description: "אנא מלא את כל השדות",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(contactForm.email)) {
+      toast({
+        title: "שגיאה",
+        description: "אנא הזן כתובת מייל תקינה",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Send message via WhatsApp
+      const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
+      window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
+      
+      toast({
+        title: "ההודעה נשלחה בהצלחה",
+        description: "ניצור איתך קשר בהקדם"
+      });
+
+      // Reset form
+      setContactForm({
+        name: '',
+        phone: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      toast({
+        title: "שגיאה בשליחת ההודעה",
+        description: "אנא נסה שוב מאוחר יותר",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return <div className="min-h-screen bg-white overflow-x-hidden">
@@ -537,38 +600,120 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-stone-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-gray-800">צור קשר</h2>
-          
-          <div className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
-            <div className="flex items-center justify-center gap-4 text-lg">
-              <Phone className="h-6 w-6 text-primary" />
-              <a href="tel:052-761-4436" className="hover:text-primary transition-colors font-medium">
-                052-761-4436
-              </a>
-            </div>
-            
-            <div className="flex items-center justify-center gap-4 text-lg">
-              <Mail className="h-6 w-6 text-primary" />
-              <a href="mailto:info@bouquet.co.il" className="hover:text-primary transition-colors font-medium">
-                info@bouquet.co.il
-              </a>
-            </div>
-            
-            <div className="flex items-center justify-center gap-4 text-lg text-center">
-              <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
-              <span className="font-medium">שערי תשובה 14, מודיעין עילית</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
+            {/* Right Side - Title and Contact Info */}
+            <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
+              {/* Title with layered effect */}
+              <div className="relative mb-12">
+                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                  Contact us
+                </h2>
+                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                  צור קשר
+                </h2>
+              </div>
+
+              {/* Contact Information */}
+              <div className="space-y-6 mt-10">
+                <div className="flex items-center justify-end gap-3 text-lg">
+                  <button 
+                    onClick={openGoogleMaps}
+                    className="hover:text-primary transition-colors font-ploni-ultralight text-right"
+                  >
+                    שערי תשובה 14 - מודיעין עלית
+                  </button>
+                  <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
+                </div>
+                
+                <div className="flex items-center justify-end gap-3 text-lg">
+                  <a 
+                    href="mailto:R0527614436@GMAIL.COM" 
+                    className="hover:text-primary transition-colors font-ploni-ultralight"
+                  >
+                    R0527614436@GMAIL.COM
+                  </a>
+                  <Mail className="h-6 w-6 text-primary flex-shrink-0" />
+                </div>
+                
+                <div className="flex items-center justify-end gap-3 text-lg">
+                  <a 
+                    href="tel:0527614436" 
+                    className="hover:text-primary transition-colors font-ploni-ultralight"
+                  >
+                    0527614436
+                  </a>
+                  <Phone className="h-6 w-6 text-primary flex-shrink-0" />
+                </div>
+              </div>
             </div>
 
-            <div className="flex justify-center gap-4 pt-4">
-              <Button onClick={openWaze} variant="outline" className="gap-2">
-                <img src={wazeIcon} alt="Waze" width="200" height="200" loading="lazy" className="h-5 w-5" />
-                נווט בווייז
-              </Button>
-              <Button onClick={openGoogleMaps} variant="outline" className="gap-2">
-                <MapPin className="h-5 w-5" />
-                גוגל מפות
-              </Button>
+            {/* Left Side - Contact Form */}
+            <div className="w-full md:w-1/2">
+              <form onSubmit={handleContactSubmit} className="bg-white rounded-2xl shadow-xl p-8 space-y-6">
+                <div className="space-y-2 text-right">
+                  <label htmlFor="name" className="block text-sm font-ploni-medium text-gray-700">
+                    שם מלא
+                  </label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                    className="text-right"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2 text-right">
+                  <label htmlFor="phone" className="block text-sm font-ploni-medium text-gray-700">
+                    טלפון
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={contactForm.phone}
+                    onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                    className="text-right"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2 text-right">
+                  <label htmlFor="email" className="block text-sm font-ploni-medium text-gray-700">
+                    אימייל
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                    className="text-right"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2 text-right">
+                  <label htmlFor="message" className="block text-sm font-ploni-medium text-gray-700">
+                    הודעה
+                  </label>
+                  <Textarea
+                    id="message"
+                    value={contactForm.message}
+                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                    className="text-right min-h-[120px]"
+                    required
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-ploni-medium text-lg py-6"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'שולח...' : 'שליחה'}
+                </Button>
+              </form>
             </div>
           </div>
         </div>
