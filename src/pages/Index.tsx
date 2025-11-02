@@ -251,10 +251,10 @@ const Index = () => {
           <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity" onClick={handleLogoClick} />
         </div>
         
-        <div className="relative w-full h-full">
+          <div className="relative w-full h-full">
           {/* Single hero image - no carousel */}
           <div className="absolute inset-0">
-            <img src={heroImageData.image_url} alt={heroImageData.title} fetchPriority="high" className="w-full h-full object-cover scale-110" />
+            <img src={heroImageData.image_url} alt={heroImageData.title} fetchPriority="high" loading="eager" decoding="async" className="w-full h-full object-cover scale-110" />
           </div>
           
           {/* Overlay with Title */}

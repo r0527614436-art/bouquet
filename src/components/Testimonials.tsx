@@ -43,10 +43,10 @@ const Testimonials = () => {
   return (
     <section className="py-20 bg-black" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-12 items-center">
-          {/* Title - Right Side */}
+        <div className="flex flex-col lg:flex-row gap-12 items-start">
+          {/* Title and Navigation - Right Side */}
           <div className="lg:w-1/3">
-            <div className="relative">
+            <div className="relative mb-8">
               <h2 className="font-ploni-black-2 text-[60px] md:text-[70px] font-semibold text-gray-600 opacity-40 leading-tight select-none">
                 recom<br/>menda<br/>tions
               </h2>
@@ -54,21 +54,9 @@ const Testimonials = () => {
                 זה מה<br/>שאומרים<br/>עלינו
               </h2>
             </div>
-          </div>
 
-          {/* Testimonials Content - Left Side */}
-          <div className="lg:w-2/3 relative">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
-              <p className="text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
-                {testimonials[currentIndex]?.content}
-              </p>
-              <p className="font-ploni-medium text-lg text-gray-900 text-right mt-4">
-                {testimonials[currentIndex]?.author_name}
-              </p>
-            </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex gap-4 justify-center mt-8">
+            {/* Navigation Arrows - Under Title */}
+            <div className="flex gap-4 justify-center">
               <Button
                 onClick={handlePrevious}
                 variant="outline"
@@ -87,6 +75,18 @@ const Testimonials = () => {
               >
                 <ChevronLeft className="h-6 w-6 text-white" />
               </Button>
+            </div>
+          </div>
+
+          {/* Testimonials Content - Left Side */}
+          <div className="lg:w-2/3">
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
+              <p className="text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
+                {testimonials[currentIndex]?.content}
+              </p>
+              <p className="font-ploni-medium text-lg text-gray-900 text-right mt-4">
+                {testimonials[currentIndex]?.author_name}
+              </p>
             </div>
           </div>
         </div>
