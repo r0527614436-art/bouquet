@@ -47,7 +47,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     };
   }, [emblaApi, onSelect]);
   return <div className="relative w-full mx-auto py-16" style={{
-    backgroundColor: '#314020'
+    backgroundColor: '#11150d'
   }}>
       <div className="relative flex flex-col items-center justify-center w-full bg-[#11150d]">
         {/* Carousel */}
