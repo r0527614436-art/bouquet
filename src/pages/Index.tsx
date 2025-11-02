@@ -616,34 +616,34 @@ const Index = () => {
 
               {/* Contact Information */}
               <div className="space-y-6 mt-10">
-                <div className="flex items-center justify-end gap-3 text-lg">
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
                   <button 
                     onClick={openGoogleMaps}
-                    className="hover:text-primary transition-colors font-ploni-ultralight text-right"
+                    className="hover:text-primary transition-colors font-ploni-ultralight text-left"
                   >
                     שערי תשובה 14 - מודיעין עלית
                   </button>
-                  <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
                 </div>
                 
-                <div className="flex items-center justify-end gap-3 text-lg">
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <Mail className="h-6 w-6 text-primary flex-shrink-0" />
                   <a 
                     href="mailto:R0527614436@GMAIL.COM" 
                     className="hover:text-primary transition-colors font-ploni-ultralight"
                   >
                     R0527614436@GMAIL.COM
                   </a>
-                  <Mail className="h-6 w-6 text-primary flex-shrink-0" />
                 </div>
                 
-                <div className="flex items-center justify-end gap-3 text-lg">
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <Phone className="h-6 w-6 text-primary flex-shrink-0" />
                   <a 
                     href="tel:0527614436" 
                     className="hover:text-primary transition-colors font-ploni-ultralight"
                   >
                     0527614436
                   </a>
-                  <Phone className="h-6 w-6 text-primary flex-shrink-0" />
                 </div>
               </div>
             </div>
