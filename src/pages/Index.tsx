@@ -536,26 +536,7 @@ const Index = () => {
       
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-black">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="font-assistant text-5xl font-bold text-center mb-12 text-white">זה מה שאומרים על</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[{
-              title: "ניסיון עשיר",
-              text: "שנות ניסיון בעיצוב אירועים ושזירת פרחים ברמה הגבוהה ביותר. עבדנו עם מאות זוגות ויצרנו אירועים בלתי נשכחים."
-            }, {
-              title: "התאמה אישית",
-              text: "כל עיצוב מותאם במיוחד עבורכם. אנו מקשיבים לחזון שלכם ומתרגמים אותו למציאות פרחונית מדהימה."
-            }, {
-              title: "איכות ללא פשרות",
-              text: "רק הפרחים הטריים והאיכותיים ביותר. אנו בוחרים בקפידה כל פרח ומתחייבים לשירות ואיכות ללא פשרות."
-            }].map((item, idx) => <div key={idx} className="bg-white p-8 rounded-2xl shadow-xl">
-                <h3 className="font-assistant text-2xl font-bold mb-4 text-gray-800 text-center">{item.title}</h3>
-                <p className="text-gray-700 leading-relaxed text-center">{item.text}</p>
-              </div>)}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-stone-50">
