@@ -302,7 +302,7 @@ const Index = () => {
       </section>
 
       {/* Gallery Carousel Section */}
-      <section className="relative py-16 bg-[#1a1a1a] mt-0">
+      <section className="relative py-16 mt-0 bg-[#11150d]">
         <GalleryCarousel slides={carouselImages} />
       </section>
 
