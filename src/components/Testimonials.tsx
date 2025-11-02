@@ -59,18 +59,18 @@ const Testimonials = () => {
             <div className="flex gap-4 justify-end">
               <Button
                 onClick={handlePrevious}
-                variant="outline"
-                size="icon"
-                className="rounded-full w-14 h-14 bg-white border-white text-gray-800 hover:bg-gray-100"
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
                 disabled={testimonials.length <= 1}
               >
                 <ChevronRight className="h-6 w-6" />
               </Button>
               <Button
                 onClick={handleNext}
-                variant="outline"
-                size="icon"
-                className="rounded-full w-14 h-14 bg-white border-white text-gray-800 hover:bg-gray-100"
+                variant="ghost"
+                size="sm"
+                className="text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
                 disabled={testimonials.length <= 1}
               >
                 <ChevronLeft className="h-6 w-6" />
