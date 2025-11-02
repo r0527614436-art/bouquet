@@ -41,39 +41,39 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="py-20 bg-black" dir="rtl">
+    <section className="py-20 bg-background" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           {/* Title and Navigation - Right Side */}
           <div className="lg:w-1/3">
             <div className="relative mb-8">
-              <h2 className="font-ploni-black-2 text-[60px] md:text-[70px] font-semibold text-gray-600 opacity-40 leading-tight select-none">
-                recom<br/>menda<br/>tions
+              <h2 className="font-ploni-black-2 text-[60px] md:text-[70px] font-semibold text-muted-foreground/40 leading-tight select-none">
+                recommen<br/>dations
               </h2>
-              <h2 className="font-ploni-black-2 text-5xl md:text-6xl font-semibold text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-tight whitespace-nowrap text-center">
+              <h2 className="font-ploni-black-2 text-5xl md:text-6xl font-semibold text-foreground absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
                 זה מה<br/>שאומרים<br/>עלינו
               </h2>
             </div>
 
             {/* Navigation Arrows - Under Title */}
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 justify-end">
               <Button
                 onClick={handlePrevious}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14 bg-black border-2 border-white hover:bg-gray-900 transition-colors"
+                className="rounded-full w-14 h-14 text-foreground"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronRight className="h-6 w-6 text-white" />
+                <ChevronRight className="h-6 w-6 text-foreground" />
               </Button>
               <Button
                 onClick={handleNext}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14 bg-black border-2 border-white hover:bg-gray-900 transition-colors"
+                className="rounded-full w-14 h-14 text-foreground"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronLeft className="h-6 w-6 text-white" />
+                <ChevronLeft className="h-6 w-6 text-foreground" />
               </Button>
             </div>
           </div>
