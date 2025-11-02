@@ -51,7 +51,7 @@ const Testimonials = () => {
                 recommen<br/>dations
               </h2>
               <h2 className="font-ploni-black-2 text-5xl md:text-6xl font-semibold text-foreground absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
-                זה מה<br/>שאומרים<br/>עלינו
+                זה מה<br/>שאומרים<br/>עלינו.
               </h2>
             </div>
 
@@ -61,30 +61,30 @@ const Testimonials = () => {
                 onClick={handlePrevious}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14 text-foreground"
+                className="rounded-full w-14 h-14"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronRight className="h-6 w-6 text-foreground" />
+                <ChevronRight className="h-6 w-6" />
               </Button>
               <Button
                 onClick={handleNext}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14 text-foreground"
+                className="rounded-full w-14 h-14"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronLeft className="h-6 w-6 text-foreground" />
+                <ChevronLeft className="h-6 w-6" />
               </Button>
             </div>
           </div>
 
           {/* Testimonials Content - Left Side */}
           <div className="lg:w-2/3">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
-              <p className="text-gray-800 text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
+            <div className="bg-card text-card-foreground rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
+              <p className="text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
                 {testimonials[currentIndex]?.content}
               </p>
-              <p className="font-ploni-medium text-lg text-gray-900 text-right mt-4">
+              <p className="font-ploni-medium text-lg text-right mt-4">
                 {testimonials[currentIndex]?.author_name}
               </p>
             </div>
