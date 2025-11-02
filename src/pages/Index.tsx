@@ -720,7 +720,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black py-12">
+      <footer className="bg-[#11150d] py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
