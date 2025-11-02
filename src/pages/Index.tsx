@@ -606,10 +606,10 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none -translate-y-6">
                   Contact us
                 </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   צור קשר
                 </h2>
               </div>
@@ -617,30 +617,30 @@ const Index = () => {
               {/* Contact Information */}
               <div className="space-y-6 mt-10">
                 <div className="flex items-center justify-start gap-3 text-lg">
-                  <MapPin className="h-6 w-6 text-primary flex-shrink-0" />
+                  <MapPin className="h-6 w-6 text-[#314020]" />
                   <button 
                     onClick={openGoogleMaps}
-                    className="hover:text-primary transition-colors font-ploni-ultralight text-left"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-left text-[#314020]"
                   >
                     שערי תשובה 14 - מודיעין עלית
                   </button>
                 </div>
                 
                 <div className="flex items-center justify-start gap-3 text-lg">
-                  <Mail className="h-6 w-6 text-primary flex-shrink-0" />
+                  <Mail className="h-6 w-6 text-[#314020]" />
                   <a 
                     href="mailto:R0527614436@GMAIL.COM" 
-                    className="hover:text-primary transition-colors font-ploni-ultralight"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-[#314020]"
                   >
                     R0527614436@GMAIL.COM
                   </a>
                 </div>
                 
                 <div className="flex items-center justify-start gap-3 text-lg">
-                  <Phone className="h-6 w-6 text-primary flex-shrink-0" />
+                  <Phone className="h-6 w-6 text-[#314020]" />
                   <a 
                     href="tel:0527614436" 
-                    className="hover:text-primary transition-colors font-ploni-ultralight"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-[#314020]"
                   >
                     0527614436
                   </a>
