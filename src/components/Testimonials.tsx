@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import arrowCircle from '@/assets/arrow-circle-testimonials.png';
 
 interface Testimonial {
   id: string;
@@ -57,24 +57,20 @@ const Testimonials = () => {
 
             {/* Navigation Arrows - Under Title */}
             <div className="flex gap-4 justify-end">
-              <Button
+              <button
                 onClick={handlePrevious}
-                variant="ghost"
-                size="sm"
-                className="text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
+                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronRight className="h-6 w-6" />
-              </Button>
-              <Button
+                <img src={arrowCircle} alt="Previous" className="w-full h-full" />
+              </button>
+              <button
                 onClick={handleNext}
-                variant="ghost"
-                size="sm"
-                className="text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
+                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed rotate-180"
                 disabled={testimonials.length <= 1}
               >
-                <ChevronLeft className="h-6 w-6" />
-              </Button>
+                <img src={arrowCircle} alt="Next" className="w-full h-full" />
+              </button>
             </div>
           </div>
 
