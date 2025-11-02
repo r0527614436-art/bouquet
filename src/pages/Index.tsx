@@ -652,7 +652,7 @@ const Index = () => {
             <div className="w-full md:w-1/2">
               <form onSubmit={handleContactSubmit} className="space-y-8 p-8">
                 <div className="space-y-2 text-right">
-                  <label htmlFor="name" className="block text-sm font-ploni-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-ploni-medium text-[#314020]">
                     שם מלא
                   </label>
                   <input
@@ -660,13 +660,13 @@ const Index = () => {
                     type="text"
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-2 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-2 text-right">
-                  <label htmlFor="phone" className="block text-sm font-ploni-medium text-gray-700">
+                  <label htmlFor="phone" className="block text-sm font-ploni-medium text-[#314020]">
                     טלפון
                   </label>
                   <input
@@ -674,13 +674,13 @@ const Index = () => {
                     type="tel"
                     value={contactForm.phone}
                     onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-2 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-2 text-right">
-                  <label htmlFor="email" className="block text-sm font-ploni-medium text-gray-700">
+                  <label htmlFor="email" className="block text-sm font-ploni-medium text-[#314020]">
                     אימייל
                   </label>
                   <input
@@ -688,27 +688,27 @@ const Index = () => {
                     type="email"
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-2 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-2 text-right">
-                  <label htmlFor="message" className="block text-sm font-ploni-medium text-gray-700">
+                  <label htmlFor="message" className="block text-sm font-ploni-medium text-[#314020]">
                     הודעה
                   </label>
                   <textarea
                     id="message"
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#11150d] text-right px-0 py-2 focus:outline-none focus:border-[#11150d] focus:ring-0 font-ploni-ultralight min-h-[80px] resize-none"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-2 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight min-h-[80px] resize-none text-[#314020]"
                     required
                   />
                 </div>
 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#11150d] hover:bg-[#11150d]/90 text-white font-ploni-medium text-lg py-4 rounded-full transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-medium text-lg py-4 rounded-full transition-all duration-300 disabled:opacity-50"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'שולח...' : 'שליחה'}
