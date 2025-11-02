@@ -41,7 +41,7 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="py-20 bg-background" dir="rtl">
+    <section className="py-20 bg-[#11150d]" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           {/* Title and Navigation - Right Side */}
@@ -50,7 +50,7 @@ const Testimonials = () => {
               <h2 className="font-ploni-black-2 text-[60px] md:text-[70px] font-semibold text-muted-foreground/40 leading-tight select-none">
                 recommen<br/>dations
               </h2>
-              <h2 className="font-ploni-black-2 text-5xl md:text-6xl font-semibold text-foreground absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
+              <h2 className="font-ploni-black-2 text-5xl md:text-6xl font-semibold text-white absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
                 זה מה<br/>שאומרים<br/>עלינו.
               </h2>
             </div>
@@ -61,7 +61,7 @@ const Testimonials = () => {
                 onClick={handlePrevious}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14"
+                className="rounded-full w-14 h-14 bg-white border-white text-gray-800 hover:bg-gray-100"
                 disabled={testimonials.length <= 1}
               >
                 <ChevronRight className="h-6 w-6" />
@@ -70,7 +70,7 @@ const Testimonials = () => {
                 onClick={handleNext}
                 variant="outline"
                 size="icon"
-                className="rounded-full w-14 h-14"
+                className="rounded-full w-14 h-14 bg-white border-white text-gray-800 hover:bg-gray-100"
                 disabled={testimonials.length <= 1}
               >
                 <ChevronLeft className="h-6 w-6" />
@@ -80,7 +80,7 @@ const Testimonials = () => {
 
           {/* Testimonials Content - Left Side */}
           <div className="lg:w-2/3">
-            <div className="bg-card text-card-foreground rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
+            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 md:p-12 min-h-[300px]">
               <p className="text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
                 {testimonials[currentIndex]?.content}
               </p>

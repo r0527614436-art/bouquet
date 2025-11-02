@@ -306,9 +306,6 @@ const Index = () => {
         <GalleryCarousel slides={carouselImages} />
       </section>
 
-      {/* Testimonials Section */}
-      <Testimonials />
-
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -526,8 +523,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Flower Selection Section */}
       
