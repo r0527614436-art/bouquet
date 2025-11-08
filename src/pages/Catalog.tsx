@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
@@ -9,7 +8,6 @@ import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
-
 interface Category {
   id: string;
   name: string;
@@ -17,7 +15,6 @@ interface Category {
   allow_cart: boolean;
   created_at: string;
 }
-
 interface CatalogItem {
   id: string;
   title: string;
@@ -28,39 +25,43 @@ interface CatalogItem {
   subcategory?: string;
   display_order?: number;
 }
-
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
-  const { addToCart, getTotalItems } = useCart();
-  const { toast } = useToast();
+  const {
+    addToCart,
+    getTotalItems
+  } = useCart();
+  const {
+    toast
+  } = useToast();
   const navigate = useNavigate();
-  
+
   // Auto-generate HTML catalog when changes occur
   useAutoGeneratePDF();
   const clickCount = useRef(0);
   const clickTimer = useRef<NodeJS.Timeout | null>(null);
-
   const handleDownloadCatalog = async () => {
     try {
       toast({
         title: "מוריד קטלוג",
-        description: "הקטלוג יורד כעת...",
+        description: "הקטלוג יורד כעת..."
       });
-
-      const { data } = supabase.storage
-        .from('catalog-pdfs')
-        .getPublicUrl('catalog-bouquet.html');
-
+      const {
+        data
+      } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-bouquet.html');
       if (data?.publicUrl) {
         // Force download with proper file name
-        const res = await fetch(data.publicUrl, { cache: 'no-store' });
+        const res = await fetch(data.publicUrl, {
+          cache: 'no-store'
+        });
         if (!res.ok) throw new Error('Failed to fetch catalog file');
         const htmlText = await res.text();
-        const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
+        const blob = new Blob([htmlText], {
+          type: 'text/html;charset=utf-8'
+        });
         const blobUrl = URL.createObjectURL(blob);
-
         const link = document.createElement('a');
         link.href = blobUrl;
         link.download = 'קטלוג בוקט.html';
@@ -68,10 +69,9 @@ const Catalog = () => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(blobUrl);
-
         toast({
           title: "הורדת קטלוג",
-          description: "הקטלוג הורד בהצלחה",
+          description: "הקטלוג הורד בהצלחה"
         });
       } else {
         throw new Error('No catalog URL available');
@@ -81,18 +81,15 @@ const Catalog = () => {
       toast({
         title: "שגיאה",
         description: "שגיאה בהורדת הקטלוג",
-        variant: "destructive",
+        variant: "destructive"
       });
     }
   };
-
   const handleLogoClick = () => {
     clickCount.current += 1;
-    
     if (clickTimer.current) {
       clearTimeout(clickTimer.current);
     }
-    
     clickTimer.current = setTimeout(() => {
       if (clickCount.current === 3) {
         navigate('/admin');
@@ -100,14 +97,17 @@ const Catalog = () => {
       clickCount.current = 0;
     }, 500);
   };
-
-  const { data: categories = [] } = useQuery({
+  const {
+    data: categories = []
+  } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('categories')
-        .select('*')
-        .order('created_at', { ascending: true });
+      const {
+        data,
+        error
+      } = await supabase.from('categories').select('*').order('created_at', {
+        ascending: true
+      });
       if (error) throw error;
       return data || [];
     }
@@ -119,13 +119,15 @@ const Catalog = () => {
       setSelectedCategory('');
     }
   }, [categories, selectedCategory]);
-
-  const { data: items = [] } = useQuery({
+  const {
+    data: items = []
+  } = useQuery({
     queryKey: ['catalog-items', 'categories'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('catalog_items')
-        .select('*');
+      const {
+        data,
+        error
+      } = await supabase.from('catalog_items').select('*');
       if (error) throw error;
       return data || [];
     }
@@ -135,7 +137,7 @@ const Catalog = () => {
   const sortedItems = items.sort((a, b) => {
     const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
     const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
-    
+
     // If categories are the same, sort by display_order then creation date
     if (categoryIndexA === categoryIndexB) {
       // First by display_order
@@ -145,15 +147,11 @@ const Catalog = () => {
       // Then by creation date
       return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
     }
-    
+
     // Sort by category order
     return categoryIndexA - categoryIndexB;
   });
-
-  const filteredItems = selectedCategory 
-    ? sortedItems.filter(item => item.category_id === selectedCategory)
-    : sortedItems;
-
+  const filteredItems = selectedCategory ? sortedItems.filter(item => item.category_id === selectedCategory) : sortedItems;
   const handleAddToCart = (item: CatalogItem) => {
     addToCart({
       id: item.id,
@@ -162,18 +160,15 @@ const Catalog = () => {
       price: item.price || '',
       category_id: item.category_id
     });
-    
     toast({
       title: "נוסף לעגלה",
-      description: `${item.title} נוסף לסל המוצרים`,
+      description: `${item.title} נוסף לסל המוצרים`
     });
   };
-
   const handleImageClick = (item: CatalogItem) => {
     setCurrentImageItem(item);
     setImageViewerOpen(true);
   };
-
   const handlePreviousImage = () => {
     if (!currentImageItem) return;
     const currentIndex = filteredItems.findIndex(item => item.id === currentImageItem.id);
@@ -181,7 +176,6 @@ const Catalog = () => {
       setCurrentImageItem(filteredItems[currentIndex - 1]);
     }
   };
-
   const handleNextImage = () => {
     if (!currentImageItem) return;
     const currentIndex = filteredItems.findIndex(item => item.id === currentImageItem.id);
@@ -189,42 +183,27 @@ const Catalog = () => {
       setCurrentImageItem(filteredItems[currentIndex + 1]);
     }
   };
-
   const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
-
   const getCategoryByItem = (item: CatalogItem) => {
     return categories.find(cat => cat.id === item.category_id);
   };
-
-  return (
-    <div className="min-h-screen bg-background" id="catalog-page">
+  return <div className="min-h-screen bg-background" id="catalog-page">
       {/* Hero Section with Background Image */}
-      <div 
-        className="relative min-h-[60vh] bg-cover bg-center flex items-center justify-center"
-        style={{
-          backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+      <div className="relative min-h-[60vh] bg-cover bg-center flex items-center justify-center" style={{
+      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
         {/* Logo - Top Left */}
         <div className="absolute top-8 left-8 z-20">
-          <div className="bg-gray-100 rounded-b-lg rounded-t-full p-2">
-            <img 
-              src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-              alt="בוקט לוגו" 
-              className="h-20 w-auto cursor-pointer"
-              onClick={handleLogoClick}
-            />
+          <div className="rounded-lg p-2 bg-gray-300 mx-0 my-0 px-[7px] py-[32px]">
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-20 w-auto cursor-pointer" onClick={handleLogoClick} />
           </div>
         </div>
 
         {/* Top Right Buttons */}
         <div className="absolute top-8 right-8 z-20 flex items-center gap-3">
-          <Button
-            onClick={handleDownloadCatalog}
-            className="bg-white/90 hover:bg-white text-gray-800 rounded-full px-4 py-2 text-sm shadow-lg backdrop-blur-sm"
-          >
+          <Button onClick={handleDownloadCatalog} className="bg-white/90 hover:bg-white text-gray-800 rounded-full px-4 py-2 text-sm shadow-lg backdrop-blur-sm">
             <Download className="h-4 w-4 ml-2" />
             הורד קטלוג
           </Button>
@@ -238,12 +217,18 @@ const Catalog = () => {
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="font-['Gloria'] text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>Catalog</span>
-            <span className="font-['Gloria'] text-white mr-4" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>קטלוג</span>
+            <span className="font-['Gloria'] text-white" style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+          }}>Catalog</span>
+            <span className="font-['Gloria'] text-white mr-4" style={{
+            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
+          }}>קטלוג</span>
           </h1>
 
           {/* Description Text */}
-          <div className="text-white text-base md:text-lg space-y-1" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
+          <div className="text-white text-base md:text-lg space-y-1" style={{
+          textShadow: '1px 1px 3px rgba(0,0,0,0.5)'
+        }}>
             <p className="font-bold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
             <p>בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
             <p>גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
@@ -256,22 +241,14 @@ const Catalog = () => {
         {/* Category Filter */}
         <div className="mb-6">
           <div className="flex flex-wrap justify-center gap-3">
-            <Button
-              onClick={() => setSelectedCategory('')}
-              className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2"
-            >
+            <Button onClick={() => setSelectedCategory('')} className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2">
               הכל
             </Button>
-            {categories.map((category) => (
-              <div key={category.id}>
-                <Button
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2"
-                >
+            {categories.map(category => <div key={category.id}>
+                <Button onClick={() => setSelectedCategory(category.id)} className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2">
                   {category.name}
                 </Button>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
@@ -286,48 +263,35 @@ const Catalog = () => {
 
         {/* Items Grid */}
         <div className="space-y-12">
-          {selectedCategory === '' ? (
-            /* Show all categories with their items */
-            categories.map((category) => {
-              const categoryItems = sortedItems.filter(item => item.category_id === category.id);
-              if (categoryItems.length === 0) return null;
-              
-              // Group items by subcategory
-              const groupedItems = categoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
-                const key = item.subcategory || 'main';
-                if (!groups[key]) groups[key] = [];
-                groups[key].push(item);
-                return groups;
-              }, {});
-              
-              return (
-                <div key={category.id} className="space-y-8">
+          {selectedCategory === '' ? (/* Show all categories with their items */
+        categories.map(category => {
+          const categoryItems = sortedItems.filter(item => item.category_id === category.id);
+          if (categoryItems.length === 0) return null;
+
+          // Group items by subcategory
+          const groupedItems = categoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
+            const key = item.subcategory || 'main';
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(item);
+            return groups;
+          }, {});
+          return <div key={category.id} className="space-y-8">
                   <div className="text-center">
                     <h2 className="text-2xl font-bold text-gray-800">{category.name}</h2>
-                    {category.subtitle && (
-                      <p className="text-gray-600 mt-1">{category.subtitle}</p>
-                    )}
+                    {category.subtitle && <p className="text-gray-600 mt-1">{category.subtitle}</p>}
                   </div>
                   
-                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => (
-                    <div key={subcategoryKey} className="space-y-4">
-                      {subcategoryKey !== 'main' && (
-                        <div className="text-center">
+                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
+                      {subcategoryKey !== 'main' && <div className="text-center">
                           <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
-                        </div>
-                      )}
+                        </div>}
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {items.map((item) => {
-                          return (
-                            <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all cursor-pointer" onClick={() => handleImageClick(item)}>
+                        {items.map(item => {
+                  return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all cursor-pointer" onClick={() => handleImageClick(item)}>
                               <div className="aspect-square overflow-hidden relative">
-                                <img
-                                  src={item.image_url}
-                                  alt={item.title}
-                                  className="w-full h-full object-cover"
-                                />
+                                <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                                 
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -342,54 +306,37 @@ const Catalog = () => {
                                     <span className="text-sm font-medium">להזמנה</span>
                                     <ArrowRight className="h-4 w-4" />
                                   </div>
-                                  {item.price && (
-                                    <span className="text-lg font-bold">₪{item.price}</span>
-                                  )}
+                                  {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            </div>;
+                })}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })
-          ) : (
-            /* Show single category items with subcategories */
-            (() => {
-              const selectedCategoryItems = sortedItems.filter(item => item.category_id === selectedCategory);
-              
-              // Group items by subcategory
-              const groupedItems = selectedCategoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
-                const key = item.subcategory || 'main';
-                if (!groups[key]) groups[key] = [];
-                groups[key].push(item);
-                return groups;
-              }, {});
+                    </div>)}
+                </div>;
+        })) : (/* Show single category items with subcategories */
+        (() => {
+          const selectedCategoryItems = sortedItems.filter(item => item.category_id === selectedCategory);
 
-              return (
-                <div className="space-y-8">
-                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => (
-                    <div key={subcategoryKey} className="space-y-4">
-                      {subcategoryKey !== 'main' && (
-                        <div className="text-center">
+          // Group items by subcategory
+          const groupedItems = selectedCategoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
+            const key = item.subcategory || 'main';
+            if (!groups[key]) groups[key] = [];
+            groups[key].push(item);
+            return groups;
+          }, {});
+          return <div className="space-y-8">
+                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
+                      {subcategoryKey !== 'main' && <div className="text-center">
                           <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
-                        </div>
-                      )}
+                        </div>}
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {items.map((item) => {
-                          return (
-                            <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all cursor-pointer" onClick={() => handleImageClick(item)}>
+                        {items.map(item => {
+                  return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all cursor-pointer" onClick={() => handleImageClick(item)}>
                               <div className="aspect-square overflow-hidden relative">
-                                <img
-                                  src={item.image_url}
-                                  alt={item.title}
-                                  className="w-full h-full object-cover"
-                                />
+                                <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                                 
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -404,28 +351,20 @@ const Catalog = () => {
                                     <span className="text-sm font-medium">להזמנה</span>
                                     <ArrowRight className="h-4 w-4" />
                                   </div>
-                                  {item.price && (
-                                    <span className="text-lg font-bold">₪{item.price}</span>
-                                  )}
+                                  {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
                                 </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            </div>;
+                })}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })()
-          )}
+                    </div>)}
+                </div>;
+        })())}
         </div>
 
-        {filteredItems.length === 0 && (
-          <div className="text-center py-12">
+        {filteredItems.length === 0 && <div className="text-center py-12">
             <p className="text-gray-500 text-lg">אין פריטים בקטגוריה זו</p>
-          </div>
-        )}
+          </div>}
 
         {/* Contact Section */}
         <div className="mt-16 border-t pt-12">
@@ -437,32 +376,17 @@ const Catalog = () => {
             
             <div className="space-y-4 text-right">
               <div>
-                <input
-                  type="text"
-                  placeholder="שם מלא"
-                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
-                />
+                <input type="text" placeholder="שם מלא" className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent" />
               </div>
               <div>
-                <input
-                  type="tel"
-                  placeholder="טלפון"
-                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
-                />
+                <input type="tel" placeholder="טלפון" className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent" />
               </div>
               <div>
-                <input
-                  type="email"
-                  placeholder="אימייל"
-                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
-                />
+                <input type="email" placeholder="אימייל" className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent" />
               </div>
               
               <div className="pt-6">
-                <button 
-                  onClick={() => window.open('https://wa.me/972527614436', '_blank')}
-                  className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white py-3 rounded-full transition-colors"
-                >
+                <button onClick={() => window.open('https://wa.me/972527614436', '_blank')} className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white py-3 rounded-full transition-colors">
                   שיחה
                 </button>
               </div>
@@ -476,8 +400,7 @@ const Catalog = () => {
           </div>
         </div>
 
-        {getTotalItems() > 0 && (
-          <div className="fixed bottom-6 right-6 z-50">
+        {getTotalItems() > 0 && <div className="fixed bottom-6 right-6 z-50">
             <Link to="/cart">
               <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative">
                 <ShoppingCart className="h-8 w-8" />
@@ -486,21 +409,11 @@ const Catalog = () => {
                 </span>
               </Button>
             </Link>
-          </div>
-        )}
+          </div>}
 
         {/* Image Viewer Modal */}
-        <ImageViewer
-          isOpen={imageViewerOpen}
-          onClose={() => setImageViewerOpen(false)}
-          currentItem={currentImageItem}
-          items={filteredItems}
-          onPrevious={handlePreviousImage}
-          onNext={handleNextImage}
-        />
+        <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} />
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Catalog;
