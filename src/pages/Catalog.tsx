@@ -194,13 +194,13 @@ const Catalog = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* White Cloud Gradient Overlay - starts at bottom third */}
+        {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" 
              style={{
                background: `
-                 radial-gradient(ellipse 120% 35% at 50% 85%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.3) 80%, transparent 100%),
-                 radial-gradient(ellipse 90% 30% at 30% 83%, rgba(255,255,255,0.8) 0%, transparent 70%),
-                 radial-gradient(ellipse 100% 32% at 70% 87%, rgba(255,255,255,0.7) 0%, transparent 75%)
+                 radial-gradient(ellipse 120% 25% at 50% 92%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.3) 80%, transparent 100%),
+                 radial-gradient(ellipse 90% 20% at 30% 90%, rgba(255,255,255,0.8) 0%, transparent 70%),
+                 radial-gradient(ellipse 100% 22% at 70% 94%, rgba(255,255,255,0.7) 0%, transparent 75%)
                `,
                filter: 'blur(30px)'
              }} 
@@ -212,12 +212,12 @@ const Catalog = () => {
                background: `
                  linear-gradient(to bottom, 
                    transparent 0%, 
-                   transparent 60%, 
-                   rgba(255,255,255,0.2) 68%,
-                   rgba(255,255,255,0.5) 75%,
-                   rgba(255,255,255,0.8) 82%,
-                   rgba(255,255,255,0.95) 90%,
-                   white 95%
+                   transparent 75%, 
+                   rgba(255,255,255,0.2) 80%,
+                   rgba(255,255,255,0.5) 85%,
+                   rgba(255,255,255,0.8) 90%,
+                   rgba(255,255,255,0.95) 95%,
+                   white 98%
                  )
                `,
                filter: 'blur(20px)'
@@ -227,7 +227,7 @@ const Catalog = () => {
         {/* Final solid white bottom section */}
         <div className="absolute inset-0" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 88%, white 98%)'
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 93%, white 99%)'
              }} 
         />
         
