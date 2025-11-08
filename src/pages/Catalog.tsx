@@ -217,8 +217,15 @@ const Catalog = () => {
           />
         </div>
 
-        {/* Back Button - Top Right */}
-        <div className="absolute top-8 right-8 z-20">
+        {/* Top Right Buttons */}
+        <div className="absolute top-8 right-8 z-20 flex items-center gap-3">
+          <Button
+            onClick={handleDownloadCatalog}
+            className="bg-white/90 hover:bg-white text-gray-800 rounded-full px-4 py-2 text-sm shadow-lg backdrop-blur-sm"
+          >
+            <Download className="h-4 w-4 ml-2" />
+            הורד קטלוג
+          </Button>
           <Link to="/" className="flex items-center text-white hover:text-pink-200 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
             <ArrowRight className="h-5 w-5 ml-2" />
             חזרה לעמוד הבית
@@ -234,51 +241,46 @@ const Catalog = () => {
           </h1>
 
           {/* Description Text */}
-          <div className="text-white text-lg md:text-xl space-y-2 mb-8" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
+          <div className="text-white text-base md:text-lg space-y-1" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
             <p className="font-bold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
             <p>בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
             <p>גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
           </div>
-
-          {/* Download Catalog Button */}
-          <Button
-            onClick={handleDownloadCatalog}
-            className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-8 py-6 text-lg"
-          >
-            <Download className="h-5 w-5 ml-2" />
-            הורד קטלוג
-          </Button>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Category Filter */}
-        <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="text-center">
-              <Button
-                variant={selectedCategory === '' ? 'default' : 'outline'}
-                onClick={() => setSelectedCategory('')}
-                className={selectedCategory === '' ? 'bg-green-700 hover:bg-green-800 text-white' : 'border-green-700 text-green-700 hover:bg-green-700 hover:text-white'}
-              >
-                הכל
-              </Button>
-            </div>
+        <div className="mb-6">
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button
+              variant={selectedCategory === '' ? 'default' : 'outline'}
+              onClick={() => setSelectedCategory('')}
+              className={selectedCategory === '' ? 'bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2' : 'border-[#3d5a3d] text-[#3d5a3d] hover:bg-[#3d5a3d] hover:text-white rounded-full px-6 py-2'}
+            >
+              הכל
+            </Button>
             {categories.map((category) => (
-              <div key={category.id} className="text-center">
+              <div key={category.id}>
                 <Button
                   variant={selectedCategory === category.id ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={selectedCategory === category.id ? 'bg-green-700 hover:bg-green-800 text-white' : 'border-green-700 text-green-700 hover:bg-green-700 hover:text-white'}
+                  className={selectedCategory === category.id ? 'bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2' : 'border-[#3d5a3d] text-[#3d5a3d] hover:bg-[#3d5a3d] hover:text-white rounded-full px-6 py-2'}
                 >
                   {category.name}
                 </Button>
-                {category.subtitle && selectedCategory === category.id && (
-                  <p className="text-sm text-gray-600 mt-1">{category.subtitle}</p>
-                )}
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Secondary Filter Buttons */}
+        <div className="mb-8">
+          <div className="flex flex-wrap justify-center gap-3 text-sm">
+            <button className="text-gray-600 hover:text-gray-800">• גלריה</button>
+            <button className="text-gray-600 hover:text-gray-800">• צבע</button>
+            <button className="text-gray-600 hover:text-gray-800">• זר פרחים</button>
           </div>
         </div>
 
@@ -301,7 +303,7 @@ const Catalog = () => {
               return (
                 <div key={category.id} className="space-y-8">
                   <div className="text-center">
-                    <h2 className="text-2xl font-bold text-pink-800">{category.name}</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">{category.name}</h2>
                     {category.subtitle && (
                       <p className="text-gray-600 mt-1">{category.subtitle}</p>
                     )}
@@ -311,7 +313,7 @@ const Catalog = () => {
                     <div key={subcategoryKey} className="space-y-4">
                       {subcategoryKey !== 'main' && (
                         <div className="text-center">
-                          <h3 className="text-lg font-semibold text-pink-600 bg-pink-50 py-2 px-4 rounded-lg inline-block">
+                          <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
                         </div>
@@ -332,14 +334,14 @@ const Catalog = () => {
                               <div className="p-4">
                                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
                                 {item.price && (
-                                  <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                                  <p className="text-gray-700 font-bold text-xl mb-3">₪{item.price}</p>
                                 )}
                                 
                                 {/* Cart button - only show if category allows cart */}
                                 {allowCart && (
                                   <button
                                     onClick={() => handleAddToCart(item)}
-                                    className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                                    className="absolute top-4 right-4 bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white p-2 rounded-full shadow-lg transition-all duration-200"
                                     title="הוסף לעגלה"
                                   >
                                     <div className="flex items-center">
@@ -384,7 +386,7 @@ const Catalog = () => {
                     <div key={subcategoryKey} className="space-y-4">
                       {subcategoryKey !== 'main' && (
                         <div className="text-center">
-                          <h3 className="text-lg font-semibold text-pink-600 bg-pink-50 py-2 px-4 rounded-lg inline-block">
+                          <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
                         </div>
@@ -406,14 +408,14 @@ const Catalog = () => {
                               <div className="p-4">
                                 <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.title}</h3>
                                 {item.price && (
-                                  <p className="text-pink-600 font-bold text-xl mb-3">₪{item.price}</p>
+                                  <p className="text-gray-700 font-bold text-xl mb-3">₪{item.price}</p>
                                 )}
                                 
                                 {/* Cart button - only show if category allows cart */}
                                 {allowCart && (
                                   <button
                                     onClick={() => handleAddToCart(item)}
-                                    className="absolute top-4 right-4 bg-pink-600 hover:bg-pink-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+                                    className="absolute top-4 right-4 bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white p-2 rounded-full shadow-lg transition-all duration-200"
                                     title="הוסף לעגלה"
                                   >
                                     <div className="flex items-center">
@@ -448,19 +450,79 @@ const Catalog = () => {
           </div>
         )}
 
+        {/* Contact Section */}
+        <div className="mt-16 border-t pt-12">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-['Gloria'] text-center mb-8">
+              <span className="text-gray-400">Contact</span>
+              <span className="mr-3">צור קשר</span>
+            </h2>
+            
+            <div className="space-y-4 text-right">
+              <div>
+                <input
+                  type="text"
+                  placeholder="שם מלא"
+                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
+                />
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  placeholder="טלפון"
+                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
+                />
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="אימייל"
+                  className="w-full border-b border-gray-300 py-2 px-0 focus:outline-none focus:border-[#3d5a3d] bg-transparent"
+                />
+              </div>
+              
+              <div className="pt-6">
+                <button 
+                  onClick={() => window.open('https://wa.me/972527614436', '_blank')}
+                  className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white py-3 rounded-full transition-colors"
+                >
+                  שיחה
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center space-y-2 text-sm text-gray-600">
+              <p>שערי תשובה 14, מודיעין עילית</p>
+              <p>052-7614436</p>
+              <p>R0522614436@GMAIL.COM</p>
+            </div>
+          </div>
+        </div>
+
         {/* Cart button at bottom of page */}
-        <div className="fixed bottom-6 right-6 z-50">
-          <Link to="/cart">
-            <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative scale-[1.3]">
-              <ShoppingCart className="h-9 w-9" />
-              {getTotalItems() > 0 && (
-                <span className="absolute -top-3 -right-3 bg-red-500 text-white rounded-full text-sm w-9 h-9 flex items-center justify-center font-bold">
+        <div className="fixed bottom-6 left-6 z-50">
+          <button
+            onClick={() => window.open('https://wa.me/972527614436', '_blank')}
+            className="bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-200"
+          >
+            <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </button>
+        </div>
+
+        {getTotalItems() > 0 && (
+          <div className="fixed bottom-6 right-6 z-50">
+            <Link to="/cart">
+              <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative">
+                <ShoppingCart className="h-8 w-8" />
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-sm w-7 h-7 flex items-center justify-center font-bold">
                   {getTotalItems()}
                 </span>
-              )}
-            </Button>
-          </Link>
-        </div>
+              </Button>
+            </Link>
+          </div>
+        )}
 
         {/* Image Viewer Modal */}
         <ImageViewer
