@@ -196,8 +196,8 @@ const Catalog = () => {
     }}>
         {/* Logo - Top Left */}
         <div className="absolute top-8 left-8 z-20">
-          <div className="bg-gray-500/40 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px]">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity brightness-[0.3]" onClick={handleLogoClick} />
+          <div className="bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
           </div>
         </div>
 
