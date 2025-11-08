@@ -189,11 +189,18 @@ const Catalog = () => {
   };
   return <div className="min-h-screen bg-background" id="catalog-page">
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[60vh] bg-cover bg-center flex items-center justify-center" style={{
-      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
-    }}>
+      <div className="relative min-h-[70vh] bg-cover bg-center" style={{
+        backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
+        {/* White Cloud Gradient Overlay - starts from middle third */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-white" 
+             style={{
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.7) 55%, white 70%)'
+             }} 
+        />
+        
         {/* Logo - Top Left */}
         <div className="absolute top-8 left-8 z-20">
           <div className="bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
@@ -213,22 +220,25 @@ const Catalog = () => {
           </Link>
         </div>
 
-        {/* Content Container */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          {/* Title */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="font-['Gloria'] text-white" style={{
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
-          }}>Catalog</span>
-            <span className="font-['Gloria'] text-white mr-4" style={{
-            textShadow: '2px 2px 4px rgba(0,0,0,0.3)'
-          }}>קטלוג</span>
-          </h1>
+        {/* Content Container - positioned at the transition */}
+        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+          {/* Title with Layered Effect - Hebrew in front, English in back */}
+          <div className="relative mb-8">
+            {/* English Background Text */}
+            <h1 className="font-['Gloria'] text-[120px] md:text-[180px] font-bold text-gray-300/40 leading-none select-none">
+              Catalog
+            </h1>
+            {/* Hebrew Front Text */}
+            <h1 className="font-ploni-black-2 text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" 
+                style={{
+                  textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
+                }}>
+              קטלוג
+            </h1>
+          </div>
 
-          {/* Description Text */}
-          <div className="text-white text-base md:text-lg space-y-1" style={{
-          textShadow: '1px 1px 3px rgba(0,0,0,0.5)'
-        }}>
+          {/* Description Text - on white section */}
+          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-24">
             <p className="font-bold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
             <p>בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
             <p>גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
