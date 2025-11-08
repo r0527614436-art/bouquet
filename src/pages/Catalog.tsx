@@ -198,19 +198,20 @@ const Catalog = () => {
         <div className="absolute inset-0" 
              style={{
                background: `
-                 radial-gradient(ellipse 100% 40% at 50% 60%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.3) 55%, transparent 70%),
-                 radial-gradient(ellipse 80% 30% at 30% 55%, rgba(255,255,255,0.6) 0%, transparent 60%),
-                 radial-gradient(ellipse 90% 35% at 70% 58%, rgba(255,255,255,0.5) 0%, transparent 65%),
-                 linear-gradient(to bottom, transparent 0%, transparent 30%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.6) 60%, white 80%)
+                 radial-gradient(ellipse 100% 40% at 50% 65%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0.6) 45%, rgba(255,255,255,0.4) 55%, transparent 70%),
+                 radial-gradient(ellipse 80% 30% at 30% 60%, rgba(255,255,255,0.7) 0%, transparent 60%),
+                 radial-gradient(ellipse 90% 35% at 70% 63%, rgba(255,255,255,0.6) 0%, transparent 65%),
+                 linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.7) 65%, white 85%)
                `,
-               filter: 'blur(8px)'
+               filter: 'blur(20px)'
              }} 
         />
         
         {/* Additional layer for smooth blend */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.8) 75%, white 90%)'
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(255,255,255,0.2) 55%, rgba(255,255,255,0.5) 65%, rgba(255,255,255,0.85) 80%, white 95%)',
+               filter: 'blur(10px)'
              }} 
         />
         
