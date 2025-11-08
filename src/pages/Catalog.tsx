@@ -197,42 +197,62 @@ const Catalog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white" id="catalog-page">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b border-pink-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <Link to="/" className="flex items-center text-pink-600 hover:text-pink-800">
-                <ArrowRight className="h-5 w-5 ml-2" />
-                חזרה לעמוד הבית
-              </Link>
-              <Button
-                onClick={handleDownloadCatalog}
-                className="flex items-center bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-6 py-2.5"
-              >
-                <Download className="h-4 w-4 ml-2" />
-                הורד קטלוג
-              </Button>
-            </div>
-            
-            <div className="flex items-center">
-              <img 
-                src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
-                alt="בוקט לוגו" 
-                className="h-24 w-auto cursor-pointer"
-                onClick={handleLogoClick}
-              />
-            </div>
+    <div className="min-h-screen bg-background" id="catalog-page">
+      {/* Hero Section with Background Image */}
+      <div 
+        className="relative min-h-[60vh] bg-cover bg-center flex items-center justify-center"
+        style={{
+          backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        {/* Logo - Top Left */}
+        <div className="absolute top-8 left-8 z-20">
+          <img 
+            src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
+            alt="בוקט לוגו" 
+            className="h-20 w-auto cursor-pointer"
+            onClick={handleLogoClick}
+          />
+        </div>
+
+        {/* Back Button - Top Right */}
+        <div className="absolute top-8 right-8 z-20">
+          <Link to="/" className="flex items-center text-white hover:text-pink-200 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
+            <ArrowRight className="h-5 w-5 ml-2" />
+            חזרה לעמוד הבית
+          </Link>
+        </div>
+
+        {/* Content Container */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          {/* Title */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="font-['Gloria'] text-white" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>Catalog</span>
+            <span className="font-['Gloria'] text-white mr-4" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>קטלוג</span>
+          </h1>
+
+          {/* Description Text */}
+          <div className="text-white text-lg md:text-xl space-y-2 mb-8" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>
+            <p className="font-bold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
+            <p>בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
+            <p>גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
           </div>
-        </div>
-      </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-pink-800 mb-4">קטלוג</h1>
+          {/* Download Catalog Button */}
+          <Button
+            onClick={handleDownloadCatalog}
+            className="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-full px-8 py-6 text-lg"
+          >
+            <Download className="h-5 w-5 ml-2" />
+            הורד קטלוג
+          </Button>
         </div>
+      </div>
 
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Category Filter */}
         <div className="mb-8">
           <div className="flex flex-wrap justify-center gap-4">
@@ -240,7 +260,7 @@ const Catalog = () => {
               <Button
                 variant={selectedCategory === '' ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory('')}
-                className={selectedCategory === '' ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
+                className={selectedCategory === '' ? 'bg-green-700 hover:bg-green-800 text-white' : 'border-green-700 text-green-700 hover:bg-green-700 hover:text-white'}
               >
                 הכל
               </Button>
@@ -250,7 +270,7 @@ const Catalog = () => {
                 <Button
                   variant={selectedCategory === category.id ? 'default' : 'outline'}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={selectedCategory === category.id ? 'bg-pink-600 hover:bg-pink-700' : 'border-pink-600 text-pink-600 hover:bg-pink-600 hover:text-white'}
+                  className={selectedCategory === category.id ? 'bg-green-700 hover:bg-green-800 text-white' : 'border-green-700 text-green-700 hover:bg-green-700 hover:text-white'}
                 >
                   {category.name}
                 </Button>
