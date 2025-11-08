@@ -194,10 +194,23 @@ const Catalog = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* White Cloud Gradient Overlay - starts from middle third */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-40% to-white" 
+        {/* White Cloud Gradient Overlay with irregular edges */}
+        <div className="absolute inset-0" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(255,255,255,0.3) 45%, rgba(255,255,255,0.7) 55%, white 70%)'
+               background: `
+                 radial-gradient(ellipse 100% 40% at 50% 60%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.75) 35%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.3) 55%, transparent 70%),
+                 radial-gradient(ellipse 80% 30% at 30% 55%, rgba(255,255,255,0.6) 0%, transparent 60%),
+                 radial-gradient(ellipse 90% 35% at 70% 58%, rgba(255,255,255,0.5) 0%, transparent 65%),
+                 linear-gradient(to bottom, transparent 0%, transparent 30%, rgba(255,255,255,0.2) 45%, rgba(255,255,255,0.6) 60%, white 80%)
+               `,
+               filter: 'blur(8px)'
+             }} 
+        />
+        
+        {/* Additional layer for smooth blend */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" 
+             style={{
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.8) 75%, white 90%)'
              }} 
         />
         
@@ -224,8 +237,8 @@ const Catalog = () => {
         <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-8">
-            {/* English Background Text */}
-            <h1 className="font-['Gloria'] text-[120px] md:text-[180px] font-bold text-gray-300/40 leading-none select-none">
+            {/* English Background Text - more visible and smaller */}
+            <h1 className="font-['Gloria'] text-[100px] md:text-[140px] font-bold text-gray-400/70 leading-none select-none">
               Catalog
             </h1>
             {/* Hebrew Front Text */}
