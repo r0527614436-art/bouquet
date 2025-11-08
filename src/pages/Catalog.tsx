@@ -194,24 +194,40 @@ const Catalog = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* White Cloud Gradient Overlay with irregular edges - starts lower */}
+        {/* White Cloud Gradient Overlay - ends at second third from top */}
         <div className="absolute inset-0" 
              style={{
                background: `
-                 radial-gradient(ellipse 120% 50% at 50% 75%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.65) 45%, rgba(255,255,255,0.4) 60%, transparent 75%),
-                 radial-gradient(ellipse 90% 40% at 35% 70%, rgba(255,255,255,0.8) 0%, transparent 65%),
-                 radial-gradient(ellipse 100% 45% at 75% 73%, rgba(255,255,255,0.7) 0%, transparent 70%),
-                 linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.8) 75%, white 90%)
+                 radial-gradient(ellipse 120% 35% at 50% 40%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.3) 80%, transparent 100%),
+                 radial-gradient(ellipse 90% 30% at 30% 38%, rgba(255,255,255,0.8) 0%, transparent 70%),
+                 radial-gradient(ellipse 100% 32% at 70% 42%, rgba(255,255,255,0.7) 0%, transparent 75%)
                `,
-               filter: 'blur(25px)'
+               filter: 'blur(30px)'
              }} 
         />
         
-        {/* Additional layer for ultra smooth blend */}
+        {/* Smooth transition layer - connects cloud to solid white */}
         <div className="absolute inset-0" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(255,255,255,0.3) 65%, rgba(255,255,255,0.6) 75%, rgba(255,255,255,0.9) 88%, white 100%)',
-               filter: 'blur(15px)'
+               background: `
+                 linear-gradient(to bottom, 
+                   transparent 0%, 
+                   transparent 30%, 
+                   rgba(255,255,255,0.2) 35%,
+                   rgba(255,255,255,0.5) 42%,
+                   rgba(255,255,255,0.8) 50%,
+                   rgba(255,255,255,0.95) 58%,
+                   white 65%
+                 )
+               `,
+               filter: 'blur(20px)'
+             }} 
+        />
+        
+        {/* Final solid white bottom section */}
+        <div className="absolute inset-0" 
+             style={{
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, white 70%)'
              }} 
         />
         
