@@ -9,8 +9,7 @@ All colors MUST be HSL.
 /* Custom Fonts */
 @font-face {
   font-family: 'Gloria';
-  src: url('/src/assets/fonts/gloria-bold.woff2') format('woff2'),
-       url('/src/assets/fonts/gloria-bold.woff') format('woff');
+  src: url('/src/assets/fonts/gloria-bold-aaa-2.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -18,16 +17,7 @@ All colors MUST be HSL.
 
 @font-face {
   font-family: 'Gloria';
-  src: url('/src/assets/fonts/gloria-demibold.woff2') format('woff2'),
-       url('/src/assets/fonts/gloria-demibold.woff') format('woff');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Gloria';
-  src: url('/src/assets/fonts/gloria-regular.woff2') format('woff2');
+  src: url('/src/assets/fonts/gloria-regular-aaa-2.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -35,7 +25,7 @@ All colors MUST be HSL.
 
 @font-face {
   font-family: 'Gloria';
-  src: url('/src/assets/fonts/gloria-light.woff') format('woff');
+  src: url('/src/assets/fonts/gloria-light-aaa.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
