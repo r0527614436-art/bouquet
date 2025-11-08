@@ -1,12 +1,11 @@
 import React from 'react';
-import { X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
+import arrowCircle from '@/assets/arrow-circle.png';
 
 interface CatalogItem {
   id: string;
@@ -34,48 +33,15 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   onPrevious,
   onNext,
 }) => {
-  const { toast } = useToast();
-  
-  const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('categories')
-        .select('*')
-        .order('created_at', { ascending: true });
-      if (error) throw error;
-      return data || [];
-    }
-  });
-
   if (!currentItem) return null;
 
   const currentIndex = items.findIndex(item => item.id === currentItem.id);
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === items.length - 1;
   
-  const handleDownloadCatalog = async () => {
-    try {
-      const success = await downloadCatalogPDF(items, categories);
-      if (success) {
-        toast({
-          title: "הורדת קטלוג",
-          description: "הקטלוג הורד בהצלחה",
-        });
-      } else {
-        toast({
-          title: "שגיאה",
-          description: "שגיאה בהורדת הקטלוג",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "שגיאה",
-        description: "שגיאה בהורדת הקטלוג",
-        variant: "destructive",
-      });
-    }
+  const handleOrder = () => {
+    const message = `שלום, אני מעוניין/ת להזמין את הפריט: ${currentItem.title}${currentItem.price ? ` במחיר ₪${currentItem.price}` : ''}`;
+    window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -147,10 +113,21 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           {/* Item info overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/80 to-transparent backdrop-blur-sm border-t border-primary/20 p-6">
             <div className="text-foreground">
-              <h3 className="text-2xl font-bold mb-2 text-primary bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{currentItem.title}</h3>
-              {currentItem.price && (
-                <p className="text-xl font-bold text-accent mb-2">₪{currentItem.price}</p>
-              )}
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold mb-2 text-primary bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{currentItem.title}</h3>
+                  {currentItem.price && (
+                    <p className="text-xl font-bold text-accent">₪{currentItem.price}</p>
+                  )}
+                </div>
+                <button
+                  onClick={handleOrder}
+                  className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg"
+                >
+                  <span className="font-medium">להזמנה</span>
+                  <img src={arrowCircle} alt="arrow" className="h-5 w-5" />
+                </button>
+              </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm text-muted-foreground bg-secondary/20 px-3 py-1 rounded-full">
                   {currentIndex + 1} מתוך {items.length}
