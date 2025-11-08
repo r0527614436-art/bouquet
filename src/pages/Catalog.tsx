@@ -209,7 +209,7 @@ const Catalog = () => {
       >
         {/* Logo - Top Left */}
         <div className="absolute top-8 left-8 z-20">
-          <div className="bg-gray-100 rounded-lg p-2">
+          <div className="bg-gray-100 rounded-b-lg rounded-t-full p-2">
             <img 
               src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
               alt="בוקט לוגו" 
