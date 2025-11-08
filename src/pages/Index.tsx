@@ -600,8 +600,8 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row gap-12 items-start">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row gap-8 items-start">
             {/* Left Side - Title and Contact Info */}
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
@@ -650,7 +650,7 @@ const Index = () => {
 
             {/* Right Side - Contact Form */}
             <div className="w-full md:w-1/2">
-              <form onSubmit={handleContactSubmit} className="space-y-8 p-8">
+              <form onSubmit={handleContactSubmit} className="space-y-6 p-4 max-w-md">
                 <div className="space-y-2 text-right">
                   <label htmlFor="name" className="block text-sm font-ploni-medium text-[#314020]">
                     שם מלא
