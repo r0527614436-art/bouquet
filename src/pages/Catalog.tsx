@@ -202,32 +202,50 @@ const Catalog = () => {
                  radial-gradient(ellipse 90% 20% at 30% 90%, rgba(255,255,255,0.8) 0%, transparent 70%),
                  radial-gradient(ellipse 100% 22% at 70% 94%, rgba(255,255,255,0.7) 0%, transparent 75%)
                `,
-               filter: 'blur(30px)'
+               filter: 'blur(35px)'
              }} 
         />
         
-        {/* Smooth transition layer - connects cloud to solid white */}
+        {/* Multiple smooth transition layers for seamless blend */}
         <div className="absolute inset-0" 
              style={{
                background: `
                  linear-gradient(to bottom, 
                    transparent 0%, 
-                   transparent 75%, 
-                   rgba(255,255,255,0.2) 80%,
-                   rgba(255,255,255,0.5) 85%,
-                   rgba(255,255,255,0.8) 90%,
-                   rgba(255,255,255,0.95) 95%,
-                   white 98%
+                   transparent 72%, 
+                   rgba(255,255,255,0.1) 76%,
+                   rgba(255,255,255,0.25) 80%,
+                   rgba(255,255,255,0.45) 84%,
+                   rgba(255,255,255,0.65) 88%,
+                   rgba(255,255,255,0.85) 92%,
+                   rgba(255,255,255,0.95) 96%,
+                   white 100%
                  )
                `,
-               filter: 'blur(20px)'
+               filter: 'blur(25px)'
+             }} 
+        />
+        
+        {/* Additional ultra-soft blend layer */}
+        <div className="absolute inset-0" 
+             style={{
+               background: `
+                 linear-gradient(to bottom, 
+                   transparent 0%, 
+                   transparent 78%, 
+                   rgba(255,255,255,0.3) 85%,
+                   rgba(255,255,255,0.7) 92%,
+                   white 100%
+                 )
+               `,
+               filter: 'blur(40px)'
              }} 
         />
         
         {/* Final solid white bottom section */}
         <div className="absolute inset-0" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 93%, white 99%)'
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(255,255,255,0.5) 95%, white 100%)'
              }} 
         />
         
