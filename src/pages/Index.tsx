@@ -323,8 +323,18 @@ const Index = () => {
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
-              textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+              color: '#B8860B',
+              textShadow: `
+                2px 2px 0px #8B6914,
+                4px 4px 0px #6B4C0F,
+                6px 6px 0px #4A330A,
+                8px 8px 0px #2E2008,
+                10px 10px 0px #1A1204,
+                12px 12px 20px rgba(0,0,0,0.5),
+                -1px -1px 0px #DAA520,
+                -2px -2px 0px #F0E68C
+              `
+            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
