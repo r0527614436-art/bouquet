@@ -225,6 +225,10 @@ const Order = () => {
                 <img 
                   src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
                   alt="בוקט לוגו" 
+                  width="476" 
+                  height="726"
+                  loading="lazy"
+                  decoding="async"
                   className="h-32 w-auto contrast-125 brightness-110"
                 />
               </div>

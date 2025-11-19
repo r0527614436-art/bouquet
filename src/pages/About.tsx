@@ -27,18 +27,18 @@ const About = () => {
               {/* Second smaller image - now leftmost */}
               <div className="flex flex-col justify-end h-[500px]">
                 <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
-                  <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" width="1920" height="719" loading="lazy" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Single smaller image */}
               <div className="flex flex-col justify-end h-[500px]">
                 <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
-                  <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" width="1920" height="719" loading="lazy" className="w-full h-full object-cover" />
+                  <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               </div>
               {/* Large image with top-left rounded */}
               <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
-                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" width="1920" height="719" loading="lazy" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" width="256" height="500" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -73,7 +73,7 @@ const About = () => {
       <footer className="bg-black py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" className="h-20 w-auto mb-6 brightness-0 invert" />
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" decoding="async" className="h-20 w-auto mb-6 brightness-0 invert" />
             <p className="text-white/60 text-sm text-center">
               © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
             </p>

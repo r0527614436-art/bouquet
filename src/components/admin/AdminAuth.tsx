@@ -34,6 +34,10 @@ const AdminAuth = ({ onLogin }: AdminAuthProps) => {
           <img 
             src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
             alt="בוקט לוגו" 
+            width="476" 
+            height="726"
+            loading="lazy"
+            decoding="async"
             className="h-16 w-auto mx-auto mb-4"
           />
           <h2 className="text-2xl font-bold text-pink-800">פאנל ניהול</h2>
