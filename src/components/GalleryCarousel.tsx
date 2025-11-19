@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import arrowCircle from '@/assets/arrow-circle.png';
 interface GallerySlide {
   id: string;
   image_url: string;
@@ -96,22 +96,12 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
 
         {/* Navigation Buttons - Below Carousel */}
         <div className="flex items-center justify-center gap-8 mt-4">
-          <button onClick={scrollPrev} className="w-16 h-16 hover:scale-110 transition-transform text-white" aria-label="Previous slide">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="30" fill="white" stroke="currentColor" strokeWidth="2"/>
-              <g transform="translate(16, 16)">
-                <ChevronRight className="w-8 h-8 text-[#314020]" />
-              </g>
-            </svg>
+          <button onClick={scrollPrev} className="w-16 h-16 hover:scale-110 transition-transform" aria-label="Previous slide">
+            <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
           </button>
 
-          <button onClick={scrollNext} className="w-16 h-16 hover:scale-110 transition-transform text-white" aria-label="Next slide">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="30" fill="white" stroke="currentColor" strokeWidth="2"/>
-              <g transform="translate(16, 16)">
-                <ChevronLeft className="w-8 h-8 text-[#314020]" />
-              </g>
-            </svg>
+          <button onClick={scrollNext} className="w-16 h-16 hover:scale-110 transition-transform" aria-label="Next slide">
+            <img src={arrowCircle} alt="Next" className="w-full h-full" />
           </button>
         </div>
       </div>

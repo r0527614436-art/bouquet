@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import arrowCircle from '@/assets/arrow-circle.png';
 
 interface CatalogItem {
   id: string;
@@ -124,7 +125,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
                   className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg"
                 >
                   <span className="font-medium">להזמנה</span>
-                  <ChevronLeft className="h-5 w-5" />
+                  <img src={arrowCircle} alt="arrow" className="h-5 w-5" />
                 </button>
               </div>
               <div className="flex items-center justify-between">

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronLeft, ChevronRight, Heart, Gift, Crown, Sparkles, Camera, Phone, Mail, MapPin, Flower2, Truck, Clock, ArrowDown } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight, Heart, Gift, Crown, Sparkles, Camera, Phone, Mail, MapPin } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -8,7 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { GalleryCarousel } from '@/components/GalleryCarousel';
 import Testimonials from '@/components/Testimonials';
+import wazeIcon from '@/assets/waze-icon.png';
+import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
+import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
+import arrowCircle from '@/assets/arrow-circle.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 interface HomepageSlide {
@@ -349,28 +353,9 @@ const Index = () => {
           <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
             <div className="relative w-24 h-24 hover:scale-110 transition-transform duration-300 mx-[59px] py-0 px-0 my-0 rounded-full">
               {/* Rotating text circle */}
-              <svg 
-                className="w-full h-full drop-shadow-2xl animate-spin-slow absolute inset-0 z-20" 
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
-                  />
-                </defs>
-                <text className="text-[20px] font-ploni-black fill-[#314020]">
-                  <textPath href="#circlePath" startOffset="0%">
-                    להורדת הקטלוג הדיגיטלי שלנו • להורדת הקטלוג הדיגיטלי שלנו •
-                  </textPath>
-                </text>
-              </svg>
-              
+              <img src={downloadCatalogBtn} alt="" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
               {/* Static arrow in center */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
-                <ArrowDown className="w-20 h-20 text-[#314020]" strokeWidth={2.5} />
-              </div>
+              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 z-30" />
             </div>
           </button>
         </div>
@@ -447,10 +432,7 @@ const Index = () => {
                   <button className="flex items-center gap-4 hover:scale-105 transition-transform">
                     <span className="font-assistant text-2xl font-bold text-gray-800">עוד עלינו</span>
                     <div className="w-12 h-12">
-                      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="24" cy="24" r="23" fill="white" stroke="currentColor" strokeWidth="2"/>
-                        <ChevronLeft className="w-6 h-6 text-[#314020]" style={{transform: 'translate(12px, 12px)'}} />
-                      </svg>
+                      <img src={arrowCircle} alt="עוד עלינו" className="w-full h-full" />
                     </div>
                   </button>
                 </Link>
@@ -465,29 +447,26 @@ const Index = () => {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
-              icon: Flower2,
+              icon: '/lovable-uploads/icon-flower.png',
               text: 'פרחים טריים\nיום-יום'
             }, {
-              icon: Sparkles,
+              icon: '/lovable-uploads/icon-bouquet.png',
               text: 'מגוון עיצובים\nמקוריים'
             }, {
-              icon: Gift,
+              icon: '/lovable-uploads/icon-gift.png',
               text: 'עיצוב מתנות\nופרחים'
             }, {
-              icon: Truck,
+              icon: '/lovable-uploads/icon-delivery.png',
               text: 'משלוחים\nבפריסה ארצית'
             }, {
-              icon: Clock,
+              icon: '/lovable-uploads/icon-time.png',
               text: 'עמידה\nבזמנים'
-            }].map((service, idx) => {
-              const IconComponent = service.icon;
-              return <div key={idx} className="flex flex-col items-center text-center">
+            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  <IconComponent className="h-12 w-12 text-[#314020]" strokeWidth={2} />
+                  <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" className="h-12 w-12 object-contain" />
                 </div>
                 <p className="text-white font-ploni text-sm md:text-base font-black whitespace-pre-line">{service.text}</p>
-              </div>;
-            })}
+              </div>)}
           </div>
         </div>
       </section>
@@ -523,10 +502,7 @@ const Index = () => {
                 <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
                   <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
                   <div className="w-12 h-12">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="24" cy="24" r="23" fill="white" stroke="currentColor" strokeWidth="2"/>
-                      <ChevronLeft className="w-6 h-6 text-[#314020]" style={{transform: 'translate(12px, 12px)'}} />
-                    </svg>
+                    <img src={arrowCircle} alt="לכל העיצובים" className="w-full h-full" />
                   </div>
                 </button>
               </Link>
