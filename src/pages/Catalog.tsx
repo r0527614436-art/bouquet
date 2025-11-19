@@ -277,7 +277,7 @@ const Catalog = () => {
               Catalog
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-ploni-black-2 text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" 
+            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" 
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
@@ -427,9 +427,9 @@ const Catalog = () => {
         {/* Contact Section */}
         <div className="mt-16 border-t pt-12">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-['Gloria'] text-center mb-8">
-              <span className="text-gray-400">Contact</span>
-              <span className="mr-3">צור קשר</span>
+            <h2 className="text-3xl text-center mb-8">
+              <span className="text-gray-400 font-['Gloria']">Contact</span>
+              <span className="mr-3 font-synopsis">צור קשר</span>
             </h2>
             
             <div className="space-y-4 text-right">
