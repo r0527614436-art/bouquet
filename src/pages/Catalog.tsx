@@ -320,15 +320,6 @@ const Catalog = () => {
           </div>
         </div>
 
-        {/* Secondary Filter Buttons */}
-        <div className="mb-8">
-          <div className="flex flex-wrap justify-center gap-3 text-sm">
-            <button className="text-gray-600 hover:text-gray-800">• גלריה</button>
-            <button className="text-gray-600 hover:text-gray-800">• צבע</button>
-            <button className="text-gray-600 hover:text-gray-800">• זר פרחים</button>
-          </div>
-        </div>
-
         {/* Items Grid */}
         <div className="space-y-12">
           {selectedCategory === '' ? (/* Show all categories with their items */
