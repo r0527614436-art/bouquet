@@ -428,7 +428,7 @@ const Catalog = () => {
         <div className="mt-16 border-t pt-12">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl text-center mb-8">
-              <span className="text-gray-400 font-['Gloria']">Contact</span>
+              <span className="text-gray-400 font-synopsis">Contact</span>
               <span className="mr-3 font-synopsis">צור קשר</span>
             </h2>
             
