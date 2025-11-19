@@ -39,10 +39,6 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === items.length - 1;
   
-  const handleOrder = () => {
-    const message = `שלום, אני מעוניין/ת להזמין את הפריט: ${currentItem.title}${currentItem.price ? ` במחיר ₪${currentItem.price}` : ''}`;
-    window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
-  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft' && !isLast) {
@@ -97,46 +93,31 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             </Button>
           )}
 
-          {/* Main image */}
-          <div className="w-full h-full flex items-center justify-center p-6">
-            <div className="relative max-w-full max-h-full">
+          {/* Main image - Full screen */}
+          <div className="w-full h-full flex items-center justify-center p-4">
+            <div className="relative w-full h-full">
               <img
                 src={currentItem.image_url}
                 alt={currentItem.title}
-                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border-2 border-primary/20"
-                style={{ maxHeight: 'calc(100vh - 12rem)' }}
+                className="w-full h-full object-contain rounded-2xl shadow-2xl"
+                style={{ maxHeight: 'calc(100vh - 8rem)' }}
               />
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-primary/10 via-transparent to-transparent pointer-events-none"></div>
             </div>
           </div>
 
           {/* Item info overlay */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/80 to-transparent backdrop-blur-sm border-t border-primary/20 p-6">
             <div className="text-foreground">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-2 text-primary bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{currentItem.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-primary">דגם {currentItem.title}</h3>
                   {currentItem.price && (
-                    <p className="text-xl font-bold text-accent">₪{currentItem.price}</p>
+                    <p className="text-xl font-bold text-gray-700">₪{currentItem.price}</p>
                   )}
                 </div>
-                <button
-                  onClick={handleOrder}
-                  className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors shadow-lg"
-                >
-                  <span className="font-medium">להזמנה</span>
-                  <img src={arrowCircle} alt="arrow" className="h-5 w-5" />
-                </button>
-              </div>
-              <div className="flex items-center justify-between">
                 <p className="text-sm text-muted-foreground bg-secondary/20 px-3 py-1 rounded-full">
                   {currentIndex + 1} מתוך {items.length}
                 </p>
-                <div className="flex gap-2">
-                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-secondary rounded-full animate-pulse delay-150"></div>
-                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse delay-300"></div>
-                </div>
               </div>
             </div>
           </div>

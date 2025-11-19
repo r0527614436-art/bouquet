@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import arrowCircle from '@/assets/arrow-circle.png';
 import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
+import { OrderDialog } from '@/components/ui/order-dialog';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
@@ -29,7 +30,9 @@ interface CatalogItem {
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
+  const [currentOrderItem, setCurrentOrderItem] = useState<CatalogItem | null>(null);
   const {
     addToCart,
     getTotalItems
@@ -169,6 +172,12 @@ const Catalog = () => {
   const handleImageClick = (item: CatalogItem) => {
     setCurrentImageItem(item);
     setImageViewerOpen(true);
+  };
+
+  const handleOrderClick = (item: CatalogItem, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent opening image viewer
+    setCurrentOrderItem(item);
+    setOrderDialogOpen(true);
   };
   const handlePreviousImage = () => {
     if (!currentImageItem) return;
@@ -362,10 +371,13 @@ const Catalog = () => {
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
                                   {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
-                                  <div className="flex items-center gap-2">
+                                  <button 
+                                    onClick={(e) => handleOrderClick(item, e)}
+                                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                                  >
                                     <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
                                     <span className="text-sm font-medium">להזמנה</span>
-                                  </div>
+                                  </button>
                                 </div>
                               </div>
                             </div>;
@@ -407,10 +419,13 @@ const Catalog = () => {
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
                                   {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
-                                  <div className="flex items-center gap-2">
+                                  <button 
+                                    onClick={(e) => handleOrderClick(item, e)}
+                                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                                  >
                                     <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
                                     <span className="text-sm font-medium">להזמנה</span>
-                                  </div>
+                                  </button>
                                 </div>
                               </div>
                             </div>;
@@ -472,6 +487,9 @@ const Catalog = () => {
 
         {/* Image Viewer Modal */}
         <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} />
+        
+        {/* Order Dialog */}
+        <OrderDialog isOpen={orderDialogOpen} onClose={() => setOrderDialogOpen(false)} item={currentOrderItem} />
       </div>
     </div>;
 };
