@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import arrowCircle from '@/assets/arrow-circle-testimonials.png';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Testimonial {
   id: string;
@@ -59,17 +59,29 @@ const Testimonials = () => {
             <div className="flex gap-4 justify-end">
               <button
                 onClick={handlePrevious}
-                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-white"
                 disabled={testimonials.length <= 1}
+                aria-label="Previous"
               >
-                <img src={arrowCircle} alt="Previous" className="w-full h-full" />
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="23" fill="white" stroke="currentColor" strokeWidth="2"/>
+                  <g transform="translate(12, 12)">
+                    <ChevronRight className="w-6 h-6 text-[#314020]" />
+                  </g>
+                </svg>
               </button>
               <button
                 onClick={handleNext}
-                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed rotate-180"
+                className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-white"
                 disabled={testimonials.length <= 1}
+                aria-label="Next"
               >
-                <img src={arrowCircle} alt="Next" className="w-full h-full" />
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="23" fill="white" stroke="currentColor" strokeWidth="2"/>
+                  <g transform="translate(12, 12)">
+                    <ChevronLeft className="w-6 h-6 text-[#314020]" />
+                  </g>
+                </svg>
               </button>
             </div>
           </div>
