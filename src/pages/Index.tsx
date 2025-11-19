@@ -324,7 +324,7 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
               textShadow: '4px 4px 8px rgba(0,0,0,0.6)'
-            }} className="font-ploni-black-2 text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
+            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold text-primary mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
             <p style={{
@@ -400,7 +400,7 @@ const Index = () => {
                 <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
@@ -476,7 +476,7 @@ const Index = () => {
                 <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
                   Catalog
                 </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
                   קטלוג
                 </h2>
               </div>
@@ -534,7 +534,7 @@ const Index = () => {
                   <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-tight select-none -mt-4">
                     Work<br />process
                   </h2>
-                  <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
+                  <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
@@ -609,7 +609,7 @@ const Index = () => {
                 <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none -translate-y-6">
                   Contact us
                 </h2>
-                <h2 className="font-ploni-black-2 text-6xl md:text-7xl font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   צור קשר
                 </h2>
               </div>

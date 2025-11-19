@@ -30,6 +30,7 @@ export default {
 				'assistant': ['Assistant', 'sans-serif'],
 				'varela-round': ['Varela Round', 'sans-serif'],
 				'amatic-sc': ['Amatic SC', 'cursive'],
+				'synopsis': ['Synopsis', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
