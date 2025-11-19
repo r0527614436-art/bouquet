@@ -135,6 +135,10 @@ All colors MUST be HSL.
     --border: 93 20% 85%;
     --input: 93 20% 85%;
     --ring: 93 33% 19%;
+    
+    --gold: 43 74% 49%;
+    --gold-light: 43 90% 60%;
+    --gold-dark: 43 60% 35%;
 
     --radius: 0.5rem;
 
