@@ -323,17 +323,21 @@ const Index = () => {
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
             <h1 style={{
-              color: '#B8860B',
+              color: '#E8D4A0',
               textShadow: `
-                2px 2px 0px #8B6914,
-                4px 4px 0px #6B4C0F,
-                6px 6px 0px #4A330A,
-                8px 8px 0px #2E2008,
-                10px 10px 0px #1A1204,
-                12px 12px 20px rgba(0,0,0,0.5),
-                -1px -1px 0px #DAA520,
-                -2px -2px 0px #F0E68C
-              `
+                1px 1px 0px #C9A961,
+                2px 2px 0px #B8954D,
+                3px 3px 0px #A78139,
+                4px 4px 0px #967225,
+                5px 5px 0px #855E11,
+                6px 6px 2px rgba(0,0,0,0.4),
+                7px 7px 4px rgba(0,0,0,0.3),
+                8px 8px 6px rgba(0,0,0,0.2),
+                -1px -1px 0px #F5E8C8,
+                0px 0px 20px rgba(232, 212, 160, 0.3)
+              `,
+              WebkitTextStroke: '1px #D4B66A',
+              filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.25))'
             }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-2 tracking-wider ml-auto">
               בוקט
             </h1>
