@@ -411,7 +411,7 @@ const Index = () => {
             <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
                 <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -620,7 +620,7 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none -translate-y-6">
                   Contact us
                 </h2>
                 <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
