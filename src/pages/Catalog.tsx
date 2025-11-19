@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
+import arrowCircle from '@/assets/arrow-circle.png';
 import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { useCart } from '@/contexts/CartContext';
@@ -360,11 +361,11 @@ const Catalog = () => {
                                 
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium">להזמנה</span>
-                                    <ArrowRight className="h-4 w-4" />
-                                  </div>
                                   {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
+                                  <div className="flex items-center gap-2">
+                                    <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                                    <span className="text-sm font-medium">להזמנה</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>;
@@ -405,11 +406,11 @@ const Catalog = () => {
                                 
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium">להזמנה</span>
-                                    <ArrowRight className="h-4 w-4" />
-                                  </div>
                                   {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
+                                  <div className="flex items-center gap-2">
+                                    <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                                    <span className="text-sm font-medium">להזמנה</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>;
