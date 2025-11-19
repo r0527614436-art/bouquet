@@ -67,7 +67,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
               marginRight: index === slides.length - 1 ? '0' : '-100px'
             }}>
                   <div className={`relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 ${isSelected ? 'rounded-t-[100px] rounded-b-2xl' : 'rounded-2xl'}`}>
-                    <img src={slide.image_url} alt={slide.title} width="1920" height="719" loading={index === 0 ? "eager" : "lazy"} onError={e => {
+                    <img src={slide.image_url} alt={slide.title} width="480" height="640" loading={index === 0 ? "eager" : "lazy"} decoding="async" onError={e => {
                   console.error('Failed to load image:', slide.image_url);
                   e.currentTarget.style.display = 'none';
                 }} style={{
