@@ -31,6 +31,7 @@ export default {
 				'varela-round': ['Varela Round', 'sans-serif'],
 				'amatic-sc': ['Amatic SC', 'cursive'],
 				'synopsis': ['Synopsis', 'sans-serif'],
+				'allura': ['Allura', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
