@@ -283,11 +283,11 @@ const Catalog = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-8">
             {/* English Background Text - more visible and smaller */}
-            <h1 className="font-allura text-[85px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(20px, -15px)' }}>
+            <h1 className="font-allura text-[100px] md:text-[140px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               Catalog
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" 
+            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>

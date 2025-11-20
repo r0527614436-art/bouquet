@@ -47,10 +47,10 @@ const Testimonials = () => {
           {/* Title and Navigation - Right Side */}
           <div className="lg:w-1/3">
             <div className="relative mb-8">
-              <h2 className="font-allura text-[60px] md:text-[70px] font-semibold text-muted-foreground/40 leading-tight select-none">
+              <h2 className="font-allura text-[60px] md:text-[70px] font-semibold text-muted-foreground/40 leading-tight select-none" style={{ transform: 'translate(15px, -10px)' }}>
                 recommen<br/>dations
               </h2>
-              <h2 className="font-synopsis text-5xl md:text-6xl font-semibold text-white absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
+              <h2 className="font-synopsis text-[60px] md:text-[70px] font-semibold text-white absolute top-1/2 right-0 -translate-y-1/2 leading-tight whitespace-nowrap text-right">
                 זה מה<br/>שאומרים<br/>עלינו.
               </h2>
             </div>
