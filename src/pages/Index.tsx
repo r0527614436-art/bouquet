@@ -411,7 +411,7 @@ const Index = () => {
             <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
                   About
                 </h2>
                 <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -487,7 +487,7 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-ploni-black-2 text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
                   Catalog
                 </h2>
                 <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
