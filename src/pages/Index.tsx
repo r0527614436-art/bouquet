@@ -411,10 +411,10 @@ const Index = () => {
             <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
                   About
                 </h2>
-                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-gray-800 absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
@@ -487,10 +487,10 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none">
+                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
                   Catalog
                 </h2>
-                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-gray-800 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
                   קטלוג
                 </h2>
               </div>
@@ -545,10 +545,10 @@ const Index = () => {
             <div className="lg:sticky lg:top-20 lg:self-start pr-8">
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative text-right">
-                  <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-tight select-none -mt-4">
+                  <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{ transform: 'translate(15px, -10px)' }}>
                     Work<br />process
                   </h2>
-                  <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
+                  <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-gray-800 absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
@@ -620,10 +620,10 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none -translate-y-6">
+                <h2 className="font-allura text-[80px] md:text-[90px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
                   Contact us
                 </h2>
-                <h2 className="font-synopsis text-6xl md:text-7xl font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   צור קשר
                 </h2>
               </div>
