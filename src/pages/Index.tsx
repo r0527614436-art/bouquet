@@ -400,7 +400,7 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full text-right flex flex-col justify-start pt-12">
+            <div className="w-full text-right flex flex-col justify-start pt-12 md:pl-8">
               {/* Title with layered effect */}
               <div className="relative mb-6">
                 <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
@@ -412,15 +412,15 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10">
-                <p className="px-0 py-0 mx-0 text-right font-normal mr-0 pr-0 pl-0">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 max-w-none">
+                <p className="text-right font-normal leading-loose">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש .
 ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו  את האווירה.
                 </p>
                 <p className="font-semibold">
                 </p>
-                <p className="font-medium">
+                <p className="font-medium leading-loose">
                   זרי בוקט ישלימו לך את הלוק. דור חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
