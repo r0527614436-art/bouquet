@@ -382,56 +382,54 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex-col md:flex-row-reverse relative pl-0 pt-[33px] pb-0 mt-0 pr-[340px] flex items-end justify-start gap-0">
+          <div className="flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center lg:items-start">
             {/* Images - Right Side */}
-            <div className="flex gap-6 items-end flex-shrink-0 mt-[69px] mb-[87px]">
+            <div className="flex gap-4 md:gap-6 items-end flex-shrink-0 justify-center">
               {/* Second smaller image - now leftmost */}
-              <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
+              <div className="w-32 h-32 md:w-48 md:h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Single smaller image */}
-              <div className="w-48 h-48 rounded-2xl overflow-hidden">
+              <div className="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 pl-0">
+              <div className="w-48 h-64 md:w-64 md:h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full absolute top-6 right-0 z-10 mt-[16px]">
+            <div className="w-full lg:flex-1 px-4 lg:px-0">
               {/* Title with layered effect */}
-              <div className="relative mb-6">
-                <h2 style={{
-                  transform: 'translate(15px, -10px)'
-                }} className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none mb-0 mt-0">
+              <div className="relative mb-6 text-right">
+                <h2
+                  style={{ transform: 'translate(15px, -10px)' }}
+                  className="font-allura text-[60px] md:text-[95px] lg:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none"
+                >
                   About
                 </h2>
-                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[50px] md:text-[80px] lg:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
-                <p className="text-right font-normal leading-loose py-2 mb-0 mx-[138px] mt-0 pt-0 pr-px pl-0 ml-[13px] mr-px pb-[20px]">
-                  אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
-הופכות למציאות של ממש. 
+              <div className="space-y-5 text-gray-700 text-base md:text-xl leading-relaxed font-ploni-aaa font-light">
+                <p className="text-right font-normal leading-loose">
+                  אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
+הופכות למציאות של ממש. 
 ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
                 </p>
-                <p className="font-semibold">
-                </p>
-                <p className="font-medium leading-loose py-2 pl-[420px] mt-8">
-                  זרי בוקט ישלימו לך את הלוק. דור 
+                <p className="font-medium leading-loose text-right">
+                  זרי בוקט ישלימו לך את הלוק. דור 
 חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
 
-
               {/* More About Button */}
-              <div className="mt-6">
-                <Link to="/about" className="pl-0 pb-0 mb-0">
-                  <button className="flex items-center gap-4 hover:scale-105 transition-transform">
-                    <span className="font-synopsis text-2xl font-semibold text-[#314020] pb-0">עוד עלינו</span>
+              <div className="mt-6 text-right">
+                <Link to="/about">
+                  <button className="inline-flex items-center gap-4 hover:scale-105 transition-transform">
+                    <span className="font-synopsis text-xl md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
                     <div className="w-12 h-12">
                       <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                     </div>
