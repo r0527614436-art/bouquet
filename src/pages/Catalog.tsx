@@ -297,9 +297,9 @@ const Catalog = () => {
 
           {/* Description Text - on white section */}
           <div className="text-gray-800 text-base md:text-lg space-y-1 mt-24">
-            <p className="font-bold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
-            <p>בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
-            <p>גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
+            <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
+            <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
+            <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
           </div>
         </div>
       </div>
@@ -336,13 +336,13 @@ const Catalog = () => {
           }, {});
           return <div key={category.id} className="space-y-8">
                   <div className="text-center">
-                    <h2 className="text-2xl font-bold text-gray-800">{category.name}</h2>
-                    {category.subtitle && <p className="text-gray-600 mt-1">{category.subtitle}</p>}
+                    <h2 className="text-2xl font-ploni-aaa font-black text-gray-800">{category.name}</h2>
+                    {category.subtitle && <p className="text-gray-600 mt-1 font-ploni-aaa font-light">{category.subtitle}</p>}
                   </div>
                   
                   {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
                       {subcategoryKey !== 'main' && <div className="text-center">
-                          <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
+                          <h3 className="text-lg font-ploni-aaa font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
                         </div>}
@@ -355,19 +355,19 @@ const Catalog = () => {
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   <div className="p-4">
-                                    <p className="text-white text-sm font-medium">דגם {item.title}</p>
+                                    <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
                                   </div>
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
+                                  {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
                                   <button 
                                     onClick={(e) => handleOrderClick(item, e)}
                                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                                   >
                                     <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
-                                    <span className="text-sm font-medium">להזמנה</span>
+                                    <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
                                   </button>
                                 </div>
                               </div>
@@ -390,7 +390,7 @@ const Catalog = () => {
           return <div className="space-y-8">
                   {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
                       {subcategoryKey !== 'main' && <div className="text-center">
-                          <h3 className="text-lg font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
+                          <h3 className="text-lg font-ploni-aaa font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
                             {subcategoryKey}
                           </h3>
                         </div>}
@@ -403,19 +403,19 @@ const Catalog = () => {
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   <div className="p-4">
-                                    <p className="text-white text-sm font-medium">דגם {item.title}</p>
+                                    <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
                                   </div>
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
                                 <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  {item.price && <span className="text-lg font-bold">₪{item.price}</span>}
+                                  {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
                                   <button 
                                     onClick={(e) => handleOrderClick(item, e)}
                                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                                   >
                                     <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
-                                    <span className="text-sm font-medium">להזמנה</span>
+                                    <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
                                   </button>
                                 </div>
                               </div>
@@ -428,13 +428,13 @@ const Catalog = () => {
         </div>
 
         {filteredItems.length === 0 && <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">אין פריטים בקטגוריה זו</p>
+            <p className="text-gray-500 text-lg font-ploni-aaa font-light">אין פריטים בקטגוריה זו</p>
           </div>}
 
         {/* Contact Section */}
         <div className="mt-16 border-t pt-12">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl text-center mb-8">
+            <h2 className="text-3xl text-center mb-8 font-ploni-aaa">
               <span className="text-gray-400 font-synopsis">Contact</span>
               <span className="mr-3 font-synopsis">צור קשר</span>
             </h2>
@@ -451,13 +451,13 @@ const Catalog = () => {
               </div>
               
               <div className="pt-6">
-                <button onClick={() => window.open('https://wa.me/972527614436', '_blank')} className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white py-3 rounded-full transition-colors">
+                <button onClick={() => window.open('https://wa.me/972527614436', '_blank')} className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white py-3 rounded-full transition-colors font-ploni-aaa font-medium">
                   שיחה
                 </button>
               </div>
             </div>
 
-            <div className="mt-8 text-center space-y-2 text-sm text-gray-600">
+            <div className="mt-8 text-center space-y-2 text-sm text-gray-600 font-ploni-aaa font-light">
               <p>שערי תשובה 14, מודיעין עילית</p>
               <p>052-7614436</p>
               <p>R0522614436@GMAIL.COM</p>
