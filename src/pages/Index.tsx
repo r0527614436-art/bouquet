@@ -382,9 +382,9 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
+          <div className="flex flex-col md:flex-row-reverse gap-0 items-start relative">
             {/* Images - Right Side */}
-            <div className="flex gap-6 items-end">
+            <div className="flex gap-6 items-end flex-shrink-0">
               {/* Second smaller image - now leftmost */}
               <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
@@ -400,7 +400,7 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full text-right flex flex-col justify-start pt-12 md:pl-8">
+            <div className="w-full absolute top-12 right-0 z-10">
               {/* Title with layered effect */}
               <div className="relative mb-6">
                 <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
@@ -412,18 +412,19 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 max-w-none">
-                <p className="text-right font-normal leading-loose">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
+                <p className="text-right font-normal leading-loose bg-stone-50 py-2">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש .
 ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו  את האווירה.
                 </p>
                 <p className="font-semibold">
                 </p>
-                <p className="font-medium leading-loose">
+                <p className="font-medium leading-loose bg-stone-50 py-2">
                   זרי בוקט ישלימו לך את הלוק. דור חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
+
 
               {/* More About Button */}
               <div className="mt-6">
