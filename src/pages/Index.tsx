@@ -413,10 +413,10 @@ const Index = () => {
                 </h2>
               </div>
               <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
-                <p className="text-right font-normal leading-loose py-2 mb-0 mx-[138px] mt-0 pt-0 pr-px pl-0 ml-[13px] mr-px pb-[46px]">
+                <p className="text-right font-normal leading-loose py-2 mb-0 mx-[138px] mt-0 pt-0 pr-px pl-0 ml-[13px] mr-px pb-[20px]">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
-הופכות למציאות של ממש.
- ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
+הופכות למציאות של ממש. 
+ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
                 </p>
                 <p className="font-semibold">
                 </p>
