@@ -52,7 +52,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
       <div className="relative flex flex-col items-center justify-center w-full bg-[#11150d]">
         {/* Carousel */}
         <div className="overflow-visible w-full max-w-[1400px] mb-8 mx-auto" ref={emblaRef}>
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-center">
             {slides.map((slide, index) => {
             const isSelected = index === selectedIndex;
             const distanceFromSelected = Math.abs(index - selectedIndex);
