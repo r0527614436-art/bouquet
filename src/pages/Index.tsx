@@ -382,9 +382,9 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center lg:items-start">
+          <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 lg:gap-0">
             {/* Images - Right Side */}
-            <div className="flex gap-4 md:gap-6 items-end flex-shrink-0 justify-center">
+            <div className="flex gap-4 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px]">
               {/* Second smaller image - now leftmost */}
               <div className="w-32 h-32 md:w-48 md:h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
@@ -400,9 +400,9 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full lg:flex-1 px-4 lg:px-0">
+            <div className="w-full px-4 lg:px-0 lg:absolute lg:top-6 lg:right-0 lg:z-10">
               {/* Title with layered effect */}
-              <div className="relative mb-6 text-right">
+              <div className="relative mb-6">
                 <h2
                   style={{ transform: 'translate(15px, -10px)' }}
                   className="font-allura text-[60px] md:text-[95px] lg:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none"
@@ -413,22 +413,22 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-base md:text-xl leading-relaxed font-ploni-aaa font-light">
-                <p className="text-right font-normal leading-loose">
+              <div className="space-y-5 text-gray-700 text-base md:text-xl leading-relaxed font-ploni-aaa font-light lg:pr-0 lg:pl-[280px]">
+                <p className="text-right font-normal leading-loose lg:-mt-8">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש. 
 ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
                 </p>
-                <p className="font-medium leading-loose text-right">
+                <p className="font-medium leading-loose text-right lg:pl-[420px] lg:mt-8">
                   זרי בוקט ישלימו לך את הלוק. דור 
 חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
 
               {/* More About Button */}
-              <div className="mt-6 text-right">
+              <div className="mt-6">
                 <Link to="/about">
-                  <button className="inline-flex items-center gap-4 hover:scale-105 transition-transform">
+                  <button className="flex items-center gap-4 hover:scale-105 transition-transform">
                     <span className="font-synopsis text-xl md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
                     <div className="w-12 h-12">
                       <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
