@@ -382,9 +382,9 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row-reverse gap-0 items-start relative">
+          <div className="flex-col md:flex-row-reverse gap-0 relative pl-0 pt-[33px] pb-0 mt-0 pr-[340px] flex items-center justify-center">
             {/* Images - Right Side */}
-            <div className="flex gap-6 items-end flex-shrink-0">
+            <div className="flex gap-6 items-end flex-shrink-0 mt-[69px] mb-[87px]">
               {/* Second smaller image - now leftmost */}
               <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
@@ -394,18 +394,18 @@ const Index = () => {
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
+              <div className="w-64 h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 pl-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full absolute top-6 right-0 z-10">
+            <div className="w-full absolute top-6 right-0 z-10 mt-[16px]">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
+                <h2 style={{
                   transform: 'translate(15px, -10px)'
-                }}>
+                }} className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none mb-0 mt-0">
                   About
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -413,14 +413,16 @@ const Index = () => {
                 </h2>
               </div>
               <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
-                <p className="text-right font-normal leading-loose py-2 mx-0 mr-0 ml-[131px] -mt-8 mb-0 pt-[6px] pb-0">
-                  אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
- ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
+                <p className="text-right font-normal leading-loose py-2 mr-0 mb-0 pb-0 mx-[138px] pl-[93px] pr-0 ml-[119px] mt-0 pt-[33px]">
+                  אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
+הופכות למציאות של ממש.
+ ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
                 </p>
                 <p className="font-semibold">
                 </p>
                 <p className="font-medium leading-loose py-2 pl-[420px] mt-8">
-                  זרי בוקט ישלימו לך את הלוק. דור חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
+                  זרי בוקט ישלימו לך את הלוק. דור 
+חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
 
