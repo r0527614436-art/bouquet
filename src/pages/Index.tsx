@@ -413,9 +413,9 @@ const Index = () => {
                 </h2>
               </div>
               <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
-                <p className="text-right font-normal leading-loose py-2 mx-0 mr-0 ml-[131px] mt-0 mb-0 pt-[6px] pb-0">
+                <p className="text-right font-normal leading-loose py-2 mx-0 mr-0 ml-[131px] -mt-8 mb-0 pt-[6px] pb-0">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
- ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
+ ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
                 </p>
                 <p className="font-semibold">
                 </p>
