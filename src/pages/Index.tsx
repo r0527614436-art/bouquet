@@ -420,7 +420,7 @@ const Index = () => {
                 </p>
                 <p className="font-semibold">
                 </p>
-                <p className="font-medium leading-loose bg-stone-50 py-2 pl-[200px]">
+                <p className="font-medium leading-loose py-2 pl-[420px]">
                   זרי בוקט ישלימו לך את הלוק. דור חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
