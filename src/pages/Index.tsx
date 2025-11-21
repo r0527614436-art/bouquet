@@ -193,10 +193,9 @@ const Index = () => {
       });
     }
   };
-
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
     if (!contactForm.name.trim() || !contactForm.phone.trim() || !contactForm.email.trim() || !contactForm.message.trim()) {
       toast({
@@ -217,14 +216,11 @@ const Index = () => {
       });
       return;
     }
-
     setIsSubmitting(true);
-
     try {
       // Send message via WhatsApp
       const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
       window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
-      
       toast({
         title: "ההודעה נשלחה בהצלחה",
         description: "ניצור איתך קשר בהקדם"
@@ -411,7 +407,9 @@ const Index = () => {
             <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
+                  transform: 'translate(15px, -10px)'
+                }}>
                   About
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -420,13 +418,14 @@ const Index = () => {
               </div>
               <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10">
                 <p>
-                  כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
+                  אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
+הופכות למציאות של ממש .
+ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו  את האווירה.
                 </p>
                 <p className="font-semibold">
-                  המטרה שלי ברורה:
                 </p>
                 <p>
-                  לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
+                  זרי בוקט ישלימו לך את הלוק. דור חדש של זרי כלה בסגנון אירופאי וטאצ' מיוחד עם הטופ בפרחים טבעיים, באיכות גבוהה, עיצוב עדכני וגימור מושלם מזכרת שתשאר לנצח.
                 </p>
               </div>
 
@@ -465,7 +464,7 @@ const Index = () => {
             }, {
               icon: '/lovable-uploads/icon-time.png',
               text: 'עמידה\nבזמנים'
-              }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
+            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
                 <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain" />
                 </div>
@@ -487,7 +486,9 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
+                  transform: 'translate(15px, -10px)'
+                }}>
                   Catalog
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
@@ -545,7 +546,9 @@ const Index = () => {
             <div className="lg:sticky lg:top-20 lg:self-start pr-8">
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative text-right">
-                  <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{ transform: 'translate(15px, -10px)' }}>
+                  <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
+                    transform: 'translate(15px, -10px)'
+                  }}>
                     Work<br />process
                   </h2>
                   <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
@@ -620,7 +623,9 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{
+                  transform: 'translate(15px, -10px)'
+                }}>
                   Contact us
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -632,30 +637,21 @@ const Index = () => {
               <div className="space-y-6 mt-10">
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <MapPin className="h-6 w-6 text-[#314020]" />
-                  <button 
-                    onClick={openGoogleMaps}
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]"
-                  >
+                  <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]">
                     שערי תשובה 14 - מודיעין עלית
                   </button>
                 </div>
                 
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <Mail className="h-6 w-6 text-[#314020]" />
-                  <a 
-                    href="mailto:R0527614436@GMAIL.COM" 
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]"
-                  >
+                  <a href="mailto:R0527614436@GMAIL.COM" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
                     R0527614436@GMAIL.COM
                   </a>
                 </div>
                 
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <Phone className="h-6 w-6 text-[#314020]" />
-                  <a 
-                    href="tel:0527614436" 
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]"
-                  >
+                  <a href="tel:0527614436" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
                     0527614436
                   </a>
                 </div>
@@ -669,62 +665,43 @@ const Index = () => {
                   <label htmlFor="name" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     שם מלא
                   </label>
-                  <input
-                    id="name"
-                    type="text"
-                    value={contactForm.name}
-                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
-                    required
-                  />
+                  <input id="name" type="text" value={contactForm.name} onChange={e => setContactForm({
+                    ...contactForm,
+                    name: e.target.value
+                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="phone" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     טלפון
                   </label>
-                  <input
-                    id="phone"
-                    type="tel"
-                    value={contactForm.phone}
-                    onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
-                    required
-                  />
+                  <input id="phone" type="tel" value={contactForm.phone} onChange={e => setContactForm({
+                    ...contactForm,
+                    phone: e.target.value
+                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="email" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     אימייל
                   </label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={contactForm.email}
-                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
-                    required
-                  />
+                  <input id="email" type="email" value={contactForm.email} onChange={e => setContactForm({
+                    ...contactForm,
+                    email: e.target.value
+                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="message" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     הודעה
                   </label>
-                  <textarea
-                    id="message"
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]"
-                    required
-                  />
+                  <textarea id="message" value={contactForm.message} onChange={e => setContactForm({
+                    ...contactForm,
+                    message: e.target.value
+                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" required />
                 </div>
 
-                <button 
-                  type="submit" 
-                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50"
-                  disabled={isSubmitting}
-                >
+                <button type="submit" className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" disabled={isSubmitting}>
                   {isSubmitting ? 'שולח...' : 'שליחה'}
                 </button>
               </form>
