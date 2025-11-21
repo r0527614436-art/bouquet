@@ -400,7 +400,7 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full absolute -top-8 right-0 z-10">
+            <div className="w-full absolute top-0 right-0 z-10">
               {/* Title with layered effect */}
               <div className="relative mb-6">
                 <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
