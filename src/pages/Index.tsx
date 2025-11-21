@@ -384,18 +384,14 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
             {/* Images - Right Side */}
-            <div className="flex gap-6">
+            <div className="flex gap-6 items-end">
               {/* Second smaller image - now leftmost */}
-              <div className="flex flex-col justify-end h-[600px]">
-                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
-                  <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                </div>
+              <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
+                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Single smaller image */}
-              <div className="flex flex-col justify-end h-[600px]">
-                <div className="w-48 h-48 rounded-2xl overflow-hidden">
-                  <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                </div>
+              <div className="w-48 h-48 rounded-2xl overflow-hidden">
+                <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Large image with top-left rounded */}
               <div className="w-64 h-[600px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
