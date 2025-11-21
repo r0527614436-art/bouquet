@@ -380,40 +380,40 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-stone-50">
+      <section id="about" className="py-12 md:py-20 bg-stone-50 overflow-visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 lg:gap-0">
+          <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-6 md:gap-8 lg:gap-0">
             {/* Images - Right Side */}
-            <div className="flex gap-4 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px]">
+            <div className="flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
               {/* Second smaller image - now leftmost */}
-              <div className="w-32 h-32 md:w-48 md:h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden">
+              <div className="w-24 h-24 md:w-48 md:h-48 rounded-br-[40px] md:rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Single smaller image */}
-              <div className="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden">
+              <div className="w-24 h-24 md:w-48 md:h-48 rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-48 h-64 md:w-64 md:h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
+              <div className="w-36 h-48 md:w-64 md:h-[450px] rounded-tl-[120px] md:rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full px-4 lg:px-0 lg:absolute lg:top-6 lg:right-0 lg:z-10">
+            <div className="w-full px-2 sm:px-4 lg:px-0 lg:absolute lg:top-6 lg:right-0 lg:z-10">
               {/* Title with layered effect */}
-              <div className="relative mb-6">
+              <div className="relative mb-4 md:mb-6">
                 <h2
-                  style={{ transform: 'translate(15px, -10px)' }}
-                  className="font-allura text-[60px] md:text-[95px] lg:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none"
+                  style={{ transform: 'translate(10px, -8px)' }}
+                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none"
                 >
                   About
                 </h2>
-                <h2 className="font-synopsis text-[50px] md:text-[80px] lg:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[40px] md:text-[80px] lg:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-base md:text-xl leading-relaxed font-ploni-aaa font-light lg:pr-0 lg:pl-[280px]">
+              <div className="space-y-3 md:space-y-5 text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa font-light lg:pr-0 lg:pl-[280px]">
                 <p className="text-right font-normal leading-loose lg:-mt-8">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש. 
@@ -426,11 +426,11 @@ const Index = () => {
               </div>
 
               {/* More About Button */}
-              <div className="mt-6">
+              <div className="mt-4 md:mt-6">
                 <Link to="/about">
-                  <button className="flex items-center gap-4 hover:scale-105 transition-transform">
-                    <span className="font-synopsis text-xl md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
-                    <div className="w-12 h-12">
+                  <button className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-transform">
+                    <span className="font-synopsis text-lg md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
+                    <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
                       <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                     </div>
                   </button>
