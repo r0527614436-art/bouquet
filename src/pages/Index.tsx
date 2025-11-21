@@ -404,7 +404,7 @@ const Index = () => {
             </div>
 
             {/* Text Content - Left Side */}
-            <div className="w-full text-right flex flex-col justify-start pt-12 relative z-10 md:mr-[-200px]">
+            <div className="w-full text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-6">
                 <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
@@ -416,7 +416,7 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 bg-stone-50 p-6 rounded-lg">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10">
                 <p>
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש .
