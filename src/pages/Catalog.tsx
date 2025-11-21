@@ -287,7 +287,7 @@ const Catalog = () => {
               Catalog
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#3d5a3d] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
+            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
