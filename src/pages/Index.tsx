@@ -394,8 +394,8 @@ const Index = () => {
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               {/* Large image with top-left rounded */}
-              <div className="w-64 h-[600px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="600" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <div className="w-64 h-[450px] rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
