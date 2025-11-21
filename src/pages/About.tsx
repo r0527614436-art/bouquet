@@ -53,7 +53,7 @@ const About = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-16">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-16">
                 <p>
                   כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
                 </p>

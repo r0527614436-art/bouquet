@@ -86,11 +86,11 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
           {/* Form Content */}
           <div className="relative z-10 bg-white/95 backdrop-blur-md rounded-2xl p-8 m-8 w-full max-w-md shadow-2xl">
-            <h2 className="text-3xl font-bold text-center mb-2 text-[#3d5a3d]">
+            <h2 className="text-3xl font-ploni-aaa font-black text-center mb-2 text-[#3d5a3d]">
               דגם {item.title}
             </h2>
             {item.price && (
-              <p className="text-xl font-bold text-center mb-6 text-gray-700">₪{item.price}</p>
+              <p className="text-xl font-ploni-aaa font-bold text-center mb-6 text-gray-700">₪{item.price}</p>
             )}
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -129,7 +129,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               
               <Button
                 type="submit"
-                className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full py-6 text-lg flex items-center justify-center gap-2 shadow-lg"
+                className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full py-6 text-lg flex items-center justify-center gap-2 shadow-lg font-ploni-aaa font-medium"
               >
                 <span>שלח הזמנה</span>
                 <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />

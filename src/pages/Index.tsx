@@ -285,17 +285,17 @@ const Index = () => {
           }].map(item => <div key={item.num} className="flex items-center gap-4">
                 {/* Collapsed State - Number and Dot */}
                 <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'}`}>
-                  <span className="font-assistant text-white text-base font-medium whitespace-nowrap">{item.num}</span>
+                  <span className="font-ploni-aaa font-medium text-white text-base whitespace-nowrap">{item.num}</span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
                 </div>
 
                 {/* Expanded State - Full Menu */}
                 <div className={`flex items-center gap-4 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'}`}>
-                  <span className="font-assistant text-white text-xl font-light min-w-[3rem]">{item.num}</span>
+                  <span className="font-ploni-aaa font-light text-white text-xl min-w-[3rem]">{item.num}</span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                  {item.isLink ? <Link to={item.href} className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
+                  {item.isLink ? <Link to={item.href} className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
                       {item.label}
-                    </Link> : <a href={item.href} className="font-assistant text-white text-xl font-medium hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
+                    </Link> : <a href={item.href} className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
                       {item.label}
                     </a>}
                 </div>
@@ -343,7 +343,7 @@ const Index = () => {
             </h1>
             <p style={{
               textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-            }} className="font-ploni-ultralight text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12 font-normal">כשהפרחים הופכים לרגעים של קסם</p>
+            }} className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12">כשהפרחים הופכים לרגעים של קסם</p>
           </div>
         </div>
 
@@ -418,7 +418,7 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-ultralight mt-10">
+              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10">
                 <p>
                   כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
                 </p>
@@ -434,7 +434,7 @@ const Index = () => {
               <div className="mt-6">
                 <Link to="/about">
                   <button className="flex items-center gap-4 hover:scale-105 transition-transform">
-                    <span className="font-assistant text-2xl font-bold text-gray-800">עוד עלינו</span>
+                    <span className="font-ploni-aaa font-semibold text-2xl text-gray-800">עוד עלינו</span>
                     <div className="w-12 h-12">
                       <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                     </div>
@@ -469,7 +469,7 @@ const Index = () => {
                 <div className="w-24 h-24 rounded-full bg-white border-4 border-black flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain" />
                 </div>
-                <p className="text-white font-ploni text-sm md:text-base font-black whitespace-pre-line">{service.text}</p>
+                <p className="text-white font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
               </div>)}
           </div>
         </div>
@@ -496,7 +496,7 @@ const Index = () => {
               </div>
             </div>
 
-            <p className="text-gray-700 text-xl leading-relaxed font-ploni-ultralight mb-8 mt-12">
+            <p className="text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mb-8 mt-12">
               כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
             </p>
 
@@ -504,7 +504,7 @@ const Index = () => {
             <div className="mt-8 mb-12">
               <Link to="/catalog">
                 <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
-                  <span className="font-assistant text-2xl font-bold text-gray-800">לכל העיצובים</span>
+                  <span className="font-ploni-aaa font-semibold text-2xl text-gray-800">לכל העיצובים</span>
                   <div className="w-12 h-12">
                     <img src={arrowCircle} alt="לכל העיצובים" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                   </div>
@@ -530,7 +530,7 @@ const Index = () => {
             }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
-                  <h3 className="font-assistant text-xl md:text-2xl font-bold text-white">{item.title}</h3>
+                  <h3 className="font-ploni-aaa font-semibold text-xl md:text-2xl text-white">{item.title}</h3>
                 </div>
               </Link>)}
           </div>
@@ -560,9 +560,9 @@ const Index = () => {
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">01</span>
+                  <span className="font-ploni-aaa font-black text-2xl">01</span>
                 </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   שיחת מיקוד להבנת הצרכים
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
@@ -573,9 +573,9 @@ const Index = () => {
               {/* Step 02 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">02</span>
+                  <span className="font-ploni-aaa font-black text-2xl">02</span>
                 </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   בחירה והזמנה
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
@@ -586,9 +586,9 @@ const Index = () => {
               {/* Step 03 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
-                  <span className="font-ploni-black-2 text-2xl">03</span>
+                  <span className="font-ploni-aaa font-black text-2xl">03</span>
                 </div>
-                <h3 className="font-ploni-black-2 text-3xl text-gray-800">
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   הכנה ומשלוח
                 </h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
@@ -634,7 +634,7 @@ const Index = () => {
                   <MapPin className="h-6 w-6 text-[#314020]" />
                   <button 
                     onClick={openGoogleMaps}
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-left text-[#314020]"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]"
                   >
                     שערי תשובה 14 - מודיעין עלית
                   </button>
@@ -644,7 +644,7 @@ const Index = () => {
                   <Mail className="h-6 w-6 text-[#314020]" />
                   <a 
                     href="mailto:R0527614436@GMAIL.COM" 
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-[#314020]"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]"
                   >
                     R0527614436@GMAIL.COM
                   </a>
@@ -654,7 +654,7 @@ const Index = () => {
                   <Phone className="h-6 w-6 text-[#314020]" />
                   <a 
                     href="tel:0527614436" 
-                    className="hover:text-[#314020]/70 transition-colors font-ploni-ultralight text-[#314020]"
+                    className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]"
                   >
                     0527614436
                   </a>
@@ -666,7 +666,7 @@ const Index = () => {
             <div className="w-full md:w-1/2">
               <form onSubmit={handleContactSubmit} className="space-y-4 p-8">
                 <div className="space-y-1 text-right">
-                  <label htmlFor="name" className="block text-sm font-ploni-medium text-[#314020]">
+                  <label htmlFor="name" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     שם מלא
                   </label>
                   <input
@@ -674,13 +674,13 @@ const Index = () => {
                     type="text"
                     value={contactForm.name}
                     onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-1 text-right">
-                  <label htmlFor="phone" className="block text-sm font-ploni-medium text-[#314020]">
+                  <label htmlFor="phone" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     טלפון
                   </label>
                   <input
@@ -688,13 +688,13 @@ const Index = () => {
                     type="tel"
                     value={contactForm.phone}
                     onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-1 text-right">
-                  <label htmlFor="email" className="block text-sm font-ploni-medium text-[#314020]">
+                  <label htmlFor="email" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     אימייל
                   </label>
                   <input
@@ -702,27 +702,27 @@ const Index = () => {
                     type="email"
                     value={contactForm.email}
                     onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight text-[#314020]"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]"
                     required
                   />
                 </div>
 
                 <div className="space-y-1 text-right">
-                  <label htmlFor="message" className="block text-sm font-ploni-medium text-[#314020]">
+                  <label htmlFor="message" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     הודעה
                   </label>
                   <textarea
                     id="message"
                     value={contactForm.message}
                     onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-ultralight min-h-[60px] resize-none text-[#314020]"
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]"
                     required
                   />
                 </div>
 
                 <button 
                   type="submit" 
-                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'שולח...' : 'שליחה'}

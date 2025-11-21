@@ -19,12 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Ploni Black', 'sans-serif'],
+				'sans': ['Ploni AAA', 'sans-serif'],
+				'ploni-aaa': ['Ploni AAA', 'sans-serif'],
 				'gloria': ['Gloria', 'serif'],
-				'ploni': ['Ploni', 'sans-serif'],
-				'ploni-ultralight': ['Ploni Ultralight', 'sans-serif'],
-				'ploni-black': ['Ploni Black', 'sans-serif'],
-				'ploni-black-2': ['Ploni Black 2', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'heebo': ['Heebo', 'sans-serif'],
 				'assistant': ['Assistant', 'sans-serif'],

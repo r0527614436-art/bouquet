@@ -80,7 +80,7 @@ const Testimonials = () => {
               <p className="text-base md:text-lg leading-relaxed whitespace-pre-wrap mb-6">
                 {testimonials[currentIndex]?.content}
               </p>
-              <p className="font-ploni-medium text-lg text-right mt-4">
+              <p className="font-ploni-aaa font-medium text-lg text-right mt-4">
                 {testimonials[currentIndex]?.author_name}
               </p>
             </div>
