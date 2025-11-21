@@ -382,7 +382,7 @@ const Index = () => {
       {/* About Section */}
       <section id="about" className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex-col md:flex-row-reverse gap-0 relative pl-0 pt-[33px] pb-0 mt-0 pr-[340px] flex items-center justify-center">
+          <div className="flex-col md:flex-row-reverse relative pl-0 pt-[33px] pb-0 mt-0 pr-[340px] flex items-end justify-start gap-0">
             {/* Images - Right Side */}
             <div className="flex gap-6 items-end flex-shrink-0 mt-[69px] mb-[87px]">
               {/* Second smaller image - now leftmost */}
@@ -413,7 +413,7 @@ const Index = () => {
                 </h2>
               </div>
               <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mt-10 pr-0 pl-[280px]">
-                <p className="text-right font-normal leading-loose py-2 mr-0 mb-0 pb-0 mx-[138px] pl-[93px] pr-0 ml-[119px] mt-0 pt-[33px]">
+                <p className="text-right font-normal leading-loose py-2 mb-0 mx-[138px] mt-0 pt-0 pr-px pl-0 ml-[13px] mr-px pb-[46px]">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש.
  ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
@@ -429,9 +429,9 @@ const Index = () => {
 
               {/* More About Button */}
               <div className="mt-6">
-                <Link to="/about">
+                <Link to="/about" className="pl-0 pb-0 mb-0">
                   <button className="flex items-center gap-4 hover:scale-105 transition-transform">
-                    <span className="font-synopsis text-2xl font-semibold text-[#314020]">עוד עלינו</span>
+                    <span className="font-synopsis text-2xl font-semibold text-[#314020] pb-0">עוד עלינו</span>
                     <div className="w-12 h-12">
                       <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                     </div>
