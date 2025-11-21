@@ -380,8 +380,8 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 md:py-20 bg-stone-50 overflow-visible">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="about" className="py-12 md:py-20 bg-stone-50 overflow-visible min-h-[600px] md:min-h-[700px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-6 md:gap-8 lg:gap-0">
             {/* Images - Right Side */}
             <div className="flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
@@ -426,7 +426,7 @@ const Index = () => {
               </div>
 
               {/* More About Button */}
-              <div className="mt-4 md:mt-6">
+              <div className="mt-6 md:mt-8 mb-4">
                 <Link to="/about">
                   <button className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-transform">
                     <span className="font-synopsis text-lg md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
