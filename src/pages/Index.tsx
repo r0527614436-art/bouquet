@@ -304,7 +304,7 @@ const Index = () => {
         </div>
         
         {/* Curved bottom edge with transparent cutout */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white overflow-visible pointer-events-none">
+        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-visible pointer-events-none" style={{ backgroundColor: '#F8FBF4' }}>
           <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
             <defs>
               <mask id="curve-mask">
@@ -312,7 +312,7 @@ const Index = () => {
                 <ellipse cx="600" cy="0" rx="80" ry="100" fill="black" />
               </mask>
             </defs>
-            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="white" mask="url(#curve-mask)" />
+            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="#F8FBF4" mask="url(#curve-mask)" />
           </svg>
         </div>
       </section>
