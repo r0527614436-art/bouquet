@@ -242,7 +242,7 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-  return <div className="min-h-screen bg-white overflow-x-hidden">
+  return <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Main Content */}
       <div>
 
@@ -323,7 +323,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-8 md:py-12 bg-stone-50 overflow-visible">
+      <section id="about" className="py-8 md:py-12 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-6 md:gap-8 lg:gap-0">
             {/* Images - Right Side */}
@@ -419,7 +419,7 @@ const Index = () => {
       </section>
 
       {/* Catalog Section */}
-      <section className="py-20 bg-stone-50">
+      <section className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-center">
           <div className="max-w-4xl mx-auto px-4">
             {/* Title with layered effect */}
@@ -478,11 +478,11 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-white relative">
+      <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit lg:pl-8">
+            <div className="lg:sticky lg:top-2 lg:self-start lg:h-fit lg:pl-8">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
@@ -498,7 +498,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-12 min-h-[1200px]">
+            <div className="space-y-12">
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
@@ -555,7 +555,7 @@ const Index = () => {
       
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-stone-50">
+      <section id="contact" className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-12 items-start">
             {/* Left Side - Title and Contact Info */}
