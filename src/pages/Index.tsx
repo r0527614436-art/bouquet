@@ -539,7 +539,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Right Side - Sticky Title */}
-            <div className="lg:sticky lg:top-20 lg:self-start pr-8">
+            <div className="lg:sticky lg:top-8 lg:self-start pr-8 transition-all duration-300">
               <div className="relative flex justify-center lg:justify-end">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
