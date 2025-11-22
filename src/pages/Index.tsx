@@ -28,7 +28,6 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: '',
     phone: '',
@@ -244,64 +243,8 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-white overflow-x-hidden">
-      {/* Side Navigation Bar - Full Height */}
-      <div className={`fixed right-0 top-0 h-screen bg-primary transition-all duration-300 ease-in-out z-50 ${isMenuOpen ? 'w-80' : 'w-20'}`} onMouseEnter={() => setIsMenuOpen(true)} onMouseLeave={() => setIsMenuOpen(false)}>
-        <div className="flex flex-col h-full py-8 bg-[#11150d]">
-          {/* Hamburger Icon */}
-          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
-            <div className="flex flex-col gap-1.5 cursor-pointer">
-              <div className="w-8 h-0.5 bg-white"></div>
-              <div className="w-8 h-0.5 bg-white"></div>
-              <div className="w-8 h-0.5 bg-white"></div>
-            </div>
-          </div>
-
-          {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-start gap-12 px-4 bg-[#11150d]">
-            {[{
-            num: '01',
-            label: 'בית',
-            href: '#',
-            isLink: false
-          }, {
-            num: '02',
-            label: 'אודות',
-            href: '#about',
-            isLink: false
-          }, {
-            num: '03',
-            label: 'קטלוג',
-            href: '/catalog',
-            isLink: true
-          }, {
-            num: '04',
-            label: 'צור קשר',
-            href: '#contact',
-            isLink: false
-          }].map(item => <div key={item.num} className="flex items-center gap-4">
-                {/* Collapsed State - Number and Dot */}
-                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'}`}>
-                  <span className="font-ploni-aaa font-medium text-white text-base whitespace-nowrap">{item.num}</span>
-                  <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
-                </div>
-
-                {/* Expanded State - Full Menu */}
-                <div className={`flex items-center gap-4 transition-opacity duration-300 ${isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'}`}>
-                  <span className="font-ploni-aaa font-light text-white text-xl min-w-[3rem]">{item.num}</span>
-                  <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                  {item.isLink ? <Link to={item.href} className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
-                      {item.label}
-                    </Link> : <a href={item.href} className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap" onClick={() => setIsMenuOpen(false)}>
-                      {item.label}
-                    </a>}
-                </div>
-              </div>)}
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content - Add padding to prevent overlap with sidebar */}
-      <div className="pr-20">
+      {/* Main Content */}
+      <div>
 
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
@@ -537,9 +480,9 @@ const Index = () => {
       {/* How It Works Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-8 lg:self-start lg:h-[calc(100vh-4rem)]">
+            <div className="lg:sticky lg:top-24 lg:self-start lg:h-fit lg:pl-8">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
