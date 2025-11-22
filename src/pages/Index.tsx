@@ -478,11 +478,11 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-24 lg:self-start lg:h-fit lg:pl-8">
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit lg:pl-8">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
@@ -498,7 +498,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-12">
+            <div className="space-y-12 min-h-[1200px]">
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
