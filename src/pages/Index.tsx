@@ -555,7 +555,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-12">
+            <div className="space-y-12 lg:pr-12">
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
