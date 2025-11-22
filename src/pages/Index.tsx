@@ -537,17 +537,17 @@ const Index = () => {
       {/* How It Works Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 lg:gap-16">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-8 lg:self-start lg:h-[400px]">
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-[calc(100vh-4rem)]">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
-                  <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
+                  <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
                     transform: 'translate(15px, -10px)'
                   }}>
                     Work<br />process
                   </h2>
-                  <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
+                  <h2 className="font-synopsis text-[65px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
@@ -555,7 +555,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-12 lg:pr-12">
+            <div className="space-y-12">
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
