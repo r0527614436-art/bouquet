@@ -537,10 +537,10 @@ const Index = () => {
       {/* How It Works Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Right Side - Sticky Title */}
-            <div className="lg:sticky lg:top-8 lg:self-start pr-8 transition-all duration-300">
-              <div className="relative flex justify-center lg:justify-end">
+          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-16">
+            {/* Left Side - Sticky Title */}
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-[400px]">
+              <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-400 opacity-60 leading-tight select-none" style={{
                     transform: 'translate(15px, -10px)'
@@ -554,7 +554,7 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Left Side - Content */}
+            {/* Right Side - Content */}
             <div className="space-y-12">
               {/* Step 01 */}
               <div className="space-y-4">
