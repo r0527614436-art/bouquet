@@ -191,8 +191,7 @@ const About = () => {
                   '/lovable-uploads/about-image-1.png',
                   '/lovable-uploads/about-image-2.png',
                   '/lovable-uploads/about-image-3.png',
-                  '/lovable-uploads/about-image-4.png',
-                  '/lovable-uploads/about-image-5.png'
+                  '/lovable-uploads/about-image-4.png'
                 ].map((img, idx) => (
                   <div key={idx} className="flex-shrink-0 w-80 h-96 rounded-2xl overflow-hidden">
                     <img 
