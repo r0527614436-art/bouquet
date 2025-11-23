@@ -94,10 +94,20 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
               width: '320px'
             }}>
                   <div className="relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl">
-                    <img src={slide.image_url} alt={slide.title} width="320" height="427" loading={index === 0 ? "eager" : "lazy"} decoding="async" onError={e => {
-                  console.error('Failed to load image:', slide.image_url);
-                  e.currentTarget.style.display = 'none';
-                }} className="w-full h-full object-cover" />
+                    <img 
+                      src={slide.image_url} 
+                      alt={slide.title} 
+                      width="320" 
+                      height="427" 
+                      loading="lazy"
+                      fetchPriority={index < 3 ? "high" : "low"}
+                      decoding="async" 
+                      onError={e => {
+                        console.error('Failed to load image:', slide.image_url);
+                        e.currentTarget.style.display = 'none';
+                      }} 
+                      className="w-full h-full object-cover" 
+                    />
 
                     {/* Title overlay - only show on selected */}
                     {isSelected && <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 text-center">
@@ -180,7 +190,10 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                       <img 
                         src={img} 
                         alt={`Gallery ${idx + 1}`} 
-                        loading="lazy" 
+                        width="400"
+                        height="500"
+                        loading="lazy"
+                        fetchPriority={Math.abs(idx - 2) <= 2 ? "high" : "low"}
                         decoding="async" 
                         className="w-full h-full object-cover" 
                       />
@@ -196,16 +209,22 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
           </div>
         </div>
 
-        {/* Navigation Buttons - Below Gallery Scroll */}
-        <div className="flex items-center justify-center gap-32 mt-[-80px]">
-          <button onClick={galleryScrollPrev} className="w-16 h-16" aria-label="Previous gallery image">
-            <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
-          </button>
+        {/* Navigation Buttons - Positioned at edges */}
+        <button 
+          onClick={galleryScrollPrev} 
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-16 h-16 z-30" 
+          aria-label="Previous gallery image"
+        >
+          <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
+        </button>
 
-          <button onClick={galleryScrollNext} className="w-16 h-16" aria-label="Next gallery image">
-            <img src={arrowCircle} alt="Next" className="w-full h-full" />
-          </button>
-        </div>
+        <button 
+          onClick={galleryScrollNext} 
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-16 h-16 z-30" 
+          aria-label="Next gallery image"
+        >
+          <img src={arrowCircle} alt="Next" className="w-full h-full" />
+        </button>
       </div>
     </div>;
 };
