@@ -75,7 +75,7 @@ const Contact = () => {
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'bottom'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
@@ -170,51 +170,8 @@ const Contact = () => {
       {/* Contact Form and Info Section */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Info - Now on the Right */}
-          <div className="space-y-6 md:order-2">
-            <div className="p-8">
-              <h3 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">פנו אלינו</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <MapPin className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-[#314020]">כתובת:</p>
-                    <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עלית</p>
-                    <button 
-                      onClick={openGoogleMaps}
-                      className="text-[#314020] hover:text-[#314020]/70 font-ploni-aaa font-medium text-sm mt-1 underline"
-                    >
-                      פתח ב-Waze →
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <Phone className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-[#314020]">טלפון:</p>
-                    <a href="tel:052-7614436" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020]">
-                      052-7614436
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <Mail className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-[#314020]">אימייל:</p>
-                    <a href="mailto:r0527614436@gmail.com" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020] break-all">
-                      r0527614436@gmail.com
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form - Now on the Left */}
-          <div className="md:order-1">
+          {/* Contact Form - Now on the Right */}
+          <div className="md:order-2">
             <h2 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">בואו נדבר</h2>
             <form onSubmit={handleContactSubmit} className="space-y-6">
               <div>
@@ -261,6 +218,49 @@ const Contact = () => {
                 {isSubmitting ? 'שולח...' : 'שליחה'}
               </button>
             </form>
+          </div>
+
+          {/* Contact Info - Now on the Left with Background */}
+          <div className="space-y-6 md:order-1">
+            <div className="p-8 rounded-2xl" style={{ backgroundColor: '#F0CFAF4D' }}>
+              <h3 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">פנו אלינו</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <MapPin className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">כתובת:</p>
+                    <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עלית</p>
+                    <button 
+                      onClick={openGoogleMaps}
+                      className="text-[#314020] hover:text-[#314020]/70 font-ploni-aaa font-medium text-sm mt-1 underline"
+                    >
+                      פתח ב-Waze →
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Phone className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">טלפון:</p>
+                    <a href="tel:052-7614436" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020]">
+                      052-7614436
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Mail className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">אימייל:</p>
+                    <a href="mailto:r0527614436@gmail.com" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020] break-all">
+                      r0527614436@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
