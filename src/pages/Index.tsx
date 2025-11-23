@@ -261,19 +261,19 @@ const Index = () => {
           
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
-            <img 
-              src="/lovable-uploads/baruch-text.png" 
-              alt="ברכש" 
-              width="600" 
-              height="300" 
-              loading="eager" 
-              fetchPriority="high"
-              decoding="async" 
-              className="mb-4 max-w-[400px] sm:max-w-[500px] md:max-w-[600px] h-auto" 
-              style={{
-                filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(244, 208, 63, 0.4))'
-              }}
-            />
+            <h1 style={{
+              color: '#F4D03F',
+              textShadow: `
+                0 0 10px rgba(244, 208, 63, 0.8),
+                0 0 20px rgba(244, 208, 63, 0.6),
+                0 0 30px rgba(244, 208, 63, 0.4),
+                2px 2px 4px rgba(0,0,0,0.3)
+              `,
+              WebkitTextStroke: '1px #B8942C',
+              filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-4 tracking-wider">
+              בוקט
+            </h1>
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
