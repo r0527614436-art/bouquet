@@ -13,6 +13,7 @@ import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
 import arrowCircle from '@/assets/arrow-circle.png';
+import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 interface HomepageSlide {
@@ -247,7 +248,7 @@ const Index = () => {
       <div>
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] overflow-visible">
+      <section className="relative h-[55vh] overflow-visible">
         {/* Logo - Absolute Position in Hero */}
         <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
           <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
@@ -261,19 +262,19 @@ const Index = () => {
           
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
-            <h1 style={{
-              color: '#F4D03F',
-              textShadow: `
-                0 0 10px rgba(244, 208, 63, 0.8),
-                0 0 20px rgba(244, 208, 63, 0.6),
-                0 0 30px rgba(244, 208, 63, 0.4),
-                2px 2px 4px rgba(0,0,0,0.3)
-              `,
-              WebkitTextStroke: '1px #B8942C',
-              filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
-            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-4 tracking-wider">
-              בוקט
-            </h1>
+            <img 
+              src={bouquetLogo3D} 
+              alt="בוקט" 
+              width="600" 
+              height="200" 
+              fetchPriority="high" 
+              loading="eager" 
+              decoding="async"
+              className="w-[300px] sm:w-[400px] md:w-[500px] h-auto mb-4"
+              style={{
+                filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+              }}
+            />
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
