@@ -1,11 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import arrowCircle from '@/assets/arrow-circle.png';
 
 interface CatalogItem {
   id: string;
@@ -33,96 +28,90 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   onPrevious,
   onNext,
 }) => {
-  if (!currentItem) return null;
+  if (!currentItem || !isOpen) return null;
 
   const currentIndex = items.findIndex(item => item.id === currentItem.id);
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === items.length - 1;
   
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && !isLast) {
+        onNext();
+      } else if (e.key === 'ArrowRight' && !isFirst) {
+        onPrevious();
+      } else if (e.key === 'Escape') {
+        onClose();
+      }
+    };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft' && !isLast) {
-      onNext();
-    } else if (e.key === 'ArrowRight' && !isFirst) {
-      onPrevious();
-    } else if (e.key === 'Escape') {
-      onClose();
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
     }
-  };
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, isFirst, isLast, onNext, onPrevious, onClose]);
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full p-0 overflow-hidden bg-gradient-to-br from-background/95 via-primary/5 to-secondary/20 backdrop-blur-sm border-primary/20" onKeyDown={handleKeyDown}>
-        <VisuallyHidden>
-          <DialogTitle>תצוגת תמונה: {currentItem.title}</DialogTitle>
-          <DialogDescription>תצוגה מורחבת של התמונה עם אפשרות ניווט</DialogDescription>
-        </VisuallyHidden>
-        <div className="relative w-full h-full bg-gradient-to-b from-background/90 to-background/95">
-          {/* Close button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="absolute top-4 right-4 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
-          >
-            <X className="h-5 w-5" />
-          </Button>
+    <div className="fixed inset-0 z-50 bg-black">
+      {/* Close button */}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={onClose}
+        className="absolute top-6 right-6 z-50 text-white bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110"
+      >
+        <X className="h-6 w-6" />
+      </Button>
 
+      {/* Model number - Top left */}
+      <div className="absolute top-6 left-6 z-50 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg">
+        <p className="text-white text-sm font-medium">דגם {currentItem.title}</p>
+      </div>
 
-          {/* Previous button */}
-          {!isFirst && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onPrevious}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
-          )}
+      {/* Previous button */}
+      {!isFirst && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onPrevious}
+          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-50 text-white bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110"
+        >
+          <ChevronRight className="h-8 w-8" />
+        </Button>
+      )}
 
-          {/* Next button */}
-          {!isLast && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 text-primary-foreground bg-primary/80 hover:bg-primary/90 backdrop-blur-sm rounded-full p-3 shadow-lg border border-primary/30 transition-all duration-300 hover:scale-105"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-          )}
+      {/* Next button */}
+      {!isLast && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={onNext}
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 z-50 text-white bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110"
+        >
+          <ChevronLeft className="h-8 w-8" />
+        </Button>
+      )}
 
-          {/* Main image - Full screen */}
-          <div className="w-full h-full flex items-center justify-center p-4">
-            <div className="relative w-full h-full">
-              <img
-                src={currentItem.image_url}
-                alt={currentItem.title}
-                className="w-full h-full object-contain rounded-2xl shadow-2xl"
-                style={{ maxHeight: 'calc(100vh - 8rem)' }}
-              />
-            </div>
-          </div>
+      {/* Main image - Full screen */}
+      <div className="w-full h-full flex items-center justify-center">
+        <img
+          src={currentItem.image_url}
+          alt={currentItem.title}
+          className="max-w-full max-h-full object-contain"
+        />
+      </div>
 
-          {/* Item info overlay */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/80 to-transparent backdrop-blur-sm border-t border-primary/20 p-6">
-            <div className="text-foreground">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold mb-2 text-primary">דגם {currentItem.title}</h3>
-                  {currentItem.price && (
-                    <p className="text-xl font-bold text-gray-700">₪{currentItem.price}</p>
-                  )}
-                </div>
-                <p className="text-sm text-muted-foreground bg-secondary/20 px-3 py-1 rounded-full">
-                  {currentIndex + 1} מתוך {items.length}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+      {/* Counter indicator */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-black/50 backdrop-blur-sm px-4 py-2 rounded-full">
+        <p className="text-white text-sm">
+          {currentIndex + 1} מתוך {items.length}
+        </p>
+      </div>
+    </div>
   );
 };
