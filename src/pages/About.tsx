@@ -175,22 +175,28 @@ const About = () => {
           <style>{`
             @keyframes infiniteScroll {
               0% { transform: translateX(0); }
-              100% { transform: translateX(calc(-256px * 4 - 24px * 4)); }
+              100% { transform: translateX(-50%); }
             }
             .scroll-container {
-              animation: infiniteScroll 30s linear forwards;
+              animation: infiniteScroll 60s linear infinite;
             }
             .scroll-container:hover {
               animation-play-state: paused;
             }
           `}</style>
           <div className="scroll-container flex gap-6">
-            {[...Array(5)].map((_, setIndex) => 
+            {[...Array(2)].map((setIndex) => 
               [
-                '/lovable-uploads/about-new-1.jpg',
-                '/lovable-uploads/about-new-2.jpg',
-                '/lovable-uploads/about-new-3.jpg',
-                '/lovable-uploads/about-new-4.jpg'
+                '/lovable-uploads/about-scroll-1.jpg',
+                '/lovable-uploads/about-scroll-2.jpg',
+                '/lovable-uploads/about-scroll-3.jpg',
+                '/lovable-uploads/about-scroll-4.jpg',
+                '/lovable-uploads/about-scroll-5.jpg',
+                '/lovable-uploads/about-scroll-6.jpg',
+                '/lovable-uploads/about-scroll-7.jpg',
+                '/lovable-uploads/about-scroll-8.jpg',
+                '/lovable-uploads/about-scroll-9.jpg',
+                '/lovable-uploads/about-scroll-10.jpg'
               ].map((img, idx) => (
                 <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
                   <img 
