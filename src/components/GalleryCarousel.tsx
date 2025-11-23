@@ -47,14 +47,12 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   }}>
       <div className="relative flex flex-col items-center justify-center w-full bg-[#11150d]">
         {/* Carousel */}
-        <div className="overflow-visible w-full max-w-[1400px] mb-8 mx-auto" ref={emblaRef}>
-          <div className="flex items-center justify-center">
+        <div className="overflow-visible w-full mb-8 mx-auto" ref={emblaRef}>
+          <div className="flex items-center gap-6">
             {slides.map((slide, index) => {
             const isSelected = index === selectedIndex;
             return <div key={`slide-${slide.id}-${index}-${slide.image_url}`} className="flex-shrink-0" style={{
-              width: '320px',
-              marginLeft: index === 0 ? '0' : '-100px',
-              marginRight: index === slides.length - 1 ? '0' : '-100px'
+              width: '320px'
             }}>
                   <div className="relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl">
                     <img src={slide.image_url} alt={slide.title} width="320" height="427" loading={index === 0 ? "eager" : "lazy"} decoding="async" onError={e => {
