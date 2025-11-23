@@ -261,16 +261,16 @@ const Index = () => {
           </div>
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4 pb-16">
             <img 
               src={bouquetLogo3D} 
               alt="בוקט" 
-              width="600" 
-              height="200" 
+              width="700" 
+              height="233" 
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="w-[300px] sm:w-[400px] md:w-[500px] h-auto mb-4"
+              className="w-[400px] sm:w-[550px] md:w-[700px] h-auto mb-8"
               style={{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
