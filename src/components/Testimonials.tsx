@@ -58,18 +58,18 @@ const Testimonials = () => {
             {/* Navigation Arrows - Under Title */}
             <div className="flex gap-4 justify-end">
               <button
-                onClick={handlePrevious}
+                onClick={handleNext}
                 className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={testimonials.length <= 1}
               >
-                <img src={arrowCircle} alt="Previous" className="w-full h-full" />
+                <img src={arrowCircle} alt="Next" className="w-full h-full" />
               </button>
               <button
-                onClick={handleNext}
+                onClick={handlePrevious}
                 className="w-12 h-12 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed rotate-180"
                 disabled={testimonials.length <= 1}
               >
-                <img src={arrowCircle} alt="Next" className="w-full h-full" />
+                <img src={arrowCircle} alt="Previous" className="w-full h-full" />
               </button>
             </div>
           </div>
