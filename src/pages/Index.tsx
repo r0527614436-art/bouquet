@@ -434,8 +434,8 @@ const Index = () => {
       <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
-            {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-[100px] lg:self-start lg:h-fit lg:pl-8 z-20">
+            {/* Left Side - Title */}
+            <div className="lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                   <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none transition-all duration-300" style={{
