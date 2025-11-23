@@ -217,12 +217,12 @@ const About = () => {
                 '/lovable-uploads/about-scroll-27.jpg',
                 '/lovable-uploads/about-scroll-28.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-96 h-[32rem] rounded-2xl overflow-hidden">
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
-                    width="256" 
-                    height="384" 
+                    width="384" 
+                    height="512" 
                     loading="lazy" 
                     decoding="async" 
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
