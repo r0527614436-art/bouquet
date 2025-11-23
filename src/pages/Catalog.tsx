@@ -373,14 +373,14 @@ const Catalog = () => {
           <div className="flex flex-wrap justify-center gap-3">
             <Button 
               onClick={() => setSelectedCategory('')} 
-              className="bg-[#3d5a3d] hover:bg-[#4a6d4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(61,90,61,0.6)] transition-all duration-300"
+              className="bg-[#3d5a3d] hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300"
             >
               הכל
             </Button>
             {categories.map(category => <div key={category.id}>
                 <Button 
                   onClick={() => setSelectedCategory(category.id)} 
-                  className="bg-[#3d5a3d] hover:bg-[#4a6d4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(61,90,61,0.6)] transition-all duration-300"
+                  className="bg-[#3d5a3d] hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300"
                 >
                   {category.name}
                 </Button>
