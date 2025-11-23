@@ -28,14 +28,14 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   });
   const [galleryEmblaRef, galleryEmblaApi] = useEmblaCarousel({
     loop: true,
-    align: 'center',
+    align: 'start',
     skipSnaps: false,
-    containScroll: false,
+    containScroll: 'trimSnaps',
     dragFree: false,
     slidesToScroll: 1,
     duration: 30,
     startIndex: 0
-  }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
+  }, [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })]);
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -111,8 +111,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Gallery Carousel Section */}
-        <div className="relative overflow-hidden pb-8 w-full h-[700px] flex items-center">
-          <div className="overflow-visible w-full max-w-7xl mx-auto" ref={galleryEmblaRef}>
+        <div className="relative overflow-hidden pb-8 w-full h-[700px] flex items-center justify-center">
+          <div className="overflow-visible w-full max-w-6xl mx-auto" ref={galleryEmblaRef}>
             <div className="flex items-center justify-center">
               {[
                 '/lovable-uploads/scroll-1.jpg',
@@ -152,17 +152,18 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     key={`scroll-${idx}`} 
                     className="flex-shrink-0 transition-all duration-500 ease-out relative"
                     style={{
-                      width: isSelected ? '500px' : '280px',
-                      height: '667px',
+                      width: isSelected ? '420px' : '280px',
+                      height: '600px',
                       marginLeft: idx === 0 ? '0' : '-80px',
                       zIndex: isSelected ? 20 : 10
                     }}
                   >
                     <div 
-                      className="relative w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500"
+                      className="relative w-full overflow-hidden shadow-2xl transition-all duration-500"
                       style={{
-                        height: isSelected ? '667px' : '373px',
-                        marginTop: isSelected ? '0' : '147px'
+                        height: isSelected ? '600px' : '373px',
+                        marginTop: isSelected ? '0' : '113px',
+                        borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
                       }}
                     >
                       <img 
