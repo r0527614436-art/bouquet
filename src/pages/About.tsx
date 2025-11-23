@@ -178,7 +178,7 @@ const About = () => {
               100% { transform: translateX(-50%); }
             }
             .scroll-container {
-              animation: infiniteScroll 60s linear infinite;
+              animation: infiniteScroll 45s linear infinite;
             }
             .scroll-container:hover {
               animation-play-state: paused;
@@ -206,7 +206,15 @@ const About = () => {
                 '/lovable-uploads/about-scroll-17.jpg',
                 '/lovable-uploads/about-scroll-18.jpg',
                 '/lovable-uploads/about-scroll-19.jpg',
-                '/lovable-uploads/about-scroll-20.jpg'
+                '/lovable-uploads/about-scroll-20.jpg',
+                '/lovable-uploads/about-scroll-21.jpg',
+                '/lovable-uploads/about-scroll-22.jpg',
+                '/lovable-uploads/about-scroll-23.jpg',
+                '/lovable-uploads/about-scroll-24.jpg',
+                '/lovable-uploads/about-scroll-25.jpg',
+                '/lovable-uploads/about-scroll-26.jpg',
+                '/lovable-uploads/about-scroll-27.jpg',
+                '/lovable-uploads/about-scroll-28.jpg'
               ].map((img, idx) => (
                 <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
                   <img 
