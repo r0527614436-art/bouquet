@@ -59,19 +59,19 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl p-0 overflow-hidden border-primary/20">
+      <DialogContent className="max-w-2xl p-0 overflow-hidden border-primary/20 bg-transparent">
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
         </VisuallyHidden>
         
-        {/* Background Image with Overlay */}
-        <div className="relative min-h-[500px] flex items-center justify-center">
+        {/* Background Image with Light Overlay */}
+        <div className="relative min-h-[500px] flex items-center justify-center rounded-lg overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${item.image_url})` }}
           >
-            <div className="absolute inset-0 bg-white/70 backdrop-blur-md"></div>
+            <div className="absolute inset-0 bg-white/50"></div>
           </div>
           
           {/* Close button */}
@@ -79,7 +79,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="absolute top-4 right-4 z-50 text-gray-700 hover:text-gray-900 hover:bg-gray-200/50 rounded-full p-2"
+            className="absolute top-4 right-4 z-50 text-gray-700 hover:text-gray-900 hover:bg-white/50 rounded-full p-2"
           >
             <X className="h-6 w-6" />
           </Button>
@@ -93,46 +93,62 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               <p className="text-lg font-ploni-aaa font-light mb-8 text-gray-700">דגם {item.price}</p>
             )}
             
-            <form onSubmit={handleSubmit} className="space-y-0">
-              <div className="border-b-2 border-[#314020]">
-                <Input
-                  type="text"
-                  placeholder="שם מלא"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
-                  required
-                />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name Field */}
+              <div className="text-center">
+                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  שם מלא
+                </label>
+                <div className="border-b-2 border-gray-400">
+                  <Input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                    required
+                  />
+                </div>
               </div>
               
-              <div className="border-b-2 border-[#314020]">
-                <Input
-                  type="tel"
-                  placeholder="טלפון"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
-                  required
-                />
+              {/* Phone Field */}
+              <div className="text-center">
+                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  טלפון
+                </label>
+                <div className="border-b-2 border-gray-400">
+                  <Input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                    required
+                  />
+                </div>
               </div>
               
-              <div className="border-b-2 border-[#314020]">
-                <Input
-                  type="date"
-                  placeholder="תאריך האירוע"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
-                  required
-                />
+              {/* Date Field */}
+              <div className="text-center">
+                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  תאריך האירוע
+                </label>
+                <div className="border-b-2 border-gray-400">
+                  <Input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                    required
+                  />
+                </div>
               </div>
               
-              <div className="pt-8">
+              {/* Submit Button */}
+              <div className="pt-4">
                 <Button
                   type="submit"
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 py-3 text-lg flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto"
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 py-3 text-base flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto"
                 >
-                  <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                  <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180 brightness-0 invert" />
                   <span>שליחת הזמנה</span>
                 </Button>
               </div>
