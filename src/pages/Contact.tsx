@@ -75,7 +75,7 @@ const Contact = () => {
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
         backgroundSize: 'cover',
-        backgroundPosition: 'bottom'
+        backgroundPosition: 'center bottom 30%'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
@@ -224,12 +224,6 @@ const Contact = () => {
                   <div>
                     <p className="font-ploni-aaa font-bold text-[#314020]">כתובת:</p>
                     <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עלית</p>
-                    <button 
-                      onClick={openGoogleMaps}
-                      className="text-[#314020] hover:text-[#314020]/70 font-ploni-aaa font-medium text-sm mt-1 underline"
-                    >
-                      פתח ב-Waze →
-                    </button>
                   </div>
                 </div>
 
