@@ -115,8 +115,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Gallery Carousel Section */}
-        <div className="relative overflow-hidden pb-8 w-full h-[700px] flex items-center justify-center">
-          <div className="overflow-visible w-full max-w-6xl mx-auto" ref={galleryEmblaRef}>
+        <div className="relative overflow-hidden pb-8 w-full h-[600px] flex items-center justify-center">
+          <div className="overflow-visible w-full px-4" ref={galleryEmblaRef}>
             <div className="flex items-center justify-center">
               {[
                 '/lovable-uploads/scroll-1.jpg',
@@ -151,12 +151,18 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 '/lovable-uploads/scroll-30.jpg'
               ].map((img, idx) => {
                 const isSelected = idx === gallerySelectedIndex;
+                // Calculate responsive widths: 
+                // Total width = center + (4 * side) - (4 * 80px overlap)
+                // center = 25% of screen, side = 15% of screen
+                const centerWidth = 'calc((100vw - 80px) * 0.28)';
+                const sideWidth = 'calc((100vw - 80px) * 0.16)';
+                
                 return (
                   <div 
                     key={`scroll-${idx}`} 
                     className="flex-shrink-0 transition-all duration-500 ease-out relative"
                     style={{
-                      width: isSelected ? '360px' : '280px',
+                      width: isSelected ? centerWidth : sideWidth,
                       height: '500px',
                       marginLeft: idx === 0 ? '0' : '-80px',
                       zIndex: isSelected ? 20 : 10
