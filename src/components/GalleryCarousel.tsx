@@ -77,7 +77,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Auto-Scrolling Carousel Section */}
-        <div className="relative overflow-hidden pb-8">
+        <div className="relative overflow-visible pb-8">
           <AutoScrollCarousel />
         </div>
 
