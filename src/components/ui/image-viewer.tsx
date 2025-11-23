@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
@@ -49,7 +49,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-4xl w-full p-0 overflow-hidden bg-white"
+        className="max-w-fit w-auto p-0 overflow-hidden bg-transparent border-0 shadow-none [&>button]:hidden"
         onKeyDown={handleKeyDown}
       >
         <VisuallyHidden>
@@ -58,6 +58,16 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
         </VisuallyHidden>
         
         <div className="relative">
+          {/* Custom close button - Green without border */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClose}
+            className="absolute -top-10 -right-2 z-20 text-[#3d5a3d] hover:text-[#2d4a2d] hover:bg-transparent p-1 transition-colors"
+          >
+            <X className="h-7 w-7" />
+          </Button>
+
           {/* Model number - Top left overlay on image */}
           {currentItem.title && (
             <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg">
@@ -65,36 +75,12 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             </div>
           )}
 
-          {/* Previous button */}
-          {!isFirst && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onPrevious}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
-          )}
-
-          {/* Next button */}
-          {!isLast && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onNext}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-          )}
-
-          {/* Main image */}
+          {/* Main image - no padding, exact size */}
           <div className="w-full">
             <img
               src={currentItem.image_url}
               alt={currentItem.title || 'תמונה'}
-              className="w-full h-auto object-contain max-h-[80vh]"
+              className="w-full h-auto object-contain max-h-[85vh] rounded-lg"
             />
           </div>
 
