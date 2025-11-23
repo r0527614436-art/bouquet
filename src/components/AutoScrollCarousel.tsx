@@ -61,7 +61,7 @@ export const AutoScrollCarousel = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-80 overflow-visible">
+    <div className="relative flex items-center justify-center h-[28rem] overflow-visible py-8">
       {getVisibleImages().map(({ index, position }) => {
         const isCentered = position === 0;
         const scale = isCentered ? 1.2 : 0.85;
