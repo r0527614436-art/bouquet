@@ -61,7 +61,7 @@ export const AutoScrollCarousel = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-80 overflow-hidden">
+    <div className="relative flex items-center justify-center h-80 overflow-visible">
       {getVisibleImages().map(({ index, position }) => {
         const isCentered = position === 0;
         const scale = isCentered ? 1.2 : 0.85;
@@ -70,7 +70,13 @@ export const AutoScrollCarousel = () => {
         
         return (
           <motion.div
-            key={`img-${index}`}
+            key={`img-${index}-pos-${position}`}
+            initial={{ 
+              scale,
+              opacity,
+              x: position * 280,
+              zIndex
+            }}
             animate={{ 
               scale,
               opacity,
