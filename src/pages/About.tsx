@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Mail, Phone } from 'lucide-react';
+import { MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import Testimonials from '@/components/Testimonials';
@@ -138,14 +138,6 @@ const About = () => {
           <div style={{ backgroundColor: '#F8FBF4' }} className="backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto contrast-125 brightness-110" />
           </div>
-        </div>
-
-        {/* Top Right Button */}
-        <div className="absolute top-8 right-8 z-20">
-          <Link to="/" className="flex items-center text-white hover:text-pink-200 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
-            <ArrowRight className="h-5 w-5 ml-2" />
-            חזרה לעמוד הבית
-          </Link>
         </div>
 
         {/* Content Container - positioned at the transition */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
@@ -75,7 +75,7 @@ const Contact = () => {
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
         backgroundSize: '120%',
-        backgroundPosition: 'center bottom'
+        backgroundPosition: 'center 55%'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
@@ -131,14 +131,6 @@ const Contact = () => {
                background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(248,251,244,0.5) 95%, #F8FBF4 100%)'
              }} 
         />
-
-        {/* Back Button */}
-        <div className="absolute top-8 right-8 z-20">
-          <Link to="/" className="flex items-center text-white hover:text-pink-200 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
-            <ArrowRight className="h-5 w-5 ml-2" />
-            חזרה לעמוד הבית
-          </Link>
-        </div>
 
         {/* Content Container */}
         <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
