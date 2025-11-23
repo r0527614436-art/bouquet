@@ -151,15 +151,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 '/lovable-uploads/scroll-30.jpg'
               ].map((img, idx) => {
                 const isSelected = idx === gallerySelectedIndex;
-                // Calculate responsive widths for exactly 5 images:
+                // Calculate responsive widths: 
                 // Total width = center + (4 * side) - (4 * 80px overlap)
-                // For screen width W: W = center + 4*side - 320
-                // Let center = 2.2 * side (center is bigger)
-                // W = 2.2*side + 4*side - 320 = 6.2*side - 320
-                // side = (W + 320) / 6.2
-                // center = 2.2 * side
-                const sideWidth = 'calc(((100vw - 80px) + 320px) / 6.2)';
-                const centerWidth = 'calc(((100vw - 80px) + 320px) / 6.2 * 2.2)';
+                // center = 25% of screen, side = 15% of screen
+                const centerWidth = 'calc((100vw - 80px) * 0.28)';
+                const sideWidth = 'calc((100vw - 80px) * 0.16)';
                 
                 return (
                   <div 
