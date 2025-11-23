@@ -170,7 +170,7 @@ const About = () => {
       </div>
 
       {/* Infinite Scrolling Images */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-16 pt-32 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="relative">
           <style>{`
             @keyframes scroll {
@@ -188,16 +188,16 @@ const About = () => {
             {[...Array(2)].map((_, setIndex) => (
               <div key={setIndex} className="flex gap-6 pl-6">
                 {[
-                  '/lovable-uploads/about-image-1.png',
-                  '/lovable-uploads/about-image-2.png',
-                  '/lovable-uploads/about-image-3.png',
-                  '/lovable-uploads/about-image-4.png'
+                  '/lovable-uploads/about-new-1.jpg',
+                  '/lovable-uploads/about-new-2.jpg',
+                  '/lovable-uploads/about-new-3.jpg',
+                  '/lovable-uploads/about-new-4.jpg'
                 ].map((img, idx) => (
-                  <div key={idx} className="flex-shrink-0 w-80 h-96 rounded-2xl overflow-hidden">
+                  <div key={idx} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
                     <img 
                       src={img} 
                       alt={`עיצוב פרחים ${idx + 1}`} 
-                      width="320" 
+                      width="256" 
                       height="384" 
                       loading="lazy" 
                       decoding="async" 
