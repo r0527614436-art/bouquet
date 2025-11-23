@@ -270,10 +270,8 @@ const Index = () => {
 
       {/* Gallery Carousel Section - with infinite scrolling images */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
-        <GalleryCarousel slides={carouselImages} />
-        
         {/* Infinite Scrolling Images Section */}
-        <div className="relative overflow-hidden pt-8">
+        <div className="relative overflow-hidden pb-8">
           <style>{`
             @keyframes infiniteScroll {
               from { transform: translateX(0); }
@@ -282,9 +280,6 @@ const Index = () => {
             .scroll-container {
               animation: infiniteScroll 45s linear infinite;
               direction: ltr;
-            }
-            .scroll-container:hover {
-              animation-play-state: paused;
             }
           `}</style>
           <div className="scroll-container flex">
@@ -301,7 +296,13 @@ const Index = () => {
                 '/lovable-uploads/scroll-9.jpg',
                 '/lovable-uploads/scroll-10.jpg',
                 '/lovable-uploads/scroll-11.jpg',
-                '/lovable-uploads/scroll-12.jpg'
+                '/lovable-uploads/scroll-12.jpg',
+                '/lovable-uploads/scroll-13.jpg',
+                '/lovable-uploads/scroll-14.jpg',
+                '/lovable-uploads/scroll-15.jpg',
+                '/lovable-uploads/scroll-16.jpg',
+                '/lovable-uploads/scroll-17.jpg',
+                '/lovable-uploads/scroll-18.jpg'
               ].map((img, idx) => (
                 <div 
                   key={`${setIndex}-${idx}`} 
@@ -319,13 +320,15 @@ const Index = () => {
                     height="576" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    className="w-full h-full object-cover" 
                   />
                 </div>
               ))
             )}
           </div>
         </div>
+        
+        <GalleryCarousel slides={carouselImages} />
       </section>
 
       {/* About Section */}
