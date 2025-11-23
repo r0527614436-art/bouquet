@@ -358,7 +358,7 @@ const Catalog = () => {
           </div>
 
           {/* Description Text - on white section */}
-          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-24">
+          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-24 mb-16">
             <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
             <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
             <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
@@ -369,13 +369,19 @@ const Catalog = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Category Filter */}
-        <div className="mb-6">
+        <div className="mb-6 mt-12">
           <div className="flex flex-wrap justify-center gap-3">
-            <Button onClick={() => setSelectedCategory('')} className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2">
+            <Button 
+              onClick={() => setSelectedCategory('')} 
+              className="bg-[#3d5a3d] hover:bg-[#4a6d4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(61,90,61,0.6)] transition-all duration-300"
+            >
               הכל
             </Button>
             {categories.map(category => <div key={category.id}>
-                <Button onClick={() => setSelectedCategory(category.id)} className="bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full px-6 py-2">
+                <Button 
+                  onClick={() => setSelectedCategory(category.id)} 
+                  className="bg-[#3d5a3d] hover:bg-[#4a6d4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(61,90,61,0.6)] transition-all duration-300"
+                >
                   {category.name}
                 </Button>
               </div>)}
