@@ -196,7 +196,17 @@ const About = () => {
                 '/lovable-uploads/about-scroll-7.jpg',
                 '/lovable-uploads/about-scroll-8.jpg',
                 '/lovable-uploads/about-scroll-9.jpg',
-                '/lovable-uploads/about-scroll-10.jpg'
+                '/lovable-uploads/about-scroll-10.jpg',
+                '/lovable-uploads/about-scroll-11.jpg',
+                '/lovable-uploads/about-scroll-12.jpg',
+                '/lovable-uploads/about-scroll-13.jpg',
+                '/lovable-uploads/about-scroll-14.jpg',
+                '/lovable-uploads/about-scroll-15.jpg',
+                '/lovable-uploads/about-scroll-16.jpg',
+                '/lovable-uploads/about-scroll-17.jpg',
+                '/lovable-uploads/about-scroll-18.jpg',
+                '/lovable-uploads/about-scroll-19.jpg',
+                '/lovable-uploads/about-scroll-20.jpg'
               ].map((img, idx) => (
                 <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
                   <img 
