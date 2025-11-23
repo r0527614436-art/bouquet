@@ -14,7 +14,18 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   slides
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [gallerySelectedIndex, setGallerySelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'center',
+    skipSnaps: false,
+    containScroll: false,
+    dragFree: false,
+    slidesToScroll: 1,
+    duration: 30,
+    startIndex: 0
+  });
+  const [galleryEmblaRef, galleryEmblaApi] = useEmblaCarousel({
     loop: true,
     align: 'center',
     skipSnaps: false,
@@ -30,10 +41,24 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
+  
+  const galleryScrollPrev = useCallback(() => {
+    if (galleryEmblaApi) galleryEmblaApi.scrollPrev();
+  }, [galleryEmblaApi]);
+  const galleryScrollNext = useCallback(() => {
+    if (galleryEmblaApi) galleryEmblaApi.scrollNext();
+  }, [galleryEmblaApi]);
+  
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
+  
+  const onGallerySelect = useCallback(() => {
+    if (!galleryEmblaApi) return;
+    setGallerySelectedIndex(galleryEmblaApi.selectedScrollSnap());
+  }, [galleryEmblaApi]);
+  
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
@@ -42,6 +67,15 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
       emblaApi.off('select', onSelect);
     };
   }, [emblaApi, onSelect]);
+  
+  useEffect(() => {
+    if (!galleryEmblaApi) return;
+    onGallerySelect();
+    galleryEmblaApi.on('select', onGallerySelect);
+    return () => {
+      galleryEmblaApi.off('select', onGallerySelect);
+    };
+  }, [galleryEmblaApi, onGallerySelect]);
   return <div className="relative w-full mx-auto py-16" style={{
     backgroundColor: '#11150d'
   }}>
@@ -75,21 +109,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
           </div>
         </div>
 
-        {/* Infinite Scrolling Images Section */}
-        <div className="relative overflow-hidden pb-8">
-          <style>{`
-            @keyframes infiniteScroll {
-              from { transform: translateX(0); }
-              to { transform: translateX(-50%); }
-            }
-            .scroll-container {
-              animation: infiniteScroll 45s linear infinite;
-              direction: ltr;
-            }
-          `}</style>
-          <div className="scroll-container flex">
-            {[0, 1].map((setIndex) => 
-              [
+        {/* Gallery Carousel Section */}
+        <div className="relative overflow-hidden pb-8 w-full">
+          <div className="overflow-visible w-full" ref={galleryEmblaRef}>
+            <div className="flex items-center">
+              {[
                 '/lovable-uploads/scroll-1.jpg',
                 '/lovable-uploads/scroll-2.jpg',
                 '/lovable-uploads/scroll-3.jpg',
@@ -113,39 +137,48 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 '/lovable-uploads/scroll-21.jpg',
                 '/lovable-uploads/scroll-22.jpg',
                 '/lovable-uploads/scroll-23.jpg',
-                '/lovable-uploads/scroll-24.jpg'
-              ].map((img, idx) => (
-                <div 
-                  key={`${setIndex}-${idx}`} 
-                  className="flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl"
-                  style={{
-                    width: '320px',
-                    height: '428px',
-                    marginLeft: idx === 0 ? '0' : '-100px'
-                  }}
-                >
-                  <img 
-                    src={img} 
-                    alt={`Gallery ${idx + 1}`} 
-                    width="320" 
-                    height="576" 
-                    loading="lazy" 
-                    decoding="async" 
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-              ))
-            )}
+                '/lovable-uploads/scroll-24.jpg',
+                '/lovable-uploads/scroll-25.jpg',
+                '/lovable-uploads/scroll-26.jpg',
+                '/lovable-uploads/scroll-27.jpg',
+                '/lovable-uploads/scroll-28.jpg',
+                '/lovable-uploads/scroll-29.jpg',
+                '/lovable-uploads/scroll-30.jpg'
+              ].map((img, idx) => {
+                const isSelected = idx === gallerySelectedIndex;
+                return (
+                  <div 
+                    key={`scroll-${idx}`} 
+                    className="flex-shrink-0 transition-all duration-300"
+                    style={{
+                      width: isSelected ? '480px' : '320px',
+                      height: isSelected ? '640px' : '428px',
+                      marginLeft: idx === 0 ? '0' : '16px'
+                    }}
+                  >
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                      <img 
+                        src={img} 
+                        alt={`Gallery ${idx + 1}`} 
+                        loading="lazy" 
+                        decoding="async" 
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Navigation Buttons - Below Scroll */}
+        {/* Navigation Buttons - Below Gallery Scroll */}
         <div className="flex items-center justify-center gap-8 mt-4">
-          <button onClick={scrollPrev} className="w-16 h-16" aria-label="Previous slide">
+          <button onClick={galleryScrollPrev} className="w-16 h-16" aria-label="Previous gallery image">
             <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
           </button>
 
-          <button onClick={scrollNext} className="w-16 h-16" aria-label="Next slide">
+          <button onClick={galleryScrollNext} className="w-16 h-16" aria-label="Next gallery image">
             <img src={arrowCircle} alt="Next" className="w-full h-full" />
           </button>
         </div>
