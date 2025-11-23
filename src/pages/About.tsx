@@ -5,18 +5,18 @@ import { Button } from '@/components/ui/button';
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background" id="about-page">
+    <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }} id="about-page">
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/about-hero.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-        {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
+        {/* Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" 
              style={{
                background: `
-                 radial-gradient(ellipse 120% 25% at 50% 92%, rgba(248,251,244,1) 0%, rgba(248,251,244,0.95) 20%, rgba(248,251,244,0.85) 40%, rgba(248,251,244,0.6) 60%, rgba(248,251,244,0.3) 80%, transparent 100%),
+                 radial-gradient(ellipse 120% 25% at 50% 92%, #F8FBF4 0%, rgba(248,251,244,0.95) 20%, rgba(248,251,244,0.85) 40%, rgba(248,251,244,0.6) 60%, rgba(248,251,244,0.3) 80%, transparent 100%),
                  radial-gradient(ellipse 90% 20% at 30% 90%, rgba(248,251,244,0.8) 0%, transparent 70%),
                  radial-gradient(ellipse 100% 22% at 70% 94%, rgba(248,251,244,0.7) 0%, transparent 75%)
                `,
@@ -37,7 +37,7 @@ const About = () => {
                    rgba(248,251,244,0.65) 88%,
                    rgba(248,251,244,0.85) 92%,
                    rgba(248,251,244,0.95) 96%,
-                   rgba(248,251,244,1) 100%
+                   #F8FBF4 100%
                  )
                `,
                filter: 'blur(25px)'
@@ -53,7 +53,7 @@ const About = () => {
                    transparent 78%, 
                    rgba(248,251,244,0.3) 85%,
                    rgba(248,251,244,0.7) 92%,
-                   rgba(248,251,244,1) 100%
+                   #F8FBF4 100%
                  )
                `,
                filter: 'blur(40px)'
@@ -63,7 +63,7 @@ const About = () => {
         {/* Final solid bottom section */}
         <div className="absolute inset-0" 
              style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(248,251,244,0.5) 95%, rgba(248,251,244,1) 100%)'
+               background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(248,251,244,0.5) 95%, #F8FBF4 100%)'
              }} 
         />
         
@@ -100,58 +100,75 @@ const About = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-base md:text-lg space-y-3 mt-24 font-ploni-aaa">
-            <p className="font-light">
-              כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם.
+          <div className="text-gray-800 text-base md:text-lg space-y-3 mt-24 font-ploni-aaa max-w-3xl mx-auto">
+            <p className="font-semibold">
+              אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
             </p>
             <p className="font-light">
-              מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק
-            </p>
-            <p className="font-light">
-              שמלווה אירועים ברגעים הכי חשובים.
+              ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה וכשיש שילוב של איכות טעם רגש והשראה - התוצאה מדברת בעד עצמה כי אנחנו בבוקט לא רק שוזרים פרחים אלא יוצרים חווית חושים. תגלו את הקסם שבפרחים ותזכו לראות איך כל חלום הופך ליצירת אומנות מלאת השראה.
             </p>
           </div>
         </div>
       </div>
 
-      {/* About Content Section */}
-      <section className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row-reverse gap-12 items-start">
-            {/* Images - Right Side */}
-            <div className="flex gap-6">
-              {/* Second smaller image - now leftmost */}
-              <div className="flex flex-col justify-end h-[500px]">
-                <div className="w-48 h-48 rounded-br-[60px] rounded-bl-lg overflow-hidden shadow-xl">
-                  <img src="/lovable-uploads/90a3731f-9a7c-492b-9345-f78bd924c8eb.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                </div>
-              </div>
-              {/* Single smaller image */}
-              <div className="flex flex-col justify-end h-[500px]">
-                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl">
-                  <img src="/lovable-uploads/46fe89ae-9c95-44d5-9e78-ccca2c5591d8.png" alt="סדנאות" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-                </div>
-              </div>
-              {/* Large image with top-left rounded */}
-              <div className="w-64 h-[500px] rounded-tl-[120px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0 shadow-xl">
-                <img src="/lovable-uploads/1f77b92c-020c-41ff-b94d-9b5e6d302d98.png" alt="זרי אירוסין" width="256" height="500" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-              </div>
+      {/* Images Gallery - 5 images in a row */}
+      <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="w-full px-0">
+          <div className="flex gap-0 overflow-hidden">
+            {/* Placeholder for 5 images - user will provide them */}
+            <div className="flex-1 h-64 md:h-80 bg-gray-200">
+              <img src="/lovable-uploads/about-image-1.png" alt="עיצוב פרחים 1" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
+            <div className="flex-1 h-64 md:h-80 bg-gray-200">
+              <img src="/lovable-uploads/about-image-2.png" alt="עיצוב פרחים 2" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1 h-64 md:h-80 bg-gray-200">
+              <img src="/lovable-uploads/about-image-3.png" alt="עיצוב פרחים 3" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1 h-64 md:h-80 bg-gray-200">
+              <img src="/lovable-uploads/about-image-4.png" alt="עיצוב פרחים 4" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1 h-64 md:h-80 bg-gray-200">
+              <img src="/lovable-uploads/about-image-5.png" alt="עיצוב פרחים 5" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Text Content - Left Side */}
-            <div className="flex-1 text-right min-h-[500px] flex flex-col justify-center">
-              <div className="space-y-5 text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light">
-                <p>
-                  כל אירוע מיוחד מתחיל בפרטים הקטנים והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
-                </p>
-                <p className="font-semibold">
-                  המטרה שלי ברורה:
-                </p>
-                <p>
-                  לדאוג שבאירוע שלכם תהיה נגיעה ייחודית של יופי, רגש וסטייל, דרך זרים, עיצובים וסידורי פרחים שנשזרים מכל הלב.
-                </p>
+      {/* Excellence Section Title */}
+      <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="text-center">
+          <h2 className="font-synopsis text-4xl md:text-5xl font-bold text-[#314020]">אצלינו המצוינות</h2>
+        </div>
+      </section>
+
+      {/* Services Icons Section */}
+      <section className="py-16" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
+            {[{
+              icon: '/lovable-uploads/icon-flower.png',
+              text: 'פרחים טריים\nיום-יום'
+            }, {
+              icon: '/lovable-uploads/icon-bouquet.png',
+              text: 'מגוון עיצובים\nמקוריים'
+            }, {
+              icon: '/lovable-uploads/icon-gift.png',
+              text: 'עיצוב מתנות\nופרחים'
+            }, {
+              icon: '/lovable-uploads/icon-delivery.png',
+              text: 'משלוחים\nבפריסה ארצית'
+            }, {
+              icon: '/lovable-uploads/icon-time.png',
+              text: 'עמידה\nבזמנים'
+            }].map((service, idx) => (
+              <div key={idx} className="flex flex-col items-center text-center">
+                <div className="w-24 h-24 rounded-full bg-[#314020] border-4 border-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
+                  <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert" />
+                </div>
+                <p className="text-[#314020] font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
