@@ -435,10 +435,10 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-24 lg:self-start lg:h-fit lg:pl-8 z-20 transition-all duration-300">
+            <div className="lg:sticky lg:top-[120px] lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
-                  <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none transition-opacity duration-500" style={{
+                  <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
                     Work<br />process
