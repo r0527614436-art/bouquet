@@ -261,7 +261,7 @@ const Index = () => {
           </div>
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4 pb-16">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
             <img 
               src={bouquetLogo3D} 
               alt="בוקט" 
@@ -270,16 +270,20 @@ const Index = () => {
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="w-[400px] sm:w-[550px] md:w-[700px] h-auto mb-8"
+              className="w-[400px] sm:w-[550px] md:w-[700px] h-auto"
               style={{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
             />
+          </div>
+          
+          {/* Subtitle at bottom center */}
+          <div className="absolute bottom-24 left-0 right-0 flex justify-center px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>
-        </div>
+          </div>
 
         {/* Dots Indicator - removed as we only have single image */}
 
