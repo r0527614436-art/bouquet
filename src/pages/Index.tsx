@@ -69,8 +69,8 @@ const Index = () => {
     font_family: 'font-sans'
   };
 
-  // Gallery slides - new images uploaded by user
-  const gallerySlides = [{
+  // Gallery slides - 6 images repeated 5 times = 30 total
+  const baseSlides = [{
     id: '1',
     image_url: '/lovable-uploads/carousel-1.jpg',
     title: "עיצוב פרחים מיוחד",
@@ -119,6 +119,13 @@ const Index = () => {
     is_active: true,
     font_family: 'font-sans'
   }];
+
+  // Repeat the slides 5 times to create 30 total slides
+  const gallerySlides = Array(5).fill(baseSlides).flat().map((slide, index) => ({
+    ...slide,
+    id: `${slide.id}-${Math.floor(index / 6) + 1}`,
+    order_index: index + 1
+  }));
 
   // Use database slides if available, otherwise use gallery slides
   const carouselImages = slides.length > 0 ? slides : gallerySlides;
