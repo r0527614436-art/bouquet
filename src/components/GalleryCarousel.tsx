@@ -116,7 +116,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
 
         {/* Gallery Carousel Section */}
         <div className="relative overflow-hidden pb-8 w-full h-[600px] flex items-center justify-center">
-          <div className="overflow-visible w-full px-4" ref={galleryEmblaRef}>
+          <div className="overflow-hidden max-w-[calc((100vw-80px)*0.92-240px)] mx-auto">
+            <div className="overflow-visible w-full px-4" ref={galleryEmblaRef}>
             <div className="flex items-center justify-center">
               {[
                 '/lovable-uploads/scroll-1.jpg',
@@ -191,6 +192,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 );
               })}
             </div>
+          </div>
           </div>
         </div>
 
