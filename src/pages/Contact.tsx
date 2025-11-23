@@ -17,7 +17,7 @@ const Contact = () => {
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!contactForm.name || !contactForm.phone || !contactForm.email || !contactForm.message) {
+    if (!contactForm.name || !contactForm.email || !contactForm.message) {
       toast({
         title: "שגיאה",
         description: "אנא מלא את כל השדות",
@@ -38,7 +38,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
+      const message = `שם: ${contactForm.name}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
       window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
       toast({
         title: "ההודעה נשלחה בהצלחה",
@@ -174,32 +174,25 @@ const Contact = () => {
           <div className="md:order-2">
             <h2 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">בואו נדבר</h2>
             <form onSubmit={handleContactSubmit} className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  placeholder="שם"
-                  value={contactForm.name}
-                  onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
-                />
-              </div>
-              <div>
-                <input
-                  type="email"
-                  placeholder="אימייל"
-                  value={contactForm.email}
-                  onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
-                />
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  placeholder="טלפון"
-                  value={contactForm.phone}
-                  onChange={(e) => setContactForm({...contactForm, phone: e.target.value})}
-                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <input
+                    type="email"
+                    placeholder="אימייל"
+                    value={contactForm.email}
+                    onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                    className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="שם"
+                    value={contactForm.name}
+                    onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                    className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
+                  />
+                </div>
               </div>
               <div>
                 <textarea
