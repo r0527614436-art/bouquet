@@ -145,11 +145,11 @@ const Contact = () => {
           {/* Title with Layered Effect */}
           <div className="relative mb-8">
             {/* English Background Text */}
-            <h1 className="font-allura text-[115px] md:text-[160px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[95px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               Contact us
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
+            <h1 className="font-synopsis text-[80px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
@@ -158,7 +158,7 @@ const Contact = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-24 mb-16">
+          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-32 mb-24">
             <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
             <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
             <p className="font-ploni-aaa font-light">עם כל זאת מכיון שהפרחים -בחלקם- אינם זמינים בכל ימות השנה</p>
@@ -168,19 +168,62 @@ const Contact = () => {
       </div>
 
       {/* Contact Form and Info Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Contact Form */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-            <h2 className="text-2xl font-ploni-aaa font-black text-gray-800 mb-6 text-center">בוא ונדבר</h2>
-            <form onSubmit={handleContactSubmit} className="space-y-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Contact Info - Now on the Right */}
+          <div className="space-y-6 md:order-2">
+            <div className="p-8">
+              <h3 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">פנו אלינו</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <MapPin className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">כתובת:</p>
+                    <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עלית</p>
+                    <button 
+                      onClick={openGoogleMaps}
+                      className="text-[#314020] hover:text-[#314020]/70 font-ploni-aaa font-medium text-sm mt-1 underline"
+                    >
+                      פתח ב-Waze →
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Phone className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">טלפון:</p>
+                    <a href="tel:052-7614436" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020]">
+                      052-7614436
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Mail className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-ploni-aaa font-bold text-[#314020]">אימייל:</p>
+                    <a href="mailto:r0527614436@gmail.com" className="font-ploni-aaa font-light text-gray-700 hover:text-[#314020] break-all">
+                      r0527614436@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form - Now on the Left */}
+          <div className="md:order-1">
+            <h2 className="text-3xl font-synopsis font-bold text-[#314020] mb-8 text-center">בואו נדבר</h2>
+            <form onSubmit={handleContactSubmit} className="space-y-6">
               <div>
                 <input
                   type="text"
                   placeholder="שם"
                   value={contactForm.name}
                   onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                  className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-[#3d5a3d] bg-transparent outline-none font-ploni-aaa transition-colors"
+                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
               <div>
@@ -189,7 +232,7 @@ const Contact = () => {
                   placeholder="אימייל"
                   value={contactForm.email}
                   onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                  className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-[#3d5a3d] bg-transparent outline-none font-ploni-aaa transition-colors"
+                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
               <div>
@@ -198,7 +241,7 @@ const Contact = () => {
                   placeholder="טלפון"
                   value={contactForm.phone}
                   onChange={(e) => setContactForm({...contactForm, phone: e.target.value})}
-                  className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-[#3d5a3d] bg-transparent outline-none font-ploni-aaa transition-colors"
+                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
               <div>
@@ -207,63 +250,32 @@ const Contact = () => {
                   value={contactForm.message}
                   onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
                   rows={4}
-                  className="w-full px-4 py-3 border-b-2 border-gray-300 focus:border-[#3d5a3d] bg-transparent outline-none font-ploni-aaa resize-none transition-colors"
+                  className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] resize-none focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
-              <Button 
+              <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="w-full bg-[#3d5a3d] hover:bg-[#6b8e6b] text-white rounded-full py-6 text-lg font-ploni-aaa font-bold shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300"
+                className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full py-3 text-lg font-ploni-aaa font-medium transition-all duration-300 disabled:opacity-50"
               >
-                שליחה
-              </Button>
+                {isSubmitting ? 'שולח...' : 'שליחה'}
+              </button>
             </form>
-          </div>
-
-          {/* Contact Info */}
-          <div className="space-y-6">
-            <div className="bg-[#f5ebe0]/50 backdrop-blur-sm rounded-2xl p-8">
-              <h3 className="text-xl font-ploni-aaa font-black text-gray-800 mb-6 text-center">פנו אלינו</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-start gap-4 p-4 bg-white/60 rounded-xl">
-                  <MapPin className="h-6 w-6 text-[#3d5a3d] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-gray-800">כתובת:</p>
-                    <p className="font-ploni-aaa text-gray-600">שערי תשובה 14, מודיעין עלית</p>
-                    <button 
-                      onClick={openGoogleMaps}
-                      className="text-[#3d5a3d] hover:text-[#6b8e6b] font-ploni-aaa font-medium text-sm mt-1"
-                    >
-                      פתח ב-Waze →
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-4 bg-white/60 rounded-xl">
-                  <Phone className="h-6 w-6 text-[#3d5a3d] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-gray-800">טלפון:</p>
-                    <a href="tel:052-7614436" className="font-ploni-aaa text-gray-600 hover:text-[#3d5a3d]">
-                      052-7614436
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4 p-4 bg-white/60 rounded-xl">
-                  <Mail className="h-6 w-6 text-[#3d5a3d] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-ploni-aaa font-bold text-gray-800">אימייל:</p>
-                    <a href="mailto:r0527614436@gmail.com" className="font-ploni-aaa text-gray-600 hover:text-[#3d5a3d] break-all">
-                      r0527614436@gmail.com
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-[#11150d] py-12">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col items-center">
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" decoding="async" className="h-20 w-auto mb-6 brightness-0 invert" />
+            <p className="text-white/60 text-sm text-center">
+              © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
