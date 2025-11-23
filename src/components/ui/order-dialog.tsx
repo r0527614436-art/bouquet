@@ -66,12 +66,12 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
         </VisuallyHidden>
         
         {/* Background Image with Overlay */}
-        <div className="relative min-h-[600px] flex items-center justify-center">
+        <div className="relative min-h-[500px] flex items-center justify-center">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${item.image_url})` }}
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+            <div className="absolute inset-0 bg-white/70 backdrop-blur-md"></div>
           </div>
           
           {/* Close button */}
@@ -79,61 +79,63 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="absolute top-4 left-4 z-50 text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm rounded-full p-3 shadow-lg"
+            className="absolute top-4 right-4 z-50 text-gray-700 hover:text-gray-900 hover:bg-gray-200/50 rounded-full p-2"
           >
-            <X className="h-5 w-5" />
+            <X className="h-6 w-6" />
           </Button>
 
           {/* Form Content */}
-          <div className="relative z-10 bg-white/95 backdrop-blur-md rounded-2xl p-8 m-8 w-full max-w-md shadow-2xl">
-            <h2 className="text-3xl font-ploni-aaa font-black text-center mb-2 text-[#3d5a3d]">
-              דגם {item.title}
+          <div className="relative z-10 w-full max-w-md mx-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-ploni-aaa font-black mb-1 text-[#314020]">
+              {item.title}
             </h2>
             {item.price && (
-              <p className="text-xl font-ploni-aaa font-bold text-center mb-6 text-gray-700">₪{item.price}</p>
+              <p className="text-lg font-ploni-aaa font-light mb-8 text-gray-700">דגם {item.price}</p>
             )}
             
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
+            <form onSubmit={handleSubmit} className="space-y-0">
+              <div className="border-b-2 border-[#314020]">
                 <Input
                   type="text"
                   placeholder="שם מלא"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="text-right border-2 border-[#3d5a3d]/30 focus:border-[#3d5a3d] rounded-lg py-6"
+                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
                   required
                 />
               </div>
               
-              <div>
+              <div className="border-b-2 border-[#314020]">
                 <Input
                   type="tel"
                   placeholder="טלפון"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="text-right border-2 border-[#3d5a3d]/30 focus:border-[#3d5a3d] rounded-lg py-6"
+                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
                   required
                 />
               </div>
               
-              <div>
+              <div className="border-b-2 border-[#314020]">
                 <Input
                   type="date"
-                  placeholder="תאריך"
+                  placeholder="תאריך האירוע"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="text-right border-2 border-[#3d5a3d]/30 focus:border-[#3d5a3d] rounded-lg py-6"
+                  className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-4 text-lg font-ploni-aaa placeholder:text-gray-500"
                   required
                 />
               </div>
               
-              <Button
-                type="submit"
-                className="w-full bg-[#3d5a3d] hover:bg-[#2d4a2d] text-white rounded-full py-6 text-lg flex items-center justify-center gap-2 shadow-lg font-ploni-aaa font-medium"
-              >
-                <span>שלח הזמנה</span>
-                <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
-              </Button>
+              <div className="pt-8">
+                <Button
+                  type="submit"
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 py-3 text-lg flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto"
+                >
+                  <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                  <span>שליחת הזמנה</span>
+                </Button>
+              </div>
             </form>
           </div>
         </div>
