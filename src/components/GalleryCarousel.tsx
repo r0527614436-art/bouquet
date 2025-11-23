@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 import arrowCircle from '@/assets/arrow-circle.png';
 interface GallerySlide {
   id: string;
@@ -34,7 +35,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     slidesToScroll: 1,
     duration: 30,
     startIndex: 0
-  });
+  }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -111,8 +112,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
 
         {/* Gallery Carousel Section */}
         <div className="relative overflow-hidden pb-8 w-full">
-          <div className="overflow-visible w-full" ref={galleryEmblaRef}>
-            <div className="flex items-center">
+          <div className="overflow-visible w-full max-w-7xl mx-auto" ref={galleryEmblaRef}>
+            <div className="flex items-center justify-center gap-4">
               {[
                 '/lovable-uploads/scroll-1.jpg',
                 '/lovable-uploads/scroll-2.jpg',
@@ -149,11 +150,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 return (
                   <div 
                     key={`scroll-${idx}`} 
-                    className="flex-shrink-0 transition-all duration-300"
+                    className="flex-shrink-0 transition-all duration-500 ease-out"
                     style={{
-                      width: isSelected ? '480px' : '320px',
-                      height: isSelected ? '640px' : '428px',
-                      marginLeft: idx === 0 ? '0' : '16px'
+                      width: isSelected ? '500px' : '280px',
+                      height: isSelected ? '667px' : '373px',
+                      opacity: isSelected ? 1 : 0.7
                     }}
                   >
                     <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
