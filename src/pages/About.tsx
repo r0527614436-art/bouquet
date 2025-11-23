@@ -18,7 +18,7 @@ const About = () => {
   });
 
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: false })
   );
 
   const openGoogleMaps = () => {
@@ -185,20 +185,22 @@ const About = () => {
 
       {/* Images Carousel */}
       <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="w-full px-4 max-w-7xl mx-auto">
+        <div className="w-full max-w-full overflow-hidden">
           <Carousel
             plugins={[plugin.current]}
             className="w-full"
-            onMouseEnter={() => plugin.current.stop()}
-            onMouseLeave={() => plugin.current.play()}
+            opts={{
+              align: "start",
+              loop: true,
+              direction: "rtl"
+            }}
           >
             <CarouselContent className="-ml-4">
               {[
                 '/lovable-uploads/about-image-1.png',
                 '/lovable-uploads/about-image-2.png',
                 '/lovable-uploads/about-image-3.png',
-                '/lovable-uploads/about-image-4.png',
-                '/lovable-uploads/about-image-5.png'
+                '/lovable-uploads/about-image-4.png'
               ].map((img, idx) => (
                 <CarouselItem key={idx} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <div className="rounded-2xl overflow-hidden h-80">
@@ -215,8 +217,6 @@ const About = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
           </Carousel>
         </div>
       </section>
@@ -251,7 +251,7 @@ const About = () => {
               <div key={idx} className="flex flex-col items-center text-center">
                 <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
                   {/* Inner white circle border */}
-                  <div className="absolute inset-2 rounded-full border-4 border-white"></div>
+                  <div className="absolute inset-3 rounded-full border-2 border-white"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
                 </div>
                 <p className="text-[#314020] font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
