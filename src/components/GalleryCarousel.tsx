@@ -111,9 +111,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Gallery Carousel Section */}
-        <div className="relative overflow-hidden pb-8 w-full">
+        <div className="relative overflow-hidden pb-8 w-full h-[700px] flex items-center">
           <div className="overflow-visible w-full max-w-7xl mx-auto" ref={galleryEmblaRef}>
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center">
               {[
                 '/lovable-uploads/scroll-1.jpg',
                 '/lovable-uploads/scroll-2.jpg',
@@ -150,14 +150,21 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                 return (
                   <div 
                     key={`scroll-${idx}`} 
-                    className="flex-shrink-0 transition-all duration-500 ease-out"
+                    className="flex-shrink-0 transition-all duration-500 ease-out relative"
                     style={{
                       width: isSelected ? '500px' : '280px',
-                      height: isSelected ? '667px' : '373px',
-                      opacity: isSelected ? 1 : 0.7
+                      height: '667px',
+                      marginLeft: idx === 0 ? '0' : '-80px',
+                      zIndex: isSelected ? 20 : 10
                     }}
                   >
-                    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                    <div 
+                      className="relative w-full rounded-2xl overflow-hidden shadow-2xl transition-all duration-500"
+                      style={{
+                        height: isSelected ? '667px' : '373px',
+                        marginTop: isSelected ? '0' : '147px'
+                      }}
+                    >
                       <img 
                         src={img} 
                         alt={`Gallery ${idx + 1}`} 
@@ -165,6 +172,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                         decoding="async" 
                         className="w-full h-full object-cover" 
                       />
+                      {!isSelected && (
+                        <div className="absolute inset-0 bg-black/40 transition-opacity duration-500" />
+                      )}
                     </div>
                   </div>
                 );
