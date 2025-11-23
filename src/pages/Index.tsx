@@ -260,29 +260,23 @@ const Index = () => {
           </div>
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-end justify-center px-4 md:pr-20">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
             <h1 style={{
-              color: '#E8D4A0',
+              color: '#D4AF37',
               textShadow: `
-                1px 1px 0px #C9A961,
-                2px 2px 0px #B8954D,
-                3px 3px 0px #A78139,
-                4px 4px 0px #967225,
-                5px 5px 0px #855E11,
-                6px 6px 2px rgba(0,0,0,0.4),
-                7px 7px 4px rgba(0,0,0,0.3),
-                8px 8px 6px rgba(0,0,0,0.2),
-                -1px -1px 0px #F5E8C8,
-                0px 0px 20px rgba(232, 212, 160, 0.3)
+                0 0 10px rgba(212, 175, 55, 0.8),
+                0 0 20px rgba(212, 175, 55, 0.6),
+                0 0 30px rgba(212, 175, 55, 0.4),
+                2px 2px 4px rgba(0,0,0,0.3)
               `,
-              WebkitTextStroke: '1px #D4B66A',
-              filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.25))'
-            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-2 tracking-wider ml-auto">
+              WebkitTextStroke: '1px #B8942C',
+              filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+            }} className="font-synopsis text-[120px] sm:text-[160px] md:text-[220px] font-semibold mb-4 tracking-wider">
               בוקט
             </h1>
-            <p style={{
-              textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-            }} className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-5xl text-green-900 ml-auto mr-8 md:mr-12">כשהפרחים הופכים לרגעים של קסם</p>
+            <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
+              textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
+            }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>
         </div>
 
