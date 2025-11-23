@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { GalleryCarousel } from '@/components/GalleryCarousel';
 import Testimonials from '@/components/Testimonials';
+import LoadingScreen from '@/components/LoadingScreen';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
@@ -16,6 +17,7 @@ import arrowCircle from '@/assets/arrow-circle.png';
 import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
+import { AnimatePresence } from 'framer-motion';
 interface HomepageSlide {
   id: string;
   title: string;
@@ -36,6 +38,7 @@ const Index = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const {
     toast
@@ -57,6 +60,47 @@ const Index = () => {
       return data || [];
     }
   });
+
+  // Track image loading
+  useEffect(() => {
+    const images = document.querySelectorAll('img');
+    let loadedCount = 0;
+    const totalImages = images.length;
+
+    if (totalImages === 0) {
+      setIsLoading(false);
+      return;
+    }
+
+    const checkAllLoaded = () => {
+      loadedCount++;
+      if (loadedCount === totalImages) {
+        setTimeout(() => setIsLoading(false), 500);
+      }
+    };
+
+    images.forEach((img) => {
+      if (img.complete) {
+        checkAllLoaded();
+      } else {
+        img.addEventListener('load', checkAllLoaded);
+        img.addEventListener('error', checkAllLoaded);
+      }
+    });
+
+    // Fallback timeout
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeout);
+      images.forEach((img) => {
+        img.removeEventListener('load', checkAllLoaded);
+        img.removeEventListener('error', checkAllLoaded);
+      });
+    };
+  }, [slides]);
 
   // Hero image - single static image
   const heroImageData = {
@@ -195,7 +239,13 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-  return <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+  return (
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
+      
+      <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Main Content */}
       <div>
 
@@ -623,6 +673,8 @@ const Index = () => {
         </div>
       </footer>
       </div>
-    </div>;
+    </div>
+    </>
+  );
 };
 export default Index;
