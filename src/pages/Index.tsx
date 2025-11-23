@@ -268,14 +268,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Carousel Section */}
+      {/* Gallery Carousel Section - with infinite scrolling images */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
         <GalleryCarousel slides={carouselImages} />
-      </section>
-
-      {/* Infinite Scrolling Images Section */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="relative">
+        
+        {/* Infinite Scrolling Images Section */}
+        <div className="relative overflow-hidden pt-8">
           <style>{`
             @keyframes infiniteScroll {
               from { transform: translateX(0); }
@@ -289,7 +287,7 @@ const Index = () => {
               animation-play-state: paused;
             }
           `}</style>
-          <div className="scroll-container flex gap-6">
+          <div className="scroll-container flex">
             {[...Array(2)].map((_, setIndex) => 
               [
                 '/lovable-uploads/scroll-1.jpg',
@@ -297,9 +295,23 @@ const Index = () => {
                 '/lovable-uploads/scroll-3.jpg',
                 '/lovable-uploads/scroll-4.jpg',
                 '/lovable-uploads/scroll-5.jpg',
-                '/lovable-uploads/scroll-6.jpg'
+                '/lovable-uploads/scroll-6.jpg',
+                '/lovable-uploads/scroll-7.jpg',
+                '/lovable-uploads/scroll-8.jpg',
+                '/lovable-uploads/scroll-9.jpg',
+                '/lovable-uploads/scroll-10.jpg',
+                '/lovable-uploads/scroll-11.jpg',
+                '/lovable-uploads/scroll-12.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 72px) / 4)', height: 'calc(((100vw - 72px) / 4) * 1.5)' }}>
+                <div 
+                  key={`${setIndex}-${idx}`} 
+                  className="flex-shrink-0 rounded-2xl overflow-hidden" 
+                  style={{ 
+                    width: 'calc((100vw - 72px) / 4)', 
+                    height: 'calc(((100vw - 72px) / 4) * 1.5)',
+                    marginLeft: idx === 0 ? '0' : '-100px'
+                  }}
+                >
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
