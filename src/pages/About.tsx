@@ -173,19 +173,19 @@ const About = () => {
       <section className="py-16 pt-32 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="relative">
           <style>{`
-            @keyframes scroll {
+            @keyframes infiniteScroll {
               0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
+              100% { transform: translateX(calc(-256px * 4 - 24px * 4)); }
             }
-            .animate-scroll {
-              animation: scroll 40s linear infinite;
+            .scroll-container {
+              animation: infiniteScroll 30s linear infinite;
             }
-            .animate-scroll:hover {
+            .scroll-container:hover {
               animation-play-state: paused;
             }
           `}</style>
-          <div className="flex gap-6 animate-scroll">
-            {[...Array(2)].map((setIndex) => 
+          <div className="scroll-container flex gap-6">
+            {[...Array(5)].map((_, setIndex) => 
               [
                 '/lovable-uploads/about-new-1.jpg',
                 '/lovable-uploads/about-new-2.jpg',
