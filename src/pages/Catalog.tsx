@@ -457,7 +457,7 @@ const Catalog = () => {
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
-                                      <span className="text-sm font-ploni-aaa font-medium">להזמנה מהירה</span>
+                                      <span className="text-base font-ploni-aaa font-semibold">להזמנה מהירה</span>
                                       <img src={arrowCircle} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
@@ -515,7 +515,7 @@ const Catalog = () => {
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
-                                      <span className="text-sm font-ploni-aaa font-medium">להזמנה מהירה</span>
+                                      <span className="text-base font-ploni-aaa font-semibold">להזמנה מהירה</span>
                                       <img src={arrowCircle} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
