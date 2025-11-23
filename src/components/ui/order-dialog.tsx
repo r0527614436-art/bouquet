@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { X } from 'lucide-react';
 import arrowCircle from '@/assets/arrow-circle.png';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery } from '@tanstack/react-query';
@@ -77,7 +76,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl p-0 overflow-hidden border-primary/20 bg-transparent">
+      <DialogContent className="max-w-3xl p-0 overflow-hidden border-primary/20 bg-transparent">
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
@@ -91,19 +90,9 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           >
             <div className="absolute inset-0 bg-white/50"></div>
           </div>
-          
-          {/* Close button */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClose}
-            className="absolute top-4 right-4 z-50 text-gray-700 hover:text-gray-900 hover:bg-white/50 rounded-full p-2"
-          >
-            <X className="h-6 w-6" />
-          </Button>
 
           {/* Form Content */}
-          <div className="relative z-10 w-full max-w-md mx-8 text-center">
+          <div className="relative z-10 w-full max-w-2xl mx-8 text-center">
             {/* Category Name */}
             {category && (
               <p className="text-2xl md:text-3xl font-ploni-aaa font-black mb-2 text-[#314020]">
@@ -117,51 +106,54 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Field */}
-              <div className="text-center">
-                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
-                  שם מלא
-                </label>
-                <div className="border-b border-[#314020]">
-                  <Input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
-                    required
-                  />
+              {/* Three Fields in a Row */}
+              <div className="grid grid-cols-3 gap-6">
+                {/* Name Field */}
+                <div className="text-center">
+                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                    שם מלא
+                  </label>
+                  <div className="border-b border-[#314020]">
+                    <Input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              {/* Phone Field */}
-              <div className="text-center">
-                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
-                  טלפון
-                </label>
-                <div className="border-b border-[#314020]">
-                  <Input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
-                    required
-                  />
+                
+                {/* Phone Field */}
+                <div className="text-center">
+                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                    טלפון
+                  </label>
+                  <div className="border-b border-[#314020]">
+                    <Input
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      required
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              {/* Date Field */}
-              <div className="text-center">
-                <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
-                  תאריך האירוע
-                </label>
-                <div className="border-b border-[#314020]">
-                  <Input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
-                    required
-                  />
+                
+                {/* Date Field */}
+                <div className="text-center">
+                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                    תאריך האירוע
+                  </label>
+                  <div className="border-b border-[#314020]">
+                    <Input
+                      type="date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      required
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -171,8 +163,8 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   type="submit"
                   className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 py-3 text-base flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto"
                 >
-                  <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180 brightness-0 invert" />
                   <span>שליחת הזמנה</span>
+                  <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
                 </Button>
               </div>
             </form>
