@@ -405,8 +405,8 @@ const Index = () => {
               text: 'עמידה\nבזמנים'
               }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center">
                 <div className="relative w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  {/* Inner green circle border */}
-                  <div className="absolute inset-3 rounded-full border-2 border-[#314020]"></div>
+                  {/* Inner green circle border - thin outer spacing */}
+                  <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain relative z-10" />
                 </div>
                 <p className="text-white font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>

@@ -250,8 +250,8 @@ const About = () => {
             }].map((service, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
                 <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  {/* Inner white circle border */}
-                  <div className="absolute inset-3 rounded-full border-2 border-white"></div>
+                  {/* Inner white circle border - thin outer spacing */}
+                  <div className="absolute inset-1 rounded-full border-2 border-white"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
                 </div>
                 <p className="text-[#314020] font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
