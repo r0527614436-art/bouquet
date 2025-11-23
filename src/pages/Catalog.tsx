@@ -447,7 +447,7 @@ const Catalog = () => {
                                 {/* Bottom overlay with price and button */}
                                 {category.allow_cart && (
                                   <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
+                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">{item.price} ש״ח</span>}
                                     <button 
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
@@ -500,7 +500,7 @@ const Catalog = () => {
                                 {/* Bottom overlay with price and button */}
                                 {selectedCategoryData?.allow_cart && (
                                   <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
+                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">{item.price} ש״ח</span>}
                                     <button 
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
