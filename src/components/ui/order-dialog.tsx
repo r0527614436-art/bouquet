@@ -92,7 +92,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           </div>
 
           {/* Form Content */}
-          <div className="relative z-10 w-full max-w-2xl mx-8 text-center">
+          <div className="relative z-10 w-full max-w-2xl mx-8 text-center pt-12">
             {/* Category Name */}
             {category && (
               <p className="text-2xl md:text-3xl font-ploni-aaa font-black mb-2 text-[#314020]">
@@ -101,11 +101,11 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             )}
             
             {/* Model Number with "דגם" */}
-            <h2 className="text-lg md:text-xl font-ploni-aaa font-light mb-8 text-gray-700">
+            <h2 className="text-lg md:text-xl font-ploni-aaa font-light mb-16 text-gray-700">
               דגם {item.price || item.title}
             </h2>
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-8">
               {/* Three Fields in a Row */}
               <div className="grid grid-cols-3 gap-6">
                 {/* Name Field */}
@@ -158,10 +158,10 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
               
               {/* Submit Button */}
-              <div className="pt-4">
+              <div className="pt-12">
                 <Button
                   type="submit"
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 py-3 text-base flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto"
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto min-w-[300px]"
                 >
                   <span>שליחת הזמנה</span>
                   <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
