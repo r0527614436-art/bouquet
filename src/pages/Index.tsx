@@ -262,11 +262,11 @@ const Index = () => {
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
             <h1 style={{
-              color: '#D4AF37',
+              color: '#F4D03F',
               textShadow: `
-                0 0 10px rgba(212, 175, 55, 0.8),
-                0 0 20px rgba(212, 175, 55, 0.6),
-                0 0 30px rgba(212, 175, 55, 0.4),
+                0 0 10px rgba(244, 208, 63, 0.8),
+                0 0 20px rgba(244, 208, 63, 0.6),
+                0 0 30px rgba(244, 208, 63, 0.4),
                 2px 2px 4px rgba(0,0,0,0.3)
               `,
               WebkitTextStroke: '1px #B8942C',
