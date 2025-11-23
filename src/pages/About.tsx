@@ -175,7 +175,7 @@ const About = () => {
           <style>{`
             @keyframes scroll {
               0% { transform: translateX(0); }
-              100% { transform: translateX(calc(-256px * 4 - 24px * 4)); }
+              100% { transform: translateX(-50%); }
             }
             .animate-scroll {
               animation: scroll 40s linear infinite;
@@ -184,27 +184,29 @@ const About = () => {
               animation-play-state: paused;
             }
           `}</style>
-          <div className="flex gap-6 animate-scroll">
-            {[...Array(6)].map((_, setIndex) => 
-              [
-                '/lovable-uploads/about-new-1.jpg',
-                '/lovable-uploads/about-new-2.jpg',
-                '/lovable-uploads/about-new-3.jpg',
-                '/lovable-uploads/about-new-4.jpg'
-              ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden">
-                  <img 
-                    src={img} 
-                    alt={`עיצוב פרחים ${idx + 1}`} 
-                    width="256" 
-                    height="384" 
-                    loading="lazy" 
-                    decoding="async" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
-                  />
-                </div>
-              ))
-            )}
+          <div className="flex animate-scroll">
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-6">
+                {[
+                  '/lovable-uploads/about-new-1.jpg',
+                  '/lovable-uploads/about-new-2.jpg',
+                  '/lovable-uploads/about-new-3.jpg',
+                  '/lovable-uploads/about-new-4.jpg'
+                ].map((img, idx) => (
+                  <div key={idx} className="flex-shrink-0 w-64 h-96 rounded-2xl overflow-hidden ml-6">
+                    <img 
+                      src={img} 
+                      alt={`עיצוב פרחים ${idx + 1}`} 
+                      width="256" 
+                      height="384" 
+                      loading="lazy" 
+                      decoding="async" 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
