@@ -102,6 +102,22 @@ const Index = () => {
     order_index: 4,
     is_active: true,
     font_family: 'font-sans'
+  }, {
+    id: '5',
+    image_url: '/lovable-uploads/carousel-5.jpg',
+    title: "מרכז שולחן מרשים",
+    description: "עיצוב פרחים מיוחד לאירועים",
+    order_index: 5,
+    is_active: true,
+    font_family: 'font-sans'
+  }, {
+    id: '6',
+    image_url: '/lovable-uploads/carousel-6.jpg',
+    title: "סידור שולחן אלגנטי",
+    description: "פרחים ונרות ליצירת אווירה",
+    order_index: 6,
+    is_active: true,
+    font_family: 'font-sans'
   }];
 
   // Use database slides if available, otherwise use gallery slides
