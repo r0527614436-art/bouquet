@@ -372,16 +372,30 @@ const Catalog = () => {
         <div className="mb-6 mt-12">
           <div className="flex flex-wrap justify-center gap-3">
             <Button 
-              onClick={() => setSelectedCategory('')} 
-              className="bg-[#3d5a3d] hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300"
+              onClick={() => {
+                console.log('Selecting all categories');
+                setSelectedCategory('');
+              }} 
+              className={`${
+                selectedCategory === '' 
+                  ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' 
+                  : 'bg-[#3d5a3d]'
+              } hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}
             >
               הכל
             </Button>
             {categories.map(category => 
               <Button 
                 key={category.id}
-                onClick={() => setSelectedCategory(category.id)} 
-                className="bg-[#3d5a3d] hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300"
+                onClick={() => {
+                  console.log('Selecting category:', category.name, category.id);
+                  setSelectedCategory(category.id);
+                }} 
+                className={`${
+                  selectedCategory === category.id 
+                    ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' 
+                    : 'bg-[#3d5a3d]'
+                } hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}
               >
                 {category.name}
               </Button>
