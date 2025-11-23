@@ -177,6 +177,49 @@ const About = () => {
         </div>
       </div>
 
+      {/* Infinite Scrolling Images */}
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="relative">
+          <style>{`
+            @keyframes scroll {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-scroll {
+              animation: scroll 40s linear infinite;
+            }
+            .animate-scroll:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          <div className="flex animate-scroll">
+            {[...Array(2)].map((_, setIndex) => (
+              <div key={setIndex} className="flex gap-6 pl-6">
+                {[
+                  '/lovable-uploads/about-image-1.png',
+                  '/lovable-uploads/about-image-2.png',
+                  '/lovable-uploads/about-image-3.png',
+                  '/lovable-uploads/about-image-4.png',
+                  '/lovable-uploads/about-image-5.png'
+                ].map((img, idx) => (
+                  <div key={idx} className="flex-shrink-0 w-80 h-96 rounded-2xl overflow-hidden">
+                    <img 
+                      src={img} 
+                      alt={`עיצוב פרחים ${idx + 1}`} 
+                      width="320" 
+                      height="384" 
+                      loading="lazy" 
+                      decoding="async" 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Excellence Section Title */}
       <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-center">
