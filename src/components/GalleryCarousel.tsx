@@ -157,7 +157,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     className="flex-shrink-0 transition-all duration-500 ease-out relative"
                     style={{
                       width: isSelected ? '360px' : '280px',
-                      height: '550px',
+                      height: '500px',
                       marginLeft: idx === 0 ? '0' : '-80px',
                       zIndex: isSelected ? 20 : 10
                     }}
@@ -165,8 +165,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     <div 
                       className="relative w-full overflow-hidden shadow-2xl transition-all duration-500"
                       style={{
-                        height: isSelected ? '550px' : '373px',
-                        marginTop: isSelected ? '0' : '88px',
+                        height: isSelected ? '500px' : '350px',
+                        marginTop: isSelected ? '0' : '75px',
                         borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
                       }}
                     >
