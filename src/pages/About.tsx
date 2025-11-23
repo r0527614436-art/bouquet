@@ -1,9 +1,81 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import Testimonials from '@/components/Testimonials';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 const About = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
+  const openGoogleMaps = () => {
+    const address = 'שערי תשובה 14, מודיעין עלית';
+    const encodedAddress = encodeURIComponent(address);
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+    window.open(mapsUrl, '_blank');
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!contactForm.name || !contactForm.phone || !contactForm.email || !contactForm.message) {
+      toast({
+        title: "שגיאה",
+        description: "אנא מלא את כל השדות",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(contactForm.email)) {
+      toast({
+        title: "שגיאה",
+        description: "אנא הזן כתובת מייל תקינה",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
+      window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
+      toast({
+        title: "ההודעה נשלחה בהצלחה",
+        description: "ניצור איתך קשר בהקדם"
+      });
+
+      setContactForm({
+        name: '',
+        phone: '',
+        email: '',
+        message: ''
+      });
+    } catch (error) {
+      toast({
+        title: "שגיאה בשליחת ההודעה",
+        description: "אנא נסה שוב מאוחר יותר",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }} id="about-page">
       {/* Hero Section with Background Image */}
@@ -111,34 +183,48 @@ const About = () => {
         </div>
       </div>
 
-      {/* Images Gallery - 5 images in a row */}
+      {/* Images Carousel */}
       <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="w-full px-0">
-          <div className="flex gap-0 overflow-hidden">
-            {/* Placeholder for 5 images - user will provide them */}
-            <div className="flex-1 h-64 md:h-80 bg-gray-200">
-              <img src="/lovable-uploads/about-image-1.png" alt="עיצוב פרחים 1" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-1 h-64 md:h-80 bg-gray-200">
-              <img src="/lovable-uploads/about-image-2.png" alt="עיצוב פרחים 2" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-1 h-64 md:h-80 bg-gray-200">
-              <img src="/lovable-uploads/about-image-3.png" alt="עיצוב פרחים 3" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-1 h-64 md:h-80 bg-gray-200">
-              <img src="/lovable-uploads/about-image-4.png" alt="עיצוב פרחים 4" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-1 h-64 md:h-80 bg-gray-200">
-              <img src="/lovable-uploads/about-image-5.png" alt="עיצוב פרחים 5" width="384" height="320" loading="lazy" decoding="async" className="w-full h-full object-cover" />
-            </div>
-          </div>
+        <div className="w-full px-4 max-w-7xl mx-auto">
+          <Carousel
+            plugins={[plugin.current]}
+            className="w-full"
+            onMouseEnter={() => plugin.current.stop()}
+            onMouseLeave={() => plugin.current.play()}
+          >
+            <CarouselContent className="-ml-4">
+              {[
+                '/lovable-uploads/about-image-1.png',
+                '/lovable-uploads/about-image-2.png',
+                '/lovable-uploads/about-image-3.png',
+                '/lovable-uploads/about-image-4.png',
+                '/lovable-uploads/about-image-5.png'
+              ].map((img, idx) => (
+                <CarouselItem key={idx} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <div className="rounded-2xl overflow-hidden h-80">
+                    <img 
+                      src={img} 
+                      alt={`עיצוב פרחים ${idx + 1}`} 
+                      width="384" 
+                      height="320" 
+                      loading="lazy" 
+                      decoding="async" 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
       </section>
 
       {/* Excellence Section Title */}
       <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-center">
-          <h2 className="font-synopsis text-4xl md:text-5xl font-bold text-[#314020]">אצלינו המצוינות</h2>
+          <h2 className="font-synopsis text-4xl md:text-5xl font-bold text-[#314020]">אצלינו תמצאו</h2>
         </div>
       </section>
 
@@ -163,8 +249,10 @@ const About = () => {
               text: 'עמידה\nבזמנים'
             }].map((service, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
-                <div className="w-24 h-24 rounded-full bg-[#314020] border-4 border-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert" />
+                <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
+                  {/* Inner white circle border */}
+                  <div className="absolute inset-2 rounded-full border-4 border-white"></div>
+                  <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
                 </div>
                 <p className="text-[#314020] font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
               </div>
@@ -173,8 +261,125 @@ const About = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row gap-12 items-start">
+            {/* Left Side - Title and Contact Info */}
+            <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
+              {/* Title with layered effect */}
+              <div className="relative mb-12">
+                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{
+                  transform: 'translate(15px, -10px)'
+                }}>
+                  Contact us
+                </h2>
+                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                  צור קשר
+                </h2>
+              </div>
+
+              {/* Contact Information */}
+              <div className="space-y-6 mt-10">
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <MapPin className="h-6 w-6 text-[#314020]" />
+                  <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]">
+                    שערי תשובה 14 - מודיעין עלית
+                  </button>
+                </div>
+                
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <Mail className="h-6 w-6 text-[#314020]" />
+                  <a href="mailto:R0527614436@GMAIL.COM" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
+                    R0527614436@GMAIL.COM
+                  </a>
+                </div>
+                
+                <div className="flex items-center justify-start gap-3 text-lg">
+                  <Phone className="h-6 w-6 text-[#314020]" />
+                  <a href="tel:0527614436" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
+                    0527614436
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Contact Form */}
+            <div className="w-full md:w-1/2">
+              <form onSubmit={handleContactSubmit} className="space-y-4 p-8">
+                <div className="space-y-1 text-right">
+                  <label htmlFor="name" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
+                    שם מלא
+                  </label>
+                  <input 
+                    id="name" 
+                    type="text" 
+                    value={contactForm.name} 
+                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} 
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
+                    required 
+                  />
+                </div>
+
+                <div className="space-y-1 text-right">
+                  <label htmlFor="phone" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
+                    טלפון
+                  </label>
+                  <input 
+                    id="phone" 
+                    type="tel" 
+                    value={contactForm.phone} 
+                    onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} 
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
+                    required 
+                  />
+                </div>
+
+                <div className="space-y-1 text-right">
+                  <label htmlFor="email" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
+                    אימייל
+                  </label>
+                  <input 
+                    id="email" 
+                    type="email" 
+                    value={contactForm.email} 
+                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} 
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
+                    required 
+                  />
+                </div>
+
+                <div className="space-y-1 text-right">
+                  <label htmlFor="message" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
+                    הודעה
+                  </label>
+                  <textarea 
+                    id="message" 
+                    value={contactForm.message} 
+                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} 
+                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" 
+                    required 
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'שולח...' : 'שליחה'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-black py-12">
+      <footer className="bg-[#11150d] py-12">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" decoding="async" className="h-20 w-auto mb-6 brightness-0 invert" />
