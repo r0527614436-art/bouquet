@@ -209,22 +209,24 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
           </div>
         </div>
 
-        {/* Navigation Buttons - Positioned at edges */}
-        <button 
-          onClick={galleryScrollPrev} 
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-16 h-16 z-30" 
-          aria-label="Previous gallery image"
-        >
-          <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
-        </button>
+        {/* Navigation Buttons - Below carousel at edges */}
+        <div className="flex items-center justify-between w-full max-w-[calc((100vw-80px)*0.92-240px)] mx-auto mt-[-40px] px-4">
+          <button 
+            onClick={galleryScrollPrev} 
+            className="w-16 h-16" 
+            aria-label="Previous gallery image"
+          >
+            <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
+          </button>
 
-        <button 
-          onClick={galleryScrollNext} 
-          className="absolute right-4 top-1/2 -translate-y-1/2 w-16 h-16 z-30" 
-          aria-label="Next gallery image"
-        >
-          <img src={arrowCircle} alt="Next" className="w-full h-full" />
-        </button>
+          <button 
+            onClick={galleryScrollNext} 
+            className="w-16 h-16" 
+            aria-label="Next gallery image"
+          >
+            <img src={arrowCircle} alt="Next" className="w-full h-full" />
+          </button>
+        </div>
       </div>
     </div>;
 };
