@@ -74,8 +74,8 @@ const Contact = () => {
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center bottom 30%'
+        backgroundSize: '120%',
+        backgroundPosition: 'center bottom'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
