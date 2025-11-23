@@ -328,18 +328,6 @@ const Catalog = () => {
           </div>
         </div>
 
-        {/* Top Right Buttons */}
-        <div className="absolute top-8 right-8 z-20 flex items-center gap-3">
-          <Button onClick={handleDownloadCatalog} className="bg-white/90 hover:bg-white text-gray-800 rounded-full px-4 py-2 text-sm shadow-lg backdrop-blur-sm">
-            <Download className="h-4 w-4 ml-2" />
-            הורד קטלוג
-          </Button>
-          <Link to="/" className="flex items-center text-white hover:text-pink-200 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
-            <ArrowRight className="h-5 w-5 ml-2" />
-            חזרה לעמוד הבית
-          </Link>
-        </div>
-
         {/* Content Container - positioned at the transition */}
         <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
