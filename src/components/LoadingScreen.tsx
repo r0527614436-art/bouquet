@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
+import bouquetLogoArch from '@/assets/bouquet-logo-arch.png';
 
 const LoadingScreen = () => {
   return (
@@ -7,39 +7,25 @@ const LoadingScreen = () => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#11150d]"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white"
     >
       <div className="text-center">
         <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
           animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.8, 1, 0.8],
+            opacity: 1,
+            scale: 1,
           }}
           transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
+            duration: 0.8,
+            ease: "easeOut"
           }}
-          className="mb-8"
         >
           <img 
-            src={bouquetLogo3D} 
+            src={bouquetLogoArch} 
             alt="Bouquet Logo" 
-            className="w-48 h-48 mx-auto"
+            className="w-64 h-auto mx-auto"
           />
-        </motion.div>
-        
-        <motion.div
-          animate={{
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <p className="text-white text-2xl font-ploni-aaa">טוען...</p>
         </motion.div>
       </div>
     </motion.div>
