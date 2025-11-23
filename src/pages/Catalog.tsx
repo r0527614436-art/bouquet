@@ -414,24 +414,28 @@ const Catalog = () => {
                               <div className="aspect-[3/4] overflow-hidden relative">
                                 <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                                 
-                                {/* Hover overlay */}
+                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  <div className="p-4">
-                                    <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
-                                  </div>
+                                  {item.title && (
+                                    <div className="p-4">
+                                      <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
+                                    </div>
+                                  )}
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
-                                <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
-                                  <button 
-                                    onClick={(e) => handleOrderClick(item, e)}
-                                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                                  >
-                                    <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
-                                    <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
-                                  </button>
-                                </div>
+                                {category.allow_cart && (
+                                  <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
+                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
+                                    <button 
+                                      onClick={(e) => handleOrderClick(item, e)}
+                                      className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                                    >
+                                      <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                                      <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
+                                    </button>
+                                  </div>
+                                )}
                               </div>
                             </div>;
                 })}
@@ -440,6 +444,7 @@ const Catalog = () => {
                 </div>;
         })) : (/* Show single category items with subcategories */
         (() => {
+          const selectedCategoryData = categories.find(c => c.id === selectedCategory);
           const selectedCategoryItems = sortedItems.filter(item => item.category_id === selectedCategory);
 
           // Group items by subcategory
@@ -464,22 +469,26 @@ const Catalog = () => {
                                 
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  <div className="p-4">
-                                    <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
-                                  </div>
+                                  {item.title && (
+                                    <div className="p-4">
+                                      <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
+                                    </div>
+                                  )}
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
-                                <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
-                                  {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
-                                  <button 
-                                    onClick={(e) => handleOrderClick(item, e)}
-                                    className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-                                  >
-                                    <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
-                                    <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
-                                  </button>
-                                </div>
+                                {selectedCategoryData?.allow_cart && (
+                                  <div className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between px-4 py-3">
+                                    {item.price && <span className="text-lg font-ploni-aaa font-bold">₪{item.price}</span>}
+                                    <button 
+                                      onClick={(e) => handleOrderClick(item, e)}
+                                      className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                                    >
+                                      <img src={arrowCircle} alt="" className="h-5 w-5 rotate-180" />
+                                      <span className="text-sm font-ploni-aaa font-medium">להזמנה</span>
+                                    </button>
+                                  </div>
+                                )}
                               </div>
                             </div>;
                 })}
