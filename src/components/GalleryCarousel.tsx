@@ -197,7 +197,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Navigation Buttons - Below Gallery Scroll */}
-        <div className="flex items-center justify-center gap-8 mt-4">
+        <div className="flex items-center justify-center gap-32 mt-[-80px]">
           <button onClick={galleryScrollPrev} className="w-16 h-16" aria-label="Previous gallery image">
             <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
           </button>
