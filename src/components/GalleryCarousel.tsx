@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import arrowCircle from '@/assets/arrow-circle.png';
+import { AutoScrollCarousel } from './AutoScrollCarousel';
 interface GallerySlide {
   id: string;
   image_url: string;
@@ -75,68 +76,9 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
           </div>
         </div>
 
-        {/* Infinite Scrolling Images Section */}
+        {/* Auto-Scrolling Carousel Section */}
         <div className="relative overflow-hidden pb-8">
-          <style>{`
-            @keyframes infiniteScroll {
-              from { transform: translateX(0); }
-              to { transform: translateX(-50%); }
-            }
-            .scroll-container {
-              animation: infiniteScroll 45s linear infinite;
-              direction: ltr;
-            }
-          `}</style>
-          <div className="scroll-container flex">
-            {[0, 1].map((setIndex) => 
-              [
-                '/lovable-uploads/scroll-1.jpg',
-                '/lovable-uploads/scroll-2.jpg',
-                '/lovable-uploads/scroll-3.jpg',
-                '/lovable-uploads/scroll-4.jpg',
-                '/lovable-uploads/scroll-5.jpg',
-                '/lovable-uploads/scroll-6.jpg',
-                '/lovable-uploads/scroll-7.jpg',
-                '/lovable-uploads/scroll-8.jpg',
-                '/lovable-uploads/scroll-9.jpg',
-                '/lovable-uploads/scroll-10.jpg',
-                '/lovable-uploads/scroll-11.jpg',
-                '/lovable-uploads/scroll-12.jpg',
-                '/lovable-uploads/scroll-13.jpg',
-                '/lovable-uploads/scroll-14.jpg',
-                '/lovable-uploads/scroll-15.jpg',
-                '/lovable-uploads/scroll-16.jpg',
-                '/lovable-uploads/scroll-17.jpg',
-                '/lovable-uploads/scroll-18.jpg',
-                '/lovable-uploads/scroll-19.jpg',
-                '/lovable-uploads/scroll-20.jpg',
-                '/lovable-uploads/scroll-21.jpg',
-                '/lovable-uploads/scroll-22.jpg',
-                '/lovable-uploads/scroll-23.jpg',
-                '/lovable-uploads/scroll-24.jpg'
-              ].map((img, idx) => (
-                <div 
-                  key={`${setIndex}-${idx}`} 
-                  className="flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl"
-                  style={{
-                    width: '320px',
-                    height: '428px',
-                    marginLeft: idx === 0 ? '0' : '-100px'
-                  }}
-                >
-                  <img 
-                    src={img} 
-                    alt={`Gallery ${idx + 1}`} 
-                    width="320" 
-                    height="576" 
-                    loading="lazy" 
-                    decoding="async" 
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-              ))
-            )}
-          </div>
+          <AutoScrollCarousel />
         </div>
 
         {/* Navigation Buttons - Below Scroll */}
