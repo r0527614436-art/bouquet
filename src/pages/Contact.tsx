@@ -259,7 +259,7 @@ const Contact = () => {
               </p>
             </div>
             <p className="text-white/60 text-sm pt-4">
-              © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">JOBCLIC.COM</a>
+              © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
           </div>
         </div>
