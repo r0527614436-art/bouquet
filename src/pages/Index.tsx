@@ -268,66 +268,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Carousel Section - with infinite scrolling images */}
+      {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
-        {/* Infinite Scrolling Images Section */}
-        <div className="relative overflow-hidden pb-8">
-          <style>{`
-            @keyframes infiniteScroll {
-              from { transform: translateX(0); }
-              to { transform: translateX(-50%); }
-            }
-            .scroll-container {
-              animation: infiniteScroll 45s linear infinite;
-              direction: ltr;
-            }
-          `}</style>
-          <div className="scroll-container flex">
-            {[...Array(2)].map((_, setIndex) => 
-              [
-                '/lovable-uploads/scroll-1.jpg',
-                '/lovable-uploads/scroll-2.jpg',
-                '/lovable-uploads/scroll-3.jpg',
-                '/lovable-uploads/scroll-4.jpg',
-                '/lovable-uploads/scroll-5.jpg',
-                '/lovable-uploads/scroll-6.jpg',
-                '/lovable-uploads/scroll-7.jpg',
-                '/lovable-uploads/scroll-8.jpg',
-                '/lovable-uploads/scroll-9.jpg',
-                '/lovable-uploads/scroll-10.jpg',
-                '/lovable-uploads/scroll-11.jpg',
-                '/lovable-uploads/scroll-12.jpg',
-                '/lovable-uploads/scroll-13.jpg',
-                '/lovable-uploads/scroll-14.jpg',
-                '/lovable-uploads/scroll-15.jpg',
-                '/lovable-uploads/scroll-16.jpg',
-                '/lovable-uploads/scroll-17.jpg',
-                '/lovable-uploads/scroll-18.jpg'
-              ].map((img, idx) => (
-                <div 
-                  key={`${setIndex}-${idx}`} 
-                  className="flex-shrink-0 rounded-2xl overflow-hidden" 
-                  style={{ 
-                    width: 'calc((100vw - 72px) / 4)', 
-                    height: 'calc(((100vw - 72px) / 4) * 1.5)',
-                    marginLeft: idx === 0 ? '0' : '-100px'
-                  }}
-                >
-                  <img 
-                    src={img} 
-                    alt={`עיצוב פרחים ${idx + 1}`} 
-                    width="384" 
-                    height="576" 
-                    loading="lazy" 
-                    decoding="async" 
-                    className="w-full h-full object-cover" 
-                  />
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-        
         <GalleryCarousel slides={carouselImages} />
       </section>
 
