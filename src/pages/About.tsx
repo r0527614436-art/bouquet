@@ -175,7 +175,7 @@ const About = () => {
           <style>{`
             @keyframes scroll {
               0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
+              100% { transform: translateX(-33.333%); }
             }
             .animate-scroll {
               animation: scroll 40s linear infinite;
@@ -185,7 +185,7 @@ const About = () => {
             }
           `}</style>
           <div className="flex animate-scroll">
-            {[...Array(2)].map((_, setIndex) => (
+            {[...Array(3)].map((_, setIndex) => (
               <div key={setIndex} className="flex gap-6 pl-6">
                 {[
                   '/lovable-uploads/about-new-1.jpg',
