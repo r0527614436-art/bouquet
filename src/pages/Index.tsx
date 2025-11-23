@@ -265,12 +265,12 @@ const Index = () => {
             <img 
               src={bouquetLogo3D} 
               alt="בוקט" 
-              width="700" 
-              height="233" 
+              width="850" 
+              height="283" 
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="w-[400px] sm:w-[550px] md:w-[700px] h-auto"
+              className="w-[500px] sm:w-[650px] md:w-[850px] h-auto"
               style={{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
