@@ -69,63 +69,8 @@ const Index = () => {
     font_family: 'font-sans'
   };
 
-  // Gallery slides - 6 images repeated 5 times = 30 total
-  const baseSlides = [{
-    id: '1',
-    image_url: '/lovable-uploads/carousel-1.jpg',
-    title: "עיצוב פרחים מיוחד",
-    description: "סידור פרחים בגוונים חמים",
-    order_index: 1,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '2',
-    image_url: '/lovable-uploads/carousel-2.jpg',
-    title: "זר פרחים רומנטי",
-    description: "פרחים בגוונים של ורוד ולבן",
-    order_index: 2,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '3',
-    image_url: '/lovable-uploads/carousel-3.jpg',
-    title: "עיצוב שולחן מרהיב",
-    description: "סידורי פרחים גבוהים למראה יוקרתי",
-    order_index: 3,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '4',
-    image_url: '/lovable-uploads/carousel-4.jpg',
-    title: "פרטי פרחים עדינים",
-    description: "פרחים בגוונים פסטליים עדינים",
-    order_index: 4,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '5',
-    image_url: '/lovable-uploads/carousel-5.jpg',
-    title: "מרכז שולחן מרשים",
-    description: "עיצוב פרחים מיוחד לאירועים",
-    order_index: 5,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '6',
-    image_url: '/lovable-uploads/carousel-6.jpg',
-    title: "סידור שולחן אלגנטי",
-    description: "פרחים ונרות ליצירת אווירה",
-    order_index: 6,
-    is_active: true,
-    font_family: 'font-sans'
-  }];
-
-  // Repeat the slides 5 times to create 30 total slides
-  const gallerySlides = Array(5).fill(baseSlides).flat().map((slide, index) => ({
-    ...slide,
-    id: `${slide.id}-${Math.floor(index / 6) + 1}`,
-    order_index: index + 1
-  }));
+  // Gallery slides - empty array (no images)
+  const gallerySlides: HomepageSlide[] = [];
 
   // Use database slides if available, otherwise use gallery slides
   const carouselImages = slides.length > 0 ? slides : gallerySlides;
