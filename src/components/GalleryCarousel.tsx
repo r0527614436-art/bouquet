@@ -28,13 +28,13 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   });
   const [galleryEmblaRef, galleryEmblaApi] = useEmblaCarousel({
     loop: true,
-    align: 'start',
+    align: 'center',
     skipSnaps: false,
     containScroll: 'trimSnaps',
     dragFree: false,
     slidesToScroll: 1,
     duration: 30,
-    startIndex: 0
+    startIndex: 2
   }, [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })]);
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -71,6 +71,10 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   
   useEffect(() => {
     if (!galleryEmblaApi) return;
+    
+    // Set initial index to 2 after carousel is ready
+    galleryEmblaApi.scrollTo(2, true);
+    
     onGallerySelect();
     galleryEmblaApi.on('select', onGallerySelect);
     return () => {
@@ -152,8 +156,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     key={`scroll-${idx}`} 
                     className="flex-shrink-0 transition-all duration-500 ease-out relative"
                     style={{
-                      width: isSelected ? '420px' : '280px',
-                      height: '600px',
+                      width: isSelected ? '360px' : '280px',
+                      height: '550px',
                       marginLeft: idx === 0 ? '0' : '-80px',
                       zIndex: isSelected ? 20 : 10
                     }}
@@ -161,8 +165,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     <div 
                       className="relative w-full overflow-hidden shadow-2xl transition-all duration-500"
                       style={{
-                        height: isSelected ? '600px' : '373px',
-                        marginTop: isSelected ? '0' : '113px',
+                        height: isSelected ? '550px' : '373px',
+                        marginTop: isSelected ? '0' : '88px',
                         borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
                       }}
                     >
