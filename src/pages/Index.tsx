@@ -273,6 +273,49 @@ const Index = () => {
         <GalleryCarousel slides={carouselImages} />
       </section>
 
+      {/* Infinite Scrolling Images Section */}
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="relative">
+          <style>{`
+            @keyframes infiniteScroll {
+              from { transform: translateX(0); }
+              to { transform: translateX(-50%); }
+            }
+            .scroll-container {
+              animation: infiniteScroll 45s linear infinite;
+              direction: ltr;
+            }
+            .scroll-container:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          <div className="scroll-container flex gap-6">
+            {[...Array(2)].map((_, setIndex) => 
+              [
+                '/lovable-uploads/scroll-1.jpg',
+                '/lovable-uploads/scroll-2.jpg',
+                '/lovable-uploads/scroll-3.jpg',
+                '/lovable-uploads/scroll-4.jpg',
+                '/lovable-uploads/scroll-5.jpg',
+                '/lovable-uploads/scroll-6.jpg'
+              ].map((img, idx) => (
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 72px) / 4)', height: 'calc(((100vw - 72px) / 4) * 1.5)' }}>
+                  <img 
+                    src={img} 
+                    alt={`עיצוב פרחים ${idx + 1}`} 
+                    width="384" 
+                    height="576" 
+                    loading="lazy" 
+                    decoding="async" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                  />
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="py-8 md:py-12 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
