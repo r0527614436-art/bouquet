@@ -185,7 +185,7 @@ const About = () => {
             }
           `}</style>
           <div className="scroll-container flex gap-6">
-            {[...Array(2)].map((setIndex) => 
+            {[...Array(2)].map((_, setIndex) => 
               [
                 '/lovable-uploads/about-scroll-1.jpg',
                 '/lovable-uploads/about-scroll-2.jpg',
