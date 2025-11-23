@@ -648,10 +648,19 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-[#11150d] py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col items-center">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" loading="lazy" decoding="async" className="h-20 w-auto mb-6 brightness-0 invert" />
-            <p className="text-white/60 text-sm text-center">
-              © 2024 בוקט - עיצוב פרחים ואירועים. כל הזכויות שמורות.
+          <div className="flex flex-col items-center text-center space-y-4">
+            <h3 className="text-white text-xl font-ploni-aaa font-bold">בוקט - שזירת פרחים</h3>
+            <p className="text-white/80 font-ploni-aaa">שזירת פרחים מקצועית</p>
+            <div className="space-y-2">
+              <p className="text-white/80 font-ploni-aaa">
+                <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a>
+              </p>
+              <p className="text-white/80 font-ploni-aaa">
+                <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
+              </p>
+            </div>
+            <p className="text-white/60 text-sm pt-4">
+              © 2025 כל הזכויות שמורות ל <a href="https://ad-websites.co.il" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
           </div>
         </div>

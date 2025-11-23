@@ -45,7 +45,7 @@ const Testimonials = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           {/* Title and Navigation - Right Side */}
-          <div className="lg:w-1/3">
+          <div className="lg:w-1/3 pt-8">
             <div className="relative mb-8">
               <h2 className="font-allura text-[70px] md:text-[82px] font-semibold text-muted-foreground/40 leading-tight select-none" style={{ transform: 'translate(15px, -10px)' }}>
                 recommen<br/>dations
