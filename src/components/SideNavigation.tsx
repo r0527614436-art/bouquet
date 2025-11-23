@@ -28,10 +28,10 @@ const SideNavigation = () => {
         {/* Navigation Items */}
         <nav className="flex-1 flex flex-col justify-start gap-12 px-4 bg-[#11150d]">
           {[
-            { num: '01', label: 'בית', href: '/', isLink: true },
-            { num: '02', label: 'אודות', href: '/about', isLink: true },
-            { num: '03', label: 'קטלוג', href: '/catalog', isLink: true },
-            { num: '04', label: 'צור קשר', href: '/#contact', isLink: false }
+            { num: '01', label: 'בית', href: '/' },
+            { num: '02', label: 'אודות', href: '/about' },
+            { num: '03', label: 'קטלוג', href: '/catalog' },
+            { num: '04', label: 'צור קשר', href: '/contact' }
           ].map((item) => (
             <div key={item.num} className="flex items-center gap-4">
               {/* Collapsed State - Number and Dot */}
@@ -52,23 +52,13 @@ const SideNavigation = () => {
                   {item.num}
                 </span>
                 <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                {item.isLink ? (
-                  <Link
-                    to={item.href}
-                    className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
-                  <a
-                    href={item.href}
-                    className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                )}
+                <Link
+                  to={item.href}
+                  className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
               </div>
             </div>
           ))}
