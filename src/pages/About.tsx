@@ -4,8 +4,6 @@ import { ArrowRight, MapPin, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import Testimonials from '@/components/Testimonials';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
 
 const About = () => {
   const { toast } = useToast();
@@ -16,10 +14,6 @@ const About = () => {
     email: '',
     message: ''
   });
-
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: false })
-  );
 
   const openGoogleMaps = () => {
     const address = 'שערי תשובה 14, מודיעין עלית';
@@ -172,7 +166,7 @@ const About = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-base md:text-lg space-y-3 mt-24 font-ploni-aaa max-w-3xl mx-auto">
+          <div className="text-gray-800 text-base md:text-lg space-y-3 mt-32 mb-16 font-ploni-aaa max-w-3xl mx-auto">
             <p className="font-semibold">
               אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
             </p>
@@ -182,44 +176,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
-      {/* Images Carousel */}
-      <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="w-full max-w-full overflow-hidden">
-          <Carousel
-            plugins={[plugin.current]}
-            className="w-full"
-            opts={{
-              align: "start",
-              loop: true,
-              direction: "rtl"
-            }}
-          >
-            <CarouselContent className="-ml-4">
-              {[
-                '/lovable-uploads/about-image-1.png',
-                '/lovable-uploads/about-image-2.png',
-                '/lovable-uploads/about-image-3.png',
-                '/lovable-uploads/about-image-4.png'
-              ].map((img, idx) => (
-                <CarouselItem key={idx} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <div className="rounded-2xl overflow-hidden h-80">
-                    <img 
-                      src={img} 
-                      alt={`עיצוב פרחים ${idx + 1}`} 
-                      width="384" 
-                      height="320" 
-                      loading="lazy" 
-                      decoding="async" 
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-      </section>
 
       {/* Excellence Section Title */}
       <section className="py-12" style={{ backgroundColor: '#F8FBF4' }}>
