@@ -6,6 +6,8 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { X } from 'lucide-react';
 import arrowCircle from '@/assets/arrow-circle.png';
 import { useToast } from '@/hooks/use-toast';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 interface CatalogItem {
   id: string;
@@ -27,6 +29,22 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');
   const { toast } = useToast();
+
+  // Fetch category name
+  const { data: category } = useQuery({
+    queryKey: ['category', item?.category_id],
+    queryFn: async () => {
+      if (!item?.category_id) return null;
+      const { data, error } = await supabase
+        .from('categories')
+        .select('name')
+        .eq('id', item.category_id)
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!item?.category_id
+  });
 
   if (!item) return null;
 
@@ -86,12 +104,17 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
           {/* Form Content */}
           <div className="relative z-10 w-full max-w-md mx-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-ploni-aaa font-black mb-1 text-[#314020]">
-              {item.title}
-            </h2>
-            {item.price && (
-              <p className="text-lg font-ploni-aaa font-light mb-8 text-gray-700">דגם {item.price}</p>
+            {/* Category Name */}
+            {category && (
+              <p className="text-2xl md:text-3xl font-ploni-aaa font-black mb-2 text-[#314020]">
+                {category.name}
+              </p>
             )}
+            
+            {/* Model Number with "דגם" */}
+            <h2 className="text-lg md:text-xl font-ploni-aaa font-light mb-8 text-gray-700">
+              דגם {item.price || item.title}
+            </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
@@ -99,7 +122,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
                   שם מלא
                 </label>
-                <div className="border-b-2 border-gray-400">
+                <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     value={name}
@@ -115,7 +138,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
                   טלפון
                 </label>
-                <div className="border-b-2 border-gray-400">
+                <div className="border-b border-[#314020]">
                   <Input
                     type="tel"
                     value={phone}
@@ -131,7 +154,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
                   תאריך האירוע
                 </label>
-                <div className="border-b-2 border-gray-400">
+                <div className="border-b border-[#314020]">
                   <Input
                     type="date"
                     value={date}
