@@ -69,53 +69,37 @@ const Index = () => {
     font_family: 'font-sans'
   };
 
-  // Gallery slides - all images including new ones
+  // Gallery slides - new images uploaded by user
   const gallerySlides = [{
     id: '1',
-    image_url: '/lovable-uploads/bouquet-1.jpg',
-    title: "זר כלה אלגנטי",
-    description: "שילוב של ורדים ופרחים לבנים וורודים",
+    image_url: '/lovable-uploads/carousel-1.jpg',
+    title: "עיצוב פרחים מיוחד",
+    description: "סידור פרחים בגוונים חמים",
     order_index: 1,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '2',
-    image_url: '/lovable-uploads/bouquet-2.jpg',
-    title: "זר כלה לבן",
-    description: "עיצוב טהור ואלגנטי",
+    image_url: '/lovable-uploads/carousel-2.jpg',
+    title: "זר פרחים רומנטי",
+    description: "פרחים בגוונים של ורוד ולבן",
     order_index: 2,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '3',
-    image_url: '/lovable-uploads/bouquet-3.jpg',
-    title: "בוקט שמנת",
-    description: "גוונים חמים של שמנת וצהוב",
+    image_url: '/lovable-uploads/carousel-3.jpg',
+    title: "עיצוב שולחן מרהיב",
+    description: "סידורי פרחים גבוהים למראה יוקרתי",
     order_index: 3,
     is_active: true,
     font_family: 'font-sans'
   }, {
     id: '4',
-    image_url: '/lovable-uploads/bouquet-4.jpg',
-    title: "זר רומנטי",
-    description: "שילוב עדין של פרחים בגוונים פסטליים",
+    image_url: '/lovable-uploads/carousel-4.jpg',
+    title: "פרטי פרחים עדינים",
+    description: "פרחים בגוונים פסטליים עדינים",
     order_index: 4,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '5',
-    image_url: '/lovable-uploads/bouquet-5.jpg',
-    title: "בוקט ורוד",
-    description: "עיצוב רומנטי בגוונים של ורוד",
-    order_index: 5,
-    is_active: true,
-    font_family: 'font-sans'
-  }, {
-    id: '6',
-    image_url: '/lovable-uploads/bouquet-6.jpg',
-    title: "זר כלה מרהיב",
-    description: "שילוב מושלם של צבעים ופרחים",
-    order_index: 6,
     is_active: true,
     font_family: 'font-sans'
   }];
