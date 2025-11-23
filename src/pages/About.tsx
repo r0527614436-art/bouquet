@@ -178,7 +178,7 @@ const About = () => {
               100% { transform: translateX(calc(-256px * 4 - 24px * 4)); }
             }
             .scroll-container {
-              animation: infiniteScroll 30s linear infinite;
+              animation: infiniteScroll 30s linear forwards;
             }
             .scroll-container:hover {
               animation-play-state: paused;
