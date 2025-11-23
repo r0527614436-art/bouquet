@@ -144,17 +144,16 @@ const About = () => {
         <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-8">
-            {/* English Background Text */}
-            <h1 className="font-allura text-[115px] md:text-[160px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
-              About
-            </h1>
-            {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
-                style={{
-                  textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
-                }}>
-              אודות
-            </h1>
+            {/* Hebrew Image replacing text */}
+            <img 
+              src="/lovable-uploads/baruch-text.png" 
+              alt="ברכש" 
+              width="400" 
+              height="200" 
+              loading="eager" 
+              decoding="async" 
+              className="mx-auto max-w-[300px] md:max-w-[400px] h-auto" 
+            />
           </div>
 
           {/* Description Text */}
@@ -170,7 +169,7 @@ const About = () => {
       </div>
 
       {/* Infinite Scrolling Images */}
-      <section className="py-16 pt-32 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-8 pt-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="relative">
           <style>{`
             @keyframes infiniteScroll {
