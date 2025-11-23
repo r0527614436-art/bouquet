@@ -174,11 +174,12 @@ const About = () => {
         <div className="relative">
           <style>{`
             @keyframes infiniteScroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
+              from { transform: translateX(0); }
+              to { transform: translateX(-50%); }
             }
             .scroll-container {
               animation: infiniteScroll 45s linear infinite;
+              direction: ltr;
             }
             .scroll-container:hover {
               animation-play-state: paused;
