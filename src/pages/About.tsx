@@ -145,7 +145,7 @@ const About = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-8">
             {/* English Background Text */}
-            <h1 className="font-allura text-[115px] md:text-[160px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[115px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               About
             </h1>
             {/* Hebrew Front Text */}
@@ -159,10 +159,10 @@ const About = () => {
 
           {/* Description Text */}
           <div className="text-gray-800 text-base md:text-lg space-y-3 mt-32 mb-16 font-ploni-aaa max-w-3xl mx-auto">
-            <p className="font-semibold">
+            <p className="font-medium">
               אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
             </p>
-            <p className="font-light">
+            <p className="font-regular">
               ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה וכשיש שילוב של איכות טעם רגש והשראה - התוצאה מדברת בעד עצמה כי אנחנו בבוקט לא רק שוזרים פרחים אלא יוצרים חווית חושים. תגלו את הקסם שבפרחים ותזכו לראות איך כל חלום הופך ליצירת אומנות מלאת השראה.
             </p>
           </div>
@@ -267,7 +267,7 @@ const About = () => {
                   <div className="absolute inset-1 rounded-full border-2 border-white"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
                 </div>
-                <p className="text-[#314020] font-ploni-aaa font-black text-sm md:text-base whitespace-pre-line">{service.text}</p>
+                <p className="text-[#314020] font-ploni-aaa font-regular text-sm md:text-base whitespace-pre-line">{service.text}</p>
               </div>
             ))}
           </div>
@@ -285,7 +285,7 @@ const About = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{
+                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/30 opacity-50 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Contact us

@@ -27,7 +27,7 @@ const SideNavigation = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-start gap-12 px-4 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col justify-end gap-10 px-4 pb-16 bg-[#11150d]">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
@@ -39,7 +39,7 @@ const SideNavigation = () => {
                 <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${
                   isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'
                 }`}>
-                  <span className="font-ploni-aaa font-medium text-white text-base whitespace-nowrap">
+                  <span className="font-ploni-aaa font-medium text-white text-lg whitespace-nowrap">
                     {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
