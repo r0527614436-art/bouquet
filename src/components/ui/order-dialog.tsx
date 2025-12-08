@@ -95,13 +95,13 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           <div className="relative z-10 w-full max-w-2xl mx-8 text-center pt-12">
             {/* Category Name */}
             {category && (
-              <p className="text-2xl md:text-3xl font-ploni-aaa font-black mb-2 text-[#314020]">
+              <p className="text-2xl md:text-3xl font-synopsis font-light mb-2 text-[#314020]">
                 {category.name}
               </p>
             )}
             
             {/* Model Number with "דגם" */}
-            <h2 className="text-lg md:text-xl font-ploni-aaa font-light mb-16 text-gray-700">
+            <h2 className="text-lg md:text-xl font-synopsis font-light mb-16 text-gray-700">
               דגם {item.price || item.title}
             </h2>
             
@@ -110,7 +110,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               <div className="grid grid-cols-3 gap-6">
                 {/* Name Field */}
                 <div className="text-center">
-                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-synopsis font-light text-gray-700 mb-2">
                     שם מלא
                   </label>
                   <div className="border-b border-[#314020]">
@@ -118,7 +118,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-synopsis placeholder:text-gray-400"
                       required
                     />
                   </div>
@@ -126,7 +126,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 
                 {/* Phone Field */}
                 <div className="text-center">
-                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-synopsis font-light text-gray-700 mb-2">
                     טלפון
                   </label>
                   <div className="border-b border-[#314020]">
@@ -134,7 +134,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-synopsis placeholder:text-gray-400"
                       required
                     />
                   </div>
@@ -142,7 +142,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 
                 {/* Date Field */}
                 <div className="text-center">
-                  <label className="block text-sm font-ploni-aaa font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-synopsis font-light text-gray-700 mb-2">
                     תאריך האירוע
                   </label>
                   <div className="border-b border-[#314020]">
@@ -150,7 +150,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-ploni-aaa placeholder:text-gray-400"
+                      className="text-center border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 text-base font-synopsis placeholder:text-gray-400"
                       required
                     />
                   </div>
@@ -161,7 +161,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               <div className="pt-12">
                 <Button
                   type="submit"
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-ploni-aaa font-medium mx-auto min-w-[300px]"
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-synopsis font-light mx-auto min-w-[300px]"
                 >
                   <span>שליחת הזמנה</span>
                   <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
