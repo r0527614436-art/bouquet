@@ -427,7 +427,7 @@ const Catalog = () => {
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   {item.title && (
                                     <div className="p-4">
-                                      <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
+                                      <p className="text-white text-sm font-synopsis font-light">דגם {item.title}</p>
                                     </div>
                                   )}
                                 </div>
@@ -445,7 +445,7 @@ const Catalog = () => {
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
-                                      <span className="text-base font-ploni-aaa font-semibold">להזמנה מהירה</span>
+                                      <span className="text-base font-synopsis font-light">להזמנה מהירה</span>
                                       <img src={arrowCircle} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
@@ -485,7 +485,7 @@ const Catalog = () => {
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   {item.title && (
                                     <div className="p-4">
-                                      <p className="text-white text-sm font-ploni-aaa font-medium">דגם {item.title}</p>
+                                      <p className="text-white text-sm font-synopsis font-light">דגם {item.title}</p>
                                     </div>
                                   )}
                                 </div>
@@ -503,7 +503,7 @@ const Catalog = () => {
                                       onClick={(e) => handleOrderClick(item, e)}
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
-                                      <span className="text-base font-ploni-aaa font-semibold">להזמנה מהירה</span>
+                                      <span className="text-base font-synopsis font-light">להזמנה מהירה</span>
                                       <img src={arrowCircle} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
