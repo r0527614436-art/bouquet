@@ -485,7 +485,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-[20px] lg:self-start lg:h-fit lg:pl-8 z-20">
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                 <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
@@ -505,7 +505,7 @@ const Index = () => {
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-2xl">01</span>
+                  <span className="font-synopsis font-semibold text-3xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   שיחת מיקוד להבנת הצרכים
@@ -518,7 +518,7 @@ const Index = () => {
               {/* Step 02 */}
               <div className="space-y-4">
                 <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-2xl">02</span>
+                  <span className="font-synopsis font-semibold text-3xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   בחירה והזמנה
@@ -531,7 +531,7 @@ const Index = () => {
               {/* Step 03 */}
               <div className="space-y-4">
                 <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-2xl">03</span>
+                  <span className="font-synopsis font-semibold text-3xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   הכנה ומשלוח
