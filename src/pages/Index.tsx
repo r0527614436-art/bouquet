@@ -272,8 +272,9 @@ const Index = () => {
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="w-[500px] sm:w-[650px] md:w-[850px] h-auto"
+              className="h-auto"
               style={{
+                width: 'clamp(400px, 55vw, 1000px)',
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
             />
