@@ -27,6 +27,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   // Fetch category name
@@ -47,7 +48,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   if (!item) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!name || !phone || !date) {
@@ -59,19 +60,48 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       return;
     }
 
-    const message = `שלום, אני מעוניין/ת להזמין:\nדגם: ${item.title}\nשם: ${name}\nטלפון: ${phone}\nתאריך: ${date}${item.price ? `\nמחיר: ₪${item.price}` : ''}`;
-    window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
-    
-    // Reset form and close
-    setName('');
-    setPhone('');
-    setDate('');
-    onClose();
-    
-    toast({
-      title: "ההזמנה נשלחה",
-      description: "פותח WhatsApp..."
-    });
+    setIsSubmitting(true);
+
+    try {
+      const orderData = {
+        customer_name: name,
+        phone: phone,
+        event_date: new Date(date).toISOString(),
+        items: JSON.stringify([{
+          id: item.id,
+          title: item.title,
+          image_url: item.image_url,
+          quantity: 1
+        }]),
+        created_at: new Date().toISOString()
+      };
+
+      const { error } = await supabase.functions.invoke('send-order', {
+        body: orderData
+      });
+
+      if (error) throw error;
+
+      // Reset form and close
+      setName('');
+      setPhone('');
+      setDate('');
+      onClose();
+      
+      toast({
+        title: "ההזמנה נשלחה בהצלחה",
+        description: "ניצור איתכם קשר בהקדם"
+      });
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      toast({
+        title: "שגיאה",
+        description: "אירעה שגיאה בשליחת ההזמנה. אנא נסו שוב",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -161,9 +191,10 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               <div className="pt-12">
                 <Button
                   type="submit"
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-synopsis font-light mx-auto min-w-[300px]"
+                  disabled={isSubmitting}
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-synopsis font-light mx-auto min-w-[300px] disabled:opacity-50"
                 >
-                  <span>שליחת הזמנה</span>
+                  <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
                   <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
                 </Button>
                 <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
