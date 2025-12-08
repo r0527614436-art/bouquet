@@ -450,7 +450,7 @@ const Index = () => {
                 '/lovable-uploads/about-scroll-13.jpg',
                 '/lovable-uploads/about-scroll-14.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '380px', height: '450px' }}>
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '280px', height: '380px' }}>
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
