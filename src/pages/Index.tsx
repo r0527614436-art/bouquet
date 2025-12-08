@@ -550,8 +550,8 @@ const Index = () => {
             <div className="space-y-12 max-w-md mr-8">
               {/* Step 01 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-3xl">01</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-10 py-1 rounded-full">
+                  <span className="font-synopsis font-light text-3xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   שיחת מיקוד להבנת הצרכים
@@ -563,8 +563,8 @@ const Index = () => {
 
               {/* Step 02 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-3xl">02</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-10 py-1 rounded-full">
+                  <span className="font-synopsis font-light text-3xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   בחירה והזמנה
@@ -576,8 +576,8 @@ const Index = () => {
 
               {/* Step 03 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
-                  <span className="font-synopsis font-semibold text-3xl">03</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-10 py-1 rounded-full">
+                  <span className="font-synopsis font-light text-3xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   הכנה ומשלוח
