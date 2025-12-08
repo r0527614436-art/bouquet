@@ -98,7 +98,7 @@ const handler = async (req: Request): Promise<Response> => {
       <body>
         <div class="container">
           <div class="header">
-            <h1>🌸 הזמנה חדשה מהאתר</h1>
+            <h1>הזמנה חדשה מהאתר</h1>
           </div>
           <div class="content">
             <div class="info-box">
