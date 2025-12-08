@@ -34,7 +34,15 @@ const SideNavigation = () => {
               { num: '03', label: 'קטלוג', href: '/catalog' },
               { num: '04', label: 'צור קשר', href: '/contact' }
             ].map((item) => (
-              <div key={item.num} className="flex items-center gap-4">
+              <Link
+                key={item.num}
+                to={item.href}
+                className="flex items-center gap-4 cursor-pointer"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+                }}
+              >
                 {/* Collapsed State - Number and Dot */}
                 <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 w-full ${
                   isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'
@@ -53,18 +61,11 @@ const SideNavigation = () => {
                     {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                <Link
-                    to={item.href}
-                    className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      window.scrollTo(0, 0);
-                    }}
-                  >
+                  <span className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap">
                     {item.label}
-                  </Link>
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </nav>
         </div>
