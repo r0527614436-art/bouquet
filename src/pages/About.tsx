@@ -262,7 +262,7 @@ const About = () => {
               text: 'עמידה\nבזמנים'
             }].map((service, idx) => (
               <div key={idx} className="flex flex-col items-center text-center">
-                <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
+                <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg">
                   {/* Inner white circle border - thin outer spacing */}
                   <div className="absolute inset-1 rounded-full border-2 border-white"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
