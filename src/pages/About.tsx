@@ -392,20 +392,13 @@ const About = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#11150d] py-12">
+      <footer className="bg-[#11150d] py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col items-center text-center space-y-4">
-            <h3 className="text-white text-xl font-ploni-aaa font-bold">בוקט - שזירת פרחים</h3>
-            <p className="text-white/80 font-ploni-aaa">שזירת פרחים מקצועית</p>
-            <div className="space-y-2">
-              <p className="text-white/80 font-ploni-aaa">
-                <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a>
-              </p>
-              <p className="text-white/80 font-ploni-aaa">
-                <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
-              </p>
-            </div>
-            <p className="text-white/60 text-sm pt-4">
+          <div className="flex flex-col items-center text-center space-y-2">
+            <p className="text-white/90 font-ploni-aaa text-base">
+              בוקט - שזירת פרחים מקצועית | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
+            </p>
+            <p className="text-white/60 text-sm">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
           </div>
