@@ -349,7 +349,7 @@ const Index = () => {
               <div className="relative mb-4 md:mb-6">
                 <h2
                   style={{ transform: 'translate(10px, -8px)' }}
-                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none"
+                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-light text-gray-300 opacity-50 leading-none select-none"
                 >
                   About
                 </h2>
@@ -428,7 +428,7 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-gray-300 opacity-50 leading-none select-none" style={{
+                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-gray-300 opacity-50 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Catalog
@@ -488,7 +488,7 @@ const Index = () => {
             <div className="lg:sticky lg:top-[20px] lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
-                  <h2 className="font-allura text-[75px] md:text-[85px] font-semibold text-gray-400 opacity-60 leading-tight select-none transition-all duration-300" style={{
+                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-400 opacity-60 leading-tight select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
                     Work<br />process
@@ -504,7 +504,7 @@ const Index = () => {
             <div className="space-y-12 max-w-md mr-8">
               {/* Step 01 */}
               <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
                   <span className="font-ploni-aaa font-black text-2xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -517,7 +517,7 @@ const Index = () => {
 
               {/* Step 02 */}
               <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
                   <span className="font-ploni-aaa font-black text-2xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -530,7 +530,7 @@ const Index = () => {
 
               {/* Step 03 */}
               <div className="space-y-4">
-                <div className="inline-block bg-gray-800 text-white px-6 py-2 rounded-full">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
                   <span className="font-ploni-aaa font-black text-2xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -565,7 +565,7 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{
+                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/30 opacity-50 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Contact us
@@ -653,20 +653,13 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#11150d] py-12">
+      <footer className="bg-[#11150d] py-8">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col items-center text-center space-y-4">
-            <h3 className="text-white text-xl font-ploni-aaa font-bold">בוקט - שזירת פרחים</h3>
-            <p className="text-white/80 font-ploni-aaa">שזירת פרחים מקצועית</p>
-            <div className="space-y-2">
-              <p className="text-white/80 font-ploni-aaa">
-                <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a>
-              </p>
-              <p className="text-white/80 font-ploni-aaa">
-                <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
-              </p>
-            </div>
-            <p className="text-white/60 text-sm pt-4">
+          <div className="flex flex-col items-center text-center space-y-2">
+            <p className="text-white/90 font-ploni-aaa text-base">
+              בוקט - שזירת פרחים מקצועית | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
+            </p>
+            <p className="text-white/60 text-sm">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
           </div>
