@@ -427,7 +427,7 @@ const Catalog = () => {
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   {item.title && (
                                     <div className="p-4">
-                                      <p className="text-white text-sm font-synopsis font-light">דגם {item.title}</p>
+                                      <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
                                     </div>
                                   )}
                                 </div>
@@ -485,7 +485,7 @@ const Catalog = () => {
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                   {item.title && (
                                     <div className="p-4">
-                                      <p className="text-white text-sm font-synopsis font-light">דגם {item.title}</p>
+                                      <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
                                     </div>
                                   )}
                                 </div>
