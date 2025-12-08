@@ -416,9 +416,55 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Gallery Full Width Image */}
-      <section className="w-full">
-        <img src="/lovable-uploads/gallery-full.png" alt="גלריה" width="1920" height="600" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
+      {/* Diagonal Scrolling Gallery */}
+      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="relative" style={{ transform: 'rotate(-3deg)', margin: '-20px -40px' }}>
+          <style>{`
+            @keyframes infiniteScrollDiagonal {
+              from { transform: translateX(0); }
+              to { transform: translateX(-50%); }
+            }
+            .diagonal-scroll-container {
+              animation: infiniteScrollDiagonal 40s linear infinite;
+              direction: ltr;
+            }
+            .diagonal-scroll-container:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          <div className="diagonal-scroll-container flex gap-4">
+            {[...Array(2)].map((_, setIndex) => 
+              [
+                '/lovable-uploads/about-scroll-1.jpg',
+                '/lovable-uploads/about-scroll-2.jpg',
+                '/lovable-uploads/about-scroll-3.jpg',
+                '/lovable-uploads/about-scroll-4.jpg',
+                '/lovable-uploads/about-scroll-5.jpg',
+                '/lovable-uploads/about-scroll-6.jpg',
+                '/lovable-uploads/about-scroll-7.jpg',
+                '/lovable-uploads/about-scroll-8.jpg',
+                '/lovable-uploads/about-scroll-9.jpg',
+                '/lovable-uploads/about-scroll-10.jpg',
+                '/lovable-uploads/about-scroll-11.jpg',
+                '/lovable-uploads/about-scroll-12.jpg',
+                '/lovable-uploads/about-scroll-13.jpg',
+                '/lovable-uploads/about-scroll-14.jpg'
+              ].map((img, idx) => (
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '280px', height: '200px' }}>
+                  <img 
+                    src={img} 
+                    alt={`עיצוב פרחים ${idx + 1}`} 
+                    width="280" 
+                    height="200" 
+                    loading="lazy" 
+                    decoding="async" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                  />
+                </div>
+              ))
+            )}
+          </div>
+        </div>
       </section>
 
       {/* Catalog Section */}
