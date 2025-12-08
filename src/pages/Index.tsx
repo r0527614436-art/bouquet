@@ -372,7 +372,7 @@ const Index = () => {
 
               {/* More About Button */}
               <div className="mt-6 md:mt-8 mb-4">
-                <Link to="/about">
+                <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
                   <button className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-transform">
                     <span className="font-synopsis text-lg md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
                     <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
@@ -492,7 +492,7 @@ const Index = () => {
 
             {/* Button with Arrow */}
             <div className="mt-8 mb-12">
-              <Link to="/catalog">
+              <Link to="/catalog" onClick={() => window.scrollTo(0, 0)}>
                 <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
                   <span className="font-synopsis text-2xl font-semibold text-[#314020]">לכל העיצובים</span>
                   <div className="w-12 h-12">
