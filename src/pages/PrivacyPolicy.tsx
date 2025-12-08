@@ -53,7 +53,7 @@ const PrivacyPolicy = () => {
             <li><strong>כתובת העסק:</strong> שערי תשובה 14, מודיעין עילית</li>
             <li><strong>מיקוד:</strong> 7182616</li>
             <li><strong>טלפון:</strong> 052-7614436</li>
-            <li><strong>דוא"ל:</strong> <a href="mailto:R0527614436@gmail.com" className="text-gold-dark hover:text-gold transition-colors">R0527614436@gmail.com</a></li>
+            <li><strong>דוא"ל:</strong> <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors">R0527614436@gmail.com</a></li>
           </ul>
 
           <hr className="border-border/30 my-8" />
@@ -136,7 +136,7 @@ const PrivacyPolicy = () => {
             <li>מחיקת מידע מסוים בכפוף לדין</li>
           </ul>
           <p className="text-foreground/80 leading-relaxed mt-4">
-            פניות בנושא ניתן לשלוח לדוא"ל: <a href="mailto:R0527614436@gmail.com" className="text-gold-dark hover:text-gold transition-colors font-semibold">R0527614436@gmail.com</a>
+            פניות בנושא ניתן לשלוח לדוא"ל: <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
           </p>
 
           <hr className="border-border/30 my-8" />
@@ -155,9 +155,9 @@ const PrivacyPolicy = () => {
           <p className="text-foreground/80 leading-relaxed">
             לשאלות בנושא מדיניות פרטיות זו ניתן לפנות לכתובת:
             <br />
-            <a href="mailto:R0527614436@gmail.com" className="text-gold-dark hover:text-gold transition-colors font-semibold">R0527614436@gmail.com</a>
+            <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
             <br />
-            או בטלפון <a href="tel:052-7614436" className="text-gold-dark hover:text-gold transition-colors font-semibold">052-7614436</a>
+            או בטלפון <a href="tel:052-7614436" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">052-7614436</a>
           </p>
 
         </div>
@@ -166,7 +166,7 @@ const PrivacyPolicy = () => {
         <div className="mt-16 text-center">
           <Link 
             to="/" 
-            className="font-synopsis font-light text-gold-dark hover:text-gold transition-colors"
+            className="font-synopsis font-light text-[#314020] hover:text-[#314020]/70 transition-colors"
           >
             חזרה לדף הבית
           </Link>
