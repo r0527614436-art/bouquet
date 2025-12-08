@@ -488,12 +488,12 @@ const Index = () => {
             <div className="lg:sticky lg:top-[20px] lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
-                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-tight select-none transition-all duration-300" style={{
+                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
                     Work process
                   </h2>
-                  <h2 className="font-synopsis text-[65px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
+                  <h2 className="font-synopsis text-[65px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-none whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
@@ -504,8 +504,8 @@ const Index = () => {
             <div className="space-y-12 max-w-md mr-8">
               {/* Step 01 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
-                  <span className="font-ploni-aaa font-black text-2xl">01</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
+                  <span className="font-synopsis font-semibold text-2xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   שיחת מיקוד להבנת הצרכים
@@ -517,8 +517,8 @@ const Index = () => {
 
               {/* Step 02 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
-                  <span className="font-ploni-aaa font-black text-2xl">02</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
+                  <span className="font-synopsis font-semibold text-2xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   בחירה והזמנה
@@ -530,8 +530,8 @@ const Index = () => {
 
               {/* Step 03 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
-                  <span className="font-ploni-aaa font-black text-2xl">03</span>
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-8 py-2 rounded-full">
+                  <span className="font-synopsis font-semibold text-2xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   הכנה ומשלוח
