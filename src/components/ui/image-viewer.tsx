@@ -70,8 +70,8 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
 
           {/* Model number - Top left overlay on image */}
           {currentItem.title && (
-            <div className="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-              <p className="text-white text-sm font-ploni-aaa font-medium">דגם {currentItem.title}</p>
+            <div className="absolute top-4 left-4 z-10 px-3 py-1.5">
+              <p className="text-white text-base font-synopsis font-light drop-shadow-lg">דגם {currentItem.title}</p>
             </div>
           )}
 
@@ -85,8 +85,8 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           </div>
 
           {/* Counter indicator - Bottom center */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full">
-            <p className="text-white text-xs font-ploni-aaa">
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 py-1">
+            <p className="text-white text-xs font-synopsis font-light drop-shadow-lg">
               {currentIndex + 1} מתוך {items.length}
             </p>
           </div>
