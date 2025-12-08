@@ -81,18 +81,18 @@ const handler = async (req: Request): Promise<Response> => {
       <head>
         <meta charset="UTF-8">
         <style>
-          body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; }
+          body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; direction: rtl; text-align: right; }
           .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
           .header { background: #314020; color: white; padding: 25px; text-align: center; }
           .header h1 { margin: 0; font-size: 24px; }
-          .content { padding: 25px; }
+          .content { padding: 25px; text-align: right; }
           .info-box { background: #f8fbf4; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-          .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e8e8; }
+          .info-row { display: flex; flex-direction: row-reverse; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e8e8; }
           .info-row:last-child { border-bottom: none; }
-          .label { color: #666; font-weight: bold; }
-          .value { color: #314020; }
-          .items-section { margin-top: 20px; }
-          .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; }
+          .label { color: #666; font-weight: bold; text-align: right; }
+          .value { color: #314020; text-align: left; }
+          .items-section { margin-top: 20px; text-align: right; }
+          .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; text-align: right; }
         </style>
       </head>
       <body>
