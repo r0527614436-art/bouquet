@@ -166,6 +166,9 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <span>שליחת הזמנה</span>
                   <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
                 </Button>
+                <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
+                  בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
+                </p>
               </div>
             </form>
           </div>

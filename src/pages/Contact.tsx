@@ -202,6 +202,9 @@ const Contact = () => {
               >
                 {isSubmitting ? 'שולח...' : 'שליחה'}
               </button>
+              <p className="text-center text-sm text-gray-500 mt-4">
+                בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+              </p>
             </form>
           </div>
 
@@ -258,6 +261,9 @@ const Contact = () => {
                 <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
               </p>
             </div>
+            <Link to="/privacy-policy" className="text-white/60 text-sm hover:text-white transition-colors">
+              מדיניות פרטיות
+            </Link>
             <p className="text-white/60 text-sm pt-4">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>

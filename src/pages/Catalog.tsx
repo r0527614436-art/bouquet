@@ -647,6 +647,9 @@ const Catalog = () => {
                 >
                   {isSubmitting ? 'שולח...' : 'שליחה'}
                 </button>
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+                </p>
               </form>
             </div>
           </div>

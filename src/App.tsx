@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import SideNavigation from "@/components/SideNavigation";
+import CookieConsent from "@/components/CookieConsent";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
@@ -13,6 +14,7 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,11 +36,13 @@ const App = () => (
                 <Route path="/order" element={<Order />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/admin" element={<Admin />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
+            <CookieConsent />
           </div>
         </BrowserRouter>
       </CartProvider>
