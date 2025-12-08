@@ -386,7 +386,7 @@ const Index = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16 bg-[#11150d]">
+      <section className="py-16 pb-8 bg-[#11150d] relative z-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
             {[{
@@ -417,8 +417,8 @@ const Index = () => {
       </section>
 
       {/* Diagonal Scrolling Gallery */}
-      <section className="py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="relative" style={{ transform: 'rotate(-3deg)', margin: '-20px -40px' }}>
+      <section className="overflow-hidden relative z-10" style={{ backgroundColor: '#F8FBF4', marginTop: '-60px', paddingTop: '20px', paddingBottom: '40px' }}>
+        <div className="relative" style={{ transform: 'rotate(-3deg)', margin: '0 -60px' }}>
           <style>{`
             @keyframes infiniteScrollDiagonal {
               from { transform: translateX(0); }
@@ -450,7 +450,7 @@ const Index = () => {
                 '/lovable-uploads/about-scroll-13.jpg',
                 '/lovable-uploads/about-scroll-14.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '280px', height: '200px' }}>
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '320px', height: '240px' }}>
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
