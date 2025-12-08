@@ -693,6 +693,9 @@ const Index = () => {
                 <button type="submit" className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" disabled={isSubmitting}>
                   {isSubmitting ? 'שולח...' : 'שליחה'}
                 </button>
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+                </p>
               </form>
             </div>
           </div>
@@ -706,6 +709,9 @@ const Index = () => {
             <p className="text-white/90 font-ploni-aaa text-base">
               בוקט - שזירת פרחים מקצועית | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
             </p>
+            <Link to="/privacy-policy" className="text-white/60 text-sm hover:text-white transition-colors">
+              מדיניות פרטיות
+            </Link>
             <p className="text-white/60 text-sm">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>

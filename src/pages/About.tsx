@@ -385,6 +385,9 @@ const About = () => {
                 >
                   {isSubmitting ? 'שולח...' : 'שליחה'}
                 </button>
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+                </p>
               </form>
             </div>
           </div>
@@ -398,6 +401,9 @@ const About = () => {
             <p className="text-white/90 font-ploni-aaa text-base">
               בוקט - שזירת פרחים מקצועית | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
             </p>
+            <Link to="/privacy-policy" className="text-white/60 text-sm hover:text-white transition-colors">
+              מדיניות פרטיות
+            </Link>
             <p className="text-white/60 text-sm">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
