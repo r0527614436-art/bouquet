@@ -27,7 +27,7 @@ const SideNavigation = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-end gap-10 px-4 pb-32 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col items-center justify-end gap-10 px-4 pb-32 bg-[#11150d]">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
@@ -36,10 +36,10 @@ const SideNavigation = () => {
             ].map((item) => (
               <div key={item.num} className="flex items-center gap-4">
                 {/* Collapsed State - Number and Dot */}
-                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 ${
+                <div className={`flex flex-col items-center gap-2 transition-opacity duration-300 w-full ${
                   isMenuOpen ? 'opacity-0 absolute' : 'opacity-100'
                 }`}>
-                  <span className="font-ploni-aaa font-medium text-white text-lg whitespace-nowrap">
+                  <span className="font-ploni-aaa font-light text-white text-xl whitespace-nowrap">
                     {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
