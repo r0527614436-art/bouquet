@@ -27,7 +27,7 @@ const SideNavigation = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col justify-end gap-10 px-4 pb-16 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col justify-end gap-10 px-4 pb-32 bg-[#11150d]">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
@@ -53,10 +53,13 @@ const SideNavigation = () => {
                     {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                  <Link
+                <Link
                     to={item.href}
                     className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     {item.label}
                   </Link>

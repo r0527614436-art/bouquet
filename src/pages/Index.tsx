@@ -349,7 +349,7 @@ const Index = () => {
               <div className="relative mb-4 md:mb-6">
                 <h2
                   style={{ transform: 'translate(10px, -8px)' }}
-                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-light text-gray-300 opacity-50 leading-none select-none"
+                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-light text-gray-400 opacity-60 leading-none select-none"
                 >
                   About
                 </h2>
@@ -357,8 +357,8 @@ const Index = () => {
                   אודות
                 </h2>
               </div>
-              <div className="space-y-3 md:space-y-5 text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa font-light lg:pr-0 lg:pl-[280px]">
-                <p className="text-right font-normal leading-loose lg:-mt-8">
+              <div className="space-y-3 md:space-y-5 text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa lg:pr-0 lg:pl-[280px]">
+                <p className="text-right font-regular leading-loose lg:-mt-8">
                   אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות 
 הופכות למציאות של ממש. 
 ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה.
@@ -428,7 +428,7 @@ const Index = () => {
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-gray-300 opacity-50 leading-none select-none" style={{
+              <h2 className="font-allura text-[95px] md:text-[105px] font-light text-gray-400 opacity-60 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Catalog
@@ -488,10 +488,10 @@ const Index = () => {
             <div className="lg:sticky lg:top-[20px] lg:self-start lg:h-fit lg:pl-8 z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
-                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-400 opacity-60 leading-tight select-none transition-all duration-300" style={{
+                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-tight select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
-                    Work<br />process
+                    Work process
                   </h2>
                   <h2 className="font-synopsis text-[65px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-tight whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
@@ -504,7 +504,7 @@ const Index = () => {
             <div className="space-y-12 max-w-md mr-8">
               {/* Step 01 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
                   <span className="font-ploni-aaa font-black text-2xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -517,7 +517,7 @@ const Index = () => {
 
               {/* Step 02 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
                   <span className="font-ploni-aaa font-black text-2xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -530,7 +530,7 @@ const Index = () => {
 
               {/* Step 03 */}
               <div className="space-y-4">
-                <div className="inline-flex items-center justify-center bg-gray-800 text-white w-14 h-10 rounded-[50%/40%]">
+                <div className="inline-flex items-center justify-center bg-gray-800 text-white px-5 py-2 rounded-full">
                   <span className="font-ploni-aaa font-black text-2xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -565,7 +565,7 @@ const Index = () => {
             <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/30 opacity-50 leading-none select-none" style={{
+              <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/40 opacity-60 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Contact us
