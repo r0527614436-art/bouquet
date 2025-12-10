@@ -290,7 +290,7 @@ const Index = () => {
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="h-auto w-[90vw] sm:w-[85vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] max-w-[1600px] min-w-[300px]"
+              className="h-auto w-[135vw] sm:w-[127vw] md:w-[120vw] lg:w-[112vw] xl:w-[105vw] max-w-[2400px] min-w-[450px]"
               style={{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
