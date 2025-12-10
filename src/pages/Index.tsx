@@ -250,72 +250,83 @@ const Index = () => {
       <div>
 
       {/* Hero Section */}
-      <section className="relative h-[70vh] overflow-visible">
-        {/* Logo - Absolute Position in Hero */}
-        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
-          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
-        </div>
-        
-          <div className="relative w-full h-full">
-          {/* Single hero image - no carousel */}
-          <div className="absolute inset-0">
-            <img src={heroImageData.image_url} alt={heroImageData.title} fetchPriority="high" loading="eager" decoding="async" className="w-full h-full object-cover scale-110" />
-          </div>
+      <section className="relative h-screen overflow-visible">
+        {/* Hero Carousel */}
+        <div className="relative w-full h-full">
+          {/* Hero images carousel */}
+          {[
+            '/lovable-uploads/hero-slide-1.jpg',
+            '/lovable-uploads/hero-slide-2.jpg',
+            '/lovable-uploads/hero-slide-3.jpg'
+          ].map((image, index) => (
+            <div 
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ${
+                currentImageIndex === index ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img 
+                src={image} 
+                alt={`Hero ${index + 1}`} 
+                fetchPriority={index === 0 ? "high" : "low"} 
+                loading={index === 0 ? "eager" : "lazy"} 
+                decoding="async" 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+          ))}
           
-          {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
-            <img 
-              src={bouquetLogo3D} 
-              alt="בוקט" 
-              width="850" 
-              height="283" 
-              fetchPriority="high" 
-              loading="eager" 
-              decoding="async"
-              className="h-auto"
-              style={{
-                width: 'clamp(500px, 70vw, 1200px)',
-                filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
-              }}
-            />
+          {/* Navigation Arrows */}
+          <button 
+            onClick={() => setCurrentImageIndex(prev => prev === 0 ? 2 : prev - 1)}
+            className="absolute left-8 top-1/2 -translate-y-1/2 z-30 hover:scale-110 transition-transform"
+            aria-label="הקודם"
+          >
+            <img src={arrowCircle} alt="" className="w-12 h-12 rotate-180" />
+          </button>
+          <button 
+            onClick={() => setCurrentImageIndex(prev => prev === 2 ? 0 : prev + 1)}
+            className="absolute right-28 top-1/2 -translate-y-1/2 z-30 hover:scale-110 transition-transform"
+            aria-label="הבא"
+          >
+            <img src={arrowCircle} alt="" className="w-12 h-12" />
+          </button>
+          
+          {/* Overlay with Logo and Download Button on same line */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
+            <div className="flex items-center justify-center gap-8">
+              {/* Download Catalog Button */}
+              <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
+                <div className="relative w-28 h-28 hover:scale-110 transition-transform duration-300 rounded-full">
+                  <img src={downloadCatalogBtn} alt="" width="112" height="112" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
+                  <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="90" height="90" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] z-30" />
+                </div>
+              </button>
+              
+              {/* Logo */}
+              <img 
+                src={bouquetLogo3D} 
+                alt="בוקט" 
+                width="850" 
+                height="283" 
+                fetchPriority="high" 
+                loading="eager" 
+                decoding="async"
+                className="h-auto"
+                style={{
+                  width: 'clamp(600px, 80vw, 1400px)',
+                  filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+                }}
+              />
+            </div>
           </div>
           
           {/* Subtitle at bottom center */}
-          <div className="absolute bottom-24 left-0 right-0 flex justify-center px-4">
+          <div className="absolute bottom-16 left-0 right-0 flex justify-center px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>
-          </div>
-
-        {/* Dots Indicator - removed as we only have single image */}
-
-        {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
-          {/* White circle background - behind the button */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 rounded-b-full shadow-lg -z-10" style={{ backgroundColor: '#F8FBF4' }} />
-          
-          <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
-            <div className="relative w-24 h-24 hover:scale-110 transition-transform duration-300 mx-[59px] py-0 px-0 my-0 rounded-full">
-              {/* Rotating text circle */}
-              <img src={downloadCatalogBtn} alt="" width="96" height="96" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
-              {/* Static arrow in center */}
-              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="80" height="80" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 z-30" />
-            </div>
-          </button>
-        </div>
-        
-        {/* Curved bottom edge with transparent cutout */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-visible pointer-events-none" style={{ backgroundColor: '#F8FBF4' }}>
-          <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
-            <defs>
-              <mask id="curve-mask">
-                <rect width="1200" height="100" fill="white" />
-                <ellipse cx="600" cy="0" rx="80" ry="100" fill="black" />
-              </mask>
-            </defs>
-            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="#F8FBF4" mask="url(#curve-mask)" />
-          </svg>
         </div>
       </section>
 
