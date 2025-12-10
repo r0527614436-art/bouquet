@@ -250,7 +250,7 @@ const Index = () => {
       <div>
 
       {/* Hero Section */}
-      <section className="relative h-screen overflow-visible">
+      <section className="relative h-[90vh] overflow-visible">
         {/* Hero Carousel */}
         <div className="relative w-full h-full">
           {/* Hero images carousel */}
@@ -282,48 +282,47 @@ const Index = () => {
             className="absolute left-8 top-1/2 -translate-y-1/2 z-30 hover:scale-110 transition-transform"
             aria-label="הקודם"
           >
-            <img src={arrowCircle} alt="" className="w-12 h-12 rotate-180" />
+            <img src={arrowCircle} alt="" className="w-14 h-14 rotate-180" />
           </button>
           <button 
             onClick={() => setCurrentImageIndex(prev => prev === 2 ? 0 : prev + 1)}
             className="absolute right-28 top-1/2 -translate-y-1/2 z-30 hover:scale-110 transition-transform"
             aria-label="הבא"
           >
-            <img src={arrowCircle} alt="" className="w-12 h-12" />
+            <img src={arrowCircle} alt="" className="w-14 h-14" />
           </button>
           
-          {/* Overlay with Logo and Download Button on same line */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-            <div className="flex items-center justify-center gap-8">
-              {/* Download Catalog Button */}
-              <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
-                <div className="relative w-28 h-28 hover:scale-110 transition-transform duration-300 rounded-full">
-                  <img src={downloadCatalogBtn} alt="" width="112" height="112" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
-                  <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="90" height="90" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] z-30" />
-                </div>
-              </button>
-              
-              {/* Logo */}
-              <img 
-                src={bouquetLogo3D} 
-                alt="בוקט" 
-                width="850" 
-                height="283" 
-                fetchPriority="high" 
-                loading="eager" 
-                decoding="async"
-                className="h-auto"
-                style={{
-                  width: 'clamp(600px, 80vw, 1400px)',
-                  filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
-                }}
-              />
-            </div>
+          {/* Logo centered */}
+          <div className="absolute inset-0 flex items-center justify-center px-4">
+            <img 
+              src={bouquetLogo3D} 
+              alt="בוקט" 
+              width="850" 
+              height="283" 
+              fetchPriority="high" 
+              loading="eager" 
+              decoding="async"
+              className="h-auto"
+              style={{
+                width: 'clamp(700px, 85vw, 1500px)',
+                filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
+              }}
+            />
+          </div>
+          
+          {/* Download Catalog Button - Left side aligned with logo */}
+          <div className="absolute left-8 top-1/2 -translate-y-1/2 z-40">
+            <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
+              <div className="relative w-28 h-28 hover:scale-110 transition-transform duration-300 rounded-full">
+                <img src={downloadCatalogBtn} alt="" width="112" height="112" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow relative z-20" />
+                <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="90" height="90" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90px] h-[90px] z-30" />
+              </div>
+            </button>
           </div>
           
           {/* Subtitle at bottom center */}
-          <div className="absolute bottom-16 left-0 right-0 flex justify-center px-4">
-            <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
+          <div className="absolute bottom-24 left-0 right-0 flex justify-center px-4">
+            <p className="font-ploni-aaa font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#314020] text-center" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>

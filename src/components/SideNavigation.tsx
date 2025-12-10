@@ -32,7 +32,7 @@ const SideNavigation = () => {
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col items-center justify-end gap-10 px-4 pb-32 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col items-center justify-end gap-10 px-6 pb-32 bg-[#11150d]" dir="rtl">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
@@ -42,7 +42,7 @@ const SideNavigation = () => {
               <Link
                 key={item.num}
                 to={item.href}
-                className="flex items-center gap-4 cursor-pointer w-full"
+                className="flex items-center cursor-pointer w-full"
                 onClick={() => {
                   setIsMenuOpen(false);
                   setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
@@ -58,16 +58,16 @@ const SideNavigation = () => {
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
                 </div>
 
-                {/* Expanded State - Full Menu - Aligned */}
-                <div className={`flex items-center gap-4 transition-opacity duration-300 w-full justify-end ${
+                {/* Expanded State - Full Menu - RTL Aligned */}
+                <div className={`flex items-center gap-4 transition-opacity duration-300 w-full ${
                   isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'
                 }`}>
-                  <span className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap">
-                    {item.label}
+                  <span className="font-ploni-aaa font-light text-white text-xl">
+                    {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
-                  <span className="font-ploni-aaa font-light text-white text-xl w-8 text-left">
-                    {item.num}
+                  <span className="font-ploni-aaa font-medium text-white text-xl hover:text-[#89a86c] transition-colors whitespace-nowrap">
+                    {item.label}
                   </span>
                 </div>
               </Link>
