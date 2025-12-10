@@ -252,8 +252,10 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-visible">
         {/* Logo - Absolute Position in Hero - aligned with download button */}
-        <div className="absolute left-[calc(4rem+59px+48px)] top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg">
-          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
+        <div className="absolute left-4 top-8 z-40" style={{ marginLeft: '59px' }}>
+          <div className="bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 shadow-lg flex justify-center" style={{ width: '96px' }}>
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
+          </div>
         </div>
         
           <div className="relative w-full h-full">
