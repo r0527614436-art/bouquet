@@ -251,6 +251,11 @@ const Index = () => {
 
       {/* Hero Section */}
       <section className="relative h-[90vh] overflow-visible">
+        {/* Original Logo - Top Left */}
+        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 shadow-lg">
+          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
+        </div>
+        
         {/* Hero Carousel */}
         <div className="relative w-full h-full">
           {/* Hero images carousel */}
@@ -292,7 +297,7 @@ const Index = () => {
             <img src={arrowCircle} alt="" className="w-14 h-14" />
           </button>
           
-          {/* Logo centered */}
+          {/* Main Title centered */}
           <div className="absolute inset-0 flex items-center justify-center px-4">
             <img 
               src={bouquetLogo3D} 
@@ -304,13 +309,13 @@ const Index = () => {
               decoding="async"
               className="h-auto"
               style={{
-                width: 'clamp(700px, 85vw, 1500px)',
+                width: 'clamp(800px, 90vw, 1700px)',
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
             />
           </div>
           
-          {/* Download Catalog Button - Left side aligned with logo */}
+          {/* Download Catalog Button - Left side */}
           <div className="absolute left-8 top-1/2 -translate-y-1/2 z-40">
             <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
               <div className="relative w-28 h-28 hover:scale-110 transition-transform duration-300 rounded-full">
@@ -322,7 +327,7 @@ const Index = () => {
           
           {/* Subtitle at bottom center */}
           <div className="absolute bottom-24 left-0 right-0 flex justify-center px-4">
-            <p className="font-ploni-aaa font-light text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#314020] text-center" style={{
+            <p className="font-ploni-aaa font-light text-xl sm:text-2xl md:text-3xl text-[#314020] text-center" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>
