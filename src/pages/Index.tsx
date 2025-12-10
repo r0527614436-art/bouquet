@@ -299,28 +299,10 @@ const Index = () => {
           </div>
           
           {/* Subtitle at bottom center */}
-          <div className="absolute bottom-20 left-0 right-0 flex flex-col items-center gap-4 px-4">
+          <div className="absolute bottom-24 left-0 right-0 flex flex-col items-center px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
-            
-            {/* Navigation arrows */}
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
-                className="hover:scale-110 transition-transform duration-300 rotate-180"
-                aria-label="תמונה הבאה"
-              >
-                <img src={arrowCircle} alt="" className="w-12 h-12" />
-              </button>
-              <button 
-                onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
-                className="hover:scale-110 transition-transform duration-300"
-                aria-label="תמונה קודמת"
-              >
-                <img src={arrowCircle} alt="" className="w-12 h-12" />
-              </button>
-            </div>
           </div>
           </div>
 
@@ -338,6 +320,24 @@ const Index = () => {
               {/* Static arrow in center */}
               <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="80" height="80" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 z-30" />
             </div>
+          </button>
+        </div>
+
+        {/* Navigation arrows - in the light transition area */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] flex items-center gap-4">
+          <button 
+            onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
+            className="hover:scale-110 transition-transform duration-300 rotate-180"
+            aria-label="תמונה הבאה"
+          >
+            <img src={arrowCircle} alt="" className="w-12 h-12" />
+          </button>
+          <button 
+            onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
+            className="hover:scale-110 transition-transform duration-300"
+            aria-label="תמונה קודמת"
+          >
+            <img src={arrowCircle} alt="" className="w-12 h-12" />
           </button>
         </div>
         
