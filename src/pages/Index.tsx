@@ -274,7 +274,7 @@ const Index = () => {
               decoding="async"
               className="h-auto"
               style={{
-                width: 'clamp(700px, 90vw, 1600px)',
+                width: 'clamp(800px, 100vw, 1900px)',
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
             />
