@@ -242,9 +242,9 @@ const About = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
+      <section className="py-16 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="max-w-6xl mx-auto px-4 overflow-visible">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 overflow-visible pt-4">
             {[{
               icon: '/lovable-uploads/icon-flower.png',
               text: 'פרחים טריים\nיום-יום'
