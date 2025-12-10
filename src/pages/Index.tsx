@@ -324,7 +324,7 @@ const Index = () => {
         </div>
 
         {/* Navigation arrows - in the light transition area */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-[100] flex items-center gap-4">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4">
           <button 
             onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
             className="hover:scale-110 transition-transform duration-300 rotate-180"
