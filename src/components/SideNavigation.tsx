@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { X, Menu } from 'lucide-react';
 
 const SideNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,23 +15,19 @@ const SideNavigation = () => {
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <div className="flex flex-col h-full py-8 bg-[#11150d]">
-          {/* Menu Icon - Hamburger or X */}
-          <div className="flex justify-center mb-12">
-            <div className="cursor-pointer text-white">
-              {isMenuOpen ? (
-                <X className="w-8 h-8" />
-              ) : (
-                <div className="flex flex-col gap-1.5">
-                  <div className="w-8 h-0.5 bg-white"></div>
-                  <div className="w-8 h-0.5 bg-white"></div>
-                  <div className="w-8 h-0.5 bg-white"></div>
-                </div>
-              )}
+          {/* Hamburger Icon */}
+          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${
+            isMenuOpen ? 'opacity-0' : 'opacity-100'
+          }`}>
+            <div className="flex flex-col gap-1.5 cursor-pointer">
+              <div className="w-8 h-0.5 bg-white"></div>
+              <div className="w-8 h-0.5 bg-white"></div>
+              <div className="w-8 h-0.5 bg-white"></div>
             </div>
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col items-center justify-end gap-10 px-6 pb-32 bg-[#11150d]" dir="rtl">
+          <nav className="flex-1 flex flex-col items-center justify-end gap-10 px-4 pb-32 bg-[#11150d]">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
@@ -42,7 +37,7 @@ const SideNavigation = () => {
               <Link
                 key={item.num}
                 to={item.href}
-                className="flex items-center cursor-pointer w-full"
+                className="flex items-center gap-4 cursor-pointer"
                 onClick={() => {
                   setIsMenuOpen(false);
                   setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
@@ -58,11 +53,11 @@ const SideNavigation = () => {
                   <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
                 </div>
 
-                {/* Expanded State - Full Menu - RTL Aligned */}
-                <div className={`flex items-center gap-4 transition-opacity duration-300 w-full ${
+                {/* Expanded State - Full Menu */}
+                <div className={`flex items-center gap-4 transition-opacity duration-300 ${
                   isMenuOpen ? 'opacity-100' : 'opacity-0 absolute'
                 }`}>
-                  <span className="font-ploni-aaa font-light text-white text-xl">
+                  <span className="font-ploni-aaa font-light text-white text-xl min-w-[3rem]">
                     {item.num}
                   </span>
                   <div className="w-2 h-2 rounded-full bg-[#89a86c] flex-shrink-0"></div>
