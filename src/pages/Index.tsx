@@ -281,7 +281,7 @@ const Index = () => {
           ))}
           
           {/* Overlay with Title */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4 pt-16 sm:pt-20 md:pt-24">
             <img 
               src={bouquetLogo3D} 
               alt="בוקט" 
