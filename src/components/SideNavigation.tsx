@@ -15,19 +15,23 @@ const SideNavigation = () => {
         onMouseLeave={() => setIsMenuOpen(false)}
       >
         <div className="flex flex-col h-full py-8 bg-[#11150d]">
-          {/* Hamburger Icon */}
-          <div className={`flex justify-center mb-12 transition-opacity duration-300 ${
-            isMenuOpen ? 'opacity-0' : 'opacity-100'
-          }`}>
-            <div className="flex flex-col gap-1.5 cursor-pointer">
-              <div className="w-8 h-0.5 bg-white"></div>
-              <div className="w-8 h-0.5 bg-white"></div>
-              <div className="w-8 h-0.5 bg-white"></div>
+          {/* Hamburger / X Icon */}
+          <div className="flex justify-center mb-12">
+            <div className="flex flex-col gap-1.5 cursor-pointer relative w-8 h-6">
+              <div className={`absolute w-8 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
+              }`}></div>
+              <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}></div>
+              <div className={`absolute w-8 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
+              }`}></div>
             </div>
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 flex flex-col items-end justify-end gap-10 px-8 pb-32 bg-[#11150d]">
+          <nav className="flex-1 flex flex-col items-start justify-end gap-10 px-8 pb-32 bg-[#11150d]">
             {[
               { num: '01', label: 'בית', href: '/' },
               { num: '02', label: 'אודות', href: '/about' },
