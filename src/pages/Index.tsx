@@ -423,9 +423,9 @@ const Index = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16 pb-8 bg-[#11150d] relative z-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12">
+      <section className="py-16 pb-8 bg-[#11150d] relative z-20 overflow-visible">
+        <div className="max-w-6xl mx-auto px-4 overflow-visible">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 overflow-visible">
             {[{
               icon: '/lovable-uploads/icon-flower.png',
               text: 'פרחים טריים\nיום-יום'
