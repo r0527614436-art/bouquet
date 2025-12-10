@@ -465,9 +465,6 @@ const Index = () => {
               animation: infiniteScrollDiagonal 40s linear infinite;
               direction: ltr;
             }
-            .diagonal-scroll-container:hover {
-              animation-play-state: paused;
-            }
           `}</style>
           <div className="diagonal-scroll-container flex gap-4">
             {[...Array(2)].map((_, setIndex) => 
