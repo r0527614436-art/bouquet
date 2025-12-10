@@ -285,14 +285,13 @@ const Index = () => {
             <img 
               src={bouquetLogo3D} 
               alt="בוקט" 
-              width="850" 
-              height="283" 
+              width="1200" 
+              height="400" 
               fetchPriority="high" 
               loading="eager" 
               decoding="async"
-              className="h-auto"
+              className="h-auto w-[90vw] sm:w-[85vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] max-w-[1600px] min-w-[300px]"
               style={{
-                width: 'clamp(800px, 100vw, 1900px)',
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
               }}
             />
