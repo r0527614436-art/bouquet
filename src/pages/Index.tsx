@@ -308,14 +308,14 @@ const Index = () => {
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
-                className="hover:scale-110 transition-transform duration-300"
+                className="hover:scale-110 transition-transform duration-300 rotate-180"
                 aria-label="תמונה הבאה"
               >
                 <img src={arrowCircle} alt="" className="w-12 h-12" />
               </button>
               <button 
                 onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
-                className="hover:scale-110 transition-transform duration-300 rotate-180"
+                className="hover:scale-110 transition-transform duration-300"
                 aria-label="תמונה קודמת"
               >
                 <img src={arrowCircle} alt="" className="w-12 h-12" />
