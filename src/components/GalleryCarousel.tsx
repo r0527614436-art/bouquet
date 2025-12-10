@@ -35,7 +35,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     slidesToScroll: 1,
     duration: 30,
     startIndex: 2
-  }, [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })]);
+  }, [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: false })]);
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
