@@ -299,7 +299,7 @@ const Index = () => {
           </div>
           
           {/* Subtitle at bottom center */}
-          <div className="absolute bottom-32 left-0 right-0 flex flex-col items-center gap-6 px-4">
+          <div className="absolute bottom-20 left-0 right-0 flex flex-col items-center gap-4 px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
@@ -307,16 +307,16 @@ const Index = () => {
             {/* Navigation arrows */}
             <div className="flex items-center gap-4">
               <button 
-                onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
+                onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
                 className="hover:scale-110 transition-transform duration-300"
-                aria-label="תמונה קודמת"
+                aria-label="תמונה הבאה"
               >
                 <img src={arrowCircle} alt="" className="w-12 h-12" />
               </button>
               <button 
-                onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
+                onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
                 className="hover:scale-110 transition-transform duration-300 rotate-180"
-                aria-label="תמונה הבאה"
+                aria-label="תמונה קודמת"
               >
                 <img src={arrowCircle} alt="" className="w-12 h-12" />
               </button>
