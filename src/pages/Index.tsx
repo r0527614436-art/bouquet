@@ -329,14 +329,14 @@ const Index = () => {
         {/* Download Catalog Button - Positioned at section boundary */}
         <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
           {/* White circle background - behind the button */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-32 h-16 rounded-b-full shadow-lg -z-10" style={{ backgroundColor: '#F8FBF4' }} />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-20 sm:w-24 md:w-32 h-10 sm:h-12 md:h-16 rounded-b-full shadow-lg -z-10" style={{ backgroundColor: '#F8FBF4' }} />
           
           <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
-            <div className="relative w-24 h-24 hover:scale-110 transition-transform duration-300 mx-[59px] py-0 px-0 my-0 rounded-full">
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300 mx-[30px] sm:mx-[45px] md:mx-[59px] py-0 px-0 my-0 rounded-full">
               {/* Rotating text circle */}
               <img src={downloadCatalogBtn} alt="" width="96" height="96" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
               {/* Static arrow in center */}
-              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="80" height="80" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 z-30" />
+              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="80" height="80" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 z-30" />
             </div>
           </button>
         </div>
