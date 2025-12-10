@@ -28,6 +28,12 @@ interface HomepageSlide {
   font_family: string;
 }
 const Index = () => {
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const heroBackgrounds = [
+    '/lovable-uploads/hero-bg-1.jpg',
+    '/lovable-uploads/hero-bg-2.jpg',
+    '/lovable-uploads/hero-bg-3.jpg'
+  ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
@@ -257,10 +263,22 @@ const Index = () => {
         </div>
         
           <div className="relative w-full h-full">
-          {/* Single hero image - no carousel */}
-          <div className="absolute inset-0">
-            <img src={heroImageData.image_url} alt={heroImageData.title} fetchPriority="high" loading="eager" decoding="async" className="w-full h-full object-cover scale-110" />
-          </div>
+          {/* Hero carousel images */}
+          {heroBackgrounds.map((bg, index) => (
+            <div 
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-700 ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <img 
+                src={bg} 
+                alt={`רקע ${index + 1}`} 
+                fetchPriority={index === 0 ? "high" : "low"} 
+                loading={index === 0 ? "eager" : "lazy"} 
+                decoding="async" 
+                className="w-full h-full object-cover" 
+              />
+            </div>
+          ))}
           
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4">
@@ -281,10 +299,28 @@ const Index = () => {
           </div>
           
           {/* Subtitle at bottom center */}
-          <div className="absolute bottom-24 left-0 right-0 flex justify-center px-4">
+          <div className="absolute bottom-32 left-0 right-0 flex flex-col items-center gap-6 px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
+            
+            {/* Navigation arrows */}
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
+                className="hover:scale-110 transition-transform duration-300"
+                aria-label="תמונה קודמת"
+              >
+                <img src={arrowCircle} alt="" className="w-12 h-12" />
+              </button>
+              <button 
+                onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
+                className="hover:scale-110 transition-transform duration-300 rotate-180"
+                aria-label="תמונה הבאה"
+              >
+                <img src={arrowCircle} alt="" className="w-12 h-12" />
+              </button>
+            </div>
           </div>
           </div>
 
