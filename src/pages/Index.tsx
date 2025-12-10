@@ -361,10 +361,10 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-8 md:py-12 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
+      <section id="about" className="py-12 md:py-16 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-6 md:gap-8 lg:gap-0">
-            {/* Images - Right Side */}
+          <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
+            {/* Images - Right Side (below text on mobile) */}
             <div className="flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
               {/* Second smaller image - now leftmost */}
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-br-[40px] md:rounded-br-[60px] rounded-bl-lg overflow-hidden">
