@@ -569,10 +569,10 @@ const Index = () => {
 
       {/* How It Works Section */}
       <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-8 lg:gap-12">
+        <div className="px-8 md:px-16 lg:px-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit lg:pl-8 z-20">
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit z-20">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-right">
                 <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
@@ -588,7 +588,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="space-y-12 max-w-md mr-8">
+            <div className="space-y-12 max-w-md lg:mr-auto">
               {/* Step 01 */}
               <div className="space-y-4">
                 <div className="inline-flex items-center justify-center bg-gray-800 text-white px-10 py-1 rounded-full">
