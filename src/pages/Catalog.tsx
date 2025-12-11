@@ -329,11 +329,11 @@ const Catalog = () => {
         </div>
 
         {/* Content Container - positioned at the transition */}
-        <div className="absolute top-[55%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="absolute top-[42%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4">
-            {/* English Background Text - much bigger */}
-            <h1 className="font-allura text-[180px] md:text-[260px] font-bold text-gray-400/50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            {/* English Background Text - much bigger, thinner font */}
+            <h1 className="font-allura text-[180px] md:text-[260px] font-light text-gray-400/50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               Catalog
             </h1>
             {/* Hebrew Front Text - smaller relative to English */}
@@ -345,8 +345,8 @@ const Catalog = () => {
             </h1>
           </div>
 
-          {/* Description Text - moved up */}
-          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-8 mb-16">
+          {/* Description Text - moved up closer to title */}
+          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-0 mb-8">
             <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
             <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
             <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
