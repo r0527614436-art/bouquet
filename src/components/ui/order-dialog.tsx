@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import arrowSimple from '@/assets/arrow-simple.png';
+import orderArrow from '@/assets/order-arrow.png';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -106,38 +106,45 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl p-0 overflow-hidden border-primary/20 bg-transparent">
+      <DialogContent className="max-w-3xl p-0 overflow-hidden border-2 border-[#314020] bg-transparent rounded-lg">
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
         </VisuallyHidden>
         
         {/* Background Image with Light Overlay */}
-        <div className="relative min-h-[500px] flex items-center justify-center rounded-lg overflow-hidden">
+        <div className="relative min-h-[500px] flex flex-col rounded-lg overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${item.image_url})` }}
           >
-            <div className="absolute inset-0 bg-white/50"></div>
+            <div className="absolute inset-0 bg-white/60"></div>
           </div>
 
-          {/* Form Content */}
-          <div className="relative z-10 w-full max-w-2xl mx-8 text-center pt-12">
-            {/* Category Name */}
-            {category && (
-              <p className="text-2xl md:text-3xl font-synopsis font-light mb-2 text-[#314020]">
-                {category.name}
-              </p>
-            )}
+          {/* Form Content - Flex column to push fields down */}
+          <div className="relative z-10 w-full flex flex-col h-full min-h-[500px]">
+            {/* Top section with titles */}
+            <div className="text-center pt-16 px-8">
+              {/* Category Name - Larger and positioned lower */}
+              {category && (
+                <p className="text-4xl md:text-5xl font-synopsis font-light mb-4 text-[#314020]">
+                  {category.name}
+                </p>
+              )}
+              
+              {/* Model Number with "דגם" - More emphasized */}
+              <h2 className="text-xl md:text-2xl font-synopsis font-medium text-[#314020]">
+                דגם {item.price || item.title}
+              </h2>
+            </div>
             
-            {/* Model Number with "דגם" */}
-            <h2 className="text-lg md:text-xl font-synopsis font-light mb-16 text-gray-700">
-              דגם {item.price || item.title}
-            </h2>
+            {/* Spacer to push form down */}
+            <div className="flex-grow"></div>
             
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {/* Three Fields in a Row */}
-              <div className="grid grid-cols-3 gap-6">
+            {/* Form at bottom */}
+            <form onSubmit={handleSubmit} className="px-8 pb-8">
+              {/* Three Fields in a Row - positioned just above button */}
+              <div className="grid grid-cols-3 gap-6 mb-6">
                 {/* Name Field */}
                 <div className="text-center">
                   <label className="block text-sm font-synopsis font-light text-gray-700 mb-2">
@@ -188,14 +195,14 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
               
               {/* Submit Button */}
-              <div className="pt-12">
+              <div className="pt-4">
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-synopsis font-light mx-auto min-w-[300px] disabled:opacity-50"
+                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 flex items-center justify-center gap-3 font-synopsis font-light mx-auto min-w-[300px] disabled:opacity-50"
                 >
-                  <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-                  <img src={arrowSimple} alt="" className="h-5 w-5 brightness-0 invert" />
+                  <span className="text-lg">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
+                  <img src={orderArrow} alt="" className="h-6 w-6" />
                 </Button>
                 <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
                   בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
