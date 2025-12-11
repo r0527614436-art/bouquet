@@ -436,7 +436,7 @@ const Catalog = () => {
                                 {category.allow_cart && (
                                   <div 
                                     onClick={(e) => handleOrderClick(item, e)}
-                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-4 cursor-pointer hover:bg-[#4a6b4a]"
+                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]"
                                   >
                                     {item.price && (
                                       <>
@@ -494,7 +494,7 @@ const Catalog = () => {
                                 {selectedCategoryData?.allow_cart && (
                                   <div 
                                     onClick={(e) => handleOrderClick(item, e)}
-                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-4 cursor-pointer hover:bg-[#4a6b4a]"
+                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]"
                                   >
                                     {item.price && (
                                       <>
