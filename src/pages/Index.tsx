@@ -550,7 +550,7 @@ const Index = () => {
               title: 'עיצוב אירועים'
             }, {
               img: '/lovable-uploads/catalog-bouquet.png',
-              title: 'זרי אירוסין'
+              title: 'זרי\nאירוסין'
             }, {
               img: '/lovable-uploads/catalog-chairs.png',
               title: 'כסאות וזרי כלה'
@@ -560,7 +560,7 @@ const Index = () => {
             }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
-                  <h3 className="font-gloria font-bold text-3xl md:text-4xl text-white">{item.title}</h3>
+                  <h3 className="font-gloria font-bold text-3xl md:text-4xl text-white text-center whitespace-pre-line">{item.title}</h3>
                 </div>
               </Link>)}
           </div>
