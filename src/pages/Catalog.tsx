@@ -48,17 +48,14 @@ const Catalog = () => {
     toast
   } = useToast();
   const navigate = useNavigate();
-
   const openGoogleMaps = () => {
     const address = 'שערי תשובה 14, מודיעין עלית';
     const encodedAddress = encodeURIComponent(address);
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(mapsUrl, '_blank');
   };
-
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!contactForm.name || !contactForm.phone || !contactForm.email || !contactForm.message) {
       toast({
         title: "שגיאה",
@@ -67,7 +64,6 @@ const Catalog = () => {
       });
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(contactForm.email)) {
       toast({
@@ -77,7 +73,6 @@ const Catalog = () => {
       });
       return;
     }
-
     setIsSubmitting(true);
     try {
       const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
@@ -86,7 +81,6 @@ const Catalog = () => {
         title: "ההודעה נשלחה בהצלחה",
         description: "ניצור איתך קשר בהקדם"
       });
-
       setContactForm({
         name: '',
         phone: '',
@@ -235,7 +229,6 @@ const Catalog = () => {
     setCurrentImageItem(item);
     setImageViewerOpen(true);
   };
-
   const handleOrderClick = (item: CatalogItem, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent opening image viewer
     setCurrentOrderItem(item);
@@ -259,29 +252,28 @@ const Catalog = () => {
   const getCategoryByItem = (item: CatalogItem) => {
     return categories.find(cat => cat.id === item.category_id);
   };
-  return <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }} id="catalog-page">
+  return <div className="min-h-screen" style={{
+    backgroundColor: '#F8FBF4'
+  }} id="catalog-page">
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
-        backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
+      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
         {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
-        <div className="absolute inset-0" 
-             style={{
-               background: `
+        <div className="absolute inset-0" style={{
+        background: `
                  radial-gradient(ellipse 120% 25% at 50% 92%, #F8FBF4 0%, rgba(248,251,244,0.95) 20%, rgba(248,251,244,0.85) 40%, rgba(248,251,244,0.6) 60%, rgba(248,251,244,0.3) 80%, transparent 100%),
                  radial-gradient(ellipse 90% 20% at 30% 90%, rgba(248,251,244,0.8) 0%, transparent 70%),
                  radial-gradient(ellipse 100% 22% at 70% 94%, rgba(248,251,244,0.7) 0%, transparent 75%)
                `,
-               filter: 'blur(35px)'
-             }} 
-        />
+        filter: 'blur(35px)'
+      }} />
         
         {/* Multiple smooth transition layers for seamless blend */}
-        <div className="absolute inset-0" 
-             style={{
-               background: `
+        <div className="absolute inset-0" style={{
+        background: `
                  linear-gradient(to bottom, 
                    transparent 0%, 
                    transparent 72%, 
@@ -294,14 +286,12 @@ const Catalog = () => {
                    #F8FBF4 100%
                  )
                `,
-               filter: 'blur(25px)'
-             }} 
-        />
+        filter: 'blur(25px)'
+      }} />
         
         {/* Additional ultra-soft blend layer */}
-        <div className="absolute inset-0" 
-             style={{
-               background: `
+        <div className="absolute inset-0" style={{
+        background: `
                  linear-gradient(to bottom, 
                    transparent 0%, 
                    transparent 78%, 
@@ -310,16 +300,13 @@ const Catalog = () => {
                    #F8FBF4 100%
                  )
                `,
-               filter: 'blur(40px)'
-             }} 
-        />
+        filter: 'blur(40px)'
+      }} />
         
          {/* Final solid bottom section */}
-        <div className="absolute inset-0" 
-             style={{
-               background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(248,251,244,0.5) 95%, #F8FBF4 100%)'
-             }} 
-        />
+        <div className="absolute inset-0" style={{
+        background: 'linear-gradient(to bottom, transparent 0%, transparent 92%, rgba(248,251,244,0.5) 95%, #F8FBF4 100%)'
+      }} />
         
         {/* Logo - Top Left */}
         <div className="absolute top-8 left-8 z-20">
@@ -333,14 +320,15 @@ const Catalog = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4">
             {/* English Background Text - much bigger, thinner font */}
-            <h1 className="font-allura text-[180px] md:text-[260px] font-light text-gray-400/50 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[180px] md:text-[260px] font-light text-gray-400/50 leading-none select-none" style={{
+            transform: 'translate(15px, -10px)'
+          }}>
               Catalog
             </h1>
             {/* Hebrew Front Text - smaller relative to English */}
-            <h1 className="font-synopsis text-[80px] md:text-[110px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
-                style={{
-                  textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
-                }}>
+            <h1 className="font-synopsis text-[80px] md:text-[110px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" style={{
+            textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
+          }}>
               קטלוג
             </h1>
           </div>
@@ -359,35 +347,18 @@ const Catalog = () => {
         {/* Category Filter */}
         <div className="mb-6 mt-12">
           <div className="flex flex-wrap justify-center gap-3">
-            <Button 
-              onClick={() => {
-                console.log('Selecting all categories');
-                setSelectedCategory('');
-              }} 
-              className={`${
-                selectedCategory === '' 
-                  ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' 
-                  : 'bg-[#3d5a3d]'
-              } hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}
-            >
+            <Button onClick={() => {
+            console.log('Selecting all categories');
+            setSelectedCategory('');
+          }} className={`${selectedCategory === '' ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}>
               הכל
             </Button>
-            {categories.map(category => 
-              <Button 
-                key={category.id}
-                onClick={() => {
-                  console.log('Selecting category:', category.name, category.id);
-                  setSelectedCategory(category.id);
-                }} 
-                className={`${
-                  selectedCategory === category.id 
-                    ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' 
-                    : 'bg-[#3d5a3d]'
-                } hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}
-              >
+            {categories.map(category => <Button key={category.id} onClick={() => {
+            console.log('Selecting category:', category.name, category.id);
+            setSelectedCategory(category.id);
+          }} className={`${selectedCategory === category.id ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}>
                 {category.name}
-              </Button>
-            )}
+              </Button>)}
           </div>
         </div>
 
@@ -425,31 +396,22 @@ const Catalog = () => {
                                 
                                  {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  {item.title && (
-                                    <div className="p-4">
+                                  {item.title && <div className="p-4">
                                       <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
-                                    </div>
-                                  )}
+                                    </div>}
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
-                                {category.allow_cart && (
-                                  <div 
-                                    onClick={(e) => handleOrderClick(item, e)}
-                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]"
-                                  >
-                                    {item.price && (
-                                      <>
+                                {category.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer bg-[#314020]">
+                                    {item.price && <>
                                         <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
                                         <div className="h-6 w-px bg-white/40 mx-3"></div>
-                                      </>
-                                    )}
+                                      </>}
                                     <div className="flex items-center gap-3 mr-auto">
                                       <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
                                       <img src={arrowSimple} alt="" className="h-7 w-7" />
                                     </div>
-                                  </div>
-                                )}
+                                  </div>}
                               </div>
                             </div>;
                 })}
@@ -483,31 +445,22 @@ const Catalog = () => {
                                 
                                 {/* Hover overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  {item.title && (
-                                    <div className="p-4">
+                                  {item.title && <div className="p-4">
                                       <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
-                                    </div>
-                                  )}
+                                    </div>}
                                 </div>
                                 
                                 {/* Bottom overlay with price and button */}
-                                {selectedCategoryData?.allow_cart && (
-                                  <div 
-                                    onClick={(e) => handleOrderClick(item, e)}
-                                    className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]"
-                                  >
-                                    {item.price && (
-                                      <>
+                                {selectedCategoryData?.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]">
+                                    {item.price && <>
                                         <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
                                         <div className="h-6 w-px bg-white/40 mx-3"></div>
-                                      </>
-                                    )}
+                                      </>}
                                     <div className="flex items-center gap-3 mr-auto">
                                       <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
                                       <img src={arrowSimple} alt="" className="h-7 w-7" />
                                     </div>
-                                  </div>
-                                )}
+                                  </div>}
                               </div>
                             </div>;
                 })}
@@ -540,7 +493,9 @@ const Catalog = () => {
       </div>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
+      <section id="contact" className="py-20" style={{
+      backgroundColor: '#F8FBF4'
+    }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-12 items-start">
             {/* Left Side - Title and Contact Info */}
@@ -548,8 +503,8 @@ const Catalog = () => {
               {/* Title with layered effect */}
               <div className="relative mb-12">
                 <h2 className="font-allura text-[95px] md:text-[105px] font-semibold text-[#314020]/30 opacity-50 leading-none select-none" style={{
-                  transform: 'translate(15px, -10px)'
-                }}>
+                transform: 'translate(15px, -10px)'
+              }}>
                   Contact us
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -589,62 +544,43 @@ const Catalog = () => {
                   <label htmlFor="name" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     שם מלא
                   </label>
-                  <input 
-                    id="name" 
-                    type="text" 
-                    value={contactForm.name} 
-                    onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })} 
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
-                    required 
-                  />
+                  <input id="name" type="text" value={contactForm.name} onChange={e => setContactForm({
+                  ...contactForm,
+                  name: e.target.value
+                })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="phone" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     טלפון
                   </label>
-                  <input 
-                    id="phone" 
-                    type="tel" 
-                    value={contactForm.phone} 
-                    onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })} 
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
-                    required 
-                  />
+                  <input id="phone" type="tel" value={contactForm.phone} onChange={e => setContactForm({
+                  ...contactForm,
+                  phone: e.target.value
+                })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="email" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     אימייל
                   </label>
-                  <input 
-                    id="email" 
-                    type="email" 
-                    value={contactForm.email} 
-                    onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })} 
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" 
-                    required 
-                  />
+                  <input id="email" type="email" value={contactForm.email} onChange={e => setContactForm({
+                  ...contactForm,
+                  email: e.target.value
+                })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
                   <label htmlFor="message" className="block text-sm font-ploni-aaa font-medium text-[#314020]">
                     הודעה
                   </label>
-                  <textarea 
-                    id="message" 
-                    value={contactForm.message} 
-                    onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })} 
-                    className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" 
-                    required 
-                  />
+                  <textarea id="message" value={contactForm.message} onChange={e => setContactForm({
+                  ...contactForm,
+                  message: e.target.value
+                })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" required />
                 </div>
 
-                <button 
-                  type="submit" 
-                  className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" 
-                  disabled={isSubmitting}
-                >
+                <button type="submit" className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" disabled={isSubmitting}>
                   {isSubmitting ? 'שולח...' : 'שליחה'}
                 </button>
                 <p className="text-center text-sm text-gray-500 mt-4">
