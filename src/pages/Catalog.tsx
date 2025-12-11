@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download, MapPin, Mail, Phone } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import arrowCircle from '@/assets/arrow-circle.png';
+import arrowSimple from '@/assets/arrow-simple.png';
 import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { OrderDialog } from '@/components/ui/order-dialog';
@@ -446,7 +446,7 @@ const Catalog = () => {
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
                                       <span className="text-base font-synopsis font-light">להזמנה מהירה</span>
-                                      <img src={arrowCircle} alt="" className="h-5 w-5" />
+                                      <img src={arrowSimple} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
                                 )}
@@ -504,7 +504,7 @@ const Catalog = () => {
                                       className="flex items-center gap-2 hover:opacity-80 transition-opacity mr-auto"
                                     >
                                       <span className="text-base font-synopsis font-light">להזמנה מהירה</span>
-                                      <img src={arrowCircle} alt="" className="h-5 w-5" />
+                                      <img src={arrowSimple} alt="" className="h-5 w-5" />
                                     </button>
                                   </div>
                                 )}

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import arrowCircle from '@/assets/arrow-circle.png';
+import arrowSimple from '@/assets/arrow-simple.png';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -195,7 +195,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 text-base flex items-center justify-center gap-2 font-synopsis font-light mx-auto min-w-[300px] disabled:opacity-50"
                 >
                   <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-                  <img src={arrowCircle} alt="" className="h-5 w-5 brightness-0 invert" />
+                  <img src={arrowSimple} alt="" className="h-5 w-5 brightness-0 invert" />
                 </Button>
                 <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
                   בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import arrowCircle from '@/assets/arrow-circle.png';
+import arrowSimple from '@/assets/arrow-simple.png';
 interface GallerySlide {
   id: string;
   image_url: string;
@@ -216,7 +216,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
             className="w-16 h-16" 
             aria-label="Previous gallery image"
           >
-            <img src={arrowCircle} alt="Previous" className="w-full h-full rotate-180" />
+            <img src={arrowSimple} alt="Previous" className="w-full h-full rotate-180" />
           </button>
 
           <button 
@@ -224,7 +224,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
             className="w-16 h-16" 
             aria-label="Next gallery image"
           >
-            <img src={arrowCircle} alt="Next" className="w-full h-full" />
+            <img src={arrowSimple} alt="Next" className="w-full h-full" />
           </button>
         </div>
       </div>
