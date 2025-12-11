@@ -13,7 +13,7 @@ import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
-import arrowCircle from '@/assets/arrow-circle.png';
+import arrowCircleGreen from '@/assets/arrow-circle-green.png';
 import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
@@ -337,14 +337,14 @@ const Index = () => {
             className="hover:scale-110 transition-transform duration-300"
             aria-label="תמונה הבאה"
           >
-            <img src={arrowCircle} alt="" className="w-12 h-12" />
+            <img src={arrowCircleGreen} alt="" className="w-12 h-12" />
           </button>
           <button 
             onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
             className="hover:scale-110 transition-transform duration-300 rotate-180"
             aria-label="תמונה קודמת"
           >
-            <img src={arrowCircle} alt="" className="w-12 h-12" />
+            <img src={arrowCircleGreen} alt="" className="w-12 h-12" />
           </button>
         </div>
         
@@ -419,7 +419,7 @@ const Index = () => {
                   <button className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-transform">
                     <span className="font-synopsis text-lg md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
                     <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
-                      <img src={arrowCircle} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
+                      <img src={arrowCircleGreen} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                     </div>
                   </button>
                 </Link>
@@ -536,7 +536,7 @@ const Index = () => {
                 <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
                   <span className="font-synopsis text-2xl font-semibold text-[#314020]">לכל העיצובים</span>
                   <div className="w-12 h-12">
-                    <img src={arrowCircle} alt="לכל העיצובים" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
+                    <img src={arrowCircleGreen} alt="לכל העיצובים" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
                   </div>
                 </button>
               </Link>
