@@ -546,13 +546,13 @@ const Index = () => {
           {/* Catalog Images Grid - Full Width */}
           <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
-              img: '/lovable-uploads/catalog-bouquet.png',
+              img: '/lovable-uploads/catalog-engagement.png',
               title: 'זרי\nאירוסין'
             }, {
-              img: '/lovable-uploads/catalog-chairs.png',
+              img: '/lovable-uploads/catalog-bouquet.png',
               title: 'כסאות וזרי\nכלה'
             }, {
-              img: '/lovable-uploads/catalog-engagement.png',
+              img: '/lovable-uploads/catalog-chairs.png',
               title: 'עיצוב\nאירועים'
             }, {
               img: '/lovable-uploads/catalog-hair.png',
