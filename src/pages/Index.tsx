@@ -546,17 +546,17 @@ const Index = () => {
           {/* Catalog Images Grid - Full Width */}
           <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
-              img: '/lovable-uploads/catalog-engagement.png',
-              title: 'עיצוב אירועים'
-            }, {
               img: '/lovable-uploads/catalog-bouquet.png',
               title: 'זרי\nאירוסין'
             }, {
               img: '/lovable-uploads/catalog-chairs.png',
-              title: 'כסאות וזרי כלה'
+              title: 'כסאות וזרי\nכלה'
+            }, {
+              img: '/lovable-uploads/catalog-engagement.png',
+              title: 'עיצוב\nאירועים'
             }, {
               img: '/lovable-uploads/catalog-hair.png',
-              title: 'קישוטי שיער'
+              title: 'קישוטי\nשיער'
             }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
