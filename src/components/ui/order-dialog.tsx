@@ -106,14 +106,14 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl p-0 overflow-hidden border-2 border-[#314020] bg-transparent rounded-lg">
+      <DialogContent className="max-w-3xl p-0 overflow-hidden border-[3px] border-[#314020] bg-transparent rounded-2xl">
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
         </VisuallyHidden>
         
         {/* Background Image with Light Overlay */}
-        <div className="relative min-h-[500px] flex flex-col rounded-lg overflow-hidden">
+        <div className="relative min-h-[500px] flex flex-col rounded-2xl overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${item.image_url})` }}
@@ -124,10 +124,10 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           {/* Form Content - Flex column to push fields down */}
           <div className="relative z-10 w-full flex flex-col h-full min-h-[500px]">
             {/* Top section with titles */}
-            <div className="text-center pt-16 px-8">
+            <div className="text-center pt-32 px-8">
               {/* Category Name - Larger and positioned lower */}
               {category && (
-                <p className="text-4xl md:text-5xl font-synopsis font-light mb-4 text-[#314020]">
+                <p className="text-4xl md:text-5xl font-synopsis font-bold mb-6 text-[#314020]">
                   {category.name}
                 </p>
               )}
