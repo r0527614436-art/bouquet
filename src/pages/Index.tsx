@@ -124,7 +124,15 @@ const Index = () => {
 
   // Use database slides if available, otherwise use gallery slides
   const carouselImages = slides.length > 0 ? slides : gallerySlides;
-  // No auto-slide for hero section - only static image
+  
+  // Auto-slide for hero section
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1));
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [heroBackgrounds.length]);
+
   const handleLogoClick = () => {
     const currentTime = Date.now();
     if (currentTime - lastClickTime > 1000) {
