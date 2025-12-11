@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, CheckCircle } from 'lucide-react';
+import { Calendar, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import simpleArrow from '@/assets/simple-arrow.png';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
@@ -122,7 +123,7 @@ const Order = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/cart" className="flex items-center text-[#314020] hover:text-[#314020]/70">
-              <ArrowRight className="h-5 w-5 ml-2" />
+              <img src={simpleArrow} alt="" className="h-5 w-5 ml-2" />
               חזרה לעגלה
             </Link>
             
