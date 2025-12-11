@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const PrivacyPolicy = () => {
+const AccessibilityStatement = () => {
   const { toast } = useToast();
   const [contactForm, setContactForm] = useState({
     name: '',
@@ -61,7 +61,7 @@ const PrivacyPolicy = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#F8FBF4]" />
         <div className="relative z-10 text-center">
           <h1 className="font-synopsis font-light text-4xl md:text-5xl text-white mb-4">
-            מדיניות פרטיות
+            הצהרת נגישות
           </h1>
         </div>
       </section>
@@ -70,136 +70,51 @@ const PrivacyPolicy = () => {
       <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
         <div className="prose prose-lg max-w-none text-foreground font-ploni-aaa">
           
-          <p className="text-muted-foreground mb-8">
-            המדיניות מנוסחת בלשון נקבה למען הנוחות, אך פונה לכל המינים.
+          <p className="text-foreground/80 leading-relaxed mb-8">
+            37a9b20d-62bb-4776-af56-856e2275b0c8.lovableproject.com מחויב להבטיח נגישות דיגיטלית לכל המשתמשים, ללא קשר ליכולותיהם. אנו מציעים מגוון כלים ותכונות נגישות באמצעות סרגל הנגישות של החברה שלנו כדי לספק חוויה מכילה וחלקה.
           </p>
 
-          {/* Section 1 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">1. כללי</h2>
-          <p className="text-foreground/80 leading-relaxed mb-4">
-            ברוכה הבאה לאתר "בוקט" (להלן: "האתר").
-            האתר מופעל ומנוהל על-ידי בעלת העסק רחל רובינשטיין, המכהנת גם כממונה הגנת הנתונים.
-            מדיניות פרטיות זו מפרטת כיצד נאסף, נשמר ומנוצל מידע הנוגע לגולשות האתר.
-          </p>
-          <p className="text-foreground/80 leading-relaxed">
-            גלישה באתר מהווה הסכמה למדיניות זו.
-          </p>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 2 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">2. פרטי העסק והממונה על הגנת המידע</h2>
-          <ul className="list-none space-y-2 text-foreground/80">
-            <li><strong>שם העסק:</strong> בוקט</li>
-            <li><strong>ממונה הגנת נתונים:</strong> רחל רובינשטיין</li>
-            <li><strong>כתובת העסק:</strong> שערי תשובה 14, מודיעין עילית</li>
-            <li><strong>מיקוד:</strong> 7182616</li>
-            <li><strong>טלפון:</strong> 052-7614436</li>
-            <li><strong>דוא"ל:</strong> <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors">R0527614436@gmail.com</a></li>
-          </ul>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 3 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">3. סוג השירות באתר</h2>
-          <p className="text-foreground/80 leading-relaxed mb-4">
-            האתר מאפשר ביצוע הזמנת מוצרים <strong>ללא תשלום באתר</strong>.
-            האתר אינו מפעיל מערכת סליקה ואינו שומר פרטי אשראי.
-          </p>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 4 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">4. מידע הנאסף באתר</h2>
-          <p className="text-foreground/80 leading-relaxed mb-4">האתר אוסף מידע משני סוגים:</p>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">תכונות</h2>
           
-          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">א. נתוני גלישה (מידע לא מזוהה אישית)</h3>
-          <p className="text-foreground/80 leading-relaxed mb-2">האתר אוסף נתונים סטטיסטיים לצורך:</p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>שיפור חוויית ונוחות הגלישה</li>
-            <li>שיפור תפקוד האתר</li>
-            <li>התאמת תכני האתר לגולשות</li>
-          </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            מידע זה עשוי לכלול: זמן שהייה, עמודים בהם ביקרתן, סוג הדפדפן, סוג המכשיר ועוד.
-            המידע אינו מזהה את המשתמשת באופן אישי.
-          </p>
-
-          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">ב. מידע שמסרת מרצון</h3>
-          <p className="text-foreground/80 leading-relaxed">
-            האתר ישמור מידע <strong>רק אם תבחרי לשלוח הודעה דרך האתר</strong> (למשל: שם, טלפון, מייל ותוכן הפנייה).
-          </p>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 5 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">5. שימוש במידע</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">המידע שתמסרי יישמר וישמש רק למטרות הבאות:</p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>מענה לפניות שנשלחו דרך האתר</li>
-            <li>יצירת קשר לפי הצורך</li>
-            <li>שיפור השירות וחוויית המשתמשת</li>
-            <li>תיעוד התכתבויות במידת הצורך</li>
-          </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            האתר <strong>אינו שולח הודעות מכל סוג</strong> אלא אם המשתמשת יזמה פנייה.
-          </p>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 6 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">6. שמירת מידע ואבטחתו</h2>
-          <p className="text-foreground/80 leading-relaxed">
-            האתר נוקט באמצעי אבטחה מקובלים להגנה על המידע מפני גישה בלתי מורשית.
-            למרות המאמצים, אין ביכולתנו להבטיח אבטחה מוחלטת של מערכות מידע.
-          </p>
-
-          <hr className="border-border/30 my-8" />
-
-          {/* Section 7 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">7. מסירת מידע לצד שלישי</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">
-            האתר <strong>אינו מעביר מידע לצדדים שלישיים</strong>, אלא אם:
-          </p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>נדרשת מסירה על פי חוק</li>
-            <li>ניתנה הסכמת המשתמשת במפורש</li>
-            <li>הדבר נדרש לצורך הפעלת האתר ושיפורו, ובכפוף להתחייבות לסודיות</li>
+          <ul className="list-none space-y-4 text-foreground/80">
+            <li><strong>קורא מסך:</strong> מסייע למשתמשים עם לקות ראייה על ידי קריאת תוכן האתר בקול רם.</li>
+            <li><strong>ניווט מקלדת:</strong> מאפשר למשתמשים לנווט באתר באמצעות המקלדת בלבד.</li>
+            <li><strong>ניווט קולי:</strong> מאפשר למשתמשים לשלוט באתר באמצעות פקודות קוליות.</li>
+            <li><strong>קורא טקסט:</strong> מספק דרך קלה לקריאת הטקסט בקול רם.</li>
+            <li><strong>אפשרויות ניגודיות:</strong> מעבר בין ניגודיות כהה לבהירה בהתאם להעדפות הויזואליות.</li>
+            <li><strong>הגדרות רוויה:</strong> התאמה בין רוויה גבוהה לנמוכה או מעבר למצב שחור-לבן לפשטות ויזואלית.</li>
+            <li><strong>התאמות תוכן:</strong> שינוי גודל טקסט, ריווח טקסט, ריווח גובה וריווח אותיות לשיפור הקריאות.</li>
+            <li><strong>מיקום טקסט:</strong> יישור טקסט לשמאל, לימין או למרכז לנוחיותך.</li>
+            <li><strong>הדגשת קישורים וכותרות:</strong> הדגשת קישורים וכותרות לאיתור קל של מידע חשוב.</li>
+            <li><strong>גופנים קריאים:</strong> הפעלת גופנים קריאים יותר לבהירות טובה יותר.</li>
+            <li><strong>סמן גדול:</strong> הגדלת הסמן לשיפור הנראות.</li>
+            <li><strong>עצירת אנימציות:</strong> השהיית כל האנימציות להפחתת הסחות דעת.</li>
+            <li><strong>עזר קריאה:</strong> שימוש במסיכת קריאה או מדריך קריאה לעזרה בהתמקדות בחלקים ספציפיים של הטקסט.</li>
+            <li><strong>מבנה דף:</strong> ניווט קל דרך מבנה הדף.</li>
+            <li><strong>מילון:</strong> קבלת הגדרות למילים קשות ישירות בדף.</li>
+            <li><strong>הסתרת תמונות:</strong> הסתרת תמונות להתמקדות בתוכן הטקסטואלי.</li>
+            <li><strong>חלוניות מידע:</strong> הפעלת חלוניות מידע להסברים נוספים על אלמנטים.</li>
           </ul>
 
           <hr className="border-border/30 my-8" />
 
-          {/* Section 8 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">8. זכויות המשתמשת</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">על פי חוק הגנת הפרטיות, כל משתמשת זכאית לדרוש:</p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>עיון במידע שנשמר אודותיה</li>
-            <li>תיקון מידע שגוי</li>
-            <li>מחיקת מידע מסוים בכפוף לדין</li>
-          </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            פניות בנושא ניתן לשלוח לדוא"ל: <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">תמיכה בטכנולוגיה מסייעת</h2>
+          <p className="text-foreground/80 leading-relaxed">
+            אתר זה תואם למגוון רחב של טכנולוגיות מסייעות, כולל קוראי מסך, תוכנות זיהוי קול ומכשירים אחרים המיועדים לעזור למשתמשים לנווט בתוכן דיגיטלי. אנו מחויבים להבטיח שהאתר שלנו עובד ביעילות עם כלים אלה.
           </p>
 
           <hr className="border-border/30 my-8" />
 
-          {/* Section 9 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">9. שינוי במדיניות הפרטיות</h2>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">צור קשר לתמיכה בנגישות</h2>
           <p className="text-foreground/80 leading-relaxed">
-            האתר רשאי לעדכן מדיניות זו מעת לעת.
-            הנוסח העדכני יפורסם באתר וייכנס לתוקף מיד עם פרסומו.
+            אם אתה נתקל בקשיים בגישה לתוכן או זקוק לסיוע, תוכל לדווח על בעיה ישירות דרך חלק 'דווח על בעיה' באתר זה. אנו מחויבים לטפל בכל בעיות הנגישות ולשפר באופן מתמיד את נגישות האתר שלנו.
           </p>
 
           <hr className="border-border/30 my-8" />
 
-          {/* Section 10 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">10. יצירת קשר</h2>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">הצהרת אחריות</h2>
           <p className="text-foreground/80 leading-relaxed">
-            לשאלות בנושא מדיניות פרטיות זו ניתן לפנות לכתובת:
-            <br />
-            <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
-            <br />
-            או בטלפון <a href="tel:052-7614436" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">052-7614436</a>
+            בעוד אנו שואפים להבטיח שהאתר נגיש במלואו ועומד בתקני הנגישות העדכניים ביותר, ייתכן שחלק מהתוכן של צד שלישי או קישורים חיצוניים לא יעמדו במלואם בהנחיות הנגישות. אנו עובדים באופן מתמיד לשיפור הנגישות של אתר זה ומקבלים בברכה משוב על כל בעיה שאתה עשוי להיתקל בה.
           </p>
 
         </div>
@@ -338,4 +253,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default AccessibilityStatement;
