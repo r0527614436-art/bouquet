@@ -419,7 +419,7 @@ const Index = () => {
                   <button className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-transform">
                     <span className="font-synopsis text-lg md:text-2xl font-semibold text-[#314020]">עוד עלינו</span>
                     <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
-                      <img src={arrowCircleGreen} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
+                      <img src={arrowCircleGreen} alt="עוד עלינו" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full rotate-180" />
                     </div>
                   </button>
                 </Link>
@@ -536,7 +536,7 @@ const Index = () => {
                 <button className="flex items-center gap-4 hover:scale-105 transition-transform mx-auto">
                   <span className="font-synopsis text-2xl font-semibold text-[#314020]">לכל העיצובים</span>
                   <div className="w-12 h-12">
-                    <img src={arrowCircleGreen} alt="לכל העיצובים" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full" />
+                    <img src={arrowCircleGreen} alt="לכל העיצובים" width="48" height="48" loading="lazy" decoding="async" className="w-full h-full rotate-180" />
                   </div>
                 </button>
               </Link>
