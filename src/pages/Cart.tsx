@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
+import simpleArrow from '@/assets/simple-arrow.png';
 
 const Cart = () => {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalItems } = useCart();
@@ -23,7 +24,7 @@ const Cart = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <Link to="/catalog" className="flex items-center text-pink-600 hover:text-pink-800">
-                <ArrowRight className="h-5 w-5 ml-2" />
+                <img src={simpleArrow} alt="" className="h-5 w-5 ml-2" />
                 חזרה לקטלוג
               </Link>
               
@@ -67,7 +68,7 @@ const Cart = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link to="/catalog" className="flex items-center text-pink-600 hover:text-pink-800">
-              <ArrowRight className="h-5 w-5 ml-2" />
+              <img src={simpleArrow} alt="" className="h-5 w-5 ml-2" />
               חזרה לקטלוג
             </Link>
             
