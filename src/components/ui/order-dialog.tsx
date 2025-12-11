@@ -201,7 +201,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   disabled={isSubmitting}
                   className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-20 py-3 flex items-center justify-center gap-3 font-synopsis font-light mx-auto min-w-[300px] disabled:opacity-50"
                 >
-                  <span className="text-lg">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
+                  <span className="text-xl">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
                   <img src={orderArrow} alt="" className="h-6 w-6" />
                 </Button>
                 <p className="text-center text-sm text-gray-600 mt-4" dir="rtl">
