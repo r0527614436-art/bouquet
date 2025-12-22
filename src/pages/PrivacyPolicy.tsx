@@ -70,136 +70,196 @@ const PrivacyPolicy = () => {
       <section className="py-16 px-4 md:px-8 max-w-4xl mx-auto">
         <div className="prose prose-lg max-w-none text-foreground font-ploni-aaa">
           
-          <p className="text-muted-foreground mb-8">
-            המדיניות מנוסחת בלשון נקבה למען הנוחות, אך פונה לכל המינים.
-          </p>
+          {/* Owner Details */}
+          <div className="mb-8 p-6 bg-[#314020]/5 rounded-lg">
+            <h3 className="font-synopsis font-light text-xl text-foreground mb-4">פרטי בעל האתר ובעל השליטה במאגר:</h3>
+            <ul className="list-none space-y-2 text-foreground/80">
+              <li><strong>שם:</strong> רחל רובינשטיין</li>
+              <li><strong>כתובת דואר אלקטרוני:</strong> <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors">R0527614436@gmail.com</a></li>
+              <li><strong>טלפון:</strong> <a href="tel:0527614436" className="text-[#314020] hover:text-[#314020]/70 transition-colors">0527614436</a></li>
+              <li><strong>כתובת URL של האתר:</strong> <a href="https://bouquet.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-[#314020] hover:text-[#314020]/70 transition-colors">https://bouquet.lovable.app/</a></li>
+              <li><strong>מען למכתבים:</strong> שערי תשובה 14 מודיעין עלית</li>
+            </ul>
+          </div>
 
           {/* Section 1 */}
           <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">1. כללי</h2>
           <p className="text-foreground/80 leading-relaxed mb-4">
-            ברוכה הבאה לאתר "בוקט" (להלן: "האתר").
-            האתר מופעל ומנוהל על-ידי בעלת העסק רחל רובינשטיין, המכהנת גם כממונה הגנת הנתונים.
-            מדיניות פרטיות זו מפרטת כיצד נאסף, נשמר ומנוצל מידע הנוגע לגולשות האתר.
+            אנו ב'בוקט שזירת פרחים', מכבדים את פרטיות המשתמשים באתר שלנו. לכן, החלטנו לפרסם מדיניות פרטיות ברורה ושקופה, ואנו מתחייבים לפעול לפיה.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            מטרת מסמך זה היא להסביר כיצד אנו מתנהלים בנוגע לפרטיות המשתמשים. בין היתר, נסביר איזה מידע נאסף, כיצד אנו משתמשים בו, ואילו זכויות עומדות לרשותך בנוגע למידע זה.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            מדיניות פרטיות זו מותאמת להוראות סעיף 11 לחוק הגנת הפרטיות, התשמ"א–1981.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            מסמך זה מנוסח בלשון זכר מטעמי נוחות בלבד, אך הוא מיועד לכל המגדרים.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            אנו ממליצים לקרוא בעיון את מדיניות הפרטיות. המשך השימוש באתר מהווה אישור לכך שקראת, הבנת ושאתה מסכים למדיניות זו. אם אינך מעוניין שהמידע שלך ייאסף בהתאם למדיניות זו, אנא הימנע משימוש באתר.
           </p>
           <p className="text-foreground/80 leading-relaxed">
-            גלישה באתר מהווה הסכמה למדיניות זו.
+            אין חובה חוקית למסור את פרטיך, אך שים לב שמסירת מידע מסוים עשויה להיות תנאי לגישה מלאה לתכני האתר, לשירותים שאנו מציעים, או לביצוע רכישות והזמנות.
           </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 2 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">2. פרטי העסק והממונה על הגנת המידע</h2>
-          <ul className="list-none space-y-2 text-foreground/80">
-            <li><strong>שם העסק:</strong> בוקט</li>
-            <li><strong>ממונה הגנת נתונים:</strong> רחל רובינשטיין</li>
-            <li><strong>כתובת העסק:</strong> שערי תשובה 14, מודיעין עילית</li>
-            <li><strong>מיקוד:</strong> 7182616</li>
-            <li><strong>טלפון:</strong> 052-7614436</li>
-            <li><strong>דוא"ל:</strong> <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors">R0527614436@gmail.com</a></li>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">2. המידע שאנו אוספים באתר</h2>
+          
+          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">2.1. בעת השימוש בשירותי האתר נאסף מידע על אודותיך, חלקו מזהה אותך אישית:</h3>
+          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
+            <li>פרטי יצירת קשר, כגון שמך, כתובת דואר אלקטרוני, מספר טלפון;</li>
+            <li>מידע שהעברת במסגרת התכתבויות ו/או תקשורת עם האתר;</li>
+            <li>מידע שהעברת על ההצעות והשירותים שעניינו אותך;</li>
+            <li>נעשה שימוש בקבצי 'עוגיות' ו/או 'פיקסלים' שחלקו עשוי לזהות אותך אישית;</li>
+            <li>כתובת IP;</li>
+          </ul>
+
+          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">2.2. חלק מהמידע שנאסף אינו מזהה אישית, למשל:</h3>
+          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
+            <li>סוג הדפדפן שממנו אתה צופה באתר;</li>
+            <li>סוג המכשיר שממנו אתה צופה באתר;</li>
+            <li>אופן השימוש באתר ונתוני גלישה – משך זמן שימוש בכל עמוד, באיזה עמודים ביקרת, פעולות שבוצעו באתר;</li>
+            <li>מוצרים שהתעניינת בהם;</li>
+            <li>התאמות משתמש כגון שפה מועדפת;</li>
           </ul>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 3 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">3. סוג השירות באתר</h2>
-          <p className="text-foreground/80 leading-relaxed mb-4">
-            האתר מאפשר ביצוע הזמנת מוצרים <strong>ללא תשלום באתר</strong>.
-            האתר אינו מפעיל מערכת סליקה ואינו שומר פרטי אשראי.
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">3. איסוף המידע</h2>
+          <p className="text-foreground/80 leading-relaxed">
+            הנתונים שיאספו וכן תכנים שהמשתמש מעלה ו/או משתף ו/או יוצר באתר, יישמרו ברשות בעל האתר. מסדי הנתונים מאוחסנים בשרתי אחסון. המשתמש באתר מצהיר כי הוא מסכים לשמירת מידע בשרתים אלו, אשר עשויים להיות בישראל או בחו"ל.
           </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 4 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">4. מידע הנאסף באתר</h2>
-          <p className="text-foreground/80 leading-relaxed mb-4">האתר אוסף מידע משני סוגים:</p>
-          
-          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">א. נתוני גלישה (מידע לא מזוהה אישית)</h3>
-          <p className="text-foreground/80 leading-relaxed mb-2">האתר אוסף נתונים סטטיסטיים לצורך:</p>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">4. מטרות איסוף ושימוש במידע</h2>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            השימוש במידע שנאסף, ייעשה בהתאם למדיניות פרטיות זו, או בהתאם להוראות כל דין החל, על מנת –
+          </p>
           <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>שיפור חוויית ונוחות הגלישה</li>
-            <li>שיפור תפקוד האתר</li>
-            <li>התאמת תכני האתר לגולשות</li>
+            <li>לתת ולאפשר שירותים כמפורט באתר;</li>
+            <li>לשפר את השירותים והתכנים המוצעים באתר, לשנותם או לבטלם;</li>
+            <li>לתקשר איתך ולהשיב לפניותיך;</li>
+            <li>אספקה ושילוח של מוצרים;</li>
+            <li>לשלוח ולפרסם מידע ותכנים שיווקיים, ולשם יצירת קשר;</li>
+            <li>על מנת להתאים את המודעות שיוצגו בעת ביקורך באתר לתחומי העניין שלך;</li>
+            <li>לצורך אכיפת כללים ונהלים באתר כפי שהם מופיעים בתנאי השימוש;</li>
+            <li>למטרות בקרה – לרבות אבטחה ומניעת הונאות, זיהוי שימוש לא חוקי באתר;</li>
           </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            מידע זה עשוי לכלול: זמן שהייה, עמודים בהם ביקרתן, סוג הדפדפן, סוג המכשיר ועוד.
-            המידע אינו מזהה את המשתמשת באופן אישי.
-          </p>
-
-          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">ב. מידע שמסרת מרצון</h3>
-          <p className="text-foreground/80 leading-relaxed">
-            האתר ישמור מידע <strong>רק אם תבחרי לשלוח הודעה דרך האתר</strong> (למשל: שם, טלפון, מייל ותוכן הפנייה).
-          </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 5 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">5. שימוש במידע</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">המידע שתמסרי יישמר וישמש רק למטרות הבאות:</p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>מענה לפניות שנשלחו דרך האתר</li>
-            <li>יצירת קשר לפי הצורך</li>
-            <li>שיפור השירות וחוויית המשתמשת</li>
-            <li>תיעוד התכתבויות במידת הצורך</li>
-          </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            האתר <strong>אינו שולח הודעות מכל סוג</strong> אלא אם המשתמשת יזמה פנייה.
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">5. הבסיס החוקי לאיסוף המידע</h2>
+          <p className="text-foreground/80 leading-relaxed">
+            אנו נעבד את המידע האישי שלך, לרבות מידע רגיש, רק כאשר יש לנו בסיס חוקי לעשות זאת- אם נתת הסכמתך לכך או אם יש לנו אישור כדין לעשות זאת.
           </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 6 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">6. שמירת מידע ואבטחתו</h2>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">6. דיוור אלקטרוני ויצירת קשר עם המשתמש</h2>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            בעל האתר מעוניין לעדכן את המשתמשים לגבי עדכונים חשובים, התפתחויות ועניינים רלוונטיים אחרים הקשורים לאתר ולשירותיו. על מנת להבטיח תקשורת רציפה ומעודכנת, בעל האתר רשאי לשלוח הודעות (נוטיפיקציות) למשתמשים.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            כמו כן, בעל האתר מעוניין לשלוח אליך, מעת לעת, ניוזלטרים או הודעות אחרות במייל, ו/או במסרון SMS או בוואטסאפ ו/או באמצעים דיגיטליים אחרים, על אודות השירותים והמוצרים וכן מידע שיווקי ופרסומי.
+          </p>
           <p className="text-foreground/80 leading-relaxed">
-            האתר נוקט באמצעי אבטחה מקובלים להגנה על המידע מפני גישה בלתי מורשית.
-            למרות המאמצים, אין ביכולתנו להבטיח אבטחה מוחלטת של מערכות מידע.
+            הודעות דיוור, יישלחו אליך רק אם נתת הסכמתך המפורשת, ובכל עת תוכל לבטל את הסכמתך ולהפסיק לקבלו.
           </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 7 */}
           <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">7. מסירת מידע לצד שלישי</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">
-            האתר <strong>אינו מעביר מידע לצדדים שלישיים</strong>, אלא אם:
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            בעל האתר לא יעביר לצדדים שלישיים את פרטיך האישיים והמידע שנאסף על פעילותך באתר אלא במקרים המפורטים להלן:
           </p>
           <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>נדרשת מסירה על פי חוק</li>
-            <li>ניתנה הסכמת המשתמשת במפורש</li>
-            <li>הדבר נדרש לצורך הפעלת האתר ושיפורו, ובכפוף להתחייבות לסודיות</li>
+            <li>שם וכתובת המייל מועברים לספק מערכת הדיוור של האתר;</li>
+            <li>אם תרכוש מוצרים ושירותים באמצעות האתר, יסופק לצד השלישי המידע הנחוץ לו להשלמת תהליך הרכישה ו/או האספקה;</li>
+            <li>חלק מהשירותים באתר מסופקים על ידי צדדים שלישיים, להם יש תנאי שימוש ומדיניות פרטיות נפרדת:</li>
+            <li>תוכן ההודעות והשיחות בוואטסאפ כפוף גם למדיניות הפרטיות של META;</li>
+            <li>חלק מהמידע מועבר לספק אשר מספק שירותי אחסון לאתר;</li>
+            <li>מידע אודות השימוש והפעילות שלך באתר, יעבור לפלטפורמות שיווק כגון META ו-GOOGLE באמצעות קבצי COOKIES ו/או פיקסלים. כמו כן, יתכן שהאתר יעביר לצדדים שלישיים מידע סטטיסטי כללי בלבד, שאינו אישי או פרטי, לגבי השימוש באתר, כגון המספר הכולל של המבקרים באתר זה ובכל עמוד של האתר וכן שמות הדומיין של נותני שירות האינטרנט של המבקרים באתר;</li>
+            <li>במקרה של מחלוקת משפטית בינך לבין בית העסק שתחייב את חשיפת פרטיך;</li>
+            <li>אם תבצע באתר פעולות המנוגדות לחוק;</li>
+            <li>אם יתקבל צו בית משפט המורה למסור את פרטיך או מידע על אודותיך לצד שלישי;</li>
+            <li>העברות בעלות עסקיות, מיזוגים וכיוצא בזה: במקרה של מיזוג, רכישה או העברה של נכסים, המידע האישי שלך עשוי להיות מועבר לצד שלישי כחלק מהעסקה, בתנאי שהתאגיד הנעבר יקבל על עצמו את הוראות מדיניות פרטיות זו;</li>
           </ul>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 8 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">8. זכויות המשתמשת</h2>
-          <p className="text-foreground/80 leading-relaxed mb-2">על פי חוק הגנת הפרטיות, כל משתמשת זכאית לדרוש:</p>
-          <ul className="list-disc list-inside space-y-1 text-foreground/80 mr-4">
-            <li>עיון במידע שנשמר אודותיה</li>
-            <li>תיקון מידע שגוי</li>
-            <li>מחיקת מידע מסוים בכפוף לדין</li>
-          </ul>
-          <p className="text-foreground/80 leading-relaxed mt-4">
-            פניות בנושא ניתן לשלוח לדוא"ל: <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">8. עוגיות (Cookies)</h2>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            עוגייה (קובץ "Cookie") היא קוד אשר משמש לאימות, מעקב אחר נתוני גלישה וכן לשמירת מידע על אודות המשתמשים. כל עוגייה נוצרת על ידי שרת, ומועברת לדפדפן של המשתמש; הדפדפן שלך הוא זה ששומר עוגיות בזיכרון של המחשב או המכשיר שלך.
           </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            האתר משתמש בעוגיות לצורך תפעולו השוטף והתקין, ובכלל זה כדי לאסוף נתונים סטטיסטיים על המשתמש ביחס לשימוש באתר, לאימות פרטים, כדי להתאים את האתר להעדפותיך האישיות ולצורכי אבטחת מידע.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            דפדפנים מודרניים כוללים אפשרות להימנע מקבלת עוגיות וכן למחוק את העוגיות הקיימות. אם אינך יודע כיצד לעשות זאת, בדוק בקובץ העזרה של הדפדפן שבו אתה משתמש.
+          </p>
+          <p className="text-foreground/80 leading-relaxed mb-2">באתר יתכן ויעשה שימוש בשלושה סוגי עוגיות:</p>
+          <ul className="list-decimal list-inside space-y-1 text-foreground/80 mr-4">
+            <li><strong>Cookies חיוניים:</strong> הכרחיים לתפעול התקין של האתר (לדוגמה: מתן אפשרות כניסה לחשבון).</li>
+            <li><strong>Cookies לביצועים:</strong> משמשים לניתוח השימוש באתר, לדוגמה (Google Analytics).</li>
+            <li><strong>Cookies פרסומיים:</strong> מספקים פרסומות מותאמות אישית למשתמש.</li>
+          </ul>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 9 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">9. שינוי במדיניות הפרטיות</h2>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">9. אבטחת מידע</h2>
           <p className="text-foreground/80 leading-relaxed">
-            האתר רשאי לעדכן מדיניות זו מעת לעת.
-            הנוסח העדכני יפורסם באתר וייכנס לתוקף מיד עם פרסומו.
+            באתר מיושמות מערכות ונהלים עדכניים לאבטחת מידע. בעוד שמערכות ונהלים אלה מצמצמים את הסיכונים לחדירה בלתי-מורשית, אין הם מעניקים בטחון מוחלט. לכן, בעל האתר לא מתחייב שהאתר ושירותיו יהיו חסינים באופן מוחלט מפני גישה בלתי-מורשית למידע המאוחסן בהם והמשתמש מצהיר כי הוא מודע ומסכים לכך.
           </p>
 
           <hr className="border-border/30 my-8" />
 
           {/* Section 10 */}
-          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">10. יצירת קשר</h2>
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">10. זכויות נשוא המידע</h2>
+          
+          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">10.1. זכות העיון</h3>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            על-פי חוק הגנת הפרטיות, התשמ"א - 1981, כל אדם זכאי לעיין במידע על אודותיו, המוחזק במאגר מידע.
+          </p>
+
+          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">10.2. זכות לתיקון מידע</h3>
+          <p className="text-foreground/80 leading-relaxed mb-4">
+            אדם שעיין במידע שעליו ומצא כי אינו נכון, שלם, ברור או מעודכן, רשאי לפנות לבעל מאגר המידע בבקשה לתקן את המידע או למוחקו.
+          </p>
+
+          <h3 className="font-synopsis font-light text-xl text-foreground mt-6 mb-3">10.3. פניות בנושאי זכויות</h3>
           <p className="text-foreground/80 leading-relaxed">
-            לשאלות בנושא מדיניות פרטיות זו ניתן לפנות לכתובת:
-            <br />
-            <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">R0527614436@gmail.com</a>
-            <br />
-            או בטלפון <a href="tel:052-7614436" className="text-[#314020] hover:text-[#314020]/70 transition-colors font-semibold">052-7614436</a>
+            יש להפנות בדרכי יצירת הקשר הרשומות מעלה.
+          </p>
+
+          <hr className="border-border/30 my-8" />
+
+          {/* Section 11 */}
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">11. דיווח על פגיעה בפרטיות</h2>
+          <p className="text-foreground/80 leading-relaxed">
+            אם אתה סבור כי פרטיותך נפגעה במסגרת או בזיקה לפעילות האתר, אנא פנה לבעל האתר ופרט בפנייתך את נסיבות הפגיעה כפי שאתה רואה אותה. כמו כן, אם יש לך שאלות או חששות בנוגע לעיבוד המידע האישי שלך או שתרצה לממש את זכויותיך, בעל האתר יענה תוך זמן סביר לפניותיך ויספק לך את המידע הדרוש לך. ניתן לפנות לבעל האתר באמצעות בדרכי יצירת הקשר הרשומות בראשית מסמך זה.
+          </p>
+
+          <hr className="border-border/30 my-8" />
+
+          {/* Section 12 */}
+          <h2 className="font-synopsis font-light text-2xl text-foreground mt-12 mb-4">12. שינויים במדיניות הפרטיות</h2>
+          <p className="text-foreground/80 leading-relaxed">
+            אנו נסקור ונעדכן באופן קבוע את מדיניות הפרטיות שלנו כדי להבטיח שהיא משקפת את נהלי הטיפול הנוכחיים שלנו בנתונים. כל העדכונים יימסרו לך בבירור, ואנו נקבל את הסכמתך ככל ויידרש על פי דין.
+          </p>
+
+          <p className="text-foreground/80 leading-relaxed mt-8 font-semibold">
+            מדיניות הפרטיות עודכנה בתאריך: דצמבר 2025
           </p>
 
         </div>
