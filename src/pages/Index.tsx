@@ -264,10 +264,14 @@ const Index = () => {
       <div>
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] overflow-visible">
+      <section className="relative h-[70vh] md:h-[90vh] overflow-visible">
         {/* Logo - Absolute Position in Hero - aligned with download button */}
-        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg" style={{ marginLeft: '59px' }}>
+        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg hidden md:block" style={{ marginLeft: '59px' }}>
           <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
+        </div>
+        {/* Mobile Logo */}
+        <div className="absolute left-4 top-4 z-40 bg-white/80 backdrop-blur-sm rounded-t-[2rem] p-2 shadow-lg md:hidden">
+          <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
         </div>
         
           <div className="relative w-full h-full">
@@ -315,8 +319,8 @@ const Index = () => {
 
         {/* Dots Indicator - removed as we only have single image */}
 
-        {/* Download Catalog Button - Positioned at section boundary */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100]">
+        {/* Download Catalog Button - Positioned at section boundary - Hidden on mobile */}
+        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100] hidden md:block">
           {/* White circle background - behind the button */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-20 sm:w-24 md:w-32 h-10 sm:h-12 md:h-16 rounded-b-full shadow-lg -z-10" style={{ backgroundColor: '#F8FBF4' }} />
           
@@ -331,20 +335,29 @@ const Index = () => {
         </div>
 
         {/* Navigation arrows - in the light transition area */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4">
-          <button 
-            onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
-            className="hover:scale-110 transition-transform duration-300"
-            aria-label="תמונה הבאה"
-          >
-            <img src={arrowCircleGreen} alt="" className="w-12 h-12" />
-          </button>
-          <button 
-            onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
-            className="hover:scale-110 transition-transform duration-300 rotate-180"
-            aria-label="תמונה קודמת"
-          >
-            <img src={arrowCircleGreen} alt="" className="w-12 h-12" />
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[100] flex flex-col md:flex-row items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
+              className="hover:scale-110 transition-transform duration-300"
+              aria-label="תמונה הבאה"
+            >
+              <img src={arrowCircleGreen} alt="" className="w-10 h-10 md:w-12 md:h-12" />
+            </button>
+            <button 
+              onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
+              className="hover:scale-110 transition-transform duration-300 rotate-180"
+              aria-label="תמונה קודמת"
+            >
+              <img src={arrowCircleGreen} alt="" className="w-10 h-10 md:w-12 md:h-12" />
+            </button>
+          </div>
+          {/* Mobile Download Button - Below arrows */}
+          <button onClick={handleDownloadCatalog} className="md:hidden relative z-10 group mt-2" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
+            <div className="relative w-14 h-14 hover:scale-110 transition-transform duration-300 rounded-full">
+              <img src={downloadCatalogBtn} alt="" width="96" height="96" loading="lazy" decoding="async" className="w-full h-full drop-shadow-2xl animate-spin-slow mix-blend-multiply relative z-20" />
+              <img src={downloadArrow} alt="להורדת הקטלוג הדיגיטלי שלנו" width="80" height="80" loading="lazy" decoding="async" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 z-30" />
+            </div>
           </button>
         </div>
         
@@ -372,16 +385,26 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
             {/* Images - Right Side (below text on mobile) */}
-            <div className="flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
-              {/* Second smaller image - now leftmost */}
+            <div className="flex md:hidden gap-3 items-center flex-shrink-0 w-full justify-center flex-wrap">
+              {/* Mobile: All same size with rounded corners */}
+              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+                <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              </div>
+            </div>
+            {/* Desktop: Original layout */}
+            <div className="hidden md:flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-br-[40px] md:rounded-br-[60px] rounded-bl-lg overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              {/* Single smaller image */}
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              {/* Large image with top-left rounded */}
               <div className="w-36 h-48 md:w-64 md:h-[450px] rounded-tl-[120px] md:rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
@@ -430,9 +453,44 @@ const Index = () => {
       </section>
 
       {/* Services Icons Section */}
-      <section className="py-16 pb-8 bg-[#11150d] relative z-20 overflow-visible">
+      <section className="py-12 md:py-16 pb-8 bg-[#11150d] relative z-20 overflow-visible">
         <div className="max-w-6xl mx-auto px-4 overflow-visible">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 overflow-visible">
+          {/* Mobile: 3 on top, 2 on bottom */}
+          <div className="grid grid-cols-3 md:hidden gap-6 overflow-visible mb-6">
+            {[{
+              icon: '/lovable-uploads/icon-flower.png',
+              text: 'פרחים טריים\nיום-יום'
+            }, {
+              icon: '/lovable-uploads/icon-bouquet.png',
+              text: 'מגוון עיצובים\nמקוריים'
+            }, {
+              icon: '/lovable-uploads/icon-gift.png',
+              text: 'עיצוב מתנות\nופרחים'
+            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                <div className="relative w-20 h-20 rounded-full bg-white flex items-center justify-center mb-3 shadow-lg hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
+                  <img src={service.icon} alt={service.text} width="40" height="40" loading="lazy" decoding="async" className="h-10 w-10 object-contain relative z-10" />
+                </div>
+                <p className="text-white font-ploni-aaa font-regular text-xs whitespace-pre-line">{service.text}</p>
+              </div>)}
+          </div>
+          <div className="grid grid-cols-2 md:hidden gap-6 overflow-visible justify-items-center">
+            {[{
+              icon: '/lovable-uploads/icon-delivery.png',
+              text: 'משלוחים\nבפריסה ארצית'
+            }, {
+              icon: '/lovable-uploads/icon-time.png',
+              text: 'עמידה\nבזמנים'
+            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                <div className="relative w-20 h-20 rounded-full bg-white flex items-center justify-center mb-3 shadow-lg hover:scale-110 transition-transform duration-300">
+                  <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
+                  <img src={service.icon} alt={service.text} width="40" height="40" loading="lazy" decoding="async" className="h-10 w-10 object-contain relative z-10" />
+                </div>
+                <p className="text-white font-ploni-aaa font-regular text-xs whitespace-pre-line">{service.text}</p>
+              </div>)}
+          </div>
+          {/* Desktop: 5 in a row */}
+          <div className="hidden md:grid md:grid-cols-5 gap-8 md:gap-12 overflow-visible">
             {[{
               icon: '/lovable-uploads/icon-flower.png',
               text: 'פרחים טריים\nיום-יום'
@@ -450,7 +508,6 @@ const Index = () => {
               text: 'עמידה\nבזמנים'
 }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
                 <div className="relative w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  {/* Inner green circle border - thin outer spacing */}
                   <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain relative z-10" />
                 </div>
@@ -543,14 +600,48 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Catalog Images Grid - Full Width */}
-          <div className="grid grid-cols-4 gap-0 w-full mt-16 pr-16">
+          {/* Catalog Images Grid - Full Width - Vertical on mobile */}
+          <div className="hidden md:grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
               img: '/lovable-uploads/catalog-engagement.png',
               title: 'זרי\nאירוסין'
             }, {
               img: '/lovable-uploads/catalog-bouquet.png',
               title: 'כסאות וזרי\nכלה'
+            }, {
+              img: '/lovable-uploads/catalog-chairs.png',
+              title: 'עיצוב\nאירועים'
+            }, {
+              img: '/lovable-uploads/catalog-hair.png',
+              title: 'קישוטי\nשיער'
+            }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
+                <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
+                  <h3 className="font-gloria font-bold text-3xl md:text-4xl text-white text-center whitespace-pre-line">{item.title}</h3>
+                </div>
+              </Link>)}
+          </div>
+          {/* Mobile: Vertical stacked layout */}
+          <div className="md:hidden flex flex-col gap-4 w-full mt-8 px-4">
+            {[{
+              img: '/lovable-uploads/catalog-engagement.png',
+              title: 'זרי אירוסין'
+            }, {
+              img: '/lovable-uploads/catalog-bouquet.png',
+              title: 'כסאות וזרי כלה'
+            }, {
+              img: '/lovable-uploads/catalog-chairs.png',
+              title: 'עיצוב אירועים'
+            }, {
+              img: '/lovable-uploads/catalog-hair.png',
+              title: 'קישוטי שיער'
+            }].map((item, idx) => <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[16/9] rounded-2xl">
+                <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-4">
+                  <h3 className="font-gloria font-bold text-2xl text-white text-center">{item.title}</h3>
+                </div>
+              </Link>)}
+          </div>
             }, {
               img: '/lovable-uploads/catalog-chairs.png',
               title: 'עיצוב\nאירועים'
