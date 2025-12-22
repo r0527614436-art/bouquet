@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
 import arrowSimple from '@/assets/arrow-simple.png';
 
 interface Testimonial {
@@ -64,9 +63,53 @@ const Testimonials = () => {
   const visibleTestimonials = getVisibleTestimonials();
 
   return (
-    <section className="py-20 bg-[#11150d]" dir="rtl">
+    <section className="py-12 md:py-20 bg-[#11150d]" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-12 items-start">
+        {/* Mobile Layout */}
+        <div className="md:hidden flex flex-col items-center">
+          {/* Title - Above testimonial on mobile */}
+          <div className="relative mb-8 text-center">
+            <h2 className="font-allura text-[50px] font-light text-muted-foreground/40 leading-none select-none" style={{ transform: 'translate(10px, -5px)' }}>
+              recommen<br/>dations
+            </h2>
+            <h2 className="font-synopsis text-[40px] font-semibold absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap" style={{ color: '#F8FBF4' }}>
+              זה מה<br/>שאומרים<br/>עלינו.
+            </h2>
+          </div>
+
+          {/* Single Testimonial on mobile */}
+          <div className="w-full max-w-sm">
+            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 min-h-[250px] flex flex-col">
+              <p className="text-sm leading-relaxed whitespace-pre-wrap mb-4 flex-1 text-right">
+                {testimonials[currentIndex]?.content}
+              </p>
+              <p className="font-ploni-aaa font-medium text-base text-right">
+                {testimonials[currentIndex]?.author_name}
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation Arrows - Centered below testimonial on mobile */}
+          <div className="flex gap-6 justify-center mt-8">
+            <button
+              onClick={handleNext}
+              className="w-10 h-10 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed rotate-180"
+              disabled={testimonials.length <= 1}
+            >
+              <img src={arrowSimple} alt="Next" className="w-full h-full" />
+            </button>
+            <button
+              onClick={handlePrevious}
+              className="w-10 h-10 hover:scale-110 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={testimonials.length <= 1}
+            >
+              <img src={arrowSimple} alt="Previous" className="w-full h-full" />
+            </button>
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:flex flex-col lg:flex-row gap-12 items-start">
           {/* Title and Navigation - Right Side */}
           <div className="lg:w-1/3 pt-8">
             <div className="relative mb-8">
@@ -99,8 +142,8 @@ const Testimonials = () => {
 
           {/* Testimonials Content - Left Side */}
           <div className="lg:w-2/3">
-            {/* Desktop: 2 testimonials, Mobile: 1 testimonial */}
-            <div className="hidden md:grid md:grid-cols-2 gap-6">
+            {/* Desktop: 2 testimonials */}
+            <div className="grid md:grid-cols-2 gap-6">
               {visibleTestimonials.map((testimonial, idx) => (
                 <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 min-h-[280px] flex flex-col">
                   <p className="text-base leading-relaxed whitespace-pre-wrap mb-6 flex-1">
@@ -111,17 +154,6 @@ const Testimonials = () => {
                   </p>
                 </div>
               ))}
-            </div>
-            {/* Mobile: Single testimonial */}
-            <div className="md:hidden">
-              <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 min-h-[280px] flex flex-col">
-                <p className="text-base leading-relaxed whitespace-pre-wrap mb-6 flex-1">
-                  {testimonials[currentIndex]?.content}
-                </p>
-                <p className="font-ploni-aaa font-medium text-lg text-right mt-4">
-                  {testimonials[currentIndex]?.author_name}
-                </p>
-              </div>
             </div>
           </div>
         </div>

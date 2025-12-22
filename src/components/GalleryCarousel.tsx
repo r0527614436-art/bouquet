@@ -2,15 +2,18 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import arrowSimple from '@/assets/arrow-simple.png';
+
 interface GallerySlide {
   id: string;
   image_url: string;
   title: string;
   description?: string | null;
 }
+
 interface GalleryCarouselProps {
   slides: GallerySlide[];
 }
+
 export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   slides
 }) => {
@@ -36,9 +39,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
     duration: 30,
     startIndex: 2
   }, [Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: false })]);
+
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
+  
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
@@ -46,6 +51,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
   const galleryScrollPrev = useCallback(() => {
     if (galleryEmblaApi) galleryEmblaApi.scrollPrev();
   }, [galleryEmblaApi]);
+  
   const galleryScrollNext = useCallback(() => {
     if (galleryEmblaApi) galleryEmblaApi.scrollNext();
   }, [galleryEmblaApi]);
@@ -81,18 +87,21 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
       galleryEmblaApi.off('select', onGallerySelect);
     };
   }, [galleryEmblaApi, onGallerySelect]);
-  return <div className="relative w-full mx-auto py-16" style={{
-    backgroundColor: '#11150d'
-  }}>
+
+  return (
+    <div className="relative w-full mx-auto py-8 md:py-16" style={{ backgroundColor: '#11150d' }}>
       <div className="relative flex flex-col items-center justify-center w-full bg-[#11150d]">
-        {/* Carousel */}
-        <div className="overflow-visible w-full mb-8 mx-auto" ref={emblaRef}>
-          <div className="flex items-center gap-6">
+        {/* Carousel - Full width on mobile */}
+        <div className="overflow-visible w-full mb-4 md:mb-8 mx-auto" ref={emblaRef}>
+          <div className="flex items-center gap-3 md:gap-6">
             {slides.map((slide, index) => {
-            const isSelected = index === selectedIndex;
-            return <div key={`slide-${slide.id}-${index}-${slide.image_url}`} className="flex-shrink-0" style={{
-              width: '320px'
-            }}>
+              const isSelected = index === selectedIndex;
+              return (
+                <div 
+                  key={`slide-${slide.id}-${index}-${slide.image_url}`} 
+                  className="flex-shrink-0" 
+                  style={{ width: 'calc(100vw - 80px)', maxWidth: '320px' }}
+                >
                   <div className="relative w-full aspect-[3/4] overflow-hidden shadow-2xl bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl">
                     <img 
                       src={slide.image_url} 
@@ -110,110 +119,133 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     />
 
                     {/* Title overlay - only show on selected */}
-                    {isSelected && <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 text-center">
-                        <h3 className="font-ploni-aaa font-semibold text-white text-2xl font-bold drop-shadow-2xl">
+                    {isSelected && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6 text-center">
+                        <h3 className="font-ploni-aaa font-semibold text-white text-xl md:text-2xl font-bold drop-shadow-2xl">
                           {slide.title}
                         </h3>
-                        {slide.description && <p className="font-ploni-aaa font-medium text-white/90 text-sm mt-2 drop-shadow-lg">
+                        {slide.description && (
+                          <p className="font-ploni-aaa font-medium text-white/90 text-xs md:text-sm mt-2 drop-shadow-lg">
                             {slide.description}
-                          </p>}
-                      </div>}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </div>;
-          })}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Gallery Carousel Section */}
-        <div className="relative overflow-hidden pb-8 w-full h-[600px] flex items-center justify-center">
-          <div className="overflow-hidden max-w-[calc((100vw-80px)*0.92-240px)] mx-auto">
-            <div className="overflow-visible w-full px-4" ref={galleryEmblaRef}>
-            <div className="flex items-center justify-center">
-              {[
-                '/lovable-uploads/scroll-1.jpg',
-                '/lovable-uploads/scroll-2.jpg',
-                '/lovable-uploads/scroll-3.jpg',
-                '/lovable-uploads/scroll-4.jpg',
-                '/lovable-uploads/scroll-5.jpg',
-                '/lovable-uploads/scroll-6.jpg',
-                '/lovable-uploads/scroll-7.jpg',
-                '/lovable-uploads/scroll-8.jpg',
-                '/lovable-uploads/scroll-9.jpg',
-                '/lovable-uploads/scroll-10.jpg',
-                '/lovable-uploads/scroll-11.jpg',
-                '/lovable-uploads/scroll-12.jpg',
-                '/lovable-uploads/scroll-13.jpg',
-                '/lovable-uploads/scroll-14.jpg',
-                '/lovable-uploads/scroll-15.jpg',
-                '/lovable-uploads/scroll-16.jpg',
-                '/lovable-uploads/scroll-17.jpg',
-                '/lovable-uploads/scroll-18.jpg',
-                '/lovable-uploads/scroll-19.jpg',
-                '/lovable-uploads/scroll-20.jpg',
-                '/lovable-uploads/scroll-21.jpg',
-                '/lovable-uploads/scroll-22.jpg',
-                '/lovable-uploads/scroll-23.jpg',
-                '/lovable-uploads/scroll-24.jpg',
-                '/lovable-uploads/scroll-25.jpg',
-                '/lovable-uploads/scroll-26.jpg',
-                '/lovable-uploads/scroll-27.jpg',
-                '/lovable-uploads/scroll-28.jpg',
-                '/lovable-uploads/scroll-29.jpg',
-                '/lovable-uploads/scroll-30.jpg'
-              ].map((img, idx) => {
-                const isSelected = idx === gallerySelectedIndex;
-                // Calculate responsive widths: 
-                // Total width = center + (4 * side) - (4 * 80px overlap)
-                // center = 25% of screen, side = 15% of screen
-                const centerWidth = 'calc((100vw - 80px) * 0.28)';
-                const sideWidth = 'calc((100vw - 80px) * 0.16)';
-                
-                return (
-                  <div 
-                    key={`scroll-${idx}`} 
-                    className="flex-shrink-0 transition-all duration-500 ease-out relative"
-                    style={{
-                      width: isSelected ? centerWidth : sideWidth,
-                      height: '500px',
-                      marginLeft: idx === 0 ? '0' : '-80px',
-                      zIndex: isSelected ? 20 : 10
-                    }}
-                  >
+        {/* Gallery Carousel Section - Smaller on mobile */}
+        <div className="relative overflow-hidden pb-4 md:pb-8 w-full h-[300px] md:h-[600px] flex items-center justify-center">
+          <div className="overflow-hidden w-full md:max-w-[calc((100vw-80px)*0.92-240px)] mx-auto">
+            <div className="overflow-visible w-full px-2 md:px-4" ref={galleryEmblaRef}>
+              <div className="flex items-center justify-center">
+                {[
+                  '/lovable-uploads/scroll-1.jpg',
+                  '/lovable-uploads/scroll-2.jpg',
+                  '/lovable-uploads/scroll-3.jpg',
+                  '/lovable-uploads/scroll-4.jpg',
+                  '/lovable-uploads/scroll-5.jpg',
+                  '/lovable-uploads/scroll-6.jpg',
+                  '/lovable-uploads/scroll-7.jpg',
+                  '/lovable-uploads/scroll-8.jpg',
+                  '/lovable-uploads/scroll-9.jpg',
+                  '/lovable-uploads/scroll-10.jpg',
+                  '/lovable-uploads/scroll-11.jpg',
+                  '/lovable-uploads/scroll-12.jpg',
+                  '/lovable-uploads/scroll-13.jpg',
+                  '/lovable-uploads/scroll-14.jpg',
+                  '/lovable-uploads/scroll-15.jpg',
+                  '/lovable-uploads/scroll-16.jpg',
+                  '/lovable-uploads/scroll-17.jpg',
+                  '/lovable-uploads/scroll-18.jpg',
+                  '/lovable-uploads/scroll-19.jpg',
+                  '/lovable-uploads/scroll-20.jpg',
+                  '/lovable-uploads/scroll-21.jpg',
+                  '/lovable-uploads/scroll-22.jpg',
+                  '/lovable-uploads/scroll-23.jpg',
+                  '/lovable-uploads/scroll-24.jpg',
+                  '/lovable-uploads/scroll-25.jpg',
+                  '/lovable-uploads/scroll-26.jpg',
+                  '/lovable-uploads/scroll-27.jpg',
+                  '/lovable-uploads/scroll-28.jpg',
+                  '/lovable-uploads/scroll-29.jpg',
+                  '/lovable-uploads/scroll-30.jpg'
+                ].map((img, idx) => {
+                  const isSelected = idx === gallerySelectedIndex;
+                  
+                  return (
                     <div 
-                      className="relative w-full overflow-hidden shadow-2xl transition-all duration-500"
+                      key={`scroll-${idx}`} 
+                      className="flex-shrink-0 transition-all duration-500 ease-out relative"
                       style={{
-                        height: isSelected ? '500px' : '350px',
-                        marginTop: isSelected ? '0' : '75px',
-                        borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
+                        width: isSelected ? 'calc(50vw)' : 'calc(25vw)',
+                        height: isSelected ? '250px' : '175px',
+                        marginLeft: idx === 0 ? '0' : '-40px',
+                        zIndex: isSelected ? 20 : 10
                       }}
                     >
-                      <img 
-                        src={img} 
-                        alt={`Gallery ${idx + 1}`} 
-                        width="400"
-                        height="500"
-                        loading="lazy"
-                        fetchPriority={Math.abs(idx - 2) <= 2 ? "high" : "low"}
-                        decoding="async" 
-                        className="w-full h-full object-cover" 
-                      />
-                      {!isSelected && (
-                        <div className="absolute inset-0 bg-black/40 transition-opacity duration-500" />
-                      )}
+                      <div 
+                        className="relative w-full overflow-hidden shadow-2xl transition-all duration-500 hidden md:block"
+                        style={{
+                          height: isSelected ? '500px' : '350px',
+                          marginTop: isSelected ? '0' : '75px',
+                          borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
+                        }}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`Gallery ${idx + 1}`} 
+                          width="400"
+                          height="500"
+                          loading="lazy"
+                          fetchPriority={Math.abs(idx - 2) <= 2 ? "high" : "low"}
+                          decoding="async" 
+                          className="w-full h-full object-cover" 
+                        />
+                        {!isSelected && (
+                          <div className="absolute inset-0 bg-black/40 transition-opacity duration-500" />
+                        )}
+                      </div>
+                      {/* Mobile version */}
+                      <div 
+                        className="relative w-full overflow-hidden shadow-2xl transition-all duration-500 md:hidden"
+                        style={{
+                          height: isSelected ? '250px' : '175px',
+                          marginTop: isSelected ? '0' : '37px',
+                          borderRadius: isSelected ? '50px 50px 8px 8px' : '8px'
+                        }}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`Gallery ${idx + 1}`} 
+                          width="200"
+                          height="250"
+                          loading="lazy"
+                          fetchPriority={Math.abs(idx - 2) <= 2 ? "high" : "low"}
+                          decoding="async" 
+                          className="w-full h-full object-cover" 
+                        />
+                        {!isSelected && (
+                          <div className="absolute inset-0 bg-black/40 transition-opacity duration-500" />
+                        )}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
         {/* Navigation Buttons - Below carousel at edges */}
-        <div className="flex items-center justify-between w-full max-w-[calc((100vw-80px)*0.92-240px)] mx-auto mt-[-40px] px-4">
+        <div className="flex items-center justify-center gap-8 w-full mt-2 md:mt-[-40px] px-4">
           <button 
             onClick={galleryScrollPrev} 
-            className="w-16 h-16" 
+            className="w-10 h-10 md:w-16 md:h-16" 
             aria-label="Previous gallery image"
           >
             <img src={arrowSimple} alt="Previous" className="w-full h-full rotate-180" />
@@ -221,12 +253,13 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
 
           <button 
             onClick={galleryScrollNext} 
-            className="w-16 h-16" 
+            className="w-10 h-10 md:w-16 md:h-16" 
             aria-label="Next gallery image"
           >
             <img src={arrowSimple} alt="Next" className="w-full h-full" />
           </button>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
