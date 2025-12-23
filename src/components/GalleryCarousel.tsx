@@ -139,8 +139,8 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Gallery Carousel Section - Smaller on mobile */}
-        <div className="relative overflow-hidden pb-4 md:pb-8 w-full h-[300px] md:h-[600px] flex items-center justify-center">
-          <div className="overflow-hidden w-full md:max-w-[calc((100vw-80px)*0.92-240px)] mx-auto">
+        <div className="relative overflow-hidden pb-4 md:pb-8 w-full h-[300px] md:h-[580px] flex items-center justify-center">
+          <div className="overflow-hidden w-full md:max-w-[90vw] mx-auto">
             <div className="overflow-visible w-full px-2 md:px-4" ref={galleryEmblaRef}>
               <div className="flex items-center justify-center">
                 {[
