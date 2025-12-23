@@ -13,7 +13,7 @@ import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
-import arrowCircleGreen from '@/assets/arrow-circle-green.png';
+import arrowCircleGreen from '@/assets/arrow-circle-new.png';
 import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
 import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
