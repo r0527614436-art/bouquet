@@ -148,11 +148,11 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           )}
           
           {/* Form and Image Layout - Image on left for desktop */}
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8 flex-1">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 flex-1">
             {/* Image Section - Left side on desktop */}
-            <div className="md:w-1/3 flex flex-col items-center order-first md:order-first">
+            <div className="md:w-[30%] flex flex-col items-center order-first md:order-first">
               <p className="font-synopsis text-lg md:text-2xl lg:text-3xl text-[#314020] mb-2 font-bold">דגם {item.price || item.title}</p>
-              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-[400px]">
+              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-none md:flex-1">
                 <img 
                   src={item.image_url} 
                   alt={item.title}
@@ -162,9 +162,9 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             </div>
 
             {/* Form Section - Right side on desktop */}
-            <form onSubmit={handleSubmit} className="md:w-2/3 flex flex-col gap-1.5 md:gap-2">
+            <div className="md:w-[70%] flex flex-col gap-1.5 md:gap-2">
               {/* Row 1: Names */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
@@ -188,7 +188,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Row 2: Phones */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="tel"
@@ -211,7 +211,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Row 3: Event Date and Day */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="date"
@@ -234,10 +234,10 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Address Section Title */}
-              <p className="text-right font-synopsis text-[#314020] font-bold text-sm md:text-base mt-1">כתובת למשלוח:</p>
+              <p className="text-right font-synopsis text-[#314020] font-bold text-sm md:text-base mt-1 max-w-md md:mr-auto">כתובת למשלוח:</p>
 
               {/* Row 4: City and Street */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
@@ -259,7 +259,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Row 5: Building, Entrance, Floor */}
-              <div className="grid grid-cols-3 gap-2 md:gap-3">
+              <div className="grid grid-cols-3 gap-2 md:gap-3 max-w-md md:mr-auto">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
@@ -290,7 +290,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Row 6: Dress Color */}
-              <div className="border-b border-[#314020]">
+              <div className="border-b border-[#314020] max-w-md md:mr-auto">
                 <Input
                   type="text"
                   placeholder="גוון שמלה:"
@@ -300,14 +300,14 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 />
               </div>
 
-              {/* Payment Method */}
-              <div className="pt-2 md:pt-3">
+              {/* Payment Method - aligned with image */}
+              <div className="pt-2 md:pt-3 max-w-md md:mr-auto">
                 <p className="text-right font-synopsis text-[#314020] mb-2 text-sm md:text-base">אמצעי תשלום:</p>
                 <div className="flex gap-2 md:gap-3 justify-end flex-wrap">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('cash')}
-                    className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
                       paymentMethod === 'cash' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -318,7 +318,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('bit')}
-                    className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
                       paymentMethod === 'bit' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -329,7 +329,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('credit')}
-                    className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
                       paymentMethod === 'credit' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -340,7 +340,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('transfer')}
-                    className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
                       paymentMethod === 'transfer' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -372,23 +372,23 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   </div>
                 )}
               </div>
-
-              {/* Submit Button */}
-              <div className="pt-2 md:pt-3 mt-auto">
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-6 md:px-8 py-2 md:py-3 flex items-center justify-center gap-2 md:gap-3 font-synopsis font-light mx-auto disabled:opacity-50"
-                >
-                  <span className="text-base md:text-xl">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-                  <img src={orderArrow} alt="" className="h-4 w-4 md:h-6 md:w-6" />
-                </Button>
-                <p className="text-center text-xs md:text-sm text-gray-600 mt-2 md:mt-3" dir="rtl">
-                  בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
-                </p>
-              </div>
-            </form>
+            </div>
           </div>
+
+          {/* Submit Button - Below the image and form */}
+          <form onSubmit={handleSubmit} className="pt-3 md:pt-4">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-6 md:px-8 py-2 md:py-3 flex items-center justify-center gap-2 md:gap-3 font-synopsis font-light mx-auto disabled:opacity-50"
+            >
+              <span className="text-base md:text-xl">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
+              <img src={orderArrow} alt="" className="h-4 w-4 md:h-6 md:w-6" />
+            </Button>
+            <p className="text-center text-xs md:text-sm text-gray-600 mt-2 md:mt-3" dir="rtl">
+              בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
+            </p>
+          </form>
         </div>
       </DialogContent>
     </Dialog>
