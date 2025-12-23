@@ -148,7 +148,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           )}
           
           {/* Form and Image Layout */}
-          <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-10">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10">
             {/* Image Section - Right side on desktop */}
             <div className="md:w-[35%] flex flex-col items-center order-first md:order-none">
               <p className="font-synopsis text-xl md:text-2xl text-[#314020] mb-3 font-bold">דגם {item.price || item.title}</p>
@@ -382,7 +382,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#6B8E4E] hover:bg-[#5a7a40] text-white rounded-full px-10 md:px-14 py-3 md:py-4 flex items-center justify-center gap-3 font-synopsis font-bold mx-auto disabled:opacity-50 text-xl md:text-2xl"
+              className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-10 md:px-14 py-3 md:py-4 flex items-center justify-center gap-3 font-synopsis font-bold mx-auto disabled:opacity-50 text-xl md:text-2xl"
             >
               <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
               <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
