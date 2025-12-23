@@ -100,14 +100,6 @@ const SideNavigation = () => {
       {/* Mobile Menu Overlay - Full screen, no WhatsApp, dots between items */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-[#11150d] z-40 flex flex-col items-center justify-center">
-          {/* Close button */}
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="absolute top-4 right-4 text-white text-3xl"
-            aria-label="סגור תפריט"
-          >
-            ×
-          </button>
           <nav className="flex flex-col items-center">
             {[
               { label: 'בית', href: '/' },

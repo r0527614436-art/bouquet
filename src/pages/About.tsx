@@ -141,15 +141,15 @@ const About = () => {
         </div>
 
         {/* Content Container - positioned at the transition */}
-        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="absolute top-[35%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
-          <div className="relative mb-8">
+          <div className="relative mb-4 md:mb-8 h-[100px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[115px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[70px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               About
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[100px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
+            <h1 className="font-synopsis text-[60px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
@@ -158,7 +158,7 @@ const About = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-base md:text-lg space-y-3 mt-32 mb-16 font-ploni-aaa max-w-3xl mx-auto">
+          <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 mt-8 md:mt-32 mb-8 md:mb-16 font-ploni-aaa max-w-3xl mx-auto px-2">
             <p className="font-medium">
               אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
             </p>
@@ -217,7 +217,7 @@ const About = () => {
                 '/lovable-uploads/about-scroll-27.jpg',
                 '/lovable-uploads/about-scroll-28.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 72px) / 4)', height: 'calc(((100vw - 72px) / 4) * 1.5)' }}>
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 48px) / 3)', height: 'calc(((100vw - 48px) / 3) * 1.5)' }}>
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
@@ -225,7 +225,16 @@ const About = () => {
                     height="576" 
                     loading="lazy" 
                     decoding="async" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 md:hidden" 
+                  />
+                  <img 
+                    src={img} 
+                    alt={`עיצוב פרחים ${idx + 1}`} 
+                    width="384" 
+                    height="576" 
+                    loading="lazy" 
+                    decoding="async" 
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 hidden md:block" 
                   />
                 </div>
               ))
@@ -244,7 +253,46 @@ const About = () => {
       {/* Services Icons Section */}
       <section className="py-16 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-6xl mx-auto px-4 overflow-visible">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-12 overflow-visible pt-4">
+          {/* Mobile: 3 on top, 2 on bottom */}
+          <div className="md:hidden grid grid-cols-3 gap-4 overflow-visible pt-4">
+            {[{
+              icon: '/lovable-uploads/icon-flower.png',
+              text: 'פרחים טריים\nיום-יום'
+            }, {
+              icon: '/lovable-uploads/icon-bouquet.png',
+              text: 'מגוון עיצובים\nמקוריים'
+            }, {
+              icon: '/lovable-uploads/icon-gift.png',
+              text: 'עיצוב מתנות\nופרחים'
+            }].map((service, idx) => (
+              <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                <div className="relative w-16 h-16 rounded-full bg-[#314020] flex items-center justify-center mb-2 shadow-lg">
+                  <div className="absolute inset-1 rounded-full border border-white"></div>
+                  <img src={service.icon} alt={service.text} width="32" height="32" loading="lazy" decoding="async" className="h-8 w-8 object-contain brightness-0 invert relative z-10" />
+                </div>
+                <p className="text-[#314020] font-ploni-aaa font-regular text-xs whitespace-pre-line">{service.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="md:hidden grid grid-cols-2 gap-4 overflow-visible pt-4 max-w-[200px] mx-auto">
+            {[{
+              icon: '/lovable-uploads/icon-delivery.png',
+              text: 'משלוחים\nבפריסה ארצית'
+            }, {
+              icon: '/lovable-uploads/icon-time.png',
+              text: 'עמידה\nבזמנים'
+            }].map((service, idx) => (
+              <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                <div className="relative w-16 h-16 rounded-full bg-[#314020] flex items-center justify-center mb-2 shadow-lg">
+                  <div className="absolute inset-1 rounded-full border border-white"></div>
+                  <img src={service.icon} alt={service.text} width="32" height="32" loading="lazy" decoding="async" className="h-8 w-8 object-contain brightness-0 invert relative z-10" />
+                </div>
+                <p className="text-[#314020] font-ploni-aaa font-regular text-xs whitespace-pre-line">{service.text}</p>
+              </div>
+            ))}
+          </div>
+          {/* Desktop: 5 in a row */}
+          <div className="hidden md:grid md:grid-cols-5 gap-12 overflow-visible pt-4">
             {[{
               icon: '/lovable-uploads/icon-flower.png',
               text: 'פרחים טריים\nיום-יום'
@@ -263,11 +311,10 @@ const About = () => {
             }].map((service, idx) => (
               <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
                 <div className="relative w-24 h-24 rounded-full bg-[#314020] flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
-                  {/* Inner white circle border - thin outer spacing */}
                   <div className="absolute inset-1 rounded-full border-2 border-white"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain brightness-0 invert relative z-10" />
                 </div>
-                <p className="text-[#314020] font-ploni-aaa font-regular text-sm md:text-base whitespace-pre-line">{service.text}</p>
+                <p className="text-[#314020] font-ploni-aaa font-regular text-base whitespace-pre-line">{service.text}</p>
               </div>
             ))}
           </div>
@@ -282,15 +329,15 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-12 items-start">
             {/* Left Side - Title and Contact Info */}
-            <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
+            <div className="w-full md:w-1/2 text-center md:text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
-              <div className="relative mb-12">
-                <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/30 opacity-50 leading-none select-none" style={{
+              <div className="relative mb-12 h-[100px] md:h-auto flex items-center justify-center md:block">
+                <h2 className="font-allura text-[60px] md:text-[105px] font-light text-[#314020]/30 opacity-50 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Contact us
                 </h2>
-                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[50px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 left-1/2 md:left-auto md:right-0 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none text-center md:text-right">
                   צור קשר
                 </h2>
               </div>
