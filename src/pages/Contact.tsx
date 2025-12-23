@@ -133,15 +133,15 @@ const Contact = () => {
         />
 
         {/* Content Container */}
-        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="absolute top-[35%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect */}
-          <div className="relative mb-8">
+          <div className="relative mb-4 md:mb-8 h-[80px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[95px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[55px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               Contact us
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[80px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap"
+            <h1 className="font-synopsis text-[45px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap text-center"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
@@ -150,7 +150,7 @@ const Contact = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-base md:text-lg space-y-1 mt-32 mb-24">
+          <div className="text-gray-800 text-sm md:text-lg space-y-1 mt-8 md:mt-32 mb-12 md:mb-24">
             <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
             <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
             <p className="font-ploni-aaa font-light">עם כל זאת מכיון שהפרחים -בחלקם- אינם זמינים בכל ימות השנה</p>
@@ -268,6 +268,28 @@ const Contact = () => {
               <Link to="/accessibility" className="text-white/60 text-sm hover:text-white transition-colors">
                 הצהרת נגישות
               </Link>
+              <button 
+                onClick={() => {
+                  const modal = document.createElement('div');
+                  modal.innerHTML = `
+                    <div style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;" onclick="this.remove()">
+                      <div style="background:#F8FBF4;padding:32px;border-radius:16px;max-width:400px;text-align:center;direction:rtl;" onclick="event.stopPropagation()">
+                        <h3 style="font-size:24px;font-weight:bold;color:#314020;margin-bottom:16px;">ביטול עסקה</h3>
+                        <p style="color:#314020;margin-bottom:24px;">לביטול עסקה ניתן לפנות אלינו:</p>
+                        <div style="display:flex;flex-direction:column;gap:12px;">
+                          <a href="tel:0527614436" style="background:#314020;color:white;padding:12px 24px;border-radius:999px;text-decoration:none;">📞 טלפון: 052-7614436</a>
+                          <a href="https://wa.me/972527614436" target="_blank" style="background:#25D366;color:white;padding:12px 24px;border-radius:999px;text-decoration:none;">💬 וואצאפ</a>
+                        </div>
+                        <button onclick="this.closest('[style*=position]').remove()" style="margin-top:16px;color:#314020;background:transparent;border:none;cursor:pointer;">סגור</button>
+                      </div>
+                    </div>
+                  `;
+                  document.body.appendChild(modal.firstElementChild!);
+                }}
+                className="text-white/60 text-sm hover:text-white transition-colors"
+              >
+                ביטול עסקה
+              </button>
             </div>
             <p className="text-white/60 text-sm pt-4">
               © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>

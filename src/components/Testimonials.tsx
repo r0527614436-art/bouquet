@@ -66,9 +66,9 @@ const Testimonials = () => {
     <section className="py-12 md:py-20 bg-[#11150d]" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile Layout */}
-        <div className="md:hidden flex flex-col items-center">
+        <div className="md:hidden flex flex-col items-center pt-8">
           {/* Title - Above testimonial on mobile */}
-          <div className="relative mb-8 text-center">
+          <div className="relative mb-8 text-center h-[180px] flex items-center justify-center">
             <h2 className="font-allura text-[50px] font-light text-muted-foreground/40 leading-none select-none" style={{ transform: 'translate(10px, -5px)' }}>
               recommen<br/>dations
             </h2>
