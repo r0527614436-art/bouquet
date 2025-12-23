@@ -309,8 +309,8 @@ const Index = () => {
             />
           </div>
           
-          {/* Subtitle at bottom center */}
-          <div className="absolute bottom-24 left-0 right-0 flex flex-col items-center px-4">
+          {/* Subtitle at bottom center - moved higher on mobile */}
+          <div className="absolute bottom-32 md:bottom-24 left-0 right-0 flex flex-col items-center px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
               textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
             }}>יופי, אומנות ויוקרה נפגשים.</p>
@@ -385,15 +385,15 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
             {/* Images - Right Side (below text on mobile) */}
-            <div className="flex md:hidden gap-3 items-center flex-shrink-0 w-full justify-center flex-wrap">
-              {/* Mobile: All same size with rounded corners */}
-              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+            <div className="flex md:hidden gap-2 items-stretch flex-shrink-0 w-full justify-center">
+              {/* Mobile: All same size in a row with rounded corners */}
+              <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+              <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="w-28 h-28 rounded-2xl overflow-hidden">
+              <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -530,7 +530,7 @@ const Index = () => {
               direction: ltr;
             }
           `}</style>
-          <div className="diagonal-scroll-container flex gap-4">
+          <div className="diagonal-scroll-container flex gap-2 md:gap-4">
             {[...Array(2)].map((_, setIndex) => 
               [
                 '/lovable-uploads/about-scroll-1.jpg',
@@ -548,7 +548,7 @@ const Index = () => {
                 '/lovable-uploads/about-scroll-13.jpg',
                 '/lovable-uploads/about-scroll-14.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg" style={{ width: '280px', height: '380px' }}>
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-[100px] h-[140px] md:w-[280px] md:h-[380px]">
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
@@ -621,8 +621,8 @@ const Index = () => {
                 </div>
               </Link>)}
           </div>
-          {/* Mobile: Vertical stacked layout */}
-          <div className="md:hidden flex flex-col gap-4 w-full mt-8 px-4">
+          {/* Mobile: Vertical stacked layout - no gaps, connected */}
+          <div className="md:hidden flex flex-col gap-0 w-full mt-8">
             {[{
               img: '/lovable-uploads/catalog-engagement.png',
               title: 'זרי אירוסין'
@@ -635,7 +635,7 @@ const Index = () => {
             }, {
               img: '/lovable-uploads/catalog-hair.png',
               title: 'קישוטי שיער'
-            }].map((item, idx) => <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[16/9] rounded-2xl">
+            }].map((item, idx) => <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[16/9]">
                 <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-4">
                   <h3 className="font-gloria font-bold text-2xl text-white text-center">{item.title}</h3>
@@ -652,23 +652,23 @@ const Index = () => {
             {/* Left Side - Sticky Title */}
             <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit z-20">
               <div className="relative flex justify-center lg:justify-start">
-                <div className="relative text-right">
-                <h2 className="font-allura text-[75px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
+                <div className="relative text-center md:text-right">
+                <h2 className="font-allura text-[45px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
                     Work process
                   </h2>
-                  <h2 className="font-synopsis text-[65px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] right-4 -translate-y-1/2 leading-none whitespace-nowrap">
+                  <h2 className="font-synopsis text-[40px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] left-1/2 md:left-auto md:right-4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
               </div>
             </div>
 
-            {/* Right Side - Content */}
-            <div className="space-y-12 max-w-md lg:mr-auto">
+            {/* Right Side - Content - Centered on mobile */}
+            <div className="space-y-12 max-w-md lg:mr-auto mx-auto md:mx-0">
               {/* Step 01 */}
-              <div className="space-y-4">
+              <div className="space-y-4 text-center md:text-right">
                 <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
                   <span className="font-synopsis font-normal text-4xl">01</span>
                 </div>
@@ -681,7 +681,7 @@ const Index = () => {
               </div>
 
               {/* Step 02 */}
-              <div className="space-y-4">
+              <div className="space-y-4 text-center md:text-right">
                 <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#314020' }}>
                   <span className="font-synopsis font-normal text-4xl">02</span>
                 </div>
@@ -694,7 +694,7 @@ const Index = () => {
               </div>
 
               {/* Step 03 */}
-              <div className="space-y-4">
+              <div className="space-y-4 text-center md:text-right">
                 <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#11150D' }}>
                   <span className="font-synopsis font-normal text-4xl">03</span>
                 </div>
@@ -725,23 +725,24 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Mobile: Title on top, form, then contact info */}
           <div className="flex flex-col md:flex-row gap-12 items-start">
-            {/* Left Side - Title and Contact Info */}
-            <div className="w-full md:w-1/2 text-right flex flex-col justify-start pt-12">
+            {/* Left Side - Title and Contact Info (desktop) */}
+            <div className="w-full md:w-1/2 text-center md:text-right flex flex-col justify-start pt-12">
               {/* Title with layered effect */}
               <div className="relative mb-12">
-              <h2 className="font-allura text-[95px] md:text-[105px] font-light text-[#314020]/40 opacity-60 leading-none select-none" style={{
+              <h2 className="font-allura text-[60px] md:text-[105px] font-light text-[#314020]/40 opacity-60 leading-none select-none" style={{
                   transform: 'translate(15px, -10px)'
                 }}>
                   Contact us
                 </h2>
-                <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
+                <h2 className="font-synopsis text-[50px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 left-1/2 md:left-auto md:right-0 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none">
                   צור קשר
                 </h2>
               </div>
 
-              {/* Contact Information */}
-              <div className="space-y-6 mt-10">
+              {/* Contact Information - Hidden on mobile, shown after form */}
+              <div className="hidden md:block space-y-6 mt-10">
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <MapPin className="h-6 w-6 text-[#314020]" />
                   <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]">
@@ -815,6 +816,30 @@ const Index = () => {
                   בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
                 </p>
               </form>
+              
+              {/* Mobile: Contact info under form */}
+              <div className="md:hidden space-y-4 mt-8 px-8">
+                <div className="flex items-center justify-center gap-3 text-lg">
+                  <MapPin className="h-5 w-5 text-[#314020]" />
+                  <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
+                    שערי תשובה 14 - מודיעין עלית
+                  </button>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 text-lg">
+                  <Mail className="h-5 w-5 text-[#314020]" />
+                  <a href="mailto:R0527614436@GMAIL.COM" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
+                    R0527614436@GMAIL.COM
+                  </a>
+                </div>
+                
+                <div className="flex items-center justify-center gap-3 text-lg">
+                  <Phone className="h-5 w-5 text-[#314020]" />
+                  <a href="tel:0527614436" className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
+                    0527614436
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -76,63 +76,72 @@ const SideNavigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation - Hamburger Only */}
+      {/* Mobile Navigation - Hamburger Only - No border, green stripes */}
       <div className="md:hidden fixed top-4 right-4 z-50">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="w-12 h-12 bg-[#11150d] rounded-full flex items-center justify-center shadow-lg"
+          className="w-12 h-12 flex items-center justify-center"
           aria-label="תפריט"
         >
           <div className="flex flex-col gap-1.5 relative w-6 h-5">
-            <div className={`absolute w-6 h-0.5 bg-white transition-all duration-300 ${
-              isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
+            <div className={`absolute w-6 h-0.5 bg-[#314020] transition-all duration-300 ${
+              isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45 bg-white' : 'top-0'
             }`}></div>
-            <div className={`absolute top-1/2 -translate-y-1/2 w-6 h-0.5 bg-white transition-all duration-300 ${
+            <div className={`absolute top-1/2 -translate-y-1/2 w-6 h-0.5 bg-[#314020] transition-all duration-300 ${
               isMenuOpen ? 'opacity-0' : 'opacity-100'
             }`}></div>
-            <div className={`absolute w-6 h-0.5 bg-white transition-all duration-300 ${
-              isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
+            <div className={`absolute w-6 h-0.5 bg-[#314020] transition-all duration-300 ${
+              isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45 bg-white' : 'bottom-0'
             }`}></div>
           </div>
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - Full screen, no WhatsApp, dots between items */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-[#11150d] z-40 flex flex-col items-center justify-center">
-          <nav className="flex flex-col items-center gap-8">
+          {/* Close button */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-4 right-4 text-white text-3xl"
+            aria-label="סגור תפריט"
+          >
+            ×
+          </button>
+          <nav className="flex flex-col items-center">
             {[
-              { num: '01', label: 'בית', href: '/' },
-              { num: '02', label: 'אודות', href: '/about' },
-              { num: '03', label: 'קטלוג', href: '/catalog' },
-              { num: '04', label: 'צור קשר', href: '/contact' }
-            ].map((item) => (
-              <Link
-                key={item.num}
-                to={item.href}
-                className="flex items-center gap-4 cursor-pointer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
-                }}
-              >
-                <span className="font-ploni-aaa font-light text-white text-xl">
-                  {item.num}
-                </span>
-                <div className="w-2 h-2 rounded-full bg-[#89a86c]"></div>
-                <span className="font-ploni-aaa font-medium text-white text-2xl hover:text-[#89a86c] transition-colors">
-                  {item.label}
-                </span>
-              </Link>
+              { label: 'בית', href: '/' },
+              { label: 'אודות', href: '/about' },
+              { label: 'קטלוג', href: '/catalog' },
+              { label: 'צור קשר', href: '/contact' }
+            ].map((item, index, arr) => (
+              <div key={item.label} className="flex flex-col items-center">
+                <Link
+                  to={item.href}
+                  className="cursor-pointer py-4"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setTimeout(() => window.scrollTo({ top: 0, behavior: 'instant' }), 0);
+                  }}
+                >
+                  <span className="font-ploni-aaa font-medium text-white text-2xl hover:text-[#89a86c] transition-colors">
+                    {item.label}
+                  </span>
+                </Link>
+                {/* Dot separator between items */}
+                {index < arr.length - 1 && (
+                  <div className="w-2 h-2 rounded-full bg-[#89a86c] my-4"></div>
+                )}
+              </div>
             ))}
           </nav>
         </div>
       )}
 
-      {/* WhatsApp Button - Overlapping sidebar */}
+      {/* WhatsApp Button - Hidden when mobile menu is open */}
       <div 
         className={`fixed bottom-8 z-[60] transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'right-72 md:right-72' : 'right-4 md:right-12'
+          isMenuOpen ? 'hidden md:block md:right-72' : 'right-4 md:right-12'
         }`}
       >
         <a
