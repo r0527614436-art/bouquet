@@ -37,7 +37,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [entrance, setEntrance] = useState('');
   const [floor, setFloor] = useState('');
   const [dressColor, setDressColor] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'cash_bit' | 'credit' | 'transfer' | ''>('');
+  const [paymentMethod, setPaymentMethod] = useState<'cash' | 'bit' | 'credit' | 'transfer' | ''>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -303,14 +303,25 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 <div className="flex gap-2 md:gap-3 justify-end flex-wrap">
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod('cash_bit')}
+                    onClick={() => setPaymentMethod('cash')}
                     className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
-                      paymentMethod === 'cash_bit' 
+                      paymentMethod === 'cash' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
-                    מזומן / ביט
+                    מזומן
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('bit')}
+                    className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                      paymentMethod === 'bit' 
+                        ? 'bg-[#314020] text-white border-[#314020]' 
+                        : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
+                    }`}
+                  >
+                    ביט
                   </button>
                   <button
                     type="button"
@@ -337,9 +348,14 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 </div>
 
                 {/* Payment Method Info */}
-                {paymentMethod === 'cash_bit' && (
+                {paymentMethod === 'cash' && (
                   <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום במזומן או בביט: 052-7669989</p>
+                    <p className="font-synopsis text-[#314020] text-sm md:text-base">ניצור איתכם קשר בהמשך לצורך התשלום</p>
+                  </div>
+                )}
+                {paymentMethod === 'bit' && (
+                  <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
+                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בביט: 052-7669989</p>
                   </div>
                 )}
                 {paymentMethod === 'credit' && (
