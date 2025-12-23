@@ -310,7 +310,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     onClick={() => setPaymentMethod('transfer')}
                     className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'transfer' 
-                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
+                        ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
@@ -321,7 +321,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     onClick={() => setPaymentMethod('credit')}
                     className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'credit' 
-                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
+                        ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
@@ -332,7 +332,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     onClick={() => setPaymentMethod('bit')}
                     className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'bit' 
-                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
+                        ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
@@ -343,7 +343,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     onClick={() => setPaymentMethod('cash')}
                     className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'cash' 
-                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
+                        ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
