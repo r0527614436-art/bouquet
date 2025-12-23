@@ -133,26 +133,26 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-5xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[95vh] md:overflow-visible max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F0E8' }}>
+      <DialogContent className="w-[95vw] max-w-4xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[95vh] md:overflow-visible max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F0E8' }}>
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
         </VisuallyHidden>
         
-        <div className="relative p-4 md:p-6 flex flex-col h-full">
+        <form onSubmit={handleSubmit} className="relative p-6 md:p-8 flex flex-col">
           {/* Category Title */}
           {category && (
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-synopsis font-bold text-center text-[#314020] mb-4 md:mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-synopsis font-bold text-center text-[#314020] mb-6 md:mb-8">
               {category.name}
             </h2>
           )}
           
-          {/* Form and Image Layout - Image on left for desktop */}
-          <div className="flex flex-col md:flex-row gap-4 md:gap-6 flex-1">
-            {/* Image Section - Left side on desktop */}
-            <div className="md:w-[30%] flex flex-col items-center order-first md:order-first">
-              <p className="font-synopsis text-lg md:text-2xl lg:text-3xl text-[#314020] mb-2 font-bold">דגם {item.price || item.title}</p>
-              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-none md:flex-1">
+          {/* Form and Image Layout */}
+          <div className="flex flex-col md:flex-row-reverse gap-6 md:gap-10">
+            {/* Image Section - Right side on desktop */}
+            <div className="md:w-[35%] flex flex-col items-center order-first md:order-none">
+              <p className="font-synopsis text-xl md:text-2xl text-[#314020] mb-3 font-bold">דגם {item.price || item.title}</p>
+              <div className="w-full rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-[380px] aspect-[4/5]">
                 <img 
                   src={item.image_url} 
                   alt={item.title}
@@ -161,17 +161,17 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
             </div>
 
-            {/* Form Section - Right side on desktop */}
-            <div className="md:w-[70%] flex flex-col gap-1.5 md:gap-2">
+            {/* Form Section - Left side on desktop */}
+            <div className="md:w-[65%] flex flex-col gap-3 md:gap-4">
               {/* Row 1: Names */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="שם פרטי"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -181,21 +181,21 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="שם משפחה"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
               </div>
 
               {/* Row 2: Phones */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="tel"
                     placeholder="פלאפון זמין ביום האירוע:"
                     value={phoneEvent}
                     onChange={(e) => setPhoneEvent(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -205,20 +205,20 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="פלאפון מחותנת:"
                     value={phoneMechuteNet}
                     onChange={(e) => setPhoneMechuteNet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
 
               {/* Row 3: Event Date and Day */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="date"
                     placeholder="תאריך האירוע:"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -228,54 +228,64 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="יום בשבוע:"
                     value={dayOfWeek}
                     onChange={(e) => setDayOfWeek(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
 
-              {/* Address Section Title */}
-              <p className="text-right font-synopsis text-[#314020] font-bold text-sm md:text-base mt-1 max-w-md md:mr-auto">כתובת למשלוח:</p>
-
-              {/* Row 4: City and Street */}
-              <div className="grid grid-cols-2 gap-2 md:gap-3 max-w-md md:mr-auto">
+              {/* Row 4: Address and City */}
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="border-b border-[#314020]">
+                  <Input
+                    type="text"
+                    placeholder="כתובת למשלוח:"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                  />
+                </div>
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="עיר:"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
+              </div>
+
+              {/* Row 5: Street and Building */}
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="רחוב:"
                     value={street}
                     onChange={(e) => setStreet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                  />
+                </div>
+                <div className="border-b border-[#314020]">
+                  <Input
+                    type="text"
+                    placeholder="בנין :"
+                    value={building}
+                    onChange={(e) => setBuilding(e.target.value)}
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
 
-              {/* Row 5: Building, Entrance, Floor */}
-              <div className="grid grid-cols-3 gap-2 md:gap-3 max-w-md md:mr-auto">
-                <div className="border-b border-[#314020]">
-                  <Input
-                    type="text"
-                    placeholder="בנין:"
-                    value={building}
-                    onChange={(e) => setBuilding(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
-                  />
-                </div>
+              {/* Row 6: Entrance and Floor */}
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="כניסה:"
                     value={entrance}
                     onChange={(e) => setEntrance(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -284,54 +294,43 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="קומה:"
                     value={floor}
                     onChange={(e) => setFloor(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
 
-              {/* Row 6: Dress Color */}
-              <div className="border-b border-[#314020] max-w-md md:mr-auto">
+              {/* Row 7: Dress Color */}
+              <div className="border-b border-[#314020]">
                 <Input
                   type="text"
                   placeholder="גוון שמלה:"
                   value={dressColor}
                   onChange={(e) => setDressColor(e.target.value)}
-                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
                 />
               </div>
 
-              {/* Payment Method - aligned with image */}
-              <div className="pt-2 md:pt-3 max-w-md md:mr-auto">
-                <p className="text-right font-synopsis text-[#314020] mb-2 text-sm md:text-base">אמצעי תשלום:</p>
-                <div className="flex gap-2 md:gap-3 justify-end flex-wrap">
+              {/* Payment Method */}
+              <div className="pt-2">
+                <p className="text-right font-synopsis text-[#314020] mb-3 text-base">אמצעי תשלום:</p>
+                <div className="flex gap-3 justify-end flex-wrap">
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod('cash')}
-                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
-                      paymentMethod === 'cash' 
-                        ? 'bg-[#314020] text-white border-[#314020]' 
+                    onClick={() => setPaymentMethod('transfer')}
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
+                      paymentMethod === 'transfer' 
+                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
-                    מזומן
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setPaymentMethod('bit')}
-                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
-                      paymentMethod === 'bit' 
-                        ? 'bg-[#314020] text-white border-[#314020]' 
-                        : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
-                    }`}
-                  >
-                    ביט
+                    העברה
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('credit')}
-                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'credit' 
-                        ? 'bg-[#314020] text-white border-[#314020]' 
+                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
@@ -339,57 +338,60 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   </button>
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod('transfer')}
-                    className={`px-3 md:px-5 py-1 md:py-1.5 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
-                      paymentMethod === 'transfer' 
-                        ? 'bg-[#314020] text-white border-[#314020]' 
+                    onClick={() => setPaymentMethod('bit')}
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
+                      paymentMethod === 'bit' 
+                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
-                    העברה
+                    ביט
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPaymentMethod('cash')}
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
+                      paymentMethod === 'cash' 
+                        ? 'bg-[#6B8E4E] text-white border-[#6B8E4E]' 
+                        : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
+                    }`}
+                  >
+                    מזומן
                   </button>
                 </div>
 
                 {/* Payment Method Info */}
                 {paymentMethod === 'cash' && (
-                  <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">ניצור איתכם קשר בהמשך לצורך התשלום</p>
-                  </div>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                 )}
                 {paymentMethod === 'bit' && (
-                  <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בביט: 052-7669989</p>
-                  </div>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">לתשלום בביט: 052-7669989</p>
                 )}
                 {paymentMethod === 'credit' && (
-                  <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">ניצור איתכם קשר בהמשך לצורך התשלום</p>
-                  </div>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                 )}
                 {paymentMethod === 'transfer' && (
-                  <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בהעברה בנקאית: בנק מזרחי טפחות, סניף 722, חשבון 102979 ע"ש רובינשטיין רחל</p>
-                  </div>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">בנק מזרחי טפחות (20) סניף 722  חשבון 102979 ע"ש רחל רובינשטיין</p>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Submit Button - Below the image and form */}
-          <form onSubmit={handleSubmit} className="pt-3 md:pt-4">
+          {/* Submit Button */}
+          <div className="pt-6 md:pt-8">
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-6 md:px-8 py-2 md:py-3 flex items-center justify-center gap-2 md:gap-3 font-synopsis font-light mx-auto disabled:opacity-50"
+              className="bg-[#6B8E4E] hover:bg-[#5a7a40] text-white rounded-full px-10 md:px-14 py-3 md:py-4 flex items-center justify-center gap-3 font-synopsis font-bold mx-auto disabled:opacity-50 text-xl md:text-2xl"
             >
-              <span className="text-base md:text-xl">{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-              <img src={orderArrow} alt="" className="h-4 w-4 md:h-6 md:w-6" />
+              <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
+              <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
             </Button>
-            <p className="text-center text-xs md:text-sm text-gray-600 mt-2 md:mt-3" dir="rtl">
+            <p className="text-center text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
               בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
             </p>
-          </form>
-        </div>
+          </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
