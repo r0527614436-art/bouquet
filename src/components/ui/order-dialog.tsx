@@ -149,10 +149,10 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           
           {/* Form and Image Layout */}
           <div className="flex flex-col md:flex-row gap-6 md:gap-10">
-            {/* Image Section - Right side on desktop */}
-            <div className="md:w-[35%] flex flex-col items-center order-first md:order-none">
+            {/* Image Section - Left side on desktop */}
+            <div className="md:w-[35%] flex flex-col items-center order-first md:order-none self-stretch">
               <p className="font-synopsis text-xl md:text-2xl text-[#314020] mb-3 font-bold">דגם {item.price || item.title}</p>
-              <div className="w-full rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-[380px] aspect-[4/5]">
+              <div className="w-full rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-none md:flex-1">
                 <img 
                   src={item.image_url} 
                   alt={item.title}
