@@ -353,34 +353,34 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
                 {/* Payment Method Info */}
                 {paymentMethod === 'cash' && (
-                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">ניצור איתכם קשר בהמשך לצורך התשלום</p>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                 )}
                 {paymentMethod === 'bit' && (
-                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">לתשלום בביט: 052-7669989</p>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-right">לתשלום בביט: 052-7669989</p>
                 )}
                 {paymentMethod === 'credit' && (
-                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">ניצור איתכם קשר בהמשך לצורך התשלום</p>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                 )}
                 {paymentMethod === 'transfer' && (
-                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-center">בנק מזרחי טפחות (20) סניף 722  חשבון 102979 ע"ש רחל רובינשטיין</p>
+                  <p className="mt-3 font-synopsis text-[#314020] text-sm text-right">בנק מזרחי טפחות (20) סניף 722  חשבון 102979 ע"ש רחל רובינשטיין</p>
                 )}
+
+                {/* Submit Button - Below payment buttons */}
+                <div className="pt-4 md:pt-6">
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 md:px-12 py-2.5 md:py-3 flex items-center justify-center gap-3 font-synopsis font-bold disabled:opacity-50 text-lg md:text-xl mr-auto"
+                  >
+                    <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
+                    <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
+                  </Button>
+                  <p className="text-right text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
+                    בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="pt-6 md:pt-8">
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-10 md:px-14 py-3 md:py-4 flex items-center justify-center gap-3 font-synopsis font-bold mx-auto disabled:opacity-50 text-xl md:text-2xl"
-            >
-              <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-              <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
-            </Button>
-            <p className="text-center text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
-              בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
-            </p>
           </div>
         </form>
       </DialogContent>
