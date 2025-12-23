@@ -366,16 +366,16 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 )}
 
                 {/* Submit Button - Below payment buttons */}
-                <div className="pt-4 md:pt-6">
+                <div className="pt-4 md:pt-6 flex flex-col items-center">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 md:px-12 py-2.5 md:py-3 flex items-center justify-center gap-3 font-synopsis font-bold disabled:opacity-50 text-lg md:text-xl mr-auto"
+                    className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 md:px-12 py-2.5 md:py-3 flex items-center justify-center gap-3 font-synopsis font-bold disabled:opacity-50 text-lg md:text-xl"
                   >
                     <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
                     <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
                   </Button>
-                  <p className="text-right text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
+                  <p className="text-center text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
                     בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
                   </p>
                 </div>
