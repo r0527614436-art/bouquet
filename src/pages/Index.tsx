@@ -388,13 +388,13 @@ const Index = () => {
             <div className="flex md:hidden gap-2 items-stretch flex-shrink-0 w-full justify-center">
               {/* Mobile: With special rounded corners and object positioning */}
               <div className="flex-1 max-w-[110px] aspect-square rounded-br-[30px] rounded-tl-lg rounded-bl-lg rounded-tr-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
               </div>
               <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 max-w-[110px] aspect-square rounded-tl-[30px] rounded-tr-lg rounded-bl-lg rounded-br-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               </div>
             </div>
             {/* Desktop: Original layout */}
