@@ -386,27 +386,27 @@ const Index = () => {
           <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
             {/* Images - Right Side (below text on mobile) */}
             <div className="flex md:hidden gap-2 items-stretch flex-shrink-0 w-full justify-center">
-              {/* Mobile: All same size in a row with rounded corners */}
-              <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              {/* Mobile: With special rounded corners and object positioning */}
+              <div className="flex-1 max-w-[110px] aspect-square rounded-tr-[30px] rounded-tl-lg rounded-bl-lg rounded-br-lg overflow-hidden">
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               </div>
               <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
-                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <div className="flex-1 max-w-[110px] aspect-square rounded-bl-[30px] rounded-tl-lg rounded-tr-lg rounded-br-lg overflow-hidden">
+                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
               </div>
             </div>
             {/* Desktop: Original layout */}
             <div className="hidden md:flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
-              <div className="w-24 h-24 md:w-48 md:h-48 rounded-tr-[40px] md:rounded-tr-[60px] rounded-tl-lg rounded-bl-lg rounded-br-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+              <div className="w-24 h-24 md:w-48 md:h-48 rounded-br-[40px] md:rounded-br-[60px] rounded-bl-lg overflow-hidden">
+                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-2xl overflow-hidden">
                 <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
-              <div className="w-36 h-48 md:w-64 md:h-[450px] rounded-bl-[120px] md:rounded-bl-[180px] rounded-tr-2xl rounded-br-2xl rounded-tl-2xl overflow-hidden flex-shrink-0">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
+              <div className="w-36 h-48 md:w-64 md:h-[450px] rounded-tl-[120px] md:rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
+                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
