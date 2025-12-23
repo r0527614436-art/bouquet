@@ -37,7 +37,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [entrance, setEntrance] = useState('');
   const [floor, setFloor] = useState('');
   const [dressColor, setDressColor] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'bit' | 'credit' | 'transfer' | ''>('');
+  const [paymentMethod, setPaymentMethod] = useState<'cash_bit' | 'credit' | 'transfer' | ''>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -303,14 +303,14 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 <div className="flex gap-2 md:gap-3 justify-end flex-wrap">
                   <button
                     type="button"
-                    onClick={() => setPaymentMethod('bit')}
+                    onClick={() => setPaymentMethod('cash_bit')}
                     className={`px-3 md:px-6 py-1.5 md:py-2 rounded-full border-2 font-synopsis transition-all text-sm md:text-base ${
-                      paymentMethod === 'bit' 
+                      paymentMethod === 'cash_bit' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
                     }`}
                   >
-                    ביט
+                    מזומן / ביט
                   </button>
                   <button
                     type="button"
@@ -337,19 +337,19 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 </div>
 
                 {/* Payment Method Info */}
-                {paymentMethod === 'bit' && (
+                {paymentMethod === 'cash_bit' && (
                   <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בביט: 052-7614436</p>
+                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום במזומן או בביט: 052-7669989</p>
                   </div>
                 )}
                 {paymentMethod === 'credit' && (
                   <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום באשראי יש ליצור קשר בטלפון 052-7614436</p>
+                    <p className="font-synopsis text-[#314020] text-sm md:text-base">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                   </div>
                 )}
                 {paymentMethod === 'transfer' && (
                   <div className="mt-2 md:mt-3 p-2 md:p-3 bg-white/50 rounded-lg text-right">
-                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בהעברה בנקאית: בנק הפועלים, סניף 123, חשבון 456789</p>
+                    <p className="font-synopsis text-[#314020] text-sm md:text-base">לתשלום בהעברה בנקאית: בנק מזרחי טפחות, סניף 722, חשבון 102979 ע"ש רובינשטיין רחל</p>
                   </div>
                 )}
               </div>
