@@ -147,12 +147,12 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
             </h2>
           )}
           
-          {/* Form and Image Layout - Image on right for desktop */}
-          <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-6 flex-1">
-            {/* Image Section - Right side on desktop */}
-            <div className="md:w-2/5 flex flex-col items-center order-first md:order-none">
+          {/* Form and Image Layout - Image on left for desktop */}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 flex-1">
+            {/* Image Section - Left side on desktop */}
+            <div className="md:w-1/3 flex flex-col items-center order-first md:order-first">
               <p className="font-synopsis text-lg md:text-2xl lg:text-3xl text-[#314020] mb-2 font-bold">דגם {item.price || item.title}</p>
-              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-none">
+              <div className="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-[400px]">
                 <img 
                   src={item.image_url} 
                   alt={item.title}
@@ -161,17 +161,17 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
             </div>
 
-            {/* Form Section - Left side on desktop */}
-            <form onSubmit={handleSubmit} className="md:w-3/5 flex flex-col gap-2 md:gap-3">
+            {/* Form Section - Right side on desktop */}
+            <form onSubmit={handleSubmit} className="md:w-2/3 flex flex-col gap-1.5 md:gap-2">
               {/* Row 1: Names */}
-              <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="שם פרטי"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                     required
                   />
                 </div>
@@ -181,21 +181,21 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="שם משפחה"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                     required
                   />
                 </div>
               </div>
 
               {/* Row 2: Phones */}
-              <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="tel"
                     placeholder="פלאפון זמין ביום האירוע:"
                     value={phoneEvent}
                     onChange={(e) => setPhoneEvent(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                     required
                   />
                 </div>
@@ -205,20 +205,20 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="פלאפון מחותנת:"
                     value={phoneMechuteNet}
                     onChange={(e) => setPhoneMechuteNet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
               {/* Row 3: Event Date and Day */}
-              <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="date"
                     placeholder="תאריך האירוע:"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                     required
                   />
                 </div>
@@ -228,20 +228,23 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="יום בשבוע:"
                     value={dayOfWeek}
                     onChange={(e) => setDayOfWeek(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
+              {/* Address Section Title */}
+              <p className="text-right font-synopsis text-[#314020] font-bold text-sm md:text-base mt-1">כתובת למשלוח:</p>
+
               {/* Row 4: City and Street */}
-              <div className="grid grid-cols-2 gap-2 md:gap-4">
+              <div className="grid grid-cols-2 gap-2 md:gap-3">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="עיר:"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -250,20 +253,20 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="רחוב:"
                     value={street}
                     onChange={(e) => setStreet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
               </div>
 
               {/* Row 5: Building, Entrance, Floor */}
-              <div className="grid grid-cols-3 gap-2 md:gap-4">
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
                 <div className="border-b border-[#314020]">
                   <Input
                     type="text"
                     placeholder="בנין:"
                     value={building}
                     onChange={(e) => setBuilding(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -272,7 +275,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="כניסה:"
                     value={entrance}
                     onChange={(e) => setEntrance(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -281,7 +284,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="קומה:"
                     value={floor}
                     onChange={(e) => setFloor(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                   />
                 </div>
               </div>
@@ -293,7 +296,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   placeholder="גוון שמלה:"
                   value={dressColor}
                   onChange={(e) => setDressColor(e.target.value)}
-                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-1 md:py-2 text-sm md:text-base font-synopsis placeholder:text-gray-500"
+                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-0.5 md:py-1 h-7 md:h-8 text-sm md:text-base font-synopsis placeholder:text-gray-500"
                 />
               </div>
 
