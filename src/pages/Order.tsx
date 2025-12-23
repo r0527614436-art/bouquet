@@ -24,6 +24,7 @@ const Order = () => {
   const [eventDate, setEventDate] = useState<Date>();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +44,7 @@ const Order = () => {
       const orderData = {
         customer_name: name,
         phone: phone,
+        email: email || null,
         event_date: eventDate.toISOString(),
         items: JSON.stringify(items),
         created_at: new Date().toISOString()
@@ -97,7 +99,8 @@ const Order = () => {
           <CheckCircle className="h-16 w-16 text-[#314020] mx-auto mb-4" />
           <h2 className="text-2xl font-synopsis font-light text-[#314020] mb-4">ההזמנה נשלחה בהצלחה!</h2>
           <p className="text-gray-600 mb-6 font-ploni-aaa">
-            הזמנתך התקבלה! ניצור איתכם קשר בהקדם
+            הזמנתך התקבלה! ניצור איתכם קשר בהקדם.
+            {email && <span className="block mt-2 text-sm">אישור הזמנה נשלח ל-{email}</span>}
           </p>
           <div className="space-y-3">
             <Link to="/catalog" className="block">
@@ -196,6 +199,20 @@ const Order = () => {
               placeholder="050-0000000"
               className="border-[#314020]/30 focus:border-[#314020] rounded-lg font-ploni-aaa"
               required
+            />
+          </div>
+
+          {/* Email */}
+          <div className="space-y-2">
+            <Label htmlFor="email" className="font-ploni-aaa text-[#314020]">אימייל (לקבלת אישור הזמנה)</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@email.com"
+              className="border-[#314020]/30 focus:border-[#314020] rounded-lg font-ploni-aaa"
+              dir="ltr"
             />
           </div>
 

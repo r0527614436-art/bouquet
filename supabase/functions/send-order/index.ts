@@ -8,6 +8,7 @@ const corsHeaders = {
 interface OrderData {
   customer_name: string;
   phone: string;
+  email: string | null;
   event_date: string;
   items: string;
   created_at: string;
@@ -34,6 +35,32 @@ async function sendEmail(subject: string, html: string) {
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`Resend error: ${res.status} ${text}`);
+  }
+
+  return await res.json();
+}
+
+async function sendEmailToCustomer(toEmail: string, subject: string, html: string) {
+  const apiKey = Deno.env.get('RESEND_API_KEY');
+  if (!apiKey) throw new Error('Missing RESEND_API_KEY');
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: "בוקט עיצוב אירועים <onboarding@resend.dev>",
+      to: [toEmail],
+      subject,
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Resend customer email error: ${res.status} ${text}`);
   }
 
   return await res.json();
@@ -130,9 +157,110 @@ const handler = async (req: Request): Promise<Response> => {
       </html>
     `;
 
-    console.log('Sending email...');
+    console.log('Sending admin email...');
     const emailResponse = await sendEmail(subject, emailContent);
-    console.log('Email sent successfully:', emailResponse);
+    console.log('Admin email sent successfully:', emailResponse);
+
+    // Send confirmation email to customer if email provided
+    if (orderData.email) {
+      console.log('Sending customer confirmation email to:', orderData.email);
+      
+      const customerEmailContent = `
+        <!DOCTYPE html>
+        <html dir="rtl" lang="he">
+        <head>
+          <meta charset="UTF-8">
+          <style>
+            body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 20px; direction: rtl; text-align: right; }
+            .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+            .header { background: #314020; color: white; padding: 30px; text-align: center; }
+            .header h1 { margin: 0; font-size: 28px; }
+            .header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 16px; }
+            .content { padding: 30px; text-align: right; }
+            .thank-you { background: linear-gradient(135deg, #f8fbf4 0%, #e8f5e0 100%); border-radius: 12px; padding: 25px; margin-bottom: 25px; text-align: center; }
+            .thank-you h2 { color: #314020; margin: 0 0 10px 0; font-size: 22px; }
+            .thank-you p { color: #666; margin: 0; }
+            .info-box { background: #fafafa; border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid #e8e8e8; }
+            .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+            .info-row:last-child { border-bottom: none; }
+            .label { color: #888; font-size: 14px; }
+            .value { color: #314020; font-weight: bold; }
+            .items-section { margin-top: 25px; }
+            .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #314020; padding-bottom: 10px; }
+            .item-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 12px; background: #fafafa; }
+            .item-card img { width: 80px; height: 100px; object-fit: cover; border-radius: 8px; }
+            .item-card h3 { margin: 0; color: #314020; font-size: 16px; }
+            .item-card p { margin: 5px 0 0 0; color: #666; font-size: 14px; }
+            .footer { background: #f8fbf4; padding: 25px; text-align: center; border-top: 1px solid #e8e8e8; }
+            .footer p { color: #666; margin: 5px 0; font-size: 14px; }
+            .footer a { color: #314020; text-decoration: none; font-weight: bold; }
+            .contact-info { background: #314020; color: white; padding: 15px; border-radius: 8px; margin-top: 15px; }
+            .contact-info a { color: white; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>בוקט - עיצוב אירועים</h1>
+              <p>אישור הזמנה</p>
+            </div>
+            <div class="content">
+              <div class="thank-you">
+                <h2>תודה על הזמנתך, ${orderData.customer_name}! 💐</h2>
+                <p>הזמנתך התקבלה בהצלחה וניצור איתך קשר בהקדם</p>
+              </div>
+              
+              <div class="info-box">
+                <div class="info-row">
+                  <span class="label">תאריך האירוע:</span>
+                  <span class="value">${new Date(orderData.event_date).toLocaleDateString('he-IL')}</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">תאריך הזמנה:</span>
+                  <span class="value">${new Date(orderData.created_at).toLocaleDateString('he-IL')}</span>
+                </div>
+              </div>
+              
+              <div class="items-section">
+                <h3 class="items-title">הפריטים שהזמנת:</h3>
+                ${items.map((item: any) => `
+                  <div class="item-card">
+                    <table style="width: 100%;">
+                      <tr>
+                        <td style="width: 100px; vertical-align: top;">
+                          <img src="${item.image_url}" alt="${item.title}">
+                        </td>
+                        <td style="vertical-align: top; padding-right: 15px;">
+                          <h3>דגם ${item.title}</h3>
+                          <p>כמות: ${item.quantity}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                `).join('')}
+              </div>
+              
+              <div class="contact-info">
+                <p style="margin: 0; font-size: 14px;">יש לך שאלות? צרו קשר:</p>
+                <p style="margin: 8px 0 0 0;"><a href="tel:052-7614436">052-7614436</a></p>
+              </div>
+            </div>
+            <div class="footer">
+              <p><strong>בוקט - רוחי רובינשטיין</strong></p>
+              <p>עיצוב אירועים | זרי כלה | זרי אירוסין | כסאות כלה</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      try {
+        const customerEmailResponse = await sendEmailToCustomer(orderData.email, 'אישור הזמנה - בוקט עיצוב אירועים', customerEmailContent);
+        console.log('Customer confirmation email sent successfully:', customerEmailResponse);
+      } catch (customerEmailError) {
+        console.error('Failed to send customer email, but admin email was sent:', customerEmailError);
+      }
+    }
 
     return new Response(JSON.stringify({ success: true, message: 'Order received and email sent successfully' }), {
       status: 200,
