@@ -139,7 +139,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
         </div>
 
         {/* Gallery Carousel Section - Smaller on mobile */}
-        <div className="relative overflow-hidden pb-4 md:pb-8 w-full h-[300px] md:h-[580px] flex items-center justify-center">
+        <div className="relative overflow-hidden pb-4 md:pb-8 w-full h-[300px] md:h-[650px] flex items-center justify-center">
           <div className="overflow-hidden w-full md:max-w-[90vw] mx-auto">
             <div className="overflow-visible w-full px-2 md:px-4" ref={galleryEmblaRef}>
               <div className="flex items-center justify-center">
@@ -182,16 +182,16 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                       key={`scroll-${idx}`} 
                       className="flex-shrink-0 transition-all duration-500 ease-out relative"
                       style={{
-                        width: isSelected ? 'calc(50vw)' : 'calc(25vw)',
-                        height: isSelected ? '250px' : '175px',
-                        marginLeft: idx === 0 ? '0' : '-40px',
+                        width: isSelected ? 'calc(30vw)' : 'calc(18vw)',
+                        maxWidth: isSelected ? '400px' : '250px',
+                        marginLeft: idx === 0 ? '0' : '-30px',
                         zIndex: isSelected ? 20 : 10
                       }}
                     >
                       <div 
                         className="relative w-full overflow-hidden shadow-2xl transition-all duration-500 hidden md:block"
                         style={{
-                          height: isSelected ? '500px' : '350px',
+                          height: isSelected ? '550px' : '400px',
                           marginTop: isSelected ? '0' : '75px',
                           borderRadius: isSelected ? '100px 100px 16px 16px' : '16px'
                         }}
