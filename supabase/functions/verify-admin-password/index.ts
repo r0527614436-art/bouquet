@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,28 +25,19 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Get the admin password from database
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    // Get the admin password from environment secret
+    const adminPassword = Deno.env.get("ADMIN_PASSWORD");
     
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-    
-    const { data, error } = await supabase
-      .from('admin_settings')
-      .select('password')
-      .eq('id', 1)
-      .single();
-
-    if (error) {
-      console.error("Error fetching password from database:", error);
+    if (!adminPassword) {
+      console.error("ADMIN_PASSWORD secret not set");
       return new Response(
-        JSON.stringify({ success: false, error: "Failed to verify password" }),
+        JSON.stringify({ success: false, error: "Admin password not configured" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
     // Verify the password
-    const isValid = password === data.password;
+    const isValid = password === adminPassword;
     
     console.log("Password verification attempt:", isValid ? "success" : "failed");
 
