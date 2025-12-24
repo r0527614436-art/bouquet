@@ -53,9 +53,10 @@ const PrivacyPolicy = () => {
       {/* Hero Section */}
       <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover"
           style={{ 
             backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
+            backgroundPosition: 'center 75%'
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#F8FBF4]" />
