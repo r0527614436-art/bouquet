@@ -60,7 +60,7 @@ const PasswordDialog = ({ showPasswordDialog, setShowPasswordDialog }: PasswordD
       if (data?.success) {
         toast({
           title: "הצלחה",
-          description: "הסיסמה שונתה בהצלחה. שים לב: ייתכן שיהיה צורך לעדכן את ה-ADMIN_PASSWORD secret בהגדרות."
+          description: "הסיסמה שונתה בהצלחה"
         });
         setShowPasswordDialog(false);
         setCurrentPassword('');
