@@ -108,27 +108,31 @@ const Catalog = () => {
         title: "מוריד קטלוג",
         description: "הקטלוג יורד כעת..."
       });
-      const {
-        data
-      } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-bouquet.html');
+      
+      // Get the PDF file URL
+      const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
+      
       if (data?.publicUrl) {
-        // Force download with proper file name
-        const res = await fetch(data.publicUrl, {
-          cache: 'no-store'
-        });
-        if (!res.ok) throw new Error('Failed to fetch catalog file');
-        const htmlText = await res.text();
-        const blob = new Blob([htmlText], {
-          type: 'text/html;charset=utf-8'
-        });
-        const blobUrl = URL.createObjectURL(blob);
+        // Check if file exists
+        const res = await fetch(data.publicUrl, { method: 'HEAD' });
+        if (!res.ok) {
+          toast({
+            title: "שגיאה",
+            description: "קובץ הקטלוג לא נמצא. אנא פנה למנהל האתר.",
+            variant: "destructive"
+          });
+          return;
+        }
+        
+        // Download the PDF
         const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = 'קטלוג בוקט.html';
+        link.href = data.publicUrl;
+        link.download = 'קטלוג בוקט.pdf';
+        link.target = '_blank';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl);
+        
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג הורד בהצלחה"
@@ -350,13 +354,13 @@ const Catalog = () => {
             <Button onClick={() => {
             console.log('Selecting all categories');
             setSelectedCategory('');
-          }} className={`${selectedCategory === '' ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}>
+          }} className={`${selectedCategory === '' ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300 font-synopsis font-medium`}>
               הכל
             </Button>
             {categories.map(category => <Button key={category.id} onClick={() => {
             console.log('Selecting category:', category.name, category.id);
             setSelectedCategory(category.id);
-          }} className={`${selectedCategory === category.id ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300`}>
+          }} className={`${selectedCategory === category.id ? 'bg-[#6b8e6b] shadow-[0_0_20px_rgba(107,142,107,0.7)]' : 'bg-[#3d5a3d]'} hover:bg-[#6b8e6b] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(107,142,107,0.7)] transition-all duration-300 font-synopsis font-medium`}>
                 {category.name}
               </Button>)}
           </div>

@@ -12,6 +12,7 @@ import ItemManagement from '@/components/admin/ItemManagement';
 import PasswordDialog from '@/components/admin/PasswordDialog';
 import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement';
 import TestimonialsManagement from '@/components/admin/TestimonialsManagement';
+import CatalogPDFManagement from '@/components/admin/CatalogPDFManagement';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
 
 interface Category {
@@ -114,6 +115,7 @@ const Admin = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <HomepageSlideManagement />
         <TestimonialsManagement />
+        <CatalogPDFManagement />
         <CategoryOrderManagement 
           categories={categories} 
           onReorderCategories={handleReorderCategories}
