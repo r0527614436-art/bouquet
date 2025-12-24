@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { Loader2 } from 'lucide-react';
 
 interface AdminAuthProps {
   onLogin: () => void;
@@ -11,19 +13,50 @@ interface AdminAuthProps {
 
 const AdminAuth = ({ onLogin }: AdminAuthProps) => {
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleLogin = () => {
-    if (password === '0527614436') {
-      onLogin();
-      sessionStorage.setItem('admin_auth', password);
-      setPassword('');
-    } else {
+  const handleLogin = async () => {
+    if (!password.trim()) {
       toast({
         title: "שגיאה",
-        description: "סיסמה שגויה",
+        description: "אנא הכנס סיסמה",
         variant: "destructive"
       });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      // Verify password via edge function
+      const { data, error } = await supabase.functions.invoke('verify-admin-password', {
+        body: { password }
+      });
+
+      if (error) throw error;
+
+      if (data?.success) {
+        onLogin();
+        // Store a session token instead of the actual password
+        sessionStorage.setItem('admin_auth', 'authenticated');
+        setPassword('');
+      } else {
+        toast({
+          title: "שגיאה",
+          description: "סיסמה שגויה",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast({
+        title: "שגיאה",
+        description: "אירעה שגיאה באימות. נסה שוב.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -51,12 +84,21 @@ const AdminAuth = ({ onLogin }: AdminAuthProps) => {
             onChange={(e) => setPassword(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
             className="text-center"
+            disabled={isLoading}
           />
           <Button 
             onClick={handleLogin}
             className="w-full bg-pink-600 hover:bg-pink-700"
+            disabled={isLoading}
           >
-            כניסה
+            {isLoading ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                מאמת...
+              </>
+            ) : (
+              'כניסה'
+            )}
           </Button>
           <Link to="/" className="block text-center text-pink-600 hover:text-pink-700">
             חזרה לעמוד הראשי

@@ -40,7 +40,7 @@ const Admin = () => {
 
   useEffect(() => {
     const auth = sessionStorage.getItem('admin_auth');
-    if (auth === '0527614436') {
+    if (auth === 'authenticated') {
       setIsAuthenticated(true);
     }
   }, []);
