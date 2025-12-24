@@ -27,47 +27,53 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Verify current password first
-    const adminPassword = Deno.env.get("ADMIN_PASSWORD");
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     
-    if (!adminPassword) {
-      console.error("ADMIN_PASSWORD secret not set");
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Get current password from database
+    const { data: settings, error: fetchError } = await supabase
+      .from('admin_settings')
+      .select('password')
+      .eq('id', 1)
+      .single();
+
+    if (fetchError) {
+      console.error("Error fetching current password:", fetchError);
       return new Response(
-        JSON.stringify({ success: false, error: "Admin password not configured" }),
+        JSON.stringify({ success: false, error: "Failed to verify current password" }),
         { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    if (currentPassword !== adminPassword) {
+    // Verify current password
+    if (currentPassword !== settings.password) {
+      console.log("Current password verification failed");
       return new Response(
         JSON.stringify({ success: false, error: "Current password is incorrect" }),
         { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
-    // Update the password in the database (for persistence - will need to be synced with secret)
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-    
-    // Store the new password in admin_settings table
-    const { error: dbError } = await supabase
+    // Update password in database
+    const { error: updateError } = await supabase
       .from('admin_settings')
-      .upsert([{ id: 1, password: newPassword, updated_at: new Date().toISOString() }]);
+      .update({ password: newPassword, updated_at: new Date().toISOString() })
+      .eq('id', 1);
 
-    if (dbError) {
-      console.error("Error updating password in database:", dbError);
-      throw dbError;
+    if (updateError) {
+      console.error("Error updating password:", updateError);
+      return new Response(
+        JSON.stringify({ success: false, error: "Failed to update password" }),
+        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
     }
 
     console.log("Admin password updated successfully");
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: "Password updated. Note: You may need to update the ADMIN_PASSWORD secret for permanent changes." 
-      }),
+      JSON.stringify({ success: true, message: "Password updated successfully" }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: any) {
