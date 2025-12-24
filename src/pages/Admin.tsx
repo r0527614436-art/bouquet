@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
 import AdminAuth from '@/components/admin/AdminAuth';
 import CategoryManagement from '@/components/admin/CategoryManagement';
 import CategoryOrderManagement from '@/components/admin/CategoryOrderManagement';
 import ItemManagement from '@/components/admin/ItemManagement';
-import PasswordDialog from '@/components/admin/PasswordDialog';
 import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement';
 import TestimonialsManagement from '@/components/admin/TestimonialsManagement';
 import CatalogPDFManagement from '@/components/admin/CatalogPDFManagement';
@@ -33,7 +31,6 @@ interface Item {
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   
   // Auto-generate PDF when admin panel is accessed
   useAutoGeneratePDF();
@@ -100,13 +97,7 @@ const Admin = () => {
             
             <h1 className="text-2xl font-bold text-pink-800">פאנל ניהול</h1>
             
-            <Button
-              onClick={() => setShowPasswordDialog(true)}
-              variant="outline"
-              className="border-pink-600 text-pink-600 hover:bg-pink-50"
-            >
-              שנה סיסמה
-            </Button>
+            <div></div>
           </div>
         </div>
       </header>
@@ -124,10 +115,6 @@ const Admin = () => {
         <ItemManagement categories={categories as any} items={items} />
       </main>
 
-      <PasswordDialog 
-        showPasswordDialog={showPasswordDialog} 
-        setShowPasswordDialog={setShowPasswordDialog} 
-      />
     </div>
   );
 };
