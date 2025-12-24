@@ -113,9 +113,9 @@ const Catalog = () => {
       const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
       
       if (data?.publicUrl) {
-        // Check if file exists
-        const res = await fetch(data.publicUrl, { method: 'HEAD' });
-        if (!res.ok) {
+        // Fetch the file as blob to force download
+        const response = await fetch(data.publicUrl);
+        if (!response.ok) {
           toast({
             title: "שגיאה",
             description: "קובץ הקטלוג לא נמצא. אנא פנה למנהל האתר.",
@@ -124,14 +124,17 @@ const Catalog = () => {
           return;
         }
         
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        
         // Download the PDF
         const link = document.createElement('a');
-        link.href = data.publicUrl;
+        link.href = url;
         link.download = 'קטלוג בוקט.pdf';
-        link.target = '_blank';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
         
         toast({
           title: "הורדת קטלוג",
