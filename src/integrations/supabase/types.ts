@@ -24,7 +24,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: number
-          password?: string
+          password: string
           updated_at?: string
         }
         Update: {
