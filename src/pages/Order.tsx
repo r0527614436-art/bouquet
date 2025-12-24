@@ -81,7 +81,7 @@ const Order = () => {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-center">
-          <h2 className="text-2xl font-synopsis font-light text-[#314020] mb-4">אין פריטים בעגלה</h2>
+          <h2 className="text-2xl font-ploni-aaa font-bold text-[#314020] mb-4">אין פריטים בעגלה</h2>
           <Link to="/catalog">
             <Button className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8">
               חזרה לקטלוג
@@ -97,7 +97,7 @@ const Order = () => {
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-md mx-auto text-center bg-white p-8 rounded-2xl shadow-md">
           <CheckCircle className="h-16 w-16 text-[#314020] mx-auto mb-4" />
-          <h2 className="text-2xl font-synopsis font-light text-[#314020] mb-4">ההזמנה נשלחה בהצלחה!</h2>
+          <h2 className="text-2xl font-ploni-aaa font-bold text-[#314020] mb-4">ההזמנה נשלחה בהצלחה!</h2>
           <p className="text-gray-600 mb-6 font-ploni-aaa">
             הזמנתך התקבלה! ניצור איתכם קשר בהקדם.
             {email && <span className="block mt-2 text-sm">אישור הזמנה נשלח ל-{email}</span>}
@@ -149,13 +149,13 @@ const Order = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-synopsis font-light text-[#314020] mb-2">פרטי הזמנה</h1>
-          <p className="text-gray-600 font-ploni-aaa">אנא מלאו את הפרטים להשלמת ההזמנה</p>
+          <h1 className="text-3xl font-ploni-aaa font-bold text-[#314020] mb-2">פרטי הזמנה</h1>
+          <p className="text-gray-600 font-ploni-aaa font-light">אנא מלאו את הפרטים להשלמת ההזמנה</p>
         </div>
 
         {/* Order Summary */}
         <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
-          <h2 className="text-xl font-synopsis font-light text-[#314020] mb-4">סיכום הזמנה</h2>
+          <h2 className="text-xl font-ploni-aaa font-bold text-[#314020] mb-4">סיכום הזמנה</h2>
           <div className="space-y-3">
             {items.map((item) => (
               <div key={item.id} className="flex items-center justify-between">
@@ -173,7 +173,7 @@ const Order = () => {
 
         {/* Order Form */}
         <form onSubmit={handleSubmitOrder} className="bg-white rounded-2xl shadow-md p-8 space-y-6">
-          <h2 className="text-xl font-synopsis font-light text-[#314020] mb-4">פרטי המזמין</h2>
+          <h2 className="text-xl font-ploni-aaa font-bold text-[#314020] mb-4">פרטי המזמין</h2>
           
           {/* Name */}
           <div className="space-y-2">
@@ -248,7 +248,7 @@ const Order = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-synopsis font-light text-lg py-6 rounded-full transition-all duration-300 disabled:opacity-50"
+            className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-bold text-lg py-6 rounded-full transition-all duration-300 disabled:opacity-50"
           >
             {isSubmitting ? 'שולח...' : 'שליחת הזמנה'}
           </Button>
