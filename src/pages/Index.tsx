@@ -15,7 +15,6 @@ import downloadArrow from '@/assets/download-arrow.png';
 import heroImage from '@/assets/hero-image.jpg';
 import arrowCircleGreen from '@/assets/arrow-circle-new.png';
 import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
-import { downloadCatalogPDF } from '@/utils/catalogPdf';
 import { useToast } from '@/hooks/use-toast';
 import { AnimatePresence } from 'framer-motion';
 interface HomepageSlide {
@@ -189,11 +188,42 @@ const Index = () => {
   });
   const handleDownloadCatalog = async () => {
     try {
-      await downloadCatalogPDF(items, categories);
       toast({
-        title: "הקטלוג הורד בהצלחה",
-        description: "הקטלוג הדיגיטלי שלנו הורד למחשב שלך"
+        title: "מוריד קטלוג",
+        description: "הקטלוג יורד כעת..."
       });
+      
+      // Get the PDF file URL from storage
+      const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
+      
+      if (data?.publicUrl) {
+        // Check if file exists
+        const res = await fetch(data.publicUrl, { method: 'HEAD' });
+        if (!res.ok) {
+          toast({
+            title: "שגיאה",
+            description: "קובץ הקטלוג לא נמצא. אנא פנה למנהל האתר.",
+            variant: "destructive"
+          });
+          return;
+        }
+        
+        // Download the PDF
+        const link = document.createElement('a');
+        link.href = data.publicUrl;
+        link.download = 'קטלוג בוקט.pdf';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        toast({
+          title: "הורדת קטלוג",
+          description: "הקטלוג הורד בהצלחה"
+        });
+      } else {
+        throw new Error('No catalog URL available');
+      }
     } catch (error) {
       console.error('Error downloading catalog:', error);
       toast({
