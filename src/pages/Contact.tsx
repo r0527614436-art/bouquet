@@ -75,7 +75,7 @@ const Contact = () => {
       <div className="relative min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
         backgroundSize: '120%',
-        backgroundPosition: 'center 55%'
+        backgroundPosition: 'center 75%'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
