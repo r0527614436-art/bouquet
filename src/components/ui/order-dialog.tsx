@@ -171,7 +171,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="שם פרטי"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -181,7 +181,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="שם משפחה"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -195,7 +195,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="פלאפון זמין ביום האירוע:"
                     value={phoneEvent}
                     onChange={(e) => setPhoneEvent(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -205,7 +205,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="פלאפון מחותנת:"
                     value={phoneMechuteNet}
                     onChange={(e) => setPhoneMechuteNet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
@@ -218,7 +218,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="תאריך האירוע:"
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                     required
                   />
                 </div>
@@ -228,7 +228,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="יום בשבוע:"
                     value={dayOfWeek}
                     onChange={(e) => setDayOfWeek(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
@@ -244,7 +244,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="עיר:"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -253,7 +253,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="רחוב:"
                     value={street}
                     onChange={(e) => setStreet(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
@@ -266,7 +266,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="בנין:"
                     value={building}
                     onChange={(e) => setBuilding(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -275,7 +275,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="כניסה (אופציונלי):"
                     value={entrance}
                     onChange={(e) => setEntrance(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
                 <div className="border-b border-[#314020]">
@@ -284,7 +284,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     placeholder="קומה:"
                     value={floor}
                     onChange={(e) => setFloor(e.target.value)}
-                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
               </div>
@@ -297,7 +297,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   placeholder="גוון שמלה:"
                   value={dressColor}
                   onChange={(e) => setDressColor(e.target.value)}
-                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-synopsis placeholder:text-[#314020]/70"
+                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                 />
               </div>
 
