@@ -121,11 +121,11 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                     {/* Title overlay - only show on selected */}
                     {isSelected && (
                       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6 text-center">
-                        <h3 className="font-ploni-aaa font-semibold text-white text-xl md:text-2xl font-bold drop-shadow-2xl">
+                        <h3 className="font-synopsis text-white text-xl md:text-2xl font-bold drop-shadow-2xl">
                           {slide.title}
                         </h3>
                         {slide.description && (
-                          <p className="font-ploni-aaa font-medium text-white/90 text-xs md:text-sm mt-2 drop-shadow-lg">
+                          <p className="font-synopsis font-medium text-white/90 text-xs md:text-sm mt-2 drop-shadow-lg">
                             {slide.description}
                           </p>
                         )}
@@ -216,7 +216,7 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
                         style={{
                           height: isSelected ? '250px' : '175px',
                           marginTop: isSelected ? '0' : '37px',
-                          borderRadius: isSelected ? '50px 50px 8px 8px' : '8px'
+                          borderRadius: isSelected ? '50px 50px 24px 24px' : '8px 8px 24px 24px'
                         }}
                       >
                         <img 
