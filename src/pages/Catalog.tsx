@@ -220,19 +220,17 @@ const Catalog = () => {
     }
   });
 
-  // Sort items by category order and display_order
+  // Sort items by category order and title number
   const sortedItems = items.sort((a, b) => {
     const categoryIndexA = categories.findIndex(cat => cat.id === a.category_id);
     const categoryIndexB = categories.findIndex(cat => cat.id === b.category_id);
 
-    // If categories are the same, sort by display_order then creation date
+    // If categories are the same, sort by title number
     if (categoryIndexA === categoryIndexB) {
-      // First by display_order
-      if (a.display_order !== b.display_order) {
-        return (a.display_order || 0) - (b.display_order || 0);
-      }
-      // Then by creation date
-      return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+      // Extract numeric part from title (e.g., "101" -> 101)
+      const numA = parseInt(a.title.replace(/\D/g, ''), 10) || 0;
+      const numB = parseInt(b.title.replace(/\D/g, ''), 10) || 0;
+      return numA - numB;
     }
 
     // Sort by category order
