@@ -217,7 +217,7 @@ const About = () => {
                 '/lovable-uploads/about-scroll-27.jpg',
                 '/lovable-uploads/about-scroll-28.jpg'
               ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 48px) / 3)', height: 'calc(((100vw - 48px) / 3) * 1.5)' }}>
+                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{ width: 'calc((100vw - 48px) / 4)', height: 'calc(((100vw - 48px) / 4) * 1.5)' }}>
                   <img 
                     src={img} 
                     alt={`עיצוב פרחים ${idx + 1}`} 
