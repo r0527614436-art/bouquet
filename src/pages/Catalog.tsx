@@ -16,6 +16,7 @@ interface Category {
   subtitle: string | null;
   allow_cart: boolean;
   created_at: string;
+  filters?: string[];
 }
 interface CatalogItem {
   id: string;
@@ -26,9 +27,11 @@ interface CatalogItem {
   created_at: string;
   subcategory?: string;
   display_order?: number;
+  filter_tags?: any;
 }
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedFilter, setSelectedFilter] = useState<string>('');
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [orderDialogOpen, setOrderDialogOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
@@ -218,7 +221,28 @@ const Catalog = () => {
     // Sort by category order
     return categoryIndexA - categoryIndexB;
   });
-  const filteredItems = selectedCategory ? sortedItems.filter(item => item.category_id === selectedCategory) : sortedItems;
+  
+  // Get available filters for selected category
+  const availableFilters = selectedCategory 
+    ? (categories.find(c => c.id === selectedCategory)?.filters as string[] || [])
+    : [];
+  
+  // Filter items by category and then by filter if selected
+  const filteredItems = (() => {
+    let items = selectedCategory 
+      ? sortedItems.filter(item => item.category_id === selectedCategory) 
+      : sortedItems;
+    
+    if (selectedFilter && selectedCategory) {
+      items = items.filter(item => {
+        const itemTags = Array.isArray(item.filter_tags) ? item.filter_tags : [];
+        return itemTags.includes(selectedFilter);
+      });
+    }
+    
+    return items;
+  })();
+  
   const handleAddToCart = (item: CatalogItem) => {
     addToCart({
       id: item.id,
@@ -352,22 +376,55 @@ const Catalog = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Category Filter */}
-        <div className="mb-6 mt-12">
+        <div className="mb-4 mt-12">
           <div className="flex flex-wrap justify-center gap-3">
             <Button onClick={() => {
             console.log('Selecting all categories');
             setSelectedCategory('');
+            setSelectedFilter('');
           }} className={`${selectedCategory === '' ? 'bg-[#4a6b4a] shadow-[0_0_20px_rgba(49,64,32,0.7)]' : 'bg-[#314020]'} hover:bg-[#4a6b4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(49,64,32,0.7)] transition-all duration-300 font-synopsis text-base font-bold`}>
               הכל
             </Button>
             {categories.map(category => <Button key={category.id} onClick={() => {
             console.log('Selecting category:', category.name, category.id);
             setSelectedCategory(category.id);
+            setSelectedFilter('');
           }} className={`${selectedCategory === category.id ? 'bg-[#4a6b4a] shadow-[0_0_20px_rgba(49,64,32,0.7)]' : 'bg-[#314020]'} hover:bg-[#4a6b4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(49,64,32,0.7)] transition-all duration-300 font-synopsis text-base font-bold`}>
                 {category.name}
               </Button>)}
           </div>
         </div>
+
+        {/* Filter Buttons - only show when category is selected and has filters */}
+        {selectedCategory && availableFilters.length > 0 && (
+          <div className="mb-6">
+            <div className="flex flex-wrap justify-center gap-2">
+              <button
+                onClick={() => setSelectedFilter('')}
+                className={`px-4 py-1.5 rounded-full text-sm font-ploni-aaa transition-all duration-200 border ${
+                  selectedFilter === '' 
+                    ? 'bg-white border-[#314020] text-[#314020] shadow-md' 
+                    : 'bg-transparent border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
+                }`}
+              >
+                הכל
+              </button>
+              {availableFilters.map(filter => (
+                <button
+                  key={filter}
+                  onClick={() => setSelectedFilter(filter)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-ploni-aaa transition-all duration-200 border ${
+                    selectedFilter === filter 
+                      ? 'bg-white border-[#314020] text-[#314020] shadow-md' 
+                      : 'bg-transparent border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Items Grid */}
         <div className="space-y-12">
