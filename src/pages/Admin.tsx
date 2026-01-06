@@ -71,7 +71,7 @@ const Admin = () => {
       const { data, error } = await supabase
         .from('catalog_items')
         .select('*')
-        .order('created_at', { ascending: true });
+        .order('display_order', { ascending: true });
       if (error) throw error;
       return data || [];
     },
