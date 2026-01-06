@@ -654,8 +654,8 @@ const Index = () => {
                 </div>
               </Link>)}
           </div>
-          {/* Mobile: Vertical stacked layout with rounded corners and spacing */}
-          <div className="md:hidden flex flex-col gap-2 w-full mt-8 px-4">
+          {/* Mobile: Vertical stacked layout with rounded corners */}
+          <div className="md:hidden flex flex-col gap-0 w-full mt-8 px-4">
             {[{
               img: '/lovable-uploads/catalog-engagement.png',
               title: 'זרי אירוסין'
@@ -668,10 +668,10 @@ const Index = () => {
             }, {
               img: '/lovable-uploads/catalog-hair.png',
               title: 'קישוטי שיער'
-            }].map((item, idx) => <Link key={idx} to="/catalog" className="group relative overflow-hidden aspect-[16/9] rounded-2xl">
+            }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-center justify-center">
-                  <h3 className="font-gloria font-bold text-3xl text-white text-center">{item.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
+                  <h3 className="font-synopsis font-bold text-3xl text-white text-center">{item.title}</h3>
                 </div>
               </Link>)}
           </div>
