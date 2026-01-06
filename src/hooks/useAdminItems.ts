@@ -8,7 +8,7 @@ export const useAdminItems = () => {
   const queryClient = useQueryClient();
 
   const createItemMutation = useMutation({
-    mutationFn: async (item: { category_id: string; title?: string; price: string; image_url: string; subcategory?: string }) => {
+    mutationFn: async (item: { category_id: string; title?: string; price: string; image_url: string; filter_tags?: Record<string, string> }) => {
       const { data, error } = await supabase
         .from('catalog_items')
         .insert([{ ...item, title: item.title || '' }])
@@ -34,7 +34,7 @@ export const useAdminItems = () => {
   });
 
   const updateItemMutation = useMutation({
-    mutationFn: async ({ id, ...item }: { id: string; category_id: string; title: string; price: string; image_url: string; subcategory?: string }) => {
+    mutationFn: async ({ id, ...item }: { id: string; category_id: string; title: string; price: string; image_url: string; filter_tags?: Record<string, string> }) => {
       const { data, error } = await supabase
         .from('catalog_items')
         .update(item)
@@ -108,11 +108,11 @@ export const useAdminItems = () => {
     }
   });
 
-  const removeFromSubcategoryMutation = useMutation({
+  const clearItemFiltersMutation = useMutation({
     mutationFn: async (id: string) => {
       const { data, error } = await supabase
         .from('catalog_items')
-        .update({ subcategory: null })
+        .update({ filter_tags: {} })
         .eq('id', id)
         .select()
         .single();
@@ -124,13 +124,13 @@ export const useAdminItems = () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       toast({
         title: "הצלחה",
-        description: "הפריט הוסר מתת-הקטגוריה בהצלחה"
+        description: "המסננים הוסרו מהפריט בהצלחה"
       });
     },
     onError: () => {
       toast({
         title: "שגיאה",
-        description: "שגיאה בהסרת הפריט מתת-הקטגוריה"
+        description: "שגיאה בהסרת המסננים מהפריט"
       });
     }
   });
@@ -140,6 +140,6 @@ export const useAdminItems = () => {
     updateItemMutation,
     deleteItemMutation,
     updateItemOrderMutation,
-    removeFromSubcategoryMutation
+    clearItemFiltersMutation
   };
 };
