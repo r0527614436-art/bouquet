@@ -213,9 +213,10 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
       const hasOption = currentTags[filterName] === option;
 
       if (shouldHaveOption && !hasOption) {
+        // Clear all existing filter tags and set only the new one (item can only belong to one filter)
         await updateItemFilterTagsMutation.mutateAsync({
           itemId: item.id,
-          filterTags: { ...currentTags, [filterName]: option }
+          filterTags: { [filterName]: option }
         });
       } else if (!shouldHaveOption && hasOption) {
         const newTags = { ...currentTags };
