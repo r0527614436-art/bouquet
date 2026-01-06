@@ -434,7 +434,7 @@ const Catalog = () => {
                       }`}
                     >
                       <span>{selectedOption || filter.name}</span>
-                      <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} strokeWidth={1.5} />
+                      <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} strokeWidth={1} />
                     </button>
                     
                     {/* Dropdown Menu */}
