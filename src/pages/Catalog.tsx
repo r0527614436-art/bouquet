@@ -25,7 +25,6 @@ interface CatalogItem {
   price: string | null;
   category_id: string;
   created_at: string;
-  subcategory?: string;
   display_order?: number;
   filter_tags?: any;
 }
@@ -433,103 +432,74 @@ const Catalog = () => {
           const categoryItems = sortedItems.filter(item => item.category_id === category.id);
           if (categoryItems.length === 0) return null;
 
-          // Group items by subcategory
-          const groupedItems = categoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
-            const key = item.subcategory || 'main';
-            if (!groups[key]) groups[key] = [];
-            groups[key].push(item);
-            return groups;
-          }, {});
           return <div key={category.id} className="space-y-8">
                   <div className="text-center">
                     <h2 className="text-2xl font-ploni-aaa font-black text-gray-800">{category.name}</h2>
                     {category.subtitle && <p className="text-gray-600 mt-1 font-ploni-aaa font-light">{category.subtitle}</p>}
                   </div>
                   
-                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
-                      {subcategoryKey !== 'main' && <div className="text-center">
-                          <h3 className="text-lg font-ploni-aaa font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
-                            {subcategoryKey}
-                          </h3>
-                        </div>}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                        {items.map(item => {
-                  return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => handleImageClick(item)}>
-                              <div className="aspect-[3/4] overflow-hidden relative">
-                                <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
-                                
-                                 {/* Hover overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  {item.title && <div className="p-4">
-                                      <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
-                                    </div>}
-                                </div>
-                                
-                                {/* Bottom overlay with price and button */}
-                                {category.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer bg-[#314020]">
-                                    {item.price && <>
-                                        <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
-                                        <div className="h-6 w-px bg-white/40 mx-3"></div>
-                                      </>}
-                                    <div className="flex items-center gap-3 mr-auto">
-                                      <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
-                                      <img src={arrowSimple} alt="" className="h-7 w-7" />
-                                    </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    {categoryItems.map(item => {
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => handleImageClick(item)}>
+                            <div className="aspect-[3/4] overflow-hidden relative">
+                              <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
+                              
+                               {/* Hover overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {item.title && <div className="p-4">
+                                    <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
                                   </div>}
                               </div>
-                            </div>;
-                })}
-                      </div>
-                    </div>)}
+                              
+                              {/* Bottom overlay with price and button */}
+                              {category.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer bg-[#314020]">
+                                  {item.price && <>
+                                      <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
+                                      <div className="h-6 w-px bg-white/40 mx-3"></div>
+                                    </>}
+                                  <div className="flex items-center gap-3 mr-auto">
+                                    <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
+                                    <img src={arrowSimple} alt="" className="h-7 w-7" />
+                                  </div>
+                                </div>}
+                            </div>
+                          </div>;
+                    })}
+                  </div>
                 </div>;
-        })) : (/* Show single category items with subcategories */
+        })) : (/* Show single category items - filtered by selected filter if any */
         (() => {
           const selectedCategoryData = categories.find(c => c.id === selectedCategory);
-          const selectedCategoryItems = sortedItems.filter(item => item.category_id === selectedCategory);
-
-          // Group items by subcategory
-          const groupedItems = selectedCategoryItems.reduce((groups: Record<string, CatalogItem[]>, item) => {
-            const key = item.subcategory || 'main';
-            if (!groups[key]) groups[key] = [];
-            groups[key].push(item);
-            return groups;
-          }, {});
+          
           return <div className="space-y-8">
-                  {Object.entries(groupedItems).map(([subcategoryKey, items]) => <div key={subcategoryKey} className="space-y-4">
-                      {subcategoryKey !== 'main' && <div className="text-center">
-                          <h3 className="text-lg font-ploni-aaa font-semibold text-gray-600 bg-gray-50 py-2 px-4 rounded-lg inline-block">
-                            {subcategoryKey}
-                          </h3>
-                        </div>}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                        {items.map(item => {
-                  return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => handleImageClick(item)}>
-                              <div className="aspect-[3/4] overflow-hidden relative">
-                                <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
-                                
-                                {/* Hover overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                  {item.title && <div className="p-4">
-                                      <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
-                                    </div>}
-                                </div>
-                                
-                                {/* Bottom overlay with price and button */}
-                                {selectedCategoryData?.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 bg-[#3d5a3d] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]">
-                                    {item.price && <>
-                                        <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
-                                        <div className="h-6 w-px bg-white/40 mx-3"></div>
-                                      </>}
-                                    <div className="flex items-center gap-3 mr-auto">
-                                      <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
-                                      <img src={arrowSimple} alt="" className="h-7 w-7" />
-                                    </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    {filteredItems.map(item => {
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => handleImageClick(item)}>
+                            <div className="aspect-[3/4] overflow-hidden relative">
+                              <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
+                              
+                              {/* Hover overlay */}
+                              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {item.title && <div className="p-4">
+                                    <p className="text-white text-base font-synopsis font-light">דגם {item.title}</p>
                                   </div>}
                               </div>
-                            </div>;
-                })}
-                      </div>
-                    </div>)}
+                              
+                              {/* Bottom overlay with price and button */}
+                              {selectedCategoryData?.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 bg-[#314020] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]">
+                                  {item.price && <>
+                                      <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
+                                      <div className="h-6 w-px bg-white/40 mx-3"></div>
+                                    </>}
+                                  <div className="flex items-center gap-3 mr-auto">
+                                    <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
+                                    <img src={arrowSimple} alt="" className="h-7 w-7" />
+                                  </div>
+                                </div>}
+                            </div>
+                          </div>;
+                    })}
+                  </div>
                 </div>;
         })())}
         </div>

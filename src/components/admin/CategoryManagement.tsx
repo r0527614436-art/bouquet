@@ -13,7 +13,6 @@ interface Category {
   name: string;
   subtitle: string | null;
   allow_cart: boolean;
-  subcategories?: string[];
 }
 
 interface CategoryManagementProps {
@@ -27,8 +26,6 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
   const [newCategoryName, setNewCategoryName] = useState('');
   const [newCategorySubtitle, setNewCategorySubtitle] = useState('');
   const [newCategoryAllowCart, setNewCategoryAllowCart] = useState(true);
-  const [subcategories, setSubcategories] = useState<string[]>([]);
-  const [newSubcategory, setNewSubcategory] = useState('');
 
   const {
     createCategoryMutation,
@@ -41,8 +38,7 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
       createCategoryMutation.mutate({
         name: newCategoryName.trim(),
         subtitle: newCategorySubtitle.trim() || null,
-        allow_cart: newCategoryAllowCart,
-        subcategories: subcategories
+        allow_cart: newCategoryAllowCart
       });
       resetForm();
     }
@@ -53,7 +49,6 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
     setNewCategoryName(category.name);
     setNewCategorySubtitle(category.subtitle || '');
     setNewCategoryAllowCart(category.allow_cart);
-    setSubcategories(category.subcategories || []);
     setShowCategoryDialog(true);
   };
 
@@ -63,8 +58,7 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
         id: editingCategory.id,
         name: newCategoryName.trim(),
         subtitle: newCategorySubtitle.trim() || null,
-        allow_cart: newCategoryAllowCart,
-        subcategories: subcategories
+        allow_cart: newCategoryAllowCart
       });
       resetForm();
     }
@@ -94,8 +88,6 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
     setNewCategoryName('');
     setNewCategorySubtitle('');
     setNewCategoryAllowCart(true);
-    setSubcategories([]);
-    setNewSubcategory('');
     setShowCategoryDialog(false);
   };
 
@@ -204,87 +196,6 @@ const CategoryManagement = ({ categories, items }: CategoryManagementProps) => {
               <Label htmlFor="allowCart">אפשר הוספה לסל</Label>
             </div>
 
-            {/* Subcategories Management */}
-            <div className="space-y-4">
-              <Label className="text-sm font-medium">קטגוריות משנה</Label>
-              
-              {/* Add new subcategory */}
-              <div className="flex gap-2">
-                <Input
-                  value={newSubcategory}
-                  onChange={(e) => setNewSubcategory(e.target.value)}
-                  placeholder="הוסף קטגוריית משנה"
-                  className="flex-1"
-                />
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    if (newSubcategory.trim() && !subcategories.includes(newSubcategory.trim())) {
-                      setSubcategories([...subcategories, newSubcategory.trim()]);
-                      setNewSubcategory('');
-                    }
-                  }}
-                >
-                  הוסף
-                </Button>
-              </div>
-
-              {/* Existing subcategories */}
-              {subcategories.length > 0 && (
-                <div className="space-y-2">
-                  {subcategories.map((subcategory, index) => (
-                    <div key={index} className="flex items-center justify-between p-2 border rounded">
-                      <span className="text-sm">{subcategory}</span>
-                      <div className="flex gap-2">
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => {
-                            if (index > 0) {
-                              const newOrder = [...subcategories];
-                              [newOrder[index], newOrder[index - 1]] = [newOrder[index - 1], newOrder[index]];
-                              setSubcategories(newOrder);
-                            }
-                          }}
-                          disabled={index === 0}
-                        >
-                          ↑
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => {
-                            if (index < subcategories.length - 1) {
-                              const newOrder = [...subcategories];
-                              [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
-                              setSubcategories(newOrder);
-                            }
-                          }}
-                          disabled={index === subcategories.length - 1}
-                        >
-                          ↓
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => {
-                            setSubcategories(subcategories.filter((_, i) => i !== index));
-                          }}
-                        >
-                          ✕
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-            
             <div className="flex space-x-2 rtl:space-x-reverse">
               <Button
                 onClick={handleSaveCategory}
