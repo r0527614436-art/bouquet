@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download, MapPin, Mail, Phone } from 'lucide-react';
+import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download, MapPin, Mail, Phone, ChevronDown } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import arrowSimple from '@/assets/arrow-simple.png';
@@ -10,14 +10,21 @@ import { OrderDialog } from '@/components/ui/order-dialog';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
+
+interface FilterOption {
+  name: string;
+  options: string[];
+}
+
 interface Category {
   id: string;
   name: string;
   subtitle: string | null;
   allow_cart: boolean;
   created_at: string;
-  filters?: string[];
+  filters?: FilterOption[] | string[];
 }
+
 interface CatalogItem {
   id: string;
   title: string;
@@ -28,9 +35,20 @@ interface CatalogItem {
   display_order?: number;
   filter_tags?: any;
 }
+
+// Helper to normalize filters to new format
+const normalizeFilters = (filters: any): FilterOption[] => {
+  if (!filters || !Array.isArray(filters)) return [];
+  if (filters.length > 0 && typeof filters[0] === 'string') {
+    return filters.map((name: string) => ({ name, options: [] }));
+  }
+  return filters as FilterOption[];
+};
+
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedFilter, setSelectedFilter] = useState<string>('');
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({});
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [imageViewerOpen, setImageViewerOpen] = useState(false);
   const [orderDialogOpen, setOrderDialogOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
@@ -223,19 +241,22 @@ const Catalog = () => {
   
   // Get available filters for selected category
   const availableFilters = selectedCategory 
-    ? (categories.find(c => c.id === selectedCategory)?.filters as string[] || [])
+    ? normalizeFilters(categories.find(c => c.id === selectedCategory)?.filters)
     : [];
   
-  // Filter items by category and then by filter if selected
+  // Filter items by category and then by selected filter options
   const filteredItems = (() => {
     let items = selectedCategory 
       ? sortedItems.filter(item => item.category_id === selectedCategory) 
       : sortedItems;
     
-    if (selectedFilter && selectedCategory) {
+    // Apply all selected filters
+    if (selectedCategory && Object.keys(selectedFilters).length > 0) {
       items = items.filter(item => {
-        const itemTags = Array.isArray(item.filter_tags) ? item.filter_tags : [];
-        return itemTags.includes(selectedFilter);
+        const itemTags = item.filter_tags || {};
+        return Object.entries(selectedFilters).every(([filterName, option]) => {
+          return itemTags[filterName] === option;
+        });
       });
     }
     
@@ -380,47 +401,83 @@ const Catalog = () => {
             <Button onClick={() => {
             console.log('Selecting all categories');
             setSelectedCategory('');
-            setSelectedFilter('');
+            setSelectedFilters({});
           }} className={`${selectedCategory === '' ? 'bg-[#4a6b4a] shadow-[0_0_20px_rgba(49,64,32,0.7)]' : 'bg-[#314020]'} hover:bg-[#4a6b4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(49,64,32,0.7)] transition-all duration-300 font-synopsis text-base font-bold`}>
               הכל
             </Button>
             {categories.map(category => <Button key={category.id} onClick={() => {
             console.log('Selecting category:', category.name, category.id);
             setSelectedCategory(category.id);
-            setSelectedFilter('');
+            setSelectedFilters({});
           }} className={`${selectedCategory === category.id ? 'bg-[#4a6b4a] shadow-[0_0_20px_rgba(49,64,32,0.7)]' : 'bg-[#314020]'} hover:bg-[#4a6b4a] text-white rounded-full px-6 py-2 shadow-lg hover:shadow-[0_0_20px_rgba(49,64,32,0.7)] transition-all duration-300 font-synopsis text-base font-bold`}>
                 {category.name}
               </Button>)}
           </div>
         </div>
 
-        {/* Filter Buttons - only show when category is selected and has filters */}
+        {/* Filter Dropdowns - only show when category is selected and has filters */}
         {selectedCategory && availableFilters.length > 0 && (
           <div className="mb-6">
-            <div className="flex flex-wrap justify-center gap-2">
-              <button
-                onClick={() => setSelectedFilter('')}
-                className={`px-4 py-1.5 rounded-full text-sm font-ploni-aaa transition-all duration-200 border ${
-                  selectedFilter === '' 
-                    ? 'bg-white border-[#314020] text-[#314020] shadow-md' 
-                    : 'bg-transparent border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
-                }`}
-              >
-                הכל
-              </button>
-              {availableFilters.map(filter => (
-                <button
-                  key={filter}
-                  onClick={() => setSelectedFilter(filter)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-ploni-aaa transition-all duration-200 border ${
-                    selectedFilter === filter 
-                      ? 'bg-white border-[#314020] text-[#314020] shadow-md' 
-                      : 'bg-transparent border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
+            <div className="flex flex-wrap justify-center gap-3">
+              {availableFilters.map(filter => {
+                const isOpen = openDropdown === filter.name;
+                const selectedOption = selectedFilters[filter.name];
+                
+                return (
+                  <div key={filter.name} className="relative">
+                    <button
+                      onClick={() => setOpenDropdown(isOpen ? null : filter.name)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-ploni-aaa transition-all duration-200 border bg-white ${
+                        selectedOption 
+                          ? 'border-[#314020] text-[#314020] shadow-md' 
+                          : 'border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
+                      }`}
+                    >
+                      <span>{selectedOption || filter.name}</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    {isOpen && (
+                      <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[150px]">
+                        {/* Clear option */}
+                        {selectedOption && (
+                          <button
+                            onClick={() => {
+                              setSelectedFilters(prev => {
+                                const newFilters = { ...prev };
+                                delete newFilters[filter.name];
+                                return newFilters;
+                              });
+                              setOpenDropdown(null);
+                            }}
+                            className="w-full text-right px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 border-b"
+                          >
+                            הכל
+                          </button>
+                        )}
+                        {filter.options.map(option => (
+                          <button
+                            key={option}
+                            onClick={() => {
+                              setSelectedFilters(prev => ({
+                                ...prev,
+                                [filter.name]: option
+                              }));
+                              setOpenDropdown(null);
+                            }}
+                            className={`w-full text-right px-4 py-2 text-sm hover:bg-gray-100 ${
+                              selectedOption === option ? 'bg-gray-50 text-[#314020] font-medium' : 'text-gray-700'
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
