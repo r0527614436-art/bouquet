@@ -418,7 +418,7 @@ const Catalog = () => {
         {/* Filter Dropdowns - only show when category is selected and has filters */}
         {selectedCategory && availableFilters.length > 0 && (
           <div className="mb-6">
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-start gap-3">
               {availableFilters.map(filter => {
                 const isOpen = openDropdown === filter.name;
                 const selectedOption = selectedFilters[filter.name];
@@ -427,14 +427,14 @@ const Catalog = () => {
                   <div key={filter.name} className="relative">
                     <button
                       onClick={() => setOpenDropdown(isOpen ? null : filter.name)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-ploni-aaa transition-all duration-200 border bg-white ${
+                      className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-ploni-aaa transition-all duration-200 bg-white ${
                         selectedOption 
-                          ? 'border-[#314020] text-[#314020] shadow-md' 
-                          : 'border-gray-300 text-gray-600 hover:border-[#314020] hover:text-[#314020]'
+                          ? 'text-[#314020] shadow-sm' 
+                          : 'text-gray-600 hover:text-[#314020]'
                       }`}
                     >
                       <span>{selectedOption || filter.name}</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} strokeWidth={1.5} />
                     </button>
                     
                     {/* Dropdown Menu */}
