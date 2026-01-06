@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Edit, X, Check } from 'lucide-react';
+import { Plus, Trash2, Edit, X, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
+interface FilterOption {
+  name: string;
+  options: string[];
+}
+
 interface Category {
   id: string;
   name: string;
-  filters?: string[];
+  filters?: FilterOption[] | string[];
 }
 
 interface Item {
@@ -21,7 +25,7 @@ interface Item {
   title: string;
   image_url: string;
   category_id: string;
-  filter_tags?: string[] | any;
+  filter_tags?: any;
 }
 
 interface FilterManagementProps {
@@ -29,24 +33,39 @@ interface FilterManagementProps {
   items: Item[];
 }
 
+// Helper to normalize filters to new format
+const normalizeFilters = (filters: any): FilterOption[] => {
+  if (!filters || !Array.isArray(filters)) return [];
+  
+  // Check if it's old format (string[])
+  if (filters.length > 0 && typeof filters[0] === 'string') {
+    return filters.map((name: string) => ({ name, options: [] }));
+  }
+  
+  // Already new format
+  return filters as FilterOption[];
+};
+
 const FilterManagement = ({ categories, items }: FilterManagementProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [newFilter, setNewFilter] = useState('');
+  const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
+  const [newOption, setNewOption] = useState('');
   const [showAssignDialog, setShowAssignDialog] = useState(false);
-  const [assigningFilter, setAssigningFilter] = useState<string>('');
+  const [assigningFilterOption, setAssigningFilterOption] = useState<{ filterName: string; option: string } | null>(null);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const selectedCategoryData = categories.find(c => c.id === selectedCategory);
-  const categoryFilters = selectedCategoryData?.filters || [];
+  const categoryFilters = normalizeFilters(selectedCategoryData?.filters);
   const categoryItems = items.filter(i => i.category_id === selectedCategory);
 
   const updateCategoryFiltersMutation = useMutation({
-    mutationFn: async ({ categoryId, filters }: { categoryId: string; filters: string[] }) => {
+    mutationFn: async ({ categoryId, filters }: { categoryId: string; filters: FilterOption[] }) => {
       const { error } = await supabase
         .from('categories')
-        .update({ filters })
+        .update({ filters: filters as any })
         .eq('id', categoryId);
       if (error) throw error;
     },
@@ -68,7 +87,7 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
   });
 
   const updateItemFilterTagsMutation = useMutation({
-    mutationFn: async ({ itemId, filterTags }: { itemId: string; filterTags: string[] }) => {
+    mutationFn: async ({ itemId, filterTags }: { itemId: string; filterTags: any }) => {
       const { error } = await supabase
         .from('catalog_items')
         .update({ filter_tags: filterTags })
@@ -83,7 +102,7 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
 
   const handleAddFilter = () => {
     if (!selectedCategory || !newFilter.trim()) return;
-    if (categoryFilters.includes(newFilter.trim())) {
+    if (categoryFilters.some(f => f.name === newFilter.trim())) {
       toast({
         title: "שגיאה",
         description: "מסנן זה כבר קיים",
@@ -92,36 +111,87 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
       return;
     }
     
-    const updatedFilters = [...categoryFilters, newFilter.trim()];
+    const updatedFilters = [...categoryFilters, { name: newFilter.trim(), options: [] }];
     updateCategoryFiltersMutation.mutate({ categoryId: selectedCategory, filters: updatedFilters });
     setNewFilter('');
   };
 
   const handleDeleteFilter = (filterName: string) => {
     if (!selectedCategory) return;
-    if (!confirm(`האם אתה בטוח שברצונך למחוק את המסנן "${filterName}"? פריטים המשויכים למסנן זה יאבדו את השיוך.`)) return;
+    if (!confirm(`האם אתה בטוח שברצונך למחוק את המסנן "${filterName}"?`)) return;
     
-    const updatedFilters = categoryFilters.filter(f => f !== filterName);
+    const updatedFilters = categoryFilters.filter(f => f.name !== filterName);
     updateCategoryFiltersMutation.mutate({ categoryId: selectedCategory, filters: updatedFilters });
     
-    // Remove filter tag from all items that have it
+    // Remove filter tags from all items that have options from this filter
     categoryItems.forEach(item => {
-      const itemTags = item.filter_tags || [];
-      if (itemTags.includes(filterName)) {
+      const itemTags = item.filter_tags || {};
+      if (itemTags[filterName]) {
+        const newTags = { ...itemTags };
+        delete newTags[filterName];
         updateItemFilterTagsMutation.mutate({
           itemId: item.id,
-          filterTags: itemTags.filter(t => t !== filterName)
+          filterTags: newTags
         });
       }
     });
   };
 
-  const openAssignDialog = (filterName: string) => {
-    setAssigningFilter(filterName);
-    const itemsWithFilter = categoryItems.filter(item => 
-      (item.filter_tags || []).includes(filterName)
-    ).map(item => item.id);
-    setSelectedItems(itemsWithFilter);
+  const handleAddOption = (filterName: string) => {
+    if (!newOption.trim()) return;
+    
+    const filter = categoryFilters.find(f => f.name === filterName);
+    if (!filter) return;
+    
+    if (filter.options.includes(newOption.trim())) {
+      toast({
+        title: "שגיאה",
+        description: "אופציה זו כבר קיימת",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    const updatedFilters = categoryFilters.map(f => 
+      f.name === filterName 
+        ? { ...f, options: [...f.options, newOption.trim()] }
+        : f
+    );
+    updateCategoryFiltersMutation.mutate({ categoryId: selectedCategory, filters: updatedFilters });
+    setNewOption('');
+  };
+
+  const handleDeleteOption = (filterName: string, option: string) => {
+    if (!confirm(`האם אתה בטוח שברצונך למחוק את האופציה "${option}"?`)) return;
+    
+    const updatedFilters = categoryFilters.map(f => 
+      f.name === filterName 
+        ? { ...f, options: f.options.filter(o => o !== option) }
+        : f
+    );
+    updateCategoryFiltersMutation.mutate({ categoryId: selectedCategory, filters: updatedFilters });
+    
+    // Remove this option from all items
+    categoryItems.forEach(item => {
+      const itemTags = item.filter_tags || {};
+      if (itemTags[filterName] === option) {
+        const newTags = { ...itemTags };
+        delete newTags[filterName];
+        updateItemFilterTagsMutation.mutate({
+          itemId: item.id,
+          filterTags: newTags
+        });
+      }
+    });
+  };
+
+  const openAssignDialog = (filterName: string, option: string) => {
+    setAssigningFilterOption({ filterName, option });
+    const itemsWithOption = categoryItems.filter(item => {
+      const itemTags = item.filter_tags || {};
+      return itemTags[filterName] === option;
+    }).map(item => item.id);
+    setSelectedItems(itemsWithOption);
     setShowAssignDialog(true);
   };
 
@@ -134,21 +204,25 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
   };
 
   const handleSaveAssignments = async () => {
-    // Update all items in the category
-    for (const item of categoryItems) {
-      const currentTags = item.filter_tags || [];
-      const shouldHaveFilter = selectedItems.includes(item.id);
-      const hasFilter = currentTags.includes(assigningFilter);
+    if (!assigningFilterOption) return;
+    const { filterName, option } = assigningFilterOption;
 
-      if (shouldHaveFilter && !hasFilter) {
+    for (const item of categoryItems) {
+      const currentTags = item.filter_tags || {};
+      const shouldHaveOption = selectedItems.includes(item.id);
+      const hasOption = currentTags[filterName] === option;
+
+      if (shouldHaveOption && !hasOption) {
         await updateItemFilterTagsMutation.mutateAsync({
           itemId: item.id,
-          filterTags: [...currentTags, assigningFilter]
+          filterTags: { ...currentTags, [filterName]: option }
         });
-      } else if (!shouldHaveFilter && hasFilter) {
+      } else if (!shouldHaveOption && hasOption) {
+        const newTags = { ...currentTags };
+        delete newTags[filterName];
         await updateItemFilterTagsMutation.mutateAsync({
           itemId: item.id,
-          filterTags: currentTags.filter(t => t !== assigningFilter)
+          filterTags: newTags
         });
       }
     }
@@ -186,7 +260,7 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
           {/* Add New Filter */}
           <div className="flex gap-2 mb-6">
             <Input
-              placeholder="שם המסנן החדש"
+              placeholder="שם המסנן החדש (לדוגמה: סוג פרח)"
               value={newFilter}
               onChange={(e) => setNewFilter(e.target.value)}
               className="max-w-xs"
@@ -202,42 +276,106 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
           </div>
 
           {/* Existing Filters */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <h3 className="text-lg font-semibold">מסננים קיימים</h3>
             {categoryFilters.length === 0 ? (
               <p className="text-gray-500">אין מסננים בקטגוריה זו</p>
             ) : (
               categoryFilters.map((filter) => {
-                const assignedCount = categoryItems.filter(item => 
-                  (item.filter_tags || []).includes(filter)
-                ).length;
+                const isExpanded = expandedFilter === filter.name;
                 
                 return (
-                  <div key={filter} className="flex items-center justify-between p-3 border rounded-lg bg-gray-50">
-                    <div>
-                      <span className="font-medium">{filter}</span>
-                      <span className="text-sm text-gray-500 mr-3">
-                        ({assignedCount} פריטים)
-                      </span>
-                    </div>
-                    <div className="flex gap-2">
+                  <div key={filter.name} className="border rounded-lg bg-gray-50 overflow-hidden">
+                    {/* Filter Header */}
+                    <div 
+                      className="flex items-center justify-between p-3 cursor-pointer hover:bg-gray-100"
+                      onClick={() => setExpandedFilter(isExpanded ? null : filter.name)}
+                    >
+                      <div className="flex items-center gap-2">
+                        {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        <span className="font-medium">{filter.name}</span>
+                        <span className="text-sm text-gray-500">
+                          ({filter.options.length} אופציות)
+                        </span>
+                      </div>
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => openAssignDialog(filter)}
-                      >
-                        <Edit className="h-4 w-4 ml-1" />
-                        שייך פריטים
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleDeleteFilter(filter)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteFilter(filter.name);
+                        }}
                         className="text-red-600 hover:text-red-700"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
+                    
+                    {/* Filter Options */}
+                    {isExpanded && (
+                      <div className="border-t p-4 space-y-3">
+                        {/* Add Option */}
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="הוסף אופציה חדשה"
+                            value={newOption}
+                            onChange={(e) => setNewOption(e.target.value)}
+                            className="max-w-xs"
+                          />
+                          <Button
+                            size="sm"
+                            onClick={() => handleAddOption(filter.name)}
+                            disabled={!newOption.trim()}
+                            className="bg-pink-600 hover:bg-pink-700"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </Button>
+                        </div>
+                        
+                        {/* Options List */}
+                        {filter.options.length === 0 ? (
+                          <p className="text-sm text-gray-500">אין אופציות למסנן זה</p>
+                        ) : (
+                          <div className="space-y-2">
+                            {filter.options.map((option) => {
+                              const assignedCount = categoryItems.filter(item => {
+                                const tags = item.filter_tags || {};
+                                return tags[filter.name] === option;
+                              }).length;
+                              
+                              return (
+                                <div key={option} className="flex items-center justify-between p-2 bg-white border rounded">
+                                  <div>
+                                    <span className="text-sm">{option}</span>
+                                    <span className="text-xs text-gray-500 mr-2">
+                                      ({assignedCount} פריטים)
+                                    </span>
+                                  </div>
+                                  <div className="flex gap-2">
+                                    <Button
+                                      size="sm"
+                                      variant="outline"
+                                      onClick={() => openAssignDialog(filter.name, option)}
+                                    >
+                                      <Edit className="h-3 w-3 ml-1" />
+                                      שייך
+                                    </Button>
+                                    <Button
+                                      size="sm"
+                                      variant="ghost"
+                                      onClick={() => handleDeleteOption(filter.name, option)}
+                                      className="text-red-600 hover:text-red-700"
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                 );
               })
@@ -250,9 +388,11 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
       <Dialog open={showAssignDialog} onOpenChange={setShowAssignDialog}>
         <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>שייך פריטים למסנן "{assigningFilter}"</DialogTitle>
+            <DialogTitle>
+              שייך פריטים ל"{assigningFilterOption?.filterName}" - {assigningFilterOption?.option}
+            </DialogTitle>
             <DialogDescription>
-              בחר את הפריטים שיופיעו תחת מסנן זה
+              בחר את הפריטים שיופיעו תחת אופציה זו
             </DialogDescription>
           </DialogHeader>
           
