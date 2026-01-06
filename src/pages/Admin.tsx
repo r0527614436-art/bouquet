@@ -9,6 +9,7 @@ import AdminAuth from '@/components/admin/AdminAuth';
 import CategoryManagement from '@/components/admin/CategoryManagement';
 import CategoryOrderManagement from '@/components/admin/CategoryOrderManagement';
 import ItemManagement from '@/components/admin/ItemManagement';
+import FilterManagement from '@/components/admin/FilterManagement';
 import PasswordDialog from '@/components/admin/PasswordDialog';
 import HomepageSlideManagement from '@/components/admin/HomepageSlideManagement';
 import TestimonialsManagement from '@/components/admin/TestimonialsManagement';
@@ -121,6 +122,7 @@ const Admin = () => {
           onReorderCategories={handleReorderCategories}
         />
         <CategoryManagement categories={categories as any} items={items} />
+        <FilterManagement categories={categories as any} items={items} />
         <ItemManagement categories={categories as any} items={items} />
       </main>
 

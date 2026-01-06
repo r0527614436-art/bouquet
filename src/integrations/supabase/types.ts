@@ -40,6 +40,7 @@ export type Database = {
           category_id: string
           created_at: string
           display_order: number | null
+          filter_tags: Json | null
           id: string
           image_url: string
           price: string | null
@@ -50,6 +51,7 @@ export type Database = {
           category_id: string
           created_at?: string
           display_order?: number | null
+          filter_tags?: Json | null
           id?: string
           image_url: string
           price?: string | null
@@ -60,6 +62,7 @@ export type Database = {
           category_id?: string
           created_at?: string
           display_order?: number | null
+          filter_tags?: Json | null
           id?: string
           image_url?: string
           price?: string | null
@@ -80,6 +83,7 @@ export type Database = {
         Row: {
           allow_cart: boolean
           created_at: string
+          filters: Json | null
           id: string
           name: string
           subcategories: Json | null
@@ -88,6 +92,7 @@ export type Database = {
         Insert: {
           allow_cart?: boolean
           created_at?: string
+          filters?: Json | null
           id?: string
           name: string
           subcategories?: Json | null
@@ -96,6 +101,7 @@ export type Database = {
         Update: {
           allow_cart?: boolean
           created_at?: string
+          filters?: Json | null
           id?: string
           name?: string
           subcategories?: Json | null
