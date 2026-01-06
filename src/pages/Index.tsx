@@ -679,7 +679,7 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-20 relative overflow-hidden" style={{ backgroundColor: '#F8FBF4', isolation: 'isolate' }}>
         <div className="px-8 md:px-16 lg:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
