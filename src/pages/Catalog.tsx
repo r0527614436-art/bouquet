@@ -305,10 +305,10 @@ const Catalog = () => {
     backgroundColor: '#F8FBF4'
   }} id="catalog-page">
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[70vh] bg-cover bg-center" style={{
-      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center'
+      <div className="relative min-h-[70vh] bg-cover" style={{
+        backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 70%'
     }}>
         {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" style={{
