@@ -321,6 +321,84 @@ const About = () => {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="px-8 md:px-16 lg:px-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Left Side - Sticky Title */}
+            <div className="lg:sticky lg:top-8 lg:self-start lg:h-fit z-20">
+              <div className="relative flex justify-center lg:justify-start">
+                <div className="relative text-center md:text-right">
+                  <h2 className="font-allura text-[45px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
+                    transform: 'translate(-25px, -10px)'
+                  }}>
+                    Work process
+                  </h2>
+                  <h2 className="font-synopsis text-[40px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] left-1/2 md:left-auto md:right-4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none whitespace-nowrap">
+                    איך זה<br />עובד אצלינו?
+                  </h2>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Content - Centered on mobile */}
+            <div className="space-y-12 max-w-md lg:mr-auto mx-auto md:mx-0">
+              {/* Step 01 */}
+              <div className="space-y-4 text-center md:text-right">
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
+                  <span className="font-synopsis font-normal text-4xl">01</span>
+                </div>
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
+                  שיחת מיקוד
+                </h3>
+                <p className="text-gray-700 text-lg leading-loose">
+                  אנחנו יוצרות שיחת מיקוד קצרה ומדויקת, שבה אנחנו מגדירות יחד את סגנון הזר/העיצוב התקציב, הגוונים המועדפים והאווירה שאת רוצה לייצר. המטרה היא להבין את כל הפרטים הדרושים כדי לדייק את הבחירה ולהתאימה בצורה מושלמת.
+                </p>
+              </div>
+
+              {/* Step 02 */}
+              <div className="space-y-4 text-center md:text-right">
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#314020' }}>
+                  <span className="font-synopsis font-normal text-4xl">02</span>
+                </div>
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
+                  בחירה והשלמת ההזמנה
+                </h3>
+                <p className="text-gray-700 text-lg leading-loose">
+                  לאחר שדייקנו את המטרה על מנת שתוכלי לקבל את ההשראה הנגשנו לך את קטלוג מרהיב מסודר לבחירה נוחה וברורה. את בוחרת את העיצוב הרצוי כמובן שניתן לשנות גוונים ולשלב בין סוגי הזרים וביחד אנחנו מבצעות התאמות של צבעים, שילובים ופרטים עיצוביים כך שיתאימו לקונספט הכולל.
+                </p>
+              </div>
+
+              {/* Step 03 */}
+              <div className="space-y-4 text-center md:text-right">
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#11150D' }}>
+                  <span className="font-synopsis font-normal text-4xl">03</span>
+                </div>
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
+                  הזמנה
+                </h3>
+                <p className="text-gray-700 text-lg leading-loose">
+                  לאחר בחירת הזר הנחשק יש למלא את פרטי ההזמנה באתר או במייל ע"י שליחת המילה הזמנה בשורת הנושא ומלוי טופס ההזמנה הנשלח אליכם אוטומטית.
+                </p>
+              </div>
+
+              {/* Step 04 */}
+              <div className="space-y-4 text-center md:text-right">
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
+                  <span className="font-synopsis font-normal text-4xl">04</span>
+                </div>
+                <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
+                  הכנה ומשלוח
+                </h3>
+                <p className="text-gray-700 text-lg leading-loose">
+                  ביום האירוע אני שוזרת את הזר בהשקעה מרבית ובשימת לב מיוחדת לפרחים טריים, איכותיים ומעוררי השראה בקו נקי עדכני מרשים ומפתיע ובדגש על שירות מקצועי אדיב ואמין. הפרחים המעוצבים נשלחים בפריסה ארצית ומגיעים אליכם במראה טבעי ורענן המשלים את חווית השמחה.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials Section */}
       <Testimonials />
 
