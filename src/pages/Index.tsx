@@ -414,10 +414,10 @@ const Index = () => {
         <div
           className="absolute hidden md:block z-[90] bg-background"
           style={{
-            left: '62px',
-            top: '-42px',
-            width: '104px',
-            height: '104px',
+            left: '78px',
+            top: '-26px',
+            width: '73px',
+            height: '73px',
             borderRadius: '50%'
           }}
         />
