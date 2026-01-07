@@ -353,9 +353,9 @@ const Index = () => {
         {/* Dots Indicator - removed as we only have single image */}
 
         {/* Download Catalog Button - Positioned at section boundary - Hidden on mobile */}
-        <div className="absolute left-4 bottom-0 translate-y-1/2 z-[100] hidden md:block">
-          {/* White circle background - behind the button */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-0 w-20 sm:w-24 md:w-32 h-10 sm:h-12 md:h-16 rounded-b-full shadow-lg -z-10" style={{ backgroundColor: '#F8FBF4' }} />
+        <div className="absolute left-4 md:left-8 bottom-0 translate-y-1/2 z-[100] hidden md:block">
+          {/* Full circle background - behind the button */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full -z-10" style={{ backgroundColor: '#F8FBF4' }} />
           
           <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300 mx-[30px] sm:mx-[45px] md:mx-[59px] py-0 px-0 my-0 rounded-full">
@@ -410,14 +410,6 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
-        {/* Light circle cutout for download button - positioned to match button */}
-        <div 
-          className="absolute left-[75px] w-32 h-32 md:w-40 md:h-40 rounded-full hidden md:block z-10" 
-          style={{ 
-            backgroundColor: '#F8FBF4',
-            top: '-64px'
-          }} 
-        />
         <GalleryCarousel slides={carouselImages} />
       </section>
 
