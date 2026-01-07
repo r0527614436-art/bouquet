@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -30,6 +30,8 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   onPrevious,
   onNext,
 }) => {
+  const [isZoomed, setIsZoomed] = useState(false);
+
   if (!currentItem) return null;
 
   const currentIndex = items.findIndex(item => item.id === currentItem.id);
@@ -42,12 +44,22 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
     } else if (e.key === 'ArrowRight' && !isFirst) {
       onPrevious();
     } else if (e.key === 'Escape') {
+      setIsZoomed(false);
       onClose();
     }
   };
 
+  const handleDoubleClick = () => {
+    setIsZoomed(!isZoomed);
+  };
+
+  const handleClose = () => {
+    setIsZoomed(false);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent 
         className="max-w-fit w-auto p-0 overflow-hidden bg-[#F5F0E8] border-[3px] border-[#314020] rounded-2xl shadow-none [&>button]:hidden"
         onKeyDown={handleKeyDown}
@@ -62,34 +74,44 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           <Button
             variant="ghost"
             size="sm"
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute -top-10 -right-2 z-20 text-[#3d5a3d] hover:text-[#2d4a2d] hover:bg-transparent p-1 transition-colors"
           >
             <X className="h-7 w-7" />
           </Button>
 
           {/* Model number - Top left overlay on image */}
-          {currentItem.title && (
+          {currentItem.title && !isZoomed && (
             <div className="absolute top-4 left-4 z-10 px-3 py-1.5">
               <p className="text-white text-base font-synopsis font-light drop-shadow-lg">דגם {currentItem.title}</p>
             </div>
           )}
 
-          {/* Main image - no padding, exact size */}
-          <div className="w-full">
+          {/* Main image - with zoom on double click */}
+          <div 
+            className={`w-full cursor-zoom-in transition-all duration-300 ${isZoomed ? 'overflow-auto max-h-[85vh] max-w-[90vw]' : ''}`}
+            onDoubleClick={handleDoubleClick}
+          >
             <img
               src={currentItem.image_url}
               alt={currentItem.title || 'תמונה'}
-              className="w-full h-auto object-contain max-h-[85vh] rounded-lg"
+              className={`w-full h-auto object-contain rounded-lg transition-transform duration-300 ${
+                isZoomed 
+                  ? 'scale-150 cursor-zoom-out' 
+                  : 'max-h-[85vh] cursor-zoom-in'
+              }`}
+              style={isZoomed ? { transformOrigin: 'center center' } : {}}
             />
           </div>
 
           {/* Counter indicator - Bottom center */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 py-1">
-            <p className="text-white text-xs font-synopsis font-light drop-shadow-lg">
-              {currentIndex + 1} מתוך {items.length}
-            </p>
-          </div>
+          {!isZoomed && (
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 py-1">
+              <p className="text-white text-xs font-synopsis font-light drop-shadow-lg">
+                {currentIndex + 1} מתוך {items.length}
+              </p>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
