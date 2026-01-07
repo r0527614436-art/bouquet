@@ -493,9 +493,9 @@ const Catalog = () => {
                     {category.subtitle && <p className="text-gray-600 mt-1 font-ploni-aaa font-light">{category.subtitle}</p>}
                   </div>
                   
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 justify-items-center">
+                  <div className="flex flex-wrap justify-center gap-2">
                     {categoryItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer w-[150px] h-[150px] sm:w-[200px] sm:h-[200px]" onClick={() => handleImageClick(item)}>
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '50px', height: '50px' }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
@@ -527,9 +527,9 @@ const Catalog = () => {
           const selectedCategoryData = categories.find(c => c.id === selectedCategory);
           
           return <div className="space-y-8">
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6 justify-items-center">
+                  <div className="flex flex-wrap justify-center gap-2">
                     {filteredItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer w-[150px] h-[150px] sm:w-[200px] sm:h-[200px]" onClick={() => handleImageClick(item)}>
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '50px', height: '50px' }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
