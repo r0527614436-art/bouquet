@@ -495,7 +495,7 @@ const Catalog = () => {
                   
                   <div className="flex flex-wrap justify-center gap-4">
                     {categoryItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '500px', height: '500px' }} onClick={() => handleImageClick(item)}>
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '350px', height: '350px' }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
@@ -529,7 +529,7 @@ const Catalog = () => {
           return <div className="space-y-8">
                   <div className="flex flex-wrap justify-center gap-4">
                     {filteredItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '500px', height: '500px' }} onClick={() => handleImageClick(item)}>
+                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '350px', height: '350px' }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
