@@ -158,7 +158,7 @@ const About = () => {
           </div>
 
           {/* Description Text */}
-          <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 mt-8 md:mt-32 mb-8 md:mb-16 font-ploni-aaa max-w-3xl mx-auto px-2">
+          <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 mt-8 md:mt-32 mb-16 md:mb-24 font-ploni-aaa max-w-3xl mx-auto px-4">
             <p className="font-medium">
               אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
             </p>
@@ -170,7 +170,7 @@ const About = () => {
       </div>
 
       {/* Infinite Scrolling Images */}
-      <section className="py-16 pt-32 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-16 pt-12 md:pt-32 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="relative">
           <style>{`
             @keyframes infiniteScroll {

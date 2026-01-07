@@ -410,6 +410,18 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
+        {/* Light circle cutout for download button - positioned behind the button */}
+        <div 
+          className="absolute hidden md:block z-[90]" 
+          style={{ 
+            left: '32px',
+            top: '-88px',
+            width: '176px',
+            height: '176px',
+            borderRadius: '50%',
+            backgroundColor: '#F8FBF4'
+          }} 
+        />
         <GalleryCarousel slides={carouselImages} />
       </section>
 
@@ -680,18 +692,18 @@ const Index = () => {
 
       {/* How It Works Section */}
       <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="px-8 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="px-4 sm:px-8 md:px-16 lg:px-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
-            <div className="lg:sticky lg:top-24 lg:self-start lg:h-fit z-20">
+            <div className="lg:sticky lg:top-24 lg:self-start lg:h-fit z-20 mb-6 sm:mb-8 lg:mb-0">
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-center md:text-right">
-                <h2 className="font-allura text-[45px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
+                <h2 className="font-allura text-[32px] sm:text-[45px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
                     transform: 'translate(-25px, -10px)'
                   }}>
                     Work process
                   </h2>
-                  <h2 className="font-synopsis text-[40px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] left-1/2 md:left-auto md:right-4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none whitespace-nowrap">
+                  <h2 className="font-synopsis text-[28px] sm:text-[40px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] left-1/2 md:left-auto md:right-4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none whitespace-nowrap">
                     איך זה<br />עובד אצלינו?
                   </h2>
                 </div>
@@ -699,7 +711,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content - Centered on mobile */}
-            <div className="space-y-12 max-w-md lg:max-w-xl xl:max-w-2xl lg:mr-auto mx-auto md:mx-0">
+            <div className="space-y-8 sm:space-y-12 max-w-[280px] sm:max-w-md lg:max-w-xl xl:max-w-2xl lg:mr-auto mx-auto md:mx-0 mt-8 sm:mt-4 lg:mt-0">
               {/* Step 01 */}
               <div className="space-y-4 text-center md:text-right">
                 <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
