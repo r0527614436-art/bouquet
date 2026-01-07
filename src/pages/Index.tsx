@@ -410,8 +410,14 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
-        {/* Light circle cutout for download button */}
-        <div className="absolute top-0 left-4 md:left-[75px] -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full hidden md:block" style={{ backgroundColor: '#F8FBF4' }} />
+        {/* Light circle cutout for download button - positioned to match button */}
+        <div 
+          className="absolute left-[75px] w-32 h-32 md:w-40 md:h-40 rounded-full hidden md:block z-10" 
+          style={{ 
+            backgroundColor: '#F8FBF4',
+            top: '-64px'
+          }} 
+        />
         <GalleryCarousel slides={carouselImages} />
       </section>
 
@@ -701,7 +707,7 @@ const Index = () => {
             </div>
 
             {/* Right Side - Content - Centered on mobile */}
-            <div className="space-y-12 max-w-md lg:mr-auto mx-auto md:mx-0">
+            <div className="space-y-12 max-w-md lg:max-w-xl xl:max-w-2xl lg:mr-auto mx-auto md:mx-0">
               {/* Step 01 */}
               <div className="space-y-4 text-center md:text-right">
                 <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
