@@ -410,6 +410,8 @@ const Index = () => {
 
       {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
+        {/* Light circle cutout for download button */}
+        <div className="absolute top-0 left-4 md:left-[75px] -translate-y-1/2 w-28 h-28 md:w-36 md:h-36 rounded-full hidden md:block" style={{ backgroundColor: '#F8FBF4' }} />
         <GalleryCarousel slides={carouselImages} />
       </section>
 
