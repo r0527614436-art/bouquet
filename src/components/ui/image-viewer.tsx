@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,11 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   onPrevious,
   onNext,
 }) => {
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const lastDistance = useRef<number | null>(null);
+  const lastPosition = useRef({ x: 0, y: 0 });
+  const isDragging = useRef(false);
 
   if (!currentItem) return null;
 
@@ -44,18 +48,75 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
     } else if (e.key === 'ArrowRight' && !isFirst) {
       onPrevious();
     } else if (e.key === 'Escape') {
-      setIsZoomed(false);
+      resetZoom();
       onClose();
     }
   };
 
+  const resetZoom = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    lastDistance.current = null;
+  };
+
   const handleDoubleClick = () => {
-    setIsZoomed(!isZoomed);
+    if (scale > 1) {
+      resetZoom();
+    } else {
+      setScale(2);
+    }
   };
 
   const handleClose = () => {
-    setIsZoomed(false);
+    resetZoom();
     onClose();
+  };
+
+  const getDistance = (touches: React.TouchList) => {
+    return Math.hypot(
+      touches[0].clientX - touches[1].clientX,
+      touches[0].clientY - touches[1].clientY
+    );
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      lastDistance.current = getDistance(e.touches);
+    } else if (e.touches.length === 1 && scale > 1) {
+      isDragging.current = true;
+      lastPosition.current = {
+        x: e.touches[0].clientX - position.x,
+        y: e.touches[0].clientY - position.y,
+      };
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && lastDistance.current !== null) {
+      e.preventDefault();
+      const newDistance = getDistance(e.touches);
+      const delta = newDistance / lastDistance.current;
+      
+      setScale(prev => {
+        const newScale = prev * delta;
+        return Math.min(Math.max(newScale, 1), 4);
+      });
+      
+      lastDistance.current = newDistance;
+    } else if (e.touches.length === 1 && isDragging.current && scale > 1) {
+      const newX = e.touches[0].clientX - lastPosition.current.x;
+      const newY = e.touches[0].clientY - lastPosition.current.y;
+      setPosition({ x: newX, y: newY });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    lastDistance.current = null;
+    isDragging.current = false;
+    
+    if (scale <= 1) {
+      resetZoom();
+    }
   };
 
   return (
@@ -81,31 +142,36 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           </Button>
 
           {/* Model number - Top left overlay on image */}
-          {currentItem.title && !isZoomed && (
+          {currentItem.title && scale <= 1 && (
             <div className="absolute top-4 left-4 z-10 px-3 py-1.5">
               <p className="text-white text-base font-synopsis font-light drop-shadow-lg">דגם {currentItem.title}</p>
             </div>
           )}
 
-          {/* Main image - with zoom on double click */}
+          {/* Main image - with pinch zoom on mobile */}
           <div 
-            className={`w-full cursor-zoom-in transition-all duration-300 ${isZoomed ? 'overflow-auto max-h-[85vh] max-w-[90vw]' : ''}`}
+            className={`w-full cursor-zoom-in transition-all duration-300 ${scale > 1 ? 'overflow-hidden' : ''}`}
             onDoubleClick={handleDoubleClick}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <img
               src={currentItem.image_url}
               alt={currentItem.title || 'תמונה'}
-              className={`w-full h-auto object-contain rounded-lg transition-transform duration-300 ${
-                isZoomed 
-                  ? 'scale-150 cursor-zoom-out' 
-                  : 'max-h-[85vh] cursor-zoom-in'
+              className={`w-full h-auto object-contain rounded-lg transition-transform duration-150 max-h-[85vh] ${
+                scale > 1 ? 'cursor-move' : 'cursor-zoom-in'
               }`}
-              style={isZoomed ? { transformOrigin: 'center center' } : {}}
+              style={{
+                transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
+                transformOrigin: 'center center',
+              }}
+              draggable={false}
             />
           </div>
 
           {/* Counter indicator - Bottom center */}
-          {!isZoomed && (
+          {scale <= 1 && (
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 py-1">
               <p className="text-white text-xs font-synopsis font-light drop-shadow-lg">
                 {currentIndex + 1} מתוך {items.length}
