@@ -61,7 +61,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent 
-        className="max-w-[95vw] md:max-w-fit w-auto p-0 overflow-hidden bg-[#F5F0E8] border-[3px] border-[#314020] rounded-2xl shadow-none [&>button]:hidden"
+        className="w-[98vw] max-w-[98vw] md:max-w-fit md:w-auto p-0 overflow-hidden bg-[#F5F0E8] border-[3px] border-[#314020] rounded-2xl shadow-none [&>button]:hidden"
         onKeyDown={handleKeyDown}
       >
         <VisuallyHidden>
