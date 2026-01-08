@@ -104,10 +104,10 @@ const SideNavigation = () => {
       {/* Mobile Menu Overlay - Full screen, no WhatsApp, dots between items */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-[#11150d] z-[90] flex flex-col items-center justify-center">
-          {/* Centered X button at top */}
+          {/* X button at top right */}
           <button
             onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 left-1/2 -translate-x-1/2 w-12 h-12 flex items-center justify-center"
+            className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center"
             aria-label="סגור תפריט"
           >
             <div className="relative w-6 h-6">
