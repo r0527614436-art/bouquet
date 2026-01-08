@@ -80,8 +80,8 @@ const SideNavigation = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation - Hamburger Only - No border, green stripes */}
-      <div className="md:hidden fixed top-4 right-4 z-[100]">
+      {/* Mobile Navigation - Hamburger Only - Hidden when menu is open */}
+      <div className={`md:hidden fixed top-4 right-4 z-[100] ${isMenuOpen ? 'hidden' : ''}`}>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="w-12 h-12 flex items-center justify-center"
