@@ -18,7 +18,11 @@ const SideNavigation = () => {
         <div className="flex flex-col h-full py-8 bg-[#11150d]">
           {/* Hamburger / X Icon */}
           <div className="flex justify-center mb-12">
-            <div className="flex flex-col gap-1.5 cursor-pointer relative w-8 h-6">
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="flex flex-col gap-1.5 cursor-pointer relative w-8 h-6 bg-transparent border-none"
+              aria-label={isMenuOpen ? 'סגור תפריט' : 'פתח תפריט'}
+            >
               <div className={`absolute w-8 h-0.5 bg-white transition-all duration-300 ${
                 isMenuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'
               }`}></div>
@@ -28,7 +32,7 @@ const SideNavigation = () => {
               <div className={`absolute w-8 h-0.5 bg-white transition-all duration-300 ${
                 isMenuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'
               }`}></div>
-            </div>
+            </button>
           </div>
 
           {/* Navigation Items */}
@@ -100,6 +104,18 @@ const SideNavigation = () => {
       {/* Mobile Menu Overlay - Full screen, no WhatsApp, dots between items */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 bg-[#11150d] z-[90] flex flex-col items-center justify-center">
+          {/* Centered X button at top */}
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 left-1/2 -translate-x-1/2 w-12 h-12 flex items-center justify-center"
+            aria-label="סגור תפריט"
+          >
+            <div className="relative w-6 h-6">
+              <div className="absolute top-1/2 left-0 w-6 h-0.5 bg-white -translate-y-1/2 rotate-45"></div>
+              <div className="absolute top-1/2 left-0 w-6 h-0.5 bg-white -translate-y-1/2 -rotate-45"></div>
+            </div>
+          </button>
+          
           <nav className="flex flex-col items-center">
             {[
               { label: 'בית', href: '/' },
