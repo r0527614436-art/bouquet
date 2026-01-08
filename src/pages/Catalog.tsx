@@ -575,7 +575,19 @@ const Catalog = () => {
           </div>}
 
         {/* Image Viewer Modal */}
-        <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} />
+        <ImageViewer 
+          isOpen={imageViewerOpen} 
+          onClose={() => setImageViewerOpen(false)} 
+          currentItem={currentImageItem} 
+          items={filteredItems} 
+          onPrevious={handlePreviousImage} 
+          onNext={handleNextImage} 
+          allowCart={currentImageItem ? getCategoryByItem(currentImageItem)?.allow_cart || false : false}
+          onOrderClick={(item) => {
+            setCurrentOrderItem(item);
+            setOrderDialogOpen(true);
+          }}
+        />
         
         {/* Order Dialog */}
         <OrderDialog isOpen={orderDialogOpen} onClose={() => setOrderDialogOpen(false)} item={currentOrderItem} />
