@@ -77,7 +77,7 @@ const SideNavigation = () => {
       </div>
 
       {/* Mobile Navigation - Hamburger Only - No border, green stripes */}
-      <div className="md:hidden fixed top-4 right-4 z-50">
+      <div className="md:hidden fixed top-4 right-4 z-[100]">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="w-12 h-12 flex items-center justify-center"
@@ -99,7 +99,7 @@ const SideNavigation = () => {
 
       {/* Mobile Menu Overlay - Full screen, no WhatsApp, dots between items */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-[#11150d] z-40 flex flex-col items-center justify-center">
+        <div className="md:hidden fixed inset-0 bg-[#11150d] z-[90] flex flex-col items-center justify-center">
           <nav className="flex flex-col items-center">
             {[
               { label: 'בית', href: '/' },
