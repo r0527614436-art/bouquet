@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import arrowSimple from '@/assets/arrow-simple.png';
 
 interface CatalogItem {
   id: string;
@@ -20,6 +21,8 @@ interface ImageViewerProps {
   items: CatalogItem[];
   onPrevious: () => void;
   onNext: () => void;
+  allowCart?: boolean;
+  onOrderClick?: (item: CatalogItem) => void;
 }
 
 export const ImageViewer: React.FC<ImageViewerProps> = ({
@@ -29,6 +32,8 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
   items,
   onPrevious,
   onNext,
+  allowCart = false,
+  onOrderClick,
 }) => {
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -170,12 +175,31 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             />
           </div>
 
-          {/* Counter indicator - Bottom center */}
+          {/* Counter indicator - Bottom center - adjusted position when green bar is shown */}
           {scale <= 1 && (
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 px-3 py-1">
+            <div className={`absolute left-1/2 transform -translate-x-1/2 z-10 px-3 py-1 ${allowCart ? 'bottom-16 md:bottom-4' : 'bottom-4'}`}>
               <p className="text-white text-xs font-synopsis font-light drop-shadow-lg">
                 {currentIndex + 1} מתוך {items.length}
               </p>
+            </div>
+          )}
+
+          {/* Green order bar - always visible on mobile when allowCart is true */}
+          {allowCart && scale <= 1 && (
+            <div 
+              onClick={() => onOrderClick?.(currentItem)}
+              className="md:hidden absolute bottom-0 left-0 right-0 bg-[#314020] text-white flex items-center px-4 py-3 cursor-pointer active:bg-[#4a6b4a] z-20"
+            >
+              {currentItem.price && (
+                <>
+                  <span className="text-xl font-ploni-aaa font-bold">{currentItem.price} ש״ח</span>
+                  <div className="h-6 w-px bg-white/40 mx-3"></div>
+                </>
+              )}
+              <div className="flex items-center gap-3 mr-auto">
+                <span className="text-xl font-synopsis font-medium">להזמנה מהירה</span>
+                <img src={arrowSimple} alt="" className="h-7 w-7" />
+              </div>
             </div>
           )}
         </div>
