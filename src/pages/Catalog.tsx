@@ -506,8 +506,8 @@ const Catalog = () => {
                                   </div>}
                               </div>
                               
-                              {/* Bottom overlay with price and button */}
-                              {category.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer bg-[#314020]">
+                               {/* Bottom overlay with price and button */}
+                              {category.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer bg-[#314020]">
                                   {item.price && <>
                                       <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
                                       <div className="h-6 w-px bg-white/40 mx-3"></div>
@@ -540,8 +540,8 @@ const Catalog = () => {
                                   </div>}
                               </div>
                               
-                              {/* Bottom overlay with price and button */}
-                              {selectedCategoryData?.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 bg-[#314020] text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]">
+                               {/* Bottom overlay with price and button */}
+                              {selectedCategoryData?.allow_cart && <div onClick={e => handleOrderClick(item, e)} className="absolute bottom-0 left-0 right-0 bg-[#314020] text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center px-4 py-2 cursor-pointer hover:bg-[#4a6b4a]">
                                   {item.price && <>
                                       <span className="text-xl font-ploni-aaa font-bold">{item.price} ש״ח</span>
                                       <div className="h-6 w-px bg-white/40 mx-3"></div>
