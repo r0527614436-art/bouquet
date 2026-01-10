@@ -17,8 +17,8 @@ const OrderConfirmation = () => {
         <Link to="/" className="mb-10 transition-transform hover:scale-105">
           <div style={{
           backgroundColor: '#EAEAEA'
-        }} className="w-[70px] h-[85px] md:w-[85px] md:h-[100px] flex items-center justify-center rounded-t-full pt-2 pb-1 bg-secondary py-[56px]">
-            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט - לוגו" className="w-[60px] md:w-[80px] h-auto object-contain" />
+        }} className="w-[105px] h-[130px] md:w-[130px] md:h-[155px] flex items-center justify-center rounded-t-full pt-2 pb-1 bg-secondary py-[56px]">
+            <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט - לוגו" className="w-[90px] md:w-[120px] h-auto object-contain" />
           </div>
         </Link>
         
