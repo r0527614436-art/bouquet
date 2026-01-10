@@ -30,7 +30,7 @@ const OrderConfirmation = () => {
             <img 
               src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" 
               alt="בוקט - לוגו" 
-              className="w-[50px] md:w-[65px] h-auto object-contain"
+              className="w-[60px] md:w-[80px] h-auto object-contain"
             />
           </div>
         </Link>
