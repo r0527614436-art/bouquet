@@ -17,13 +17,13 @@ const OrderConfirmation = () => {
         <Link to="/" className="mb-10 transition-transform hover:scale-105">
           <div style={{
           backgroundColor: '#EAEAEA'
-        }} className="w-[105px] h-[150px] md:w-[130px] md:h-[180px] flex items-center justify-center rounded-t-full pt-2 pb-1 bg-secondary py-[56px]">
+        }} className="w-[105px] h-[170px] md:w-[130px] md:h-[200px] flex items-center justify-center rounded-t-full pt-2 pb-1 bg-secondary py-[56px]">
             <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט - לוגו" className="w-[90px] md:w-[120px] h-auto object-contain" />
           </div>
         </Link>
         
         {/* Main Text */}
-        <div className="space-y-3">
+        <div className="space-y-6 md:space-y-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-['Ploni_Medium_AAA']" style={{
           color: '#314020'
         }}>
@@ -34,7 +34,7 @@ const OrderConfirmation = () => {
         }}>
             שמחים שבחרתם בנו!
           </p>
-          <p className="text-2xl md:text-3xl lg:text-4xl font-['Ploni_Regular_AAA'] mt-6" style={{
+          <p className="text-2xl md:text-3xl lg:text-4xl font-['Ploni_Regular_AAA'] mt-8" style={{
           color: '#314020'
         }}>
             צוות בוקט
