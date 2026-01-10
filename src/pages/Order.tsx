@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Calendar, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import simpleArrow from '@/assets/simple-arrow.png';
@@ -17,8 +17,8 @@ import { supabase } from '@/integrations/supabase/client';
 const Order = () => {
   const { items, clearCart } = useCart();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
   
   // Form state
   const [eventDate, setEventDate] = useState<Date>();
@@ -57,13 +57,8 @@ const Order = () => {
 
       if (error) throw error;
 
-      setOrderSubmitted(true);
       clearCart();
-      
-      toast({
-        title: "ההזמנה נשלחה בהצלחה",
-        description: "ניצור איתכם קשר בהקדם",
-      });
+      navigate('/order-confirmation');
 
     } catch (error) {
       console.error('Error submitting order:', error);
@@ -77,7 +72,7 @@ const Order = () => {
     }
   };
 
-  if (items.length === 0 && !orderSubmitted) {
+  if (items.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-center">
@@ -87,33 +82,6 @@ const Order = () => {
               חזרה לקטלוג
             </Button>
           </Link>
-        </div>
-      </div>
-    );
-  }
-
-  if (orderSubmitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="max-w-md mx-auto text-center bg-white p-8 rounded-2xl shadow-md">
-          <CheckCircle className="h-16 w-16 text-[#314020] mx-auto mb-4" />
-          <h2 className="text-2xl font-ploni-aaa font-bold text-[#314020] mb-4">ההזמנה נשלחה בהצלחה!</h2>
-          <p className="text-gray-600 mb-6 font-ploni-aaa">
-            הזמנתך התקבלה! ניצור איתכם קשר בהקדם.
-            {email && <span className="block mt-2 text-sm">אישור הזמנה נשלח ל-{email}</span>}
-          </p>
-          <div className="space-y-3">
-            <Link to="/catalog" className="block">
-              <Button className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full">
-                המשיכו לקנות
-              </Button>
-            </Link>
-            <Link to="/" className="block">
-              <Button variant="outline" className="w-full border-[#314020] text-[#314020] hover:bg-[#314020] hover:text-white rounded-full">
-                חזרה לעמוד הבית
-              </Button>
-            </Link>
-          </div>
         </div>
       </div>
     );
