@@ -425,7 +425,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 md:py-16 overflow-visible" style={{ backgroundColor: '#F8FBF4' }}>
+      <section id="about" className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
             {/* Images - Right Side (below text on mobile) */}
