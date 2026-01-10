@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +25,7 @@ interface OrderDialogProps {
 }
 
 export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item }) => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [phoneEvent, setPhoneEvent] = useState('');
@@ -114,11 +116,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       setDressColor('');
       setPaymentMethod('');
       onClose();
-      
-      toast({
-        title: "ההזמנה נשלחה בהצלחה",
-        description: "ניצור איתכם קשר בהקדם"
-      });
+      navigate('/order-confirmation');
     } catch (error) {
       console.error('Error submitting order:', error);
       toast({
