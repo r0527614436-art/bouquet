@@ -13,7 +13,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent 
-        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[900px] w-full"
+        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[900px] w-full [&>button]:hidden"
         style={{ background: 'transparent' }}
       >
         {/* Main container with green border */}
