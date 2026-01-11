@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { GalleryCarousel } from '@/components/GalleryCarousel';
 import Testimonials from '@/components/Testimonials';
 import LoadingScreen from '@/components/LoadingScreen';
+import CatalogNotReadyPopup from '@/components/CatalogNotReadyPopup';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
 import downloadArrow from '@/assets/download-arrow.png';
@@ -44,6 +45,7 @@ const Index = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCatalogNotReadyPopup, setShowCatalogNotReadyPopup] = useState(false);
   const navigate = useNavigate();
   const {
     toast
@@ -188,6 +190,17 @@ const Index = () => {
   });
   const handleDownloadCatalog = async () => {
     try {
+      // First check if catalog file exists
+      const { data: files, error: listError } = await supabase.storage
+        .from('catalog-pdfs')
+        .list('', { search: 'catalog-download.pdf' });
+      
+      if (listError || !files || files.length === 0 || !files.find(f => f.name === 'catalog-download.pdf')) {
+        // No catalog file - show popup
+        setShowCatalogNotReadyPopup(true);
+        return;
+      }
+      
       toast({
         title: "מוריד קטלוג",
         description: "הקטלוג יורד כעת..."
@@ -200,11 +213,8 @@ const Index = () => {
         // Fetch the file as blob to force download
         const response = await fetch(data.publicUrl);
         if (!response.ok) {
-          toast({
-            title: "שגיאה",
-            description: "קובץ הקטלוג לא נמצא. אנא פנה למנהל האתר.",
-            variant: "destructive"
-          });
+          // File doesn't exist - show popup
+          setShowCatalogNotReadyPopup(true);
           return;
         }
         
@@ -229,11 +239,8 @@ const Index = () => {
       }
     } catch (error) {
       console.error('Error downloading catalog:', error);
-      toast({
-        title: "שגיאה בהורדת הקטלוג",
-        description: "אנא נסה שוב מאוחר יותר",
-        variant: "destructive"
-      });
+      // Show popup on error
+      setShowCatalogNotReadyPopup(true);
     }
   };
   const handleContactSubmit = async (e: React.FormEvent) => {
@@ -291,6 +298,11 @@ const Index = () => {
       <AnimatePresence>
         {isLoading && <LoadingScreen />}
       </AnimatePresence>
+      
+      <CatalogNotReadyPopup 
+        isOpen={showCatalogNotReadyPopup} 
+        onClose={() => setShowCatalogNotReadyPopup(false)} 
+      />
       
       <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Main Content */}
