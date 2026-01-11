@@ -94,7 +94,7 @@ const Testimonials = () => {
 
           {/* Single Testimonial on mobile */}
           <div className="w-full max-w-sm">
-            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 h-[250px] flex flex-col overflow-hidden">
+            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 h-[320px] flex flex-col overflow-hidden">
               <p className={`${getTextSizeClass(testimonials[currentIndex]?.content, true)} leading-relaxed whitespace-pre-wrap mb-4 flex-1 text-right overflow-hidden`}>
                 {testimonials[currentIndex]?.content}
               </p>
@@ -160,7 +160,7 @@ const Testimonials = () => {
             {/* Desktop: 2 testimonials */}
             <div className="grid md:grid-cols-2 gap-6">
               {visibleTestimonials.map((testimonial, idx) => (
-                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[280px] flex flex-col overflow-hidden">
+                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[350px] flex flex-col overflow-hidden">
                   <p className={`${getTextSizeClass(testimonial?.content)} leading-relaxed whitespace-pre-wrap mb-6 flex-1 overflow-hidden`}>
                     {testimonial?.content}
                   </p>
