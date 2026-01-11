@@ -160,7 +160,7 @@ const Testimonials = () => {
             {/* Desktop: 2 testimonials */}
             <div className="grid md:grid-cols-2 gap-6">
               {visibleTestimonials.map((testimonial, idx) => (
-                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[350px] flex flex-col overflow-hidden">
+                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[420px] flex flex-col overflow-hidden">
                   <p className={`${getTextSizeClass(testimonial?.content)} leading-relaxed whitespace-pre-wrap mb-6 flex-1 overflow-hidden`}>
                     {testimonial?.content}
                   </p>
