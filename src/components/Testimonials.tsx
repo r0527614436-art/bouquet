@@ -26,6 +26,22 @@ const getTextSizeClass = (content: string, isMobile: boolean = false) => {
   return 'text-base';
 };
 
+// Helper function to calculate dynamic height based on longest testimonial
+const getCardHeight = (maxLength: number, isMobile: boolean = false) => {
+  if (isMobile) {
+    if (maxLength > 400) return 'h-[450px]';
+    if (maxLength > 300) return 'h-[380px]';
+    if (maxLength > 200) return 'h-[320px]';
+    return 'h-[280px]';
+  }
+  // Desktop
+  if (maxLength > 500) return 'h-[520px]';
+  if (maxLength > 400) return 'h-[450px]';
+  if (maxLength > 300) return 'h-[380px]';
+  if (maxLength > 200) return 'h-[320px]';
+  return 'h-[280px]';
+};
+
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -77,6 +93,14 @@ const Testimonials = () => {
 
   const visibleTestimonials = getVisibleTestimonials();
 
+  // Calculate max testimonial length for dynamic height
+  const maxTestimonialLength = testimonials.reduce((max, t) => 
+    Math.max(max, t.content?.length || 0), 0
+  );
+
+  const desktopCardHeight = getCardHeight(maxTestimonialLength, false);
+  const mobileCardHeight = getCardHeight(maxTestimonialLength, true);
+
   return (
     <section className="py-12 md:py-20 bg-[#11150d]" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +118,7 @@ const Testimonials = () => {
 
           {/* Single Testimonial on mobile */}
           <div className="w-full max-w-sm">
-            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 h-[320px] flex flex-col overflow-hidden">
+            <div className={`bg-white text-gray-800 rounded-2xl shadow-xl p-6 ${mobileCardHeight} flex flex-col overflow-hidden`}>
               <p className={`${getTextSizeClass(testimonials[currentIndex]?.content, true)} leading-relaxed whitespace-pre-wrap mb-4 flex-1 text-right overflow-hidden`}>
                 {testimonials[currentIndex]?.content}
               </p>
@@ -160,7 +184,7 @@ const Testimonials = () => {
             {/* Desktop: 2 testimonials */}
             <div className="grid md:grid-cols-2 gap-6">
               {visibleTestimonials.map((testimonial, idx) => (
-                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[420px] flex flex-col overflow-hidden">
+                <div key={testimonial?.id || idx} className={`bg-white text-gray-800 rounded-2xl shadow-xl p-8 ${desktopCardHeight} flex flex-col overflow-hidden`}>
                   <p className={`${getTextSizeClass(testimonial?.content)} leading-relaxed whitespace-pre-wrap mb-6 flex-1 overflow-hidden`}>
                     {testimonial?.content}
                   </p>
