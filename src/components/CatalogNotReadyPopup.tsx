@@ -13,7 +13,7 @@ const CatalogNotReadyPopup: React.FC<CatalogNotReadyPopupProps> = ({ isOpen, onC
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent 
-        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[700px] w-full [&>button]:hidden"
+        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[700px] w-full [&>button]:hidden z-[9999]"
         style={{ background: 'transparent' }}
       >
         {/* Main container with green border */}
