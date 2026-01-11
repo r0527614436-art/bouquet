@@ -180,11 +180,13 @@ const Catalog = () => {
       clearTimeout(clickTimer.current);
     }
     clickTimer.current = setTimeout(() => {
-      if (clickCount.current === 3) {
+      if (clickCount.current >= 3) {
         navigate('/admin');
+      } else {
+        navigate('/');
       }
       clickCount.current = 0;
-    }, 500);
+    }, 400);
   };
   const {
     data: categories = []
