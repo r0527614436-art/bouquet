@@ -658,12 +658,12 @@ const Index = () => {
             }, {
               img: '/lovable-uploads/catalog-hair.png',
               title: 'קישוטי\nשיער'
-            }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
-                <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
+                <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl md:text-4xl text-white text-center whitespace-pre-line">{item.title}</h3>
                 </div>
-              </Link>)}
+              </div>)}
           </div>
           {/* Mobile: Vertical stacked layout with rounded corners */}
           <div className="md:hidden flex flex-col gap-0 w-full mt-8 px-4">
@@ -679,12 +679,12 @@ const Index = () => {
             }, {
               img: '/lovable-uploads/catalog-hair.png',
               title: 'קישוטי שיער'
-            }].map((item, idx) => <Link key={idx} to="/catalog" className={`group relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
-                <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+            }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
+                <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl text-white text-center">{item.title}</h3>
                 </div>
-              </Link>)}
+              </div>)}
           </div>
         </div>
       </section>
