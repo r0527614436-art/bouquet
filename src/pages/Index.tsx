@@ -136,16 +136,22 @@ const Index = () => {
 
   const handleLogoClick = () => {
     const currentTime = Date.now();
-    if (currentTime - lastClickTime > 1000) {
+    if (currentTime - lastClickTime > 500) {
       setLogoClickCount(1);
+      // Single click - navigate home after short delay to check for double/triple click
+      setTimeout(() => {
+        if (logoClickCount <= 1) {
+          // Already on home page, no need to navigate
+        }
+      }, 600);
     } else {
       setLogoClickCount(prev => prev + 1);
+      if (logoClickCount >= 2) {
+        navigate('/admin');
+        setLogoClickCount(0);
+      }
     }
     setLastClickTime(currentTime);
-    if (logoClickCount === 2) {
-      navigate('/admin');
-      setLogoClickCount(0);
-    }
   };
   const openWhatsApp = () => {
     window.open('https://wa.me/972527614436', '_blank');
