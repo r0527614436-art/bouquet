@@ -11,6 +11,21 @@ interface Testimonial {
   is_active: boolean;
 }
 
+// Helper function to determine text size based on content length
+const getTextSizeClass = (content: string, isMobile: boolean = false) => {
+  const length = content?.length || 0;
+  if (isMobile) {
+    if (length > 250) return 'text-xs';
+    if (length > 180) return 'text-sm';
+    return 'text-sm';
+  }
+  // Desktop
+  if (length > 350) return 'text-xs';
+  if (length > 250) return 'text-sm';
+  if (length > 180) return 'text-base';
+  return 'text-base';
+};
+
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -79,8 +94,8 @@ const Testimonials = () => {
 
           {/* Single Testimonial on mobile */}
           <div className="w-full max-w-sm">
-            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 min-h-[250px] flex flex-col">
-              <p className="text-sm leading-relaxed whitespace-pre-wrap mb-4 flex-1 text-right">
+            <div className="bg-white text-gray-800 rounded-2xl shadow-xl p-6 h-[250px] flex flex-col overflow-hidden">
+              <p className={`${getTextSizeClass(testimonials[currentIndex]?.content, true)} leading-relaxed whitespace-pre-wrap mb-4 flex-1 text-right overflow-hidden`}>
                 {testimonials[currentIndex]?.content}
               </p>
               <p className="font-ploni-aaa font-medium text-base text-right">
@@ -145,8 +160,8 @@ const Testimonials = () => {
             {/* Desktop: 2 testimonials */}
             <div className="grid md:grid-cols-2 gap-6">
               {visibleTestimonials.map((testimonial, idx) => (
-                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 min-h-[280px] flex flex-col">
-                  <p className="text-base leading-relaxed whitespace-pre-wrap mb-6 flex-1">
+                <div key={testimonial?.id || idx} className="bg-white text-gray-800 rounded-2xl shadow-xl p-8 h-[280px] flex flex-col overflow-hidden">
+                  <p className={`${getTextSizeClass(testimonial?.content)} leading-relaxed whitespace-pre-wrap mb-6 flex-1 overflow-hidden`}>
                     {testimonial?.content}
                   </p>
                   <p className="font-ploni-aaa font-medium text-lg text-right mt-4">
