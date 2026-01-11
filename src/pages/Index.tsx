@@ -201,11 +201,6 @@ const Index = () => {
         return;
       }
       
-      toast({
-        title: "מוריד קטלוג",
-        description: "הקטלוג יורד כעת..."
-      });
-      
       // Get the PDF file URL from storage
       const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
       
