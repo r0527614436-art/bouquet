@@ -13,7 +13,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent 
-        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[800px] w-full"
+        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[900px] w-full"
         style={{ background: 'transparent' }}
       >
         {/* Main container with green border */}
@@ -24,7 +24,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
           }}
         >
-          {/* Background image with blur overlay */}
+          {/* Background image */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ 
@@ -32,21 +32,22 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
             }}
           />
           
-          {/* Dark blur overlay */}
+          {/* Light blur overlay - not covering text area */}
           <div 
             className="absolute inset-0"
             style={{ 
-              backgroundColor: 'rgba(0, 0, 0, 0.5)',
-              backdropFilter: 'blur(2px)'
+              backgroundColor: 'rgba(255, 255, 255, 0.3)',
+              backdropFilter: 'blur(3px)'
             }}
           />
           
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-10 md:px-12 md:py-14 min-h-[400px] md:min-h-[450px]">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-12 md:px-14 md:py-16 min-h-[450px] md:min-h-[520px]">
             {/* Close button */}
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 md:top-6 md:right-6 text-white/80 hover:text-white transition-colors z-20"
+              className="absolute top-4 right-4 md:top-6 md:right-6 hover:opacity-70 transition-opacity z-20"
+              style={{ color: '#314020' }}
               aria-label="סגור"
             >
               <X className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
@@ -62,7 +63,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
             
             {/* Body text */}
             <div 
-              className="font-ploni-aaa font-regular text-base md:text-xl leading-relaxed max-w-[600px] mb-10 md:mb-12 space-y-1"
+              className="font-ploni-aaa font-regular text-base md:text-xl leading-relaxed max-w-[650px] mb-10 md:mb-12 space-y-1"
               style={{ color: '#314020' }}
             >
               <p>בתהליך בחירת הפרחים והשזירה</p>
