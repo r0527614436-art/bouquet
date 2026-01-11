@@ -7,6 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const CatalogPDFManagement = () => {
   const [isUploading, setIsUploading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -79,6 +80,7 @@ const CatalogPDFManagement = () => {
   };
 
   const handleDelete = async () => {
+    setIsDeleting(true);
     try {
       const { error } = await supabase.storage
         .from('catalog-pdfs')
@@ -86,12 +88,12 @@ const CatalogPDFManagement = () => {
 
       if (error) throw error;
 
+      await queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
+
       toast({
         title: "הצלחה",
         description: "קובץ ה-PDF נמחק בהצלחה"
       });
-
-      queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
     } catch (error) {
       console.error('Error deleting PDF:', error);
       toast({
@@ -99,6 +101,8 @@ const CatalogPDFManagement = () => {
         description: "אירעה שגיאה במחיקת הקובץ",
         variant: "destructive"
       });
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -153,11 +157,21 @@ const CatalogPDFManagement = () => {
 
               <Button
                 onClick={handleDelete}
+                disabled={isDeleting}
                 variant="outline"
                 className="border-red-600 text-red-600 hover:bg-red-50"
               >
-                <Trash2 className="h-4 w-4 mr-2" />
-                מחק
+                {isDeleting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    מוחק...
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="h-4 w-4 mr-2" />
+                    מחק
+                  </>
+                )}
               </Button>
             </>
           )}
