@@ -24,19 +24,13 @@ const OrderConfirmation = () => {
         
         {/* Main Text */}
         <div className="space-y-6 md:space-y-8">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-['Ploni_Medium_AAA']" style={{
-          color: '#314020'
-        }}>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-synopsis font-medium text-[#314020]">
             ההזמנה נקלטה בהצלחה
           </h1>
-          <p className="text-3xl md:text-5xl lg:text-6xl font-['Ploni_Bold_AAA']" style={{
-          color: '#314020'
-        }}>
+          <p className="text-3xl md:text-5xl lg:text-6xl font-synopsis font-bold text-[#314020]">
             שמחים שבחרתם בנו!
           </p>
-          <p className="text-2xl md:text-3xl lg:text-4xl font-['Ploni_Regular_AAA'] mt-8" style={{
-          color: '#314020'
-        }}>
+          <p className="text-2xl md:text-3xl lg:text-4xl font-synopsis mt-8 text-[#314020]">
             צוות בוקט
           </p>
         </div>
