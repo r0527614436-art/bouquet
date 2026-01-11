@@ -88,7 +88,9 @@ const CatalogPDFManagement = () => {
 
       if (error) throw error;
 
-      await queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
+      // Force refetch by removing the query and refetching
+      queryClient.removeQueries({ queryKey: ['catalog-pdf-url'] });
+      await queryClient.refetchQueries({ queryKey: ['catalog-pdf-url'] });
 
       toast({
         title: "הצלחה",
