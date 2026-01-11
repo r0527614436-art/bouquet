@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, Save, X, Upload, FolderOpen, ChevronUp, ChevronDown, Minus } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Upload, FolderOpen, ChevronUp, ChevronDown, Minus, Download, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -38,8 +38,101 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
   const [newItem, setNewItem] = useState({ category_id: '', title: '', price: '', image_url: '', filter_tags: {} as any });
   const [editingItem, setEditingItem] = useState<Item | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [downloadingCategory, setDownloadingCategory] = useState<string | null>(null);
   const { createItemMutation, updateItemMutation, deleteItemMutation, updateItemOrderMutation, clearItemFiltersMutation } = useAdminItems();
   const { toast } = useToast();
+
+  // Sanitize filename - remove special characters
+  const sanitizeFilename = (name: string): string => {
+    return name
+      .replace(/[<>:"/\\|?*]/g, '') // Remove illegal characters
+      .replace(/\s+/g, '_') // Replace spaces with underscores
+      .trim();
+  };
+
+  // Download all images for a category
+  const downloadCategoryImages = async (categoryId: string, categoryName: string) => {
+    const categoryItems = items.filter(item => item.category_id === categoryId);
+    
+    if (categoryItems.length === 0) {
+      toast({
+        title: "אין תמונות",
+        description: "אין פריטים בקטגוריה זו",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setDownloadingCategory(categoryId);
+    let successCount = 0;
+    let errorCount = 0;
+
+    try {
+      for (const item of categoryItems) {
+        try {
+          // Fetch the image
+          const response = await fetch(item.image_url);
+          if (!response.ok) throw new Error('Failed to fetch image');
+          
+          const blob = await response.blob();
+          
+          // Get file extension from URL or content type
+          let extension = 'jpg';
+          const urlParts = item.image_url.split('.');
+          if (urlParts.length > 1) {
+            const ext = urlParts[urlParts.length - 1].split('?')[0].toLowerCase();
+            if (['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(ext)) {
+              extension = ext;
+            }
+          }
+          
+          // Create filename from item title or use a fallback
+          const itemName = item.title || `פריט_${successCount + 1}`;
+          const filename = `${sanitizeFilename(categoryName)}_${sanitizeFilename(itemName)}.${extension}`;
+          
+          // Create download link
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = filename;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+          
+          successCount++;
+          
+          // Small delay between downloads to avoid overwhelming the browser
+          await new Promise(resolve => setTimeout(resolve, 300));
+        } catch (error) {
+          console.error(`Error downloading image for item ${item.id}:`, error);
+          errorCount++;
+        }
+      }
+
+      if (successCount > 0) {
+        toast({
+          title: "הורדה הושלמה",
+          description: `${successCount} תמונות הורדו בהצלחה${errorCount > 0 ? ` (${errorCount} נכשלו)` : ''}`
+        });
+      } else {
+        toast({
+          title: "שגיאה",
+          description: "לא הצלחנו להוריד תמונות",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      console.error('Error downloading category images:', error);
+      toast({
+        title: "שגיאה",
+        description: "שגיאה בהורדת התמונות",
+        variant: "destructive"
+      });
+    } finally {
+      setDownloadingCategory(null);
+    }
+  };
 
   const uploadImageToStorage = async (file: File): Promise<string> => {
     console.log('Starting image upload for file:', file.name, 'Size:', file.size);
@@ -430,6 +523,35 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
           <Plus className="h-4 w-4 ml-2" />
           {createItemMutation.isPending ? 'מוסיף...' : 'הוסף פריט'}
         </Button>
+      </div>
+
+      {/* Download Images by Category */}
+      <div className="border-b pb-6 mb-6">
+        <h3 className="text-lg font-semibold mb-4">הורדת תמונות לפי קטגוריה</h3>
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {categories.map((category) => {
+            const categoryItemCount = items.filter(item => item.category_id === category.id).length;
+            const isDownloading = downloadingCategory === category.id;
+            
+            return (
+              <Button
+                key={category.id}
+                variant="outline"
+                onClick={() => downloadCategoryImages(category.id, category.name)}
+                disabled={isDownloading || categoryItemCount === 0}
+                className="flex items-center justify-center gap-2"
+              >
+                {isDownloading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="h-4 w-4" />
+                )}
+                <span>{category.name}</span>
+                <span className="text-xs text-gray-500">({categoryItemCount})</span>
+              </Button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Items List */}
