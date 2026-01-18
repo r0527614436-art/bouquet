@@ -8,8 +8,6 @@ const OrderConfirmation = () => {
       backgroundImage: 'url(/lovable-uploads/order-confirmation-bg.jpg)'
     }} />
       
-      {/* Blur/Fog Overlay */}
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]" />
       
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
