@@ -151,9 +151,9 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Description Text - Outside hero, on white background */}
-      <div className="py-8 md:py-0 md:absolute md:top-[70vh] md:left-1/2 md:-translate-x-1/2 md:z-10 text-center px-4 w-full" style={{ backgroundColor: '#F8FBF4' }}>
-        <div className="text-gray-800 text-sm md:text-lg space-y-1 md:mt-8 mb-8 md:mb-24">
+      {/* Description Text - Inside hero at bottom */}
+      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="text-gray-800 text-sm md:text-lg space-y-1">
           <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
           <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
           <p className="font-ploni-aaa font-light">עם כל זאת מכיון שהפרחים -בחלקם- אינם זמינים בכל ימות השנה</p>
