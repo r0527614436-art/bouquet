@@ -133,29 +133,31 @@ const Contact = () => {
         />
 
         {/* Content Container */}
-        <div className="absolute top-[35%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="absolute top-[20%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect */}
-          <div className="relative mb-4 md:mb-8 h-[80px] md:h-auto flex items-center justify-center">
+          <div className="relative mb-4 md:mb-8 h-[70px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[55px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[45px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               Contact us
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[45px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap text-center"
+            <h1 className="font-synopsis text-[40px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap text-center"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
               צור קשר
             </h1>
           </div>
+        </div>
+      </div>
 
-          {/* Description Text */}
-          <div className="text-gray-800 text-sm md:text-lg space-y-1 mt-8 md:mt-32 mb-12 md:mb-24">
-            <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
-            <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
-            <p className="font-ploni-aaa font-light">עם כל זאת מכיון שהפרחים -בחלקם- אינם זמינים בכל ימות השנה</p>
-            <p className="font-ploni-aaa font-light">ייתכנו שינויים קלים בסוג הפרח /גוון ובשלבי הפתיחה</p>
-          </div>
+      {/* Description Text - Outside hero, on white background */}
+      <div className="py-8 md:py-0 md:absolute md:top-[70vh] md:left-1/2 md:-translate-x-1/2 md:z-10 text-center px-4 w-full" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="text-gray-800 text-sm md:text-lg space-y-1 md:mt-8 mb-8 md:mb-24">
+          <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
+          <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
+          <p className="font-ploni-aaa font-light">עם כל זאת מכיון שהפרחים -בחלקם- אינם זמינים בכל ימות השנה</p>
+          <p className="font-ploni-aaa font-light">ייתכנו שינויים קלים בסוג הפרח /גוון ובשלבי הפתיחה</p>
         </div>
       </div>
 
