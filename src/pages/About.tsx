@@ -142,31 +142,33 @@ const About = () => {
         </div>
 
         {/* Content Container - positioned at the transition */}
-        <div className="absolute top-[35%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+        <div className="absolute top-[20%] md:top-[45%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
-          <div className="relative mb-4 md:mb-8 h-[100px] md:h-auto flex items-center justify-center">
+          <div className="relative mb-4 md:mb-8 h-[80px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[70px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[50px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               About
             </h1>
             {/* Hebrew Front Text */}
-            <h1 className="font-synopsis text-[60px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
+            <h1 className="font-synopsis text-[45px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none"
                 style={{
                   textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
                 }}>
               אודות
             </h1>
           </div>
+        </div>
+      </div>
 
-          {/* Description Text */}
-          <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 mt-8 md:mt-32 mb-16 md:mb-24 font-ploni-aaa max-w-3xl mx-auto px-4">
-            <p className="font-medium">
-              אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
-            </p>
-            <p className="font-regular">
-              ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה וכשיש שילוב של איכות טעם רגש והשראה - התוצאה מדברת בעד עצמה כי אנחנו בבוקט לא רק שוזרים פרחים אלא יוצרים חווית חושים. תגלו את הקסם שבפרחים ותזכו לראות איך כל חלום הופך ליצירת אומנות מלאת השראה.
-            </p>
-          </div>
+      {/* Description Text - Outside hero, on white background */}
+      <div className="py-8 md:py-0 md:absolute md:top-[70vh] md:left-1/2 md:-translate-x-1/2 md:z-10 text-center px-4 w-full" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 md:mt-8 mb-8 md:mb-24 font-ploni-aaa max-w-3xl mx-auto px-4">
+          <p className="font-medium">
+            אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
+          </p>
+          <p className="font-regular">
+            ומאמינם שכל שמחה ראויה לפרחים מושלמים שישלימו את האווירה וכשיש שילוב של איכות טעם רגש והשראה - התוצאה מדברת בעד עצמה כי אנחנו בבוקט לא רק שוזרים פרחים אלא יוצרים חווית חושים. תגלו את הקסם שבפרחים ותזכו לראות איך כל חלום הופך ליצירת אומנות מלאת השראה.
+          </p>
         </div>
       </div>
 
