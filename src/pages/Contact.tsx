@@ -72,7 +72,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[70vh] bg-cover bg-center" style={{
+      <div className="relative min-h-[45vh] md:min-h-[70vh] bg-cover bg-center" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
         backgroundSize: '120%',
         backgroundPosition: 'center 75%'
@@ -151,8 +151,8 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Description Text - Inside hero at bottom */}
-      <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
+      {/* Description Text - Between hero and form section */}
+      <div className="text-center px-4 py-6 md:py-8 -mt-4 md:-mt-8 relative z-20" style={{ backgroundColor: '#F8FBF4' }}>
         <div className="text-gray-800 text-sm md:text-lg space-y-1">
           <p className="font-ploni-aaa font-semibold">בתהליך בחירת הפרחים והשזירה</p>
           <p className="font-ploni-aaa font-light">מושקע מאמץ רב ע״מ להנגיש לכם זר עמיד יפה ורענן</p>
@@ -162,7 +162,7 @@ const Contact = () => {
       </div>
 
       {/* Contact Form and Info Section */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form - Now on the Right */}
           <div className="md:order-2">
