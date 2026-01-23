@@ -48,15 +48,32 @@ const CatalogPDFManagement = () => {
 
     setIsUploading(true);
     try {
+      console.log('Starting PDF upload...', { fileName: file.name, fileSize: file.size, fileType: file.type });
+      
+      // First, try to delete the existing file if it exists
+      const { error: deleteError } = await supabase.storage
+        .from('catalog-pdfs')
+        .remove(['catalog-download.pdf']);
+      
+      if (deleteError) {
+        console.log('Delete existing file result:', deleteError);
+        // Don't throw here - file might not exist
+      }
+      
       // Upload the PDF file with a fixed name
-      const { error: uploadError } = await supabase.storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
         .from('catalog-pdfs')
         .upload('catalog-download.pdf', file, {
           cacheControl: '3600',
           upsert: true
         });
 
-      if (uploadError) throw uploadError;
+      console.log('Upload result:', { uploadData, uploadError });
+
+      if (uploadError) {
+        console.error('Upload error details:', uploadError);
+        throw uploadError;
+      }
 
       toast({
         title: "הצלחה",
@@ -64,11 +81,14 @@ const CatalogPDFManagement = () => {
       });
 
       queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error uploading PDF:', error);
+      console.error('Error message:', error?.message);
+      console.error('Error status:', error?.status);
+      console.error('Error statusCode:', error?.statusCode);
       toast({
         title: "שגיאה",
-        description: "אירעה שגיאה בהעלאת הקובץ",
+        description: error?.message || "אירעה שגיאה בהעלאת הקובץ",
         variant: "destructive"
       });
     } finally {
