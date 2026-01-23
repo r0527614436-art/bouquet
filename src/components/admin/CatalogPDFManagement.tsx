@@ -5,6 +5,32 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+const BUCKET_NAME = 'catalog-pdfs';
+const CATALOG_PDF_PATH = 'catalog-download.pdf';
+
+async function publicFileExists(publicUrl: string): Promise<boolean> {
+  // Avoid CDN/browser caching of a previous 404 by adding a cache-busting query param.
+  const bustUrl = `${publicUrl}${publicUrl.includes('?') ? '&' : '?'}v=${Date.now()}`;
+
+  try {
+    const headResponse = await fetch(bustUrl, { method: 'HEAD', cache: 'no-store' });
+    if (headResponse.ok) return true;
+    if (headResponse.status === 404) return false;
+
+    // Some environments may not support HEAD properly (405/400). Fallback to GET and cancel the body.
+    if (headResponse.status === 405 || headResponse.status === 400) {
+      const getResponse = await fetch(bustUrl, { method: 'GET', cache: 'no-store' });
+      // Cancel download ASAP (we only need headers / status)
+      getResponse.body?.cancel();
+      return getResponse.ok;
+    }
+
+    return false;
+  } catch {
+    return false;
+  }
+}
+
 const CatalogPDFManagement = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -17,19 +43,11 @@ const CatalogPDFManagement = () => {
     queryKey: ['catalog-pdf-url'],
     queryFn: async () => {
       const { data } = supabase.storage
-        .from('catalog-pdfs')
-        .getPublicUrl('catalog-download.pdf');
+        .from(BUCKET_NAME)
+        .getPublicUrl(CATALOG_PDF_PATH);
       
-      // Check if file exists by trying to fetch it
-      try {
-        const response = await fetch(data.publicUrl, { method: 'HEAD' });
-        if (response.ok) {
-          return data.publicUrl;
-        }
-        return null;
-      } catch {
-        return null;
-      }
+      const exists = await publicFileExists(data.publicUrl);
+      return exists ? data.publicUrl : null;
     }
   });
 
@@ -52,8 +70,8 @@ const CatalogPDFManagement = () => {
       
       // First, try to delete the existing file if it exists
       const { error: deleteError } = await supabase.storage
-        .from('catalog-pdfs')
-        .remove(['catalog-download.pdf']);
+        .from(BUCKET_NAME)
+        .remove([CATALOG_PDF_PATH]);
       
       if (deleteError) {
         console.log('Delete existing file result:', deleteError);
@@ -62,8 +80,8 @@ const CatalogPDFManagement = () => {
       
       // Upload the PDF file with a fixed name
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('catalog-pdfs')
-        .upload('catalog-download.pdf', file, {
+        .from(BUCKET_NAME)
+        .upload(CATALOG_PDF_PATH, file, {
           cacheControl: '3600',
           upsert: true
         });
@@ -80,7 +98,18 @@ const CatalogPDFManagement = () => {
         description: "קובץ ה-PDF הועלה בהצלחה"
       });
 
-      queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
+      // Optimistic UI update (avoid a stuck "לא קיים" due to caching/propagation)
+      const { data: publicUrlData } = supabase.storage
+        .from(BUCKET_NAME)
+        .getPublicUrl(CATALOG_PDF_PATH);
+      queryClient.setQueryData(['catalog-pdf-url'], publicUrlData.publicUrl);
+
+      // Then revalidate from the network
+      await queryClient.invalidateQueries({ queryKey: ['catalog-pdf-url'] });
+      // A short delay helps when the public endpoint needs a moment to reflect the new object
+      setTimeout(() => {
+        queryClient.refetchQueries({ queryKey: ['catalog-pdf-url'] });
+      }, 800);
     } catch (error: any) {
       console.error('Error uploading PDF:', error);
       console.error('Error message:', error?.message);
@@ -103,8 +132,8 @@ const CatalogPDFManagement = () => {
     setIsDeleting(true);
     try {
       const { error } = await supabase.storage
-        .from('catalog-pdfs')
-        .remove(['catalog-download.pdf']);
+        .from(BUCKET_NAME)
+        .remove([CATALOG_PDF_PATH]);
 
       if (error) throw error;
 
