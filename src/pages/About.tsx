@@ -167,7 +167,7 @@ const About = () => {
       <section className="py-16 pt-12 md:pt-32 overflow-hidden" style={{
       backgroundColor: '#F8FBF4'
     }}>
-        <div className="relative">
+        <div className="relative overflow-visible">
           <style>{`
             @keyframes infiniteScroll {
               from { transform: translateX(0); }
@@ -178,13 +178,13 @@ const About = () => {
               direction: ltr;
             }
           `}</style>
-          <div className="scroll-container flex gap-6">
+          <div className="scroll-container flex gap-6 overflow-visible py-4">
             {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.jpg', '/lovable-uploads/about-scroll-2.jpg', '/lovable-uploads/about-scroll-3.jpg', '/lovable-uploads/about-scroll-4.jpg', '/lovable-uploads/about-scroll-5.jpg', '/lovable-uploads/about-scroll-6.jpg', '/lovable-uploads/about-scroll-7.jpg', '/lovable-uploads/about-scroll-8.jpg', '/lovable-uploads/about-scroll-9.jpg', '/lovable-uploads/about-scroll-10.jpg', '/lovable-uploads/about-scroll-11.jpg', '/lovable-uploads/about-scroll-12.jpg', '/lovable-uploads/about-scroll-13.jpg', '/lovable-uploads/about-scroll-14.jpg', '/lovable-uploads/about-scroll-15.jpg', '/lovable-uploads/about-scroll-16.jpg', '/lovable-uploads/about-scroll-17.jpg', '/lovable-uploads/about-scroll-18.jpg', '/lovable-uploads/about-scroll-19.jpg', '/lovable-uploads/about-scroll-20.jpg', '/lovable-uploads/about-scroll-21.jpg', '/lovable-uploads/about-scroll-22.jpg', '/lovable-uploads/about-scroll-23.jpg', '/lovable-uploads/about-scroll-24.jpg', '/lovable-uploads/about-scroll-25.jpg', '/lovable-uploads/about-scroll-26.jpg', '/lovable-uploads/about-scroll-27.jpg', '/lovable-uploads/about-scroll-28.jpg'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{
             width: 'calc((100vw - 48px) / 5)',
             height: 'calc(((100vw - 48px) / 5) * 1.5)'
           }}>
-                  <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="384" height="576" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 md:hidden" />
-                  <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="384" height="576" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500 hidden md:block" />
+                  <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="384" height="576" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 md:hidden" />
+                  <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="384" height="576" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 hidden md:block" />
                 </div>))}
           </div>
         </div>
