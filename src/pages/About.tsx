@@ -152,10 +152,10 @@ const About = () => {
       </div>
 
       {/* Description Text */}
-      <div className="py-8 text-center px-4 w-full" style={{
+      <div className="py-4 text-center px-4 w-full" style={{
       backgroundColor: '#F8FBF4'
     }}>
-        <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 mt-6 md:mt-10 mb-10 md:mb-16 font-ploni-aaa max-w-3xl mx-auto px-4">
+        <div className="text-gray-800 text-sm md:text-lg space-y-2 md:space-y-3 font-ploni-aaa max-w-3xl mx-auto px-4">
           <p className="font-medium">
             אנו בבוקט שמחים להיות שותפים לרגעים המרגשים שבהם תחינות ובקשות הופכות למציאות של ממש.
           </p>
@@ -164,7 +164,7 @@ const About = () => {
       </div>
 
       {/* Infinite Scrolling Images */}
-      <section className="py-16 pt-12 md:pt-32 overflow-hidden" style={{
+      <section className="pt-4 pb-16 overflow-hidden" style={{
       backgroundColor: '#F8FBF4'
     }}>
         <div className="relative overflow-visible">
