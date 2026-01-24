@@ -104,8 +104,19 @@ const Catalog = () => {
     }
     setIsSubmitting(true);
     try {
-      const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aמייל: ${contactForm.email}%0A%0Aהודעה:%0A${contactForm.message}`;
-      window.open(`https://wa.me/972527614436?text=${encodeURIComponent(message)}`, '_blank');
+      const response = await supabase.functions.invoke('send-contact', {
+        body: {
+          name: contactForm.name,
+          phone: contactForm.phone,
+          email: contactForm.email,
+          message: contactForm.message
+        }
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message || "שגיאה בשליחת ההודעה");
+      }
+
       toast({
         title: "ההודעה נשלחה בהצלחה",
         description: "ניצור איתך קשר בהקדם"
@@ -116,7 +127,8 @@ const Catalog = () => {
         email: '',
         message: ''
       });
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Error sending contact form:", error);
       toast({
         title: "שגיאה בשליחת ההודעה",
         description: "אנא נסה שוב מאוחר יותר",

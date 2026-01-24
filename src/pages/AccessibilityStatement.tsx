@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const AccessibilityStatement = () => {
   const { toast } = useToast();
@@ -35,17 +36,36 @@ const AccessibilityStatement = () => {
 
     setIsSubmitting(true);
     
-    const message = `שם: ${contactForm.name}%0Aטלפון: ${contactForm.phone}%0Aאימייל: ${contactForm.email}%0Aהודעה: ${contactForm.message}`;
-    const whatsappUrl = `https://wa.me/972527614436?text=${message}`;
-    window.open(whatsappUrl, '_blank');
-    
-    toast({
-      title: "הפנייה נשלחה",
-      description: "תודה על פנייתך, נחזור אליך בהקדם"
-    });
-    
-    setContactForm({ name: '', phone: '', email: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      const response = await supabase.functions.invoke('send-contact', {
+        body: {
+          name: contactForm.name,
+          phone: contactForm.phone,
+          email: contactForm.email,
+          message: contactForm.message
+        }
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message || "שגיאה בשליחת ההודעה");
+      }
+
+      toast({
+        title: "הפנייה נשלחה",
+        description: "תודה על פנייתך, נחזור אליך בהקדם"
+      });
+      
+      setContactForm({ name: '', phone: '', email: '', message: '' });
+    } catch (error: any) {
+      console.error("Error sending contact form:", error);
+      toast({
+        title: "שגיאה בשליחת ההודעה",
+        description: "אנא נסה שוב מאוחר יותר",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
