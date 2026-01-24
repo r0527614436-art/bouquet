@@ -54,7 +54,15 @@ const Catalog = () => {
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
   const [currentOrderItem, setCurrentOrderItem] = useState<CatalogItem | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [welcomePopupOpen, setWelcomePopupOpen] = useState(true);
+  const [welcomePopupOpen, setWelcomePopupOpen] = useState(false);
+  
+  // Show welcome popup after 3 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setWelcomePopupOpen(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
   const [contactForm, setContactForm] = useState({
     name: '',
     phone: '',
