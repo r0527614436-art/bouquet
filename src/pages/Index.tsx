@@ -29,7 +29,7 @@ interface HomepageSlide {
 }
 const Index = () => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const heroBackgrounds = ['/lovable-uploads/hero-bg-1.jpg', '/lovable-uploads/hero-bg-2.jpg', '/lovable-uploads/hero-bg-3.jpg'];
+  const heroBackgrounds = ['/lovable-uploads/hero-new-1.jpg', '/lovable-uploads/hero-new-2.jpg', '/lovable-uploads/hero-new-3.jpg'];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
