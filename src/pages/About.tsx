@@ -69,8 +69,11 @@ const About = () => {
     backgroundColor: '#F8FBF4'
   }} id="about-page">
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
-      backgroundImage: `url('/lovable-uploads/about-hero.jpg')`
+      <div className="relative min-h-[70vh] w-full" style={{
+      backgroundImage: `url('/lovable-uploads/about-hero.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'top center',
+      backgroundRepeat: 'no-repeat'
     }}>
         {/* Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" style={{
