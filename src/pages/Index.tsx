@@ -29,11 +29,7 @@ interface HomepageSlide {
 }
 const Index = () => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const heroBackgrounds = [
-    '/lovable-uploads/hero-bg-1.jpg',
-    '/lovable-uploads/hero-bg-2.jpg',
-    '/lovable-uploads/hero-bg-3.jpg'
-  ];
+  const heroBackgrounds = ['/lovable-uploads/hero-bg-1.jpg', '/lovable-uploads/hero-bg-2.jpg', '/lovable-uploads/hero-bg-3.jpg'];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
@@ -73,20 +69,17 @@ const Index = () => {
     const images = document.querySelectorAll('img');
     let loadedCount = 0;
     const totalImages = images.length;
-
     if (totalImages === 0) {
       setIsLoading(false);
       return;
     }
-
     const checkAllLoaded = () => {
       loadedCount++;
       if (loadedCount === totalImages) {
         setTimeout(() => setIsLoading(false), 500);
       }
     };
-
-    images.forEach((img) => {
+    images.forEach(img => {
       if (img.complete) {
         checkAllLoaded();
       } else {
@@ -99,10 +92,9 @@ const Index = () => {
     const timeout = setTimeout(() => {
       setIsLoading(false);
     }, 5000);
-
     return () => {
       clearTimeout(timeout);
-      images.forEach((img) => {
+      images.forEach(img => {
         img.removeEventListener('load', checkAllLoaded);
         img.removeEventListener('error', checkAllLoaded);
       });
@@ -125,15 +117,14 @@ const Index = () => {
 
   // Use database slides if available, otherwise use gallery slides
   const carouselImages = slides.length > 0 ? slides : gallerySlides;
-  
+
   // Auto-slide for hero section
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1));
+      setCurrentHeroIndex(prev => prev === heroBackgrounds.length - 1 ? 0 : prev + 1);
     }, 4000);
     return () => clearInterval(interval);
   }, [heroBackgrounds.length]);
-
   const handleLogoClick = () => {
     const currentTime = Date.now();
     if (currentTime - lastClickTime > 500) {
@@ -197,31 +188,33 @@ const Index = () => {
   const handleDownloadCatalog = async () => {
     try {
       // Use Storage API list to check file existence (reliable, not affected by CDN/cache)
-      const { data: files, error: listError } = await supabase.storage
-        .from('catalog-pdfs')
-        .list('', { search: 'catalog-download.pdf' });
-      
+      const {
+        data: files,
+        error: listError
+      } = await supabase.storage.from('catalog-pdfs').list('', {
+        search: 'catalog-download.pdf'
+      });
       const fileExists = !listError && files && files.some(f => f.name === 'catalog-download.pdf');
-      
       if (!fileExists) {
         console.log('Catalog PDF not found via storage.list');
         setShowCatalogNotReadyPopup(true);
         return;
       }
-      
+
       // Get the PDF file URL from storage with cache-busting
-      const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
-      
+      const {
+        data
+      } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
       if (!data?.publicUrl) {
         throw new Error('No catalog URL available');
       }
 
       // Add cache-busting to avoid NetFree/CDN caching issues
       const cacheBustedUrl = `${data.publicUrl}?v=${Date.now()}`;
-      
+
       // Fetch the file as blob to force download
       const response = await fetch(cacheBustedUrl);
-      
+
       // Check if blocked by NetFree (status 418) or other issues
       if (!response.ok || response.status === 418) {
         console.warn('Catalog fetch failed or blocked:', response.status, response.statusText);
@@ -233,16 +226,14 @@ const Index = () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג נפתח בחלון חדש"
         });
         return;
       }
-      
       const blob = await response.blob();
-      
+
       // Verify it's actually a PDF (not an error page)
       if (!blob.type.includes('pdf') && blob.size < 10000) {
         console.warn('Response is not a valid PDF, using direct link');
@@ -253,16 +244,14 @@ const Index = () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג נפתח בחלון חדש"
         });
         return;
       }
-      
       const url = window.URL.createObjectURL(blob);
-      
+
       // Download the PDF
       const link = document.createElement('a');
       link.href = url;
@@ -271,7 +260,6 @@ const Index = () => {
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-      
       toast({
         title: "הורדת קטלוג",
         description: "הקטלוג הורד בהצלחה"
@@ -331,25 +319,25 @@ const Index = () => {
       setIsSubmitting(false);
     }
   };
-  return (
-    <>
+  return <>
       <AnimatePresence>
         {isLoading && <LoadingScreen />}
       </AnimatePresence>
       
-      <CatalogNotReadyPopup 
-        isOpen={showCatalogNotReadyPopup} 
-        onClose={() => setShowCatalogNotReadyPopup(false)} 
-      />
+      <CatalogNotReadyPopup isOpen={showCatalogNotReadyPopup} onClose={() => setShowCatalogNotReadyPopup(false)} />
       
-      <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
+      <div className="min-h-screen" style={{
+      backgroundColor: '#F8FBF4'
+    }}>
       {/* Main Content */}
       <div>
 
       {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[90vh] overflow-visible">
         {/* Logo - Absolute Position in Hero - aligned with download button */}
-        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg hidden md:block" style={{ marginLeft: '59px' }}>
+        <div className="absolute left-4 top-8 z-40 bg-white/80 backdrop-blur-sm rounded-t-[3rem] p-3 mx-px my-0 px-px py-[3px] shadow-lg hidden md:block" style={{
+            marginLeft: '59px'
+          }}>
           <img src="/lovable-uploads/a426acbf-1250-4310-96a5-a86f391bac0f.png" alt="בוקט לוגו" width="476" height="726" fetchPriority="high" loading="eager" decoding="async" className="h-32 w-auto cursor-pointer hover:opacity-80 transition-opacity contrast-125 brightness-110" onClick={handleLogoClick} />
         </div>
         {/* Mobile Logo */}
@@ -359,44 +347,22 @@ const Index = () => {
         
           <div className="relative w-full h-full overflow-hidden">
           {/* Hero carousel images */}
-          {heroBackgrounds.map((bg, index) => (
-            <div 
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-700 ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}
-            >
-              <img 
-                src={bg} 
-                alt={`רקע ${index + 1}`} 
-                fetchPriority={index === 0 ? "high" : "low"} 
-                loading={index === 0 ? "eager" : "lazy"} 
-                decoding="async" 
-                className="w-full h-full object-cover" 
-              />
-            </div>
-          ))}
+          {heroBackgrounds.map((bg, index) => <div key={index} className={`absolute inset-0 transition-opacity duration-700 ${index === currentHeroIndex ? 'opacity-100' : 'opacity-0'}`}>
+              <img src={bg} alt={`רקע ${index + 1}`} fetchPriority={index === 0 ? "high" : "low"} loading={index === 0 ? "eager" : "lazy"} decoding="async" className="w-full h-full object-cover" />
+            </div>)}
           
           {/* Overlay with Title */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white/40 flex flex-col items-center justify-center px-4 pt-16 sm:pt-20 md:pt-24">
-            <img 
-              src={bouquetLogo3D} 
-              alt="בוקט" 
-              width="1200" 
-              height="400" 
-              fetchPriority="high" 
-              loading="eager" 
-              decoding="async"
-              className="h-auto w-[135vw] sm:w-[127vw] md:w-[120vw] lg:w-[112vw] xl:w-[105vw] max-w-[2400px] min-w-[450px]"
-              style={{
+            <img src={bouquetLogo3D} alt="בוקט" width="1200" height="400" fetchPriority="high" loading="eager" decoding="async" className="h-auto w-[135vw] sm:w-[127vw] md:w-[120vw] lg:w-[112vw] xl:w-[105vw] max-w-[2400px] min-w-[450px]" style={{
                 filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.2))'
-              }}
-            />
+              }} />
           </div>
           
           {/* Subtitle at bottom center - moved higher on mobile */}
           <div className="absolute bottom-32 md:bottom-24 left-0 right-0 flex flex-col items-center px-4">
             <p className="font-ploni-aaa font-light text-2xl sm:text-3xl md:text-4xl text-[#314020]" style={{
-              textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
-            }}>יופי, אומנות ויוקרה נפגשים.</p>
+                textShadow: '2px 2px 4px rgba(255,255,255,0.8)'
+              }}>יופי, אומנות ויוקרה נפגשים.</p>
           </div>
           </div>
 
@@ -405,7 +371,9 @@ const Index = () => {
         {/* Download Catalog Button - Positioned at section boundary - Hidden on mobile */}
         <div className="absolute left-4 md:left-8 bottom-0 translate-y-1/2 z-[100] hidden md:block">
           {/* Full circle background - behind the button */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full -z-10" style={{ backgroundColor: '#F8FBF4' }} />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full -z-10" style={{
+              backgroundColor: '#F8FBF4'
+            }} />
           
           <button onClick={handleDownloadCatalog} className="relative z-10 group" aria-label="להורדת הקטלוג הדיגיטלי שלנו">
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300 mx-[30px] sm:mx-[45px] md:mx-[59px] py-0 px-0 my-0 rounded-full">
@@ -420,18 +388,10 @@ const Index = () => {
         {/* Navigation arrows - in the light transition area */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[80] flex flex-col md:flex-row items-center gap-2 md:gap-4">
           <div className="flex items-center gap-4">
-            <button 
-              onClick={() => setCurrentHeroIndex((prev) => (prev === heroBackgrounds.length - 1 ? 0 : prev + 1))}
-              className="hover:scale-110 transition-transform duration-300"
-              aria-label="תמונה הבאה"
-            >
+            <button onClick={() => setCurrentHeroIndex(prev => prev === heroBackgrounds.length - 1 ? 0 : prev + 1)} className="hover:scale-110 transition-transform duration-300" aria-label="תמונה הבאה">
               <img src={arrowCircleGreen} alt="" className="w-10 h-10 md:w-12 md:h-12" />
             </button>
-            <button 
-              onClick={() => setCurrentHeroIndex((prev) => (prev === 0 ? heroBackgrounds.length - 1 : prev - 1))}
-              className="hover:scale-110 transition-transform duration-300 rotate-180"
-              aria-label="תמונה קודמת"
-            >
+            <button onClick={() => setCurrentHeroIndex(prev => prev === 0 ? heroBackgrounds.length - 1 : prev - 1)} className="hover:scale-110 transition-transform duration-300 rotate-180" aria-label="תמונה קודמת">
               <img src={arrowCircleGreen} alt="" className="w-10 h-10 md:w-12 md:h-12" />
             </button>
           </div>
@@ -445,7 +405,9 @@ const Index = () => {
         </div>
         
         {/* Curved bottom edge with transparent cutout */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-visible pointer-events-none" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-visible pointer-events-none" style={{
+            backgroundColor: '#F8FBF4'
+          }}>
           <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
             <defs>
               <mask id="curve-mask">
@@ -461,21 +423,20 @@ const Index = () => {
       {/* Gallery Carousel Section */}
       <section className="relative py-16 mt-0 bg-[#11150d]">
         {/* Light circle cutout for download button - positioned behind the button */}
-        <div
-          className="absolute hidden md:block z-[90] bg-background"
-          style={{
+        <div className="absolute hidden md:block z-[90] bg-background" style={{
             left: '78px',
             top: '-26px',
             width: '73px',
             height: '73px',
             borderRadius: '50%'
-          }}
-        />
+          }} />
         <GalleryCarousel slides={carouselImages} />
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: '#F8FBF4' }}>
+      <section id="about" className="py-12 md:py-16 overflow-hidden" style={{
+          backgroundColor: '#F8FBF4'
+        }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col-reverse lg:flex-row-reverse lg:relative lg:pr-[340px] items-center lg:items-end justify-start gap-8 md:gap-10 lg:gap-0">
             {/* Images - Right Side (below text on mobile) */}
@@ -508,10 +469,9 @@ const Index = () => {
             <div className="w-full px-2 sm:px-4 lg:px-0 lg:absolute lg:top-6 lg:right-0 lg:z-10">
               {/* Title with layered effect */}
               <div className="relative mb-4 md:mb-6">
-                <h2
-                  style={{ transform: 'translate(10px, -8px)' }}
-                  className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-light text-gray-400 opacity-60 leading-none select-none"
-                >
+                <h2 style={{
+                    transform: 'translate(10px, -8px)'
+                  }} className="font-allura text-[50px] md:text-[95px] lg:text-[105px] font-light text-gray-400 opacity-60 leading-none select-none">
                   About
                 </h2>
                 <h2 className="font-synopsis text-[40px] md:text-[80px] lg:text-[90px] font-semibold text-[#314020] absolute top-1/2 right-0 -translate-y-1/2 leading-none">
@@ -552,15 +512,15 @@ const Index = () => {
           {/* Mobile: 3 on top, 2 on bottom */}
           <div className="grid grid-cols-3 md:hidden gap-6 overflow-visible mb-6">
             {[{
-              icon: '/lovable-uploads/icon-flower.png',
-              text: 'פרחים טריים\nיום-יום'
-            }, {
-              icon: '/lovable-uploads/icon-bouquet.png',
-              text: 'מגוון עיצובים\nמקוריים'
-            }, {
-              icon: '/lovable-uploads/icon-gift.png',
-              text: 'עיצוב מתנות\nופרחים'
-            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                icon: '/lovable-uploads/icon-flower.png',
+                text: 'פרחים טריים\nיום-יום'
+              }, {
+                icon: '/lovable-uploads/icon-bouquet.png',
+                text: 'מגוון עיצובים\nמקוריים'
+              }, {
+                icon: '/lovable-uploads/icon-gift.png',
+                text: 'עיצוב מתנות\nופרחים'
+              }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
                 <div className="relative w-20 h-20 rounded-full bg-white flex items-center justify-center mb-3 shadow-lg hover:scale-110 transition-transform duration-300">
                   <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
                   <img src={service.icon} alt={service.text} width="40" height="40" loading="lazy" decoding="async" className="h-10 w-10 object-contain relative z-10" />
@@ -570,12 +530,12 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-2 md:hidden gap-6 overflow-visible justify-items-center">
             {[{
-              icon: '/lovable-uploads/icon-delivery.png',
-              text: 'משלוחים\nבפריסה ארצית'
-            }, {
-              icon: '/lovable-uploads/icon-time.png',
-              text: 'עמידה\nבזמנים'
-            }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                icon: '/lovable-uploads/icon-delivery.png',
+                text: 'משלוחים\nבפריסה ארצית'
+              }, {
+                icon: '/lovable-uploads/icon-time.png',
+                text: 'עמידה\nבזמנים'
+              }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
                 <div className="relative w-20 h-20 rounded-full bg-white flex items-center justify-center mb-3 shadow-lg hover:scale-110 transition-transform duration-300">
                   <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
                   <img src={service.icon} alt={service.text} width="40" height="40" loading="lazy" decoding="async" className="h-10 w-10 object-contain relative z-10" />
@@ -586,21 +546,21 @@ const Index = () => {
           {/* Desktop: 5 in a row */}
           <div className="hidden md:grid md:grid-cols-5 gap-8 md:gap-12 overflow-visible">
             {[{
-              icon: '/lovable-uploads/icon-flower.png',
-              text: 'פרחים טריים\nיום-יום'
-            }, {
-              icon: '/lovable-uploads/icon-bouquet.png',
-              text: 'מגוון עיצובים\nמקוריים'
-            }, {
-              icon: '/lovable-uploads/icon-gift.png',
-              text: 'עיצוב מתנות\nופרחים'
-            }, {
-              icon: '/lovable-uploads/icon-delivery.png',
-              text: 'משלוחים\nבפריסה ארצית'
-            }, {
-              icon: '/lovable-uploads/icon-time.png',
-              text: 'עמידה\nבזמנים'
-}].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
+                icon: '/lovable-uploads/icon-flower.png',
+                text: 'פרחים טריים\nיום-יום'
+              }, {
+                icon: '/lovable-uploads/icon-bouquet.png',
+                text: 'מגוון עיצובים\nמקוריים'
+              }, {
+                icon: '/lovable-uploads/icon-gift.png',
+                text: 'עיצוב מתנות\nופרחים'
+              }, {
+                icon: '/lovable-uploads/icon-delivery.png',
+                text: 'משלוחים\nבפריסה ארצית'
+              }, {
+                icon: '/lovable-uploads/icon-time.png',
+                text: 'עמידה\nבזמנים'
+              }].map((service, idx) => <div key={idx} className="flex flex-col items-center text-center cursor-pointer">
                 <div className="relative w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4 shadow-lg hover:scale-110 transition-transform duration-300">
                   <div className="absolute inset-1 rounded-full border-2 border-[#314020]"></div>
                   <img src={service.icon} alt={service.text} width="48" height="48" loading="lazy" decoding="async" className="h-12 w-12 object-contain relative z-10" />
@@ -612,8 +572,16 @@ const Index = () => {
       </section>
 
       {/* Diagonal Scrolling Gallery */}
-      <section className="overflow-hidden relative z-10" style={{ backgroundColor: '#F8FBF4', marginTop: '-120px', paddingTop: '80px', paddingBottom: '40px' }}>
-        <div className="relative" style={{ transform: 'rotate(-3deg)', margin: '0 -60px' }}>
+      <section className="overflow-hidden relative z-10" style={{
+          backgroundColor: '#F8FBF4',
+          marginTop: '-120px',
+          paddingTop: '80px',
+          paddingBottom: '40px'
+        }}>
+        <div className="relative" style={{
+            transform: 'rotate(-3deg)',
+            margin: '0 -60px'
+          }}>
           <style>{`
             @keyframes infiniteScrollDiagonal {
               from { transform: translateX(0); }
@@ -625,50 +593,25 @@ const Index = () => {
             }
           `}</style>
           <div className="diagonal-scroll-container flex gap-2 md:gap-4">
-            {[...Array(2)].map((_, setIndex) => 
-              [
-                '/lovable-uploads/about-scroll-1.jpg',
-                '/lovable-uploads/about-scroll-2.jpg',
-                '/lovable-uploads/about-scroll-3.jpg',
-                '/lovable-uploads/about-scroll-4.jpg',
-                '/lovable-uploads/about-scroll-5.jpg',
-                '/lovable-uploads/about-scroll-6.jpg',
-                '/lovable-uploads/about-scroll-7.jpg',
-                '/lovable-uploads/about-scroll-8.jpg',
-                '/lovable-uploads/about-scroll-9.jpg',
-                '/lovable-uploads/about-scroll-10.jpg',
-                '/lovable-uploads/about-scroll-11.jpg',
-                '/lovable-uploads/about-scroll-12.jpg',
-                '/lovable-uploads/about-scroll-13.jpg',
-                '/lovable-uploads/about-scroll-14.jpg'
-              ].map((img, idx) => (
-                <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-[100px] h-[140px] md:w-[280px] md:h-[380px]">
-                  <img 
-                    src={img} 
-                    alt={`עיצוב פרחים ${idx + 1}`} 
-                    width="280" 
-                    height="200" 
-                    loading="lazy" 
-                    decoding="async" 
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" 
-                  />
-                </div>
-              ))
-            )}
+            {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.jpg', '/lovable-uploads/about-scroll-2.jpg', '/lovable-uploads/about-scroll-3.jpg', '/lovable-uploads/about-scroll-4.jpg', '/lovable-uploads/about-scroll-5.jpg', '/lovable-uploads/about-scroll-6.jpg', '/lovable-uploads/about-scroll-7.jpg', '/lovable-uploads/about-scroll-8.jpg', '/lovable-uploads/about-scroll-9.jpg', '/lovable-uploads/about-scroll-10.jpg', '/lovable-uploads/about-scroll-11.jpg', '/lovable-uploads/about-scroll-12.jpg', '/lovable-uploads/about-scroll-13.jpg', '/lovable-uploads/about-scroll-14.jpg'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-[100px] h-[140px] md:w-[280px] md:h-[380px]">
+                  <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="280" height="200" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+                </div>))}
           </div>
         </div>
       </section>
 
       {/* Catalog Section */}
-      <section className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-20" style={{
+          backgroundColor: '#F8FBF4'
+        }}>
         <div className="text-center">
           <div className="max-w-4xl mx-auto px-4">
             {/* Title with layered effect */}
             <div className="relative mb-8 flex justify-center">
               <div className="relative">
               <h2 className="font-allura text-[95px] md:text-[105px] font-light text-gray-400 opacity-60 leading-none select-none" style={{
-                  transform: 'translate(15px, -10px)'
-                }}>
+                    transform: 'translate(15px, -10px)'
+                  }}>
                   Catalog
                 </h2>
                 <h2 className="font-synopsis text-[80px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none">
@@ -677,9 +620,7 @@ const Index = () => {
               </div>
             </div>
 
-            <p className="text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa font-regular mb-8 mt-12">
-              כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
-            </p>
+            <p className="text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa font-regular mb-8 mt-12">כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובס"ד, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.</p>
 
             {/* Button with Arrow */}
             <div className="mt-8 mb-12">
@@ -697,18 +638,18 @@ const Index = () => {
           {/* Catalog Images Grid - Full Width - Vertical on mobile */}
           <div className="hidden md:grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
-              img: '/lovable-uploads/catalog-engagement.png',
-              title: 'זרי\nאירוסין'
-            }, {
-              img: '/lovable-uploads/catalog-bouquet.png',
-              title: 'כסאות וזרי\nכלה'
-            }, {
-              img: '/lovable-uploads/catalog-chairs.png',
-              title: 'עיצוב\nאירועים'
-            }, {
-              img: '/lovable-uploads/catalog-hair.png',
-              title: 'קישוטי\nשיער'
-            }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
+                img: '/lovable-uploads/catalog-engagement.png',
+                title: 'זרי\nאירוסין'
+              }, {
+                img: '/lovable-uploads/catalog-bouquet.png',
+                title: 'כסאות וזרי\nכלה'
+              }, {
+                img: '/lovable-uploads/catalog-chairs.png',
+                title: 'עיצוב\nאירועים'
+              }, {
+                img: '/lovable-uploads/catalog-hair.png',
+                title: 'קישוטי\nשיער'
+              }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl md:text-4xl text-white text-center whitespace-pre-line">{item.title}</h3>
@@ -718,18 +659,18 @@ const Index = () => {
           {/* Mobile: Vertical stacked layout with rounded corners */}
           <div className="md:hidden flex flex-col gap-0 w-full mt-8 px-4">
             {[{
-              img: '/lovable-uploads/catalog-engagement.png',
-              title: 'זרי אירוסין'
-            }, {
-              img: '/lovable-uploads/catalog-bouquet.png',
-              title: 'כסאות וזרי כלה'
-            }, {
-              img: '/lovable-uploads/catalog-chairs.png',
-              title: 'עיצוב אירועים'
-            }, {
-              img: '/lovable-uploads/catalog-hair.png',
-              title: 'קישוטי שיער'
-            }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
+                img: '/lovable-uploads/catalog-engagement.png',
+                title: 'זרי אירוסין'
+              }, {
+                img: '/lovable-uploads/catalog-bouquet.png',
+                title: 'כסאות וזרי כלה'
+              }, {
+                img: '/lovable-uploads/catalog-chairs.png',
+                title: 'עיצוב אירועים'
+              }, {
+                img: '/lovable-uploads/catalog-hair.png',
+                title: 'קישוטי שיער'
+              }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl text-white text-center">{item.title}</h3>
@@ -740,7 +681,9 @@ const Index = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 relative" style={{ backgroundColor: '#F8FBF4' }}>
+      <section className="py-20 relative" style={{
+          backgroundColor: '#F8FBF4'
+        }}>
         <div className="px-4 sm:px-8 md:px-16 lg:px-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-12">
             {/* Left Side - Sticky Title */}
@@ -748,8 +691,8 @@ const Index = () => {
               <div className="relative flex justify-center lg:justify-start">
                 <div className="relative text-center md:text-right">
                 <h2 className="font-allura text-[32px] sm:text-[45px] md:text-[85px] font-light text-gray-500 opacity-70 leading-none select-none transition-all duration-300" style={{
-                    transform: 'translate(-25px, -10px)'
-                  }}>
+                      transform: 'translate(-25px, -10px)'
+                    }}>
                     Work process
                   </h2>
                   <h2 className="font-synopsis text-[28px] sm:text-[40px] md:text-[75px] font-semibold text-[#314020] absolute top-[55%] left-1/2 md:left-auto md:right-4 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none whitespace-nowrap">
@@ -763,33 +706,35 @@ const Index = () => {
             <div className="space-y-8 sm:space-y-12 max-w-[280px] sm:max-w-md lg:max-w-xl xl:max-w-2xl lg:mr-auto mx-auto md:mx-0 mt-8 sm:mt-4 lg:mt-0">
               {/* Step 01 */}
               <div className="space-y-4 text-center md:text-right">
-                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{
+                    backgroundColor: '#000000'
+                  }}>
                   <span className="font-synopsis font-normal text-4xl">01</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   שיחת מיקוד
                 </h3>
-                <p className="text-gray-700 text-lg leading-loose">
-                  אנחנו יוצרות שיחת מיקוד קצרה ומדויקת, שבה אנחנו מגדירות יחד את סגנון הזר/העיצוב התקציב, הגוונים המועדפים והאווירה שאת רוצה לייצר. המטרה היא להבין את כל הפרטים הדרושים כדי לדייק את הבחירה ולהתאימה בצורה מושלמת.
-                </p>
+                <p className="text-gray-700 text-lg leading-loose">אנו יוצרות שיחת מיקוד קצרה ומדויקת, שבה אנו מגדירות יחד את סגנון הזר/העיצוב התקציב, הגוונים המועדפים והאווירה שאת רוצה לייצר. המטרה היא להבין את כל הפרטים הדרושים כדי לדייק את הבחירה ולהתאימה בצורה מושלמת.</p>
               </div>
 
               {/* Step 02 */}
               <div className="space-y-4 text-center md:text-right">
-                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#314020' }}>
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{
+                    backgroundColor: '#314020'
+                  }}>
                   <span className="font-synopsis font-normal text-4xl">02</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   בחירה והשלמת ההזמנה
                 </h3>
-                <p className="text-gray-700 text-lg leading-loose">
-                  לאחר שדייקנו את המטרה על מנת שתוכלי לקבל את ההשראה הנגשנו לך את קטלוג מרהיב מסודר לבחירה נוחה וברורה. את בוחרת את העיצוב הרצוי כמובן שניתן לשנות גוונים ולשלב בין סוגי הזרים וביחד אנחנו מבצעות התאמות של צבעים, שילובים ופרטים עיצוביים כך שיתאימו לקונספט הכולל.
-                </p>
+                <p className="text-gray-700 text-lg leading-loose">לאחר שדייקנו את המטרה על מנת שתוכלי לקבל את ההשראה הנגשנו לך את קטלוג מרהיב מסודר לבחירה נוחה וברורה. את בוחרת את העיצוב הרצוי כמובן שניתן לשנות גוונים ולשלב בין סוגי הזרים וביחד אנו מבצעות התאמות של צבעים, שילובים ופרטים עיצוביים כך שיתאימו לקונספט הכולל.</p>
               </div>
 
               {/* Step 03 */}
               <div className="space-y-4 text-center md:text-right">
-                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#11150D' }}>
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{
+                    backgroundColor: '#11150D'
+                  }}>
                   <span className="font-synopsis font-normal text-4xl">03</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
@@ -802,15 +747,15 @@ const Index = () => {
 
               {/* Step 04 */}
               <div className="space-y-4 text-center md:text-right">
-                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{ backgroundColor: '#000000' }}>
+                <div className="inline-flex items-center justify-center text-white px-10 py-0.5 rounded-full" style={{
+                    backgroundColor: '#000000'
+                  }}>
                   <span className="font-synopsis font-normal text-4xl">04</span>
                 </div>
                 <h3 className="font-ploni-aaa font-black text-3xl text-gray-800">
                   הכנה ומשלוח
                 </h3>
-                <p className="text-gray-700 text-lg leading-loose">
-                  ביום האירוע אני שוזרת את הזר בהשקעה מרבית ובשימת לב מיוחדת לפרחים טריים, איכותיים ומעוררי השראה בקו נקי עדכני מרשים ומפתיע ובדגש על שירות מקצועי אדיב ואמין. הפרחים המעוצבים נשלחים בפריסה ארצית ומגיעים אליכם במראה טבעי ורענן המשלים את חווית השמחה.
-                </p>
+                <p className="text-gray-700 text-lg leading-loose">ביום האירוע אנו שוזרים את הזר בהשקעה מרבית ובשימת לב מיוחדת לפרחים טריים, איכותיים ומעוררי השראה בקו נקי עדכני מרשים ומפתיע ובדגש על שירות מקצועי אדיב ואמין. הפרחים המעוצבים נשלחים בפריסה ארצית ומגיעים אליכם במראה טבעי ורענן המשלים את חווית השמחה.</p>
               </div>
             </div>
           </div>
@@ -830,7 +775,9 @@ const Index = () => {
       
 
       {/* Contact Section */}
-      <section id="contact" className="py-20" style={{ backgroundColor: '#F8FBF4' }}>
+      <section id="contact" className="py-20" style={{
+          backgroundColor: '#F8FBF4'
+        }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mobile: Title on top, form, then contact info */}
           <div className="flex flex-col md:flex-row gap-12 items-start">
@@ -839,8 +786,8 @@ const Index = () => {
               {/* Title with layered effect */}
               <div className="relative mb-12 h-[80px] md:h-auto flex items-center justify-center md:block">
               <h2 className="font-allura text-[50px] md:text-[105px] font-light text-[#314020]/40 opacity-60 leading-none select-none" style={{
-                  transform: 'translate(15px, -10px)'
-                }}>
+                    transform: 'translate(15px, -10px)'
+                  }}>
                   Contact us
                 </h2>
                 <h2 className="font-synopsis text-[40px] md:text-[90px] font-semibold text-[#314020] absolute top-1/2 left-1/2 md:left-auto md:right-0 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 leading-none text-center md:text-right">
@@ -881,9 +828,9 @@ const Index = () => {
                     שם מלא
                   </label>
                   <input id="name" type="text" value={contactForm.name} onChange={e => setContactForm({
-                    ...contactForm,
-                    name: e.target.value
-                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
+                      ...contactForm,
+                      name: e.target.value
+                    })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
@@ -891,9 +838,9 @@ const Index = () => {
                     טלפון
                   </label>
                   <input id="phone" type="tel" value={contactForm.phone} onChange={e => setContactForm({
-                    ...contactForm,
-                    phone: e.target.value
-                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
+                      ...contactForm,
+                      phone: e.target.value
+                    })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
@@ -901,9 +848,9 @@ const Index = () => {
                     אימייל
                   </label>
                   <input id="email" type="email" value={contactForm.email} onChange={e => setContactForm({
-                    ...contactForm,
-                    email: e.target.value
-                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
+                      ...contactForm,
+                      email: e.target.value
+                    })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light text-[#314020]" required />
                 </div>
 
                 <div className="space-y-1 text-right">
@@ -911,9 +858,9 @@ const Index = () => {
                     הודעה
                   </label>
                   <textarea id="message" value={contactForm.message} onChange={e => setContactForm({
-                    ...contactForm,
-                    message: e.target.value
-                  })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" required />
+                      ...contactForm,
+                      message: e.target.value
+                    })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" required />
                 </div>
 
                 <button type="submit" className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-medium text-lg py-3 rounded-full transition-all duration-300 disabled:opacity-50" disabled={isSubmitting}>
@@ -966,8 +913,7 @@ const Index = () => {
               <Link to="/accessibility" className="text-white/60 text-sm hover:text-white transition-colors">
                 הצהרת נגישות
               </Link>
-              <button 
-                onClick={() => {
+              <button onClick={() => {
                   const modal = document.createElement('div');
                   modal.innerHTML = `
                     <div style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;" onclick="this.remove()">
@@ -983,9 +929,7 @@ const Index = () => {
                     </div>
                   `;
                   document.body.appendChild(modal.firstElementChild!);
-                }}
-                className="text-white/60 text-sm hover:text-white transition-colors"
-              >
+                }} className="text-white/60 text-sm hover:text-white transition-colors">
                 ביטול עסקה
               </button>
             </div>
@@ -997,7 +941,6 @@ const Index = () => {
       </footer>
       </div>
     </div>
-    </>
-  );
+    </>;
 };
 export default Index;
