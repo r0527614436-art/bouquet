@@ -8,6 +8,21 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 const BUCKET_NAME = 'catalog-pdfs';
 const CATALOG_PDF_PATH = 'catalog-download.pdf';
 
+async function storageObjectExists(bucket: string, objectPath: string): Promise<boolean> {
+  const parts = objectPath.split('/').filter(Boolean);
+  const fileName = parts.pop();
+  const folder = parts.join('/');
+  if (!fileName) return false;
+
+  const { data, error } = await supabase.storage.from(bucket).list(folder, {
+    limit: 100,
+    search: fileName,
+  });
+
+  if (error) throw error;
+  return (data ?? []).some((obj) => obj.name === fileName);
+}
+
 async function publicFileExists(publicUrl: string): Promise<boolean> {
   // Avoid CDN/browser caching of a previous 404 by adding a cache-busting query param.
   const bustUrl = `${publicUrl}${publicUrl.includes('?') ? '&' : '?'}v=${Date.now()}`;
@@ -45,9 +60,17 @@ const CatalogPDFManagement = () => {
       const { data } = supabase.storage
         .from(BUCKET_NAME)
         .getPublicUrl(CATALOG_PDF_PATH);
-      
-      const exists = await publicFileExists(data.publicUrl);
-      return exists ? data.publicUrl : null;
+
+      // Prefer Storage API (list) for existence checks (more reliable than HEAD on public URL).
+      try {
+        const existsViaStorage = await storageObjectExists(BUCKET_NAME, CATALOG_PDF_PATH);
+        if (existsViaStorage) return data.publicUrl;
+      } catch (e) {
+        console.warn('storageObjectExists failed, falling back to public URL check', e);
+      }
+
+      const existsViaPublic = await publicFileExists(data.publicUrl);
+      return existsViaPublic ? data.publicUrl : null;
     }
   });
 
