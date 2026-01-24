@@ -369,7 +369,7 @@ const Catalog = () => {
           </div>
         </div>
 
-        {/* Content Container - positioned at the transition */}
+        {/* Title Container - positioned on the image */}
         <div className="absolute top-[35%] md:top-[42%] left-1/2 -translate-x-1/2 z-10 text-center px-4 w-full">
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4 md:mb-4 h-[100px] md:h-auto flex items-center justify-center">
@@ -386,13 +386,15 @@ const Catalog = () => {
               קטלוג
             </h1>
           </div>
+        </div>
+      </div>
 
-          {/* Description Text - moved up closer to title */}
-          <div className="text-gray-800 text-sm md:text-lg space-y-1 mt-4 md:mt-0 mb-8 md:mb-8">
-            <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
-            <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
-            <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
-          </div>
+      {/* Description Text - positioned on the white transition area, outside the hero */}
+      <div className="text-center px-4 -mt-8 md:-mt-4 mb-8 relative z-10" style={{ backgroundColor: '#F8FBF4' }}>
+        <div className="text-gray-800 text-sm md:text-lg space-y-1 pt-4">
+          <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
+          <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
+          <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
         </div>
       </div>
 
