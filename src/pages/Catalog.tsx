@@ -11,12 +11,10 @@ import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
 import CatalogWelcomePopup from '@/components/CatalogWelcomePopup';
-
 interface FilterOption {
   name: string;
   options: string[];
 }
-
 interface Category {
   id: string;
   name: string;
@@ -25,7 +23,6 @@ interface Category {
   created_at: string;
   filters?: FilterOption[] | string[];
 }
-
 interface CatalogItem {
   id: string;
   title: string;
@@ -41,11 +38,13 @@ interface CatalogItem {
 const normalizeFilters = (filters: any): FilterOption[] => {
   if (!filters || !Array.isArray(filters)) return [];
   if (filters.length > 0 && typeof filters[0] === 'string') {
-    return filters.map((name: string) => ({ name, options: [] }));
+    return filters.map((name: string) => ({
+      name,
+      options: []
+    }));
   }
   return filters as FilterOption[];
 };
-
 const Catalog = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({});
@@ -130,10 +129,11 @@ const Catalog = () => {
         title: "מוריד קטלוג",
         description: "הקטלוג יורד כעת..."
       });
-      
+
       // Get the PDF file URL
-      const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
-      
+      const {
+        data
+      } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
       if (data?.publicUrl) {
         // Fetch the file as blob to force download
         const response = await fetch(data.publicUrl);
@@ -145,10 +145,9 @@ const Catalog = () => {
           });
           return;
         }
-        
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
-        
+
         // Download the PDF
         const link = document.createElement('a');
         link.href = url;
@@ -157,7 +156,6 @@ const Catalog = () => {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
-        
         toast({
           title: "הורדת קטלוג",
           description: "הקטלוג הורד בהצלחה"
@@ -240,18 +238,14 @@ const Catalog = () => {
     // Sort by category order
     return categoryIndexA - categoryIndexB;
   });
-  
+
   // Get available filters for selected category
-  const availableFilters = selectedCategory 
-    ? normalizeFilters(categories.find(c => c.id === selectedCategory)?.filters)
-    : [];
-  
+  const availableFilters = selectedCategory ? normalizeFilters(categories.find(c => c.id === selectedCategory)?.filters) : [];
+
   // Filter items by category and then by selected filter options
   const filteredItems = (() => {
-    let items = selectedCategory 
-      ? sortedItems.filter(item => item.category_id === selectedCategory) 
-      : sortedItems;
-    
+    let items = selectedCategory ? sortedItems.filter(item => item.category_id === selectedCategory) : sortedItems;
+
     // Apply all selected filters
     if (selectedCategory && Object.keys(selectedFilters).length > 0) {
       items = items.filter(item => {
@@ -261,10 +255,8 @@ const Catalog = () => {
         });
       });
     }
-    
     return items;
   })();
-  
   const handleAddToCart = (item: CatalogItem) => {
     addToCart({
       id: item.id,
@@ -309,12 +301,9 @@ const Catalog = () => {
     backgroundColor: '#F8FBF4'
   }} id="catalog-page">
       {/* Hero Section with Background Image */}
-      <div 
-        className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat"
-        style={{
-          backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`
-        }}
-      >
+      <div className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
+      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`
+    }}>
         {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" style={{
         background: `
@@ -390,11 +379,13 @@ const Catalog = () => {
       </div>
 
       {/* Description Text - positioned on the white transition area, outside the hero */}
-      <div className="text-center px-4 -mt-8 md:-mt-4 mb-8 relative z-10" style={{ backgroundColor: '#F8FBF4' }}>
+      <div className="text-center px-4 -mt-8 md:-mt-4 mb-8 relative z-10" style={{
+      backgroundColor: '#F8FBF4'
+    }}>
         <div className="text-gray-800 text-sm md:text-lg space-y-1 pt-4">
           <p className="font-ploni-aaa font-semibold">כל זר נולד מתוך שיחה תיאום ציפיות, הבנה, השראה וחיבור...</p>
           <p className="font-ploni-aaa font-light">בקטלוג שלנו תגלו זרים מרהיבים עיצובים מוקפדים</p>
-          <p className="font-ploni-aaa font-light">גלו,התרשמו ,ותנו לעצמכם להנות מכל הטוב הזה</p>
+          <p className="font-ploni-aaa font-light">גללו, התרשמו, ותנו לעצמכם להנות מכל הטוב הזה</p>
         </div>
       </div>
 
@@ -421,71 +412,46 @@ const Catalog = () => {
         </div>
 
         {/* Filter Dropdowns - only show when category is selected and has filters */}
-        {selectedCategory && availableFilters.length > 0 && (
-          <div className="mb-6">
+        {selectedCategory && availableFilters.length > 0 && <div className="mb-6">
             <div className="flex flex-wrap justify-start gap-3">
               {availableFilters.map(filter => {
-                const isOpen = openDropdown === filter.name;
-                const selectedOption = selectedFilters[filter.name];
-                
-                return (
-                  <div key={filter.name} className="relative">
-                    <button
-                      onClick={() => setOpenDropdown(isOpen ? null : filter.name)}
-                      className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-ploni-aaa transition-all duration-200 bg-white ${
-                        selectedOption 
-                          ? 'text-[#314020] shadow-sm' 
-                          : 'text-gray-600 hover:text-[#314020]'
-                      }`}
-                    >
+            const isOpen = openDropdown === filter.name;
+            const selectedOption = selectedFilters[filter.name];
+            return <div key={filter.name} className="relative">
+                    <button onClick={() => setOpenDropdown(isOpen ? null : filter.name)} className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-ploni-aaa transition-all duration-200 bg-white ${selectedOption ? 'text-[#314020] shadow-sm' : 'text-gray-600 hover:text-[#314020]'}`}>
                       <span>{selectedOption || filter.name}</span>
                       <ChevronDown className={`h-3 w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} strokeWidth={1} />
                     </button>
                     
                     {/* Dropdown Menu */}
-                    {isOpen && (
-                      <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[150px]">
+                    {isOpen && <div className="absolute top-full mt-1 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[150px]">
                         {/* Clear option */}
-                        {selectedOption && (
-                          <button
-                            onClick={() => {
-                              setSelectedFilters(prev => {
-                                const newFilters = { ...prev };
-                                delete newFilters[filter.name];
-                                return newFilters;
-                              });
-                              setOpenDropdown(null);
-                            }}
-                            className="w-full text-right px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 border-b"
-                          >
+                        {selectedOption && <button onClick={() => {
+                  setSelectedFilters(prev => {
+                    const newFilters = {
+                      ...prev
+                    };
+                    delete newFilters[filter.name];
+                    return newFilters;
+                  });
+                  setOpenDropdown(null);
+                }} className="w-full text-right px-4 py-2 text-sm text-gray-500 hover:bg-gray-100 border-b">
                             הכל
-                          </button>
-                        )}
-                        {filter.options.map(option => (
-                          <button
-                            key={option}
-                            onClick={() => {
-                              setSelectedFilters(prev => ({
-                                ...prev,
-                                [filter.name]: option
-                              }));
-                              setOpenDropdown(null);
-                            }}
-                            className={`w-full text-right px-4 py-2 text-sm hover:bg-gray-100 ${
-                              selectedOption === option ? 'bg-gray-50 text-[#314020] font-medium' : 'text-gray-700'
-                            }`}
-                          >
+                          </button>}
+                        {filter.options.map(option => <button key={option} onClick={() => {
+                  setSelectedFilters(prev => ({
+                    ...prev,
+                    [filter.name]: option
+                  }));
+                  setOpenDropdown(null);
+                }} className={`w-full text-right px-4 py-2 text-sm hover:bg-gray-100 ${selectedOption === option ? 'bg-gray-50 text-[#314020] font-medium' : 'text-gray-700'}`}>
                             {option}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                          </button>)}
+                      </div>}
+                  </div>;
+          })}
             </div>
-          </div>
-        )}
+          </div>}
 
         {/* Items Grid */}
         <div className="space-y-12">
@@ -493,7 +459,6 @@ const Catalog = () => {
         categories.map(category => {
           const categoryItems = sortedItems.filter(item => item.category_id === category.id);
           if (categoryItems.length === 0) return null;
-
           return <div key={category.id} className="space-y-8">
                   <div className="text-center">
                     <h2 className="text-2xl font-ploni-aaa font-black text-gray-800">{category.name}</h2>
@@ -502,7 +467,10 @@ const Catalog = () => {
                   
                   <div className="flex flex-wrap justify-center gap-4">
                     {categoryItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '350px', height: '350px' }} onClick={() => handleImageClick(item)}>
+                return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{
+                  width: '350px',
+                  height: '350px'
+                }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
@@ -526,17 +494,19 @@ const Catalog = () => {
                                 </div>}
                             </div>
                           </div>;
-                    })}
+              })}
                   </div>
                 </div>;
         })) : (/* Show single category items - filtered by selected filter if any */
         (() => {
           const selectedCategoryData = categories.find(c => c.id === selectedCategory);
-          
           return <div className="space-y-8">
                   <div className="flex flex-wrap justify-center gap-4">
                     {filteredItems.map(item => {
-                      return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{ width: '350px', height: '350px' }} onClick={() => handleImageClick(item)}>
+                return <div key={item.id} className="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer" style={{
+                  width: '350px',
+                  height: '350px'
+                }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
                               <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
                               
@@ -560,7 +530,7 @@ const Catalog = () => {
                                 </div>}
                             </div>
                           </div>;
-                    })}
+              })}
                   </div>
                 </div>;
         })())}
@@ -582,19 +552,10 @@ const Catalog = () => {
           </div>}
 
         {/* Image Viewer Modal */}
-        <ImageViewer 
-          isOpen={imageViewerOpen} 
-          onClose={() => setImageViewerOpen(false)} 
-          currentItem={currentImageItem} 
-          items={filteredItems} 
-          onPrevious={handlePreviousImage} 
-          onNext={handleNextImage} 
-          allowCart={currentImageItem ? getCategoryByItem(currentImageItem)?.allow_cart || false : false}
-          onOrderClick={(item) => {
-            setCurrentOrderItem(item);
-            setOrderDialogOpen(true);
-          }}
-        />
+        <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} allowCart={currentImageItem ? getCategoryByItem(currentImageItem)?.allow_cart || false : false} onOrderClick={item => {
+        setCurrentOrderItem(item);
+        setOrderDialogOpen(true);
+      }} />
         
         {/* Order Dialog */}
         <OrderDialog isOpen={orderDialogOpen} onClose={() => setOrderDialogOpen(false)} item={currentOrderItem} />
@@ -718,11 +679,7 @@ const Catalog = () => {
         <OrderDialog isOpen={orderDialogOpen} onClose={() => setOrderDialogOpen(false)} item={currentOrderItem} />
 
         {/* Welcome Popup */}
-        <CatalogWelcomePopup 
-          isOpen={welcomePopupOpen} 
-          onClose={() => setWelcomePopupOpen(false)} 
-          onContinue={() => setWelcomePopupOpen(false)} 
-        />
+        <CatalogWelcomePopup isOpen={welcomePopupOpen} onClose={() => setWelcomePopupOpen(false)} onContinue={() => setWelcomePopupOpen(false)} />
     </div>;
 };
 export default Catalog;
