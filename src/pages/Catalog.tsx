@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download, MapPin, Mail, Phone, ChevronDown } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -46,6 +46,7 @@ const normalizeFilters = (filters: any): FilterOption[] => {
   return filters as FilterOption[];
 };
 const Catalog = () => {
+  const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({});
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -222,12 +223,21 @@ const Catalog = () => {
     }
   });
 
-  // Set empty (all) as selected when categories are loaded
+  // Set category from URL param when categories are loaded
   useEffect(() => {
-    if (selectedCategory === null && categories.length > 0) {
-      setSelectedCategory('');
+    if (categories.length > 0) {
+      const categoryParam = searchParams.get('category');
+      if (categoryParam) {
+        // Find category by name
+        const matchingCategory = categories.find(c => c.name === categoryParam);
+        if (matchingCategory) {
+          setSelectedCategory(matchingCategory.id);
+        }
+      } else if (selectedCategory === '') {
+        // Keep "all" selected if no param
+      }
     }
-  }, [categories, selectedCategory]);
+  }, [categories, searchParams]);
   const {
     data: items = []
   } = useQuery({
