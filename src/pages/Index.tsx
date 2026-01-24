@@ -650,44 +650,52 @@ const Index = () => {
           {/* Catalog Images Grid - Full Width - Vertical on mobile */}
           <div className="hidden md:grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
-                img: '/lovable-uploads/catalog-engagement.png',
-                title: 'זרי\nאירוסין'
-              }, {
                 img: '/lovable-uploads/catalog-bouquet.png',
-                title: 'כסאות וזרי\nכלה'
+                title: 'כסאות וזרי\nכלה',
+                category: 'זרי כלה'
               }, {
-                img: '/lovable-uploads/catalog-chairs.png',
-                title: 'עיצוב\nאירועים'
+                img: '/lovable-uploads/catalog-engagement.png',
+                title: 'זרי\nאירוסין',
+                category: 'זרי אירוסין'
               }, {
                 img: '/lovable-uploads/catalog-hair.png',
-                title: 'קישוטי\nשיער'
-              }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[2/3] ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
+                title: 'קישוטי\nשיער',
+                category: 'קישוטי שיער'
+              }, {
+                img: '/lovable-uploads/catalog-chairs.png',
+                title: 'עיצוב\nאירועים',
+                category: 'מתנות מעוצבות'
+              }].map((item, idx) => <Link key={idx} to={`/catalog?category=${encodeURIComponent(item.category)}`} onClick={() => window.scrollTo(0, 0)} className={`relative overflow-hidden aspect-[2/3] cursor-pointer hover:scale-[1.02] transition-transform ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="900" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl md:text-4xl text-white text-center whitespace-pre-line">{item.title}</h3>
                 </div>
-              </div>)}
+              </Link>)}
           </div>
           {/* Mobile: Vertical stacked layout with rounded corners */}
           <div className="md:hidden flex flex-col gap-0 w-full mt-8 px-4">
             {[{
-                img: '/lovable-uploads/catalog-engagement.png',
-                title: 'זרי אירוסין'
-              }, {
                 img: '/lovable-uploads/catalog-bouquet.png',
-                title: 'כסאות וזרי כלה'
+                title: 'כסאות וזרי כלה',
+                category: 'זרי כלה'
               }, {
-                img: '/lovable-uploads/catalog-chairs.png',
-                title: 'עיצוב אירועים'
+                img: '/lovable-uploads/catalog-engagement.png',
+                title: 'זרי אירוסין',
+                category: 'זרי אירוסין'
               }, {
                 img: '/lovable-uploads/catalog-hair.png',
-                title: 'קישוטי שיער'
-              }].map((item, idx) => <div key={idx} className={`relative overflow-hidden aspect-[16/9] ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
+                title: 'קישוטי שיער',
+                category: 'קישוטי שיער'
+              }, {
+                img: '/lovable-uploads/catalog-chairs.png',
+                title: 'עיצוב אירועים',
+                category: 'מתנות מעוצבות'
+              }].map((item, idx) => <Link key={idx} to={`/catalog?category=${encodeURIComponent(item.category)}`} onClick={() => window.scrollTo(0, 0)} className={`relative overflow-hidden aspect-[16/9] cursor-pointer active:scale-[0.98] transition-transform ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>
                 <img src={item.img} alt={item.title} width="600" height="340" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end justify-center pb-6">
                   <h3 className="font-synopsis font-bold text-3xl text-white text-center">{item.title}</h3>
                 </div>
-              </div>)}
+              </Link>)}
           </div>
         </div>
       </section>
