@@ -144,7 +144,7 @@ const About = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4 md:mb-8 h-[80px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[50px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <h1 className="font-allura text-[50px] md:text-[160px] font-light text-gray-500/80 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
               About
             </h1>
             {/* Hebrew Front Text */}
