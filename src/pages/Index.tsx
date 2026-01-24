@@ -677,7 +677,7 @@ const Index = () => {
               </div>
             </div>
 
-            <p className="text-gray-700 text-xl leading-relaxed font-ploni-aaa font-light mb-8 mt-12">
+            <p className="text-gray-700 text-sm md:text-xl leading-relaxed font-ploni-aaa font-regular mb-8 mt-12">
               כל אירוע מיוחד מתחיל בפרטים הקטנים – והפרחים הם אלה שמעניקים לו את הקסם. מתוך אהבה לשזירה ובעזרת סייעתא דשמיא, הפכתי את התחביב לעסק שמלווה אירועים ברגעים הכי חשובים.
             </p>
 
