@@ -934,7 +934,7 @@ const Index = () => {
               </button>
             </div>
             <p className="text-white/60 text-sm">
-              © 2025 כל הזכויות שמורות ל <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
+              <span className="font-bold">בניה</span> <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a> | <span className="font-bold">עיצוב</span> <a href="https://rsilver.co.il" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">rsilver</a>
             </p>
           </div>
         </div>
