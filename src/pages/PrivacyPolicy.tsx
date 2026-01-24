@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
               <li><strong>כתובת דואר אלקטרוני:</strong> <a href="mailto:R0527614436@gmail.com" className="text-[#314020] hover:text-[#314020]/70 transition-colors">R0527614436@gmail.com</a></li>
               <li><strong>טלפון:</strong> <a href="tel:0527614436" className="text-[#314020] hover:text-[#314020]/70 transition-colors">0527614436</a></li>
               <li><strong>כתובת URL של האתר:</strong> <a href="https://bouquet.lovable.app/" target="_blank" rel="noopener noreferrer" className="text-[#314020] hover:text-[#314020]/70 transition-colors">https://bouquet.lovable.app/</a></li>
-              <li><strong>מען למכתבים:</strong> שערי תשובה 14 מודיעין עלית</li>
+              <li><strong>מען למכתבים:</strong> שערי תשובה 14 מודיעין עילית</li>
             </ul>
           </div>
 

@@ -853,7 +853,7 @@ const Index = () => {
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <MapPin className="h-6 w-6 text-[#314020]" />
                   <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]">
-                    שערי תשובה 14 - מודיעין עלית
+                    שערי תשובה 14 - מודיעין עילית
                   </button>
                 </div>
                 
@@ -929,7 +929,7 @@ const Index = () => {
                 <div className="flex items-center justify-center gap-3 text-lg">
                   <MapPin className="h-5 w-5 text-[#314020]" />
                   <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-[#314020]">
-                    שערי תשובה 14 - מודיעין עלית
+                    שערי תשובה 14 - מודיעין עילית
                   </button>
                 </div>
                 

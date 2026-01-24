@@ -78,7 +78,7 @@ const Catalog = () => {
   } = useToast();
   const navigate = useNavigate();
   const openGoogleMaps = () => {
-    const address = 'שערי תשובה 14, מודיעין עלית';
+    const address = 'שערי תשובה 14, מודיעין עילית';
     const encodedAddress = encodeURIComponent(address);
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(mapsUrl, '_blank');
@@ -594,7 +594,7 @@ const Catalog = () => {
                 <div className="flex items-center justify-start gap-3 text-lg">
                   <MapPin className="h-6 w-6 text-[#314020]" />
                   <button onClick={openGoogleMaps} className="hover:text-[#314020]/70 transition-colors font-ploni-aaa font-light text-left text-[#314020]">
-                    שערי תשובה 14 - מודיעין עלית
+                    שערי תשובה 14 - מודיעין עילית
                   </button>
                 </div>
                 

@@ -63,7 +63,7 @@ const Contact = () => {
   };
 
   const openGoogleMaps = () => {
-    const address = 'שערי תשובה 14, מודיעין עלית';
+    const address = 'שערי תשובה 14, מודיעין עילית';
     const encodedAddress = encodeURIComponent(address);
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(mapsUrl, '_blank');
@@ -218,7 +218,7 @@ const Contact = () => {
                   <MapPin className="h-6 w-6 text-[#314020] flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-ploni-aaa font-bold text-[#314020]">כתובת:</p>
-                    <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עלית</p>
+                    <p className="font-ploni-aaa font-light text-gray-700">שערי תשובה 14, מודיעין עילית</p>
                   </div>
                 </div>
 
