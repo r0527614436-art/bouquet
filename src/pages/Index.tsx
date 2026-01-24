@@ -416,19 +416,46 @@ const Index = () => {
           </button>
         </div>
         
-        {/* Curved bottom edge with transparent cutout */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 overflow-visible pointer-events-none" style={{
-            backgroundColor: '#F8FBF4'
-          }}>
-          <svg viewBox="0 0 1200 100" className="absolute bottom-0 w-full h-full" preserveAspectRatio="none">
-            <defs>
-              <mask id="curve-mask">
-                <rect width="1200" height="100" fill="white" />
-                <ellipse cx="600" cy="0" rx="80" ry="100" fill="black" />
-              </mask>
-            </defs>
-            <path d="M 0,0 L 0,100 L 1200,100 L 1200,0 Z" fill="#F8FBF4" mask="url(#curve-mask)" />
-          </svg>
+        {/* Cloud blending effect at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 md:h-56 pointer-events-none z-30">
+          {/* Main cloud shapes using radial gradients */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-full"
+            style={{
+              background: `
+                radial-gradient(ellipse 80% 100% at 20% 100%, #F8FBF4 0%, transparent 70%),
+                radial-gradient(ellipse 60% 90% at 50% 100%, #F8FBF4 0%, transparent 65%),
+                radial-gradient(ellipse 70% 95% at 80% 100%, #F8FBF4 0%, transparent 70%)
+              `
+            }}
+          />
+          {/* Additional layered clouds for depth */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-3/4"
+            style={{
+              background: `
+                radial-gradient(ellipse 50% 80% at 10% 100%, #F8FBF4 0%, transparent 60%),
+                radial-gradient(ellipse 45% 70% at 35% 100%, #F8FBF4 0%, transparent 55%),
+                radial-gradient(ellipse 55% 85% at 65% 100%, #F8FBF4 0%, transparent 60%),
+                radial-gradient(ellipse 50% 75% at 90% 100%, #F8FBF4 0%, transparent 55%)
+              `
+            }}
+          />
+          {/* Soft gradient base */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-1/2"
+            style={{
+              background: 'linear-gradient(to top, #F8FBF4 0%, #F8FBF4 30%, transparent 100%)'
+            }}
+          />
+          {/* Blur layer for softness */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-24 md:h-32"
+            style={{
+              background: 'linear-gradient(to top, #F8FBF4 0%, transparent 100%)',
+              filter: 'blur(20px)'
+            }}
+          />
         </div>
       </section>
 
