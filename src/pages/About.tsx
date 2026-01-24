@@ -72,7 +72,7 @@ const About = () => {
       <div className="relative min-h-[70vh] w-full" style={{
       backgroundImage: `url('/lovable-uploads/about-hero.jpg')`,
       backgroundSize: 'cover',
-      backgroundPosition: 'top center',
+      backgroundPosition: 'bottom center',
       backgroundRepeat: 'no-repeat'
     }}>
         {/* Cloud Gradient Overlay - only bottom fifth (20%) */}
