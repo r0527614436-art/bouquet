@@ -8,3 +8,15 @@ verify_jwt = false
 
 [functions.update-admin-password]
 verify_jwt = false
+
+[functions.send-order]
+verify_jwt = false
+
+[functions.send-contact]
+verify_jwt = false
+
+[functions.generate-catalog-html]
+verify_jwt = false
+
+[functions.generate-catalog-pdf]
+verify_jwt = false
