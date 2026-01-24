@@ -480,7 +480,7 @@ const Catalog = () => {
                   height: '350px'
                 }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
-                              <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
+                              <img src={item.image_url} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-opacity duration-300" onLoad={(e) => e.currentTarget.style.opacity = '1'} style={{ opacity: 0 }} />
                               
                                {/* Hover overlay */}
                               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -516,7 +516,7 @@ const Catalog = () => {
                   height: '350px'
                 }} onClick={() => handleImageClick(item)}>
                             <div className="w-full h-full overflow-hidden relative">
-                              <img src={item.image_url} alt={item.title} className="w-full h-full object-cover" />
+                              <img src={item.image_url} alt={item.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-opacity duration-300" onLoad={(e) => e.currentTarget.style.opacity = '1'} style={{ opacity: 0 }} />
                               
                               {/* Hover overlay */}
                               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
