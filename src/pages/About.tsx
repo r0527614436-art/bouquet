@@ -74,10 +74,8 @@ const About = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }} id="about-page">
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[70vh] bg-cover bg-center" style={{
-        backgroundImage: `url('/lovable-uploads/about-hero.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+      <div className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
+        backgroundImage: `url('/lovable-uploads/about-hero.jpg')`
       }}>
         {/* Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" 
