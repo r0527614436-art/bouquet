@@ -72,8 +72,11 @@ const Contact = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Hero Section with Background Image */}
-      <div className="relative min-h-[45vh] md:min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
-        backgroundImage: `url('/lovable-uploads/contact-hero-new.jpg')`
+      <div className="relative min-h-[45vh] md:min-h-[70vh] w-full" style={{
+        backgroundImage: `url('/lovable-uploads/contact-hero-new.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'top center',
+        backgroundRepeat: 'no-repeat'
       }}>
         {/* White Cloud Gradient Overlay */}
         <div className="absolute inset-0" 
