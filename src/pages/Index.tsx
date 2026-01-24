@@ -196,51 +196,88 @@ const Index = () => {
   });
   const handleDownloadCatalog = async () => {
     try {
-      // First check if catalog file exists
+      // Use Storage API list to check file existence (reliable, not affected by CDN/cache)
       const { data: files, error: listError } = await supabase.storage
         .from('catalog-pdfs')
         .list('', { search: 'catalog-download.pdf' });
       
-      if (listError || !files || files.length === 0 || !files.find(f => f.name === 'catalog-download.pdf')) {
-        // No catalog file - show popup
+      const fileExists = !listError && files && files.some(f => f.name === 'catalog-download.pdf');
+      
+      if (!fileExists) {
+        console.log('Catalog PDF not found via storage.list');
         setShowCatalogNotReadyPopup(true);
         return;
       }
       
-      // Get the PDF file URL from storage
+      // Get the PDF file URL from storage with cache-busting
       const { data } = supabase.storage.from('catalog-pdfs').getPublicUrl('catalog-download.pdf');
       
-      if (data?.publicUrl) {
-        // Fetch the file as blob to force download
-        const response = await fetch(data.publicUrl);
-        if (!response.ok) {
-          // File doesn't exist - show popup
-          setShowCatalogNotReadyPopup(true);
-          return;
-        }
-        
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        
-        // Download the PDF
+      if (!data?.publicUrl) {
+        throw new Error('No catalog URL available');
+      }
+
+      // Add cache-busting to avoid NetFree/CDN caching issues
+      const cacheBustedUrl = `${data.publicUrl}?v=${Date.now()}`;
+      
+      // Fetch the file as blob to force download
+      const response = await fetch(cacheBustedUrl);
+      
+      // Check if blocked by NetFree (status 418) or other issues
+      if (!response.ok || response.status === 418) {
+        console.warn('Catalog fetch failed or blocked:', response.status, response.statusText);
+        // File exists in storage but fetch failed - try direct link as fallback
         const link = document.createElement('a');
-        link.href = url;
+        link.href = cacheBustedUrl;
         link.download = 'קטלוג בוקט.pdf';
+        link.target = '_blank';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
         
         toast({
           title: "הורדת קטלוג",
-          description: "הקטלוג הורד בהצלחה"
+          description: "הקטלוג נפתח בחלון חדש"
         });
-      } else {
-        throw new Error('No catalog URL available');
+        return;
       }
+      
+      const blob = await response.blob();
+      
+      // Verify it's actually a PDF (not an error page)
+      if (!blob.type.includes('pdf') && blob.size < 10000) {
+        console.warn('Response is not a valid PDF, using direct link');
+        const link = document.createElement('a');
+        link.href = cacheBustedUrl;
+        link.download = 'קטלוג בוקט.pdf';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        toast({
+          title: "הורדת קטלוג",
+          description: "הקטלוג נפתח בחלון חדש"
+        });
+        return;
+      }
+      
+      const url = window.URL.createObjectURL(blob);
+      
+      // Download the PDF
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'קטלוג בוקט.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      toast({
+        title: "הורדת קטלוג",
+        description: "הקטלוג הורד בהצלחה"
+      });
     } catch (error) {
       console.error('Error downloading catalog:', error);
-      // Show popup on error
       setShowCatalogNotReadyPopup(true);
     }
   };
