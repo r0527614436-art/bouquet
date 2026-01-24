@@ -1,7 +1,8 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Link } from 'react-router-dom';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import arrowCircleGreen from '@/assets/arrow-circle-new.png';
 
 interface CatalogNotReadyPopupProps {
@@ -40,6 +41,12 @@ const CatalogNotReadyPopup: React.FC<CatalogNotReadyPopupProps> = ({ isOpen, onC
               backdropFilter: 'blur(3px)'
             }}
           />
+          
+          {/* Accessibility: Hidden title and description for screen readers */}
+          <VisuallyHidden>
+            <DialogTitle>הקטלוג בהכנה</DialogTitle>
+            <DialogDescription>הקטלוג עדיין לא זמין להורדה, מוזמנים לגלול בקטלוג באתר</DialogDescription>
+          </VisuallyHidden>
           
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-12 md:px-14 md:py-16 min-h-[350px] md:min-h-[400px]">
