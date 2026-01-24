@@ -8,11 +8,23 @@ const corsHeaders = {
 interface OrderData {
   customer_name: string;
   phone: string;
-  email: string | null;
+  phone_mechutenet?: string;
+  email?: string | null;
   event_date: string;
+  day_of_week?: string;
+  address?: string;
+  dress_color?: string;
+  payment_method?: string;
   items: string;
   created_at: string;
 }
+
+const paymentMethodLabels: Record<string, string> = {
+  'cash': 'מזומן',
+  'bit': 'ביט',
+  'credit': 'אשראי',
+  'transfer': 'העברה בנקאית'
+};
 
 async function sendEmail(subject: string, html: string) {
   const apiKey = Deno.env.get('RESEND_API_KEY');
@@ -79,7 +91,12 @@ const handler = async (req: Request): Promise<Response> => {
     console.log('Order received:', {
       customer: orderData.customer_name,
       phone: orderData.phone,
+      phone_mechutenet: orderData.phone_mechutenet,
       date: orderData.event_date,
+      day_of_week: orderData.day_of_week,
+      address: orderData.address,
+      dress_color: orderData.dress_color,
+      payment_method: orderData.payment_method,
       itemCount: items.length
     });
 
@@ -114,6 +131,7 @@ const handler = async (req: Request): Promise<Response> => {
           .header h1 { margin: 0; font-size: 24px; }
           .content { padding: 25px; text-align: right; }
           .info-box { background: #f8fbf4; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+          .section-title { color: #314020; font-size: 16px; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #314020; padding-bottom: 8px; }
           .info-row { display: flex; flex-direction: row-reverse; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e8e8; }
           .info-row:last-child { border-bottom: none; }
           .label { color: #666; font-weight: bold; text-align: right; }
@@ -128,7 +146,9 @@ const handler = async (req: Request): Promise<Response> => {
             <h1>הזמנה חדשה מהאתר</h1>
           </div>
           <div class="content">
+            <!-- Customer Details -->
             <div class="info-box">
+              <div class="section-title">פרטי הלקוח</div>
               <div class="info-row">
                 <span class="label">שם המזמין:</span>
                 <span class="value">${orderData.customer_name}</span>
@@ -137,10 +157,60 @@ const handler = async (req: Request): Promise<Response> => {
                 <span class="label">טלפון:</span>
                 <span class="value"><a href="tel:${orderData.phone}" style="color: #314020;">${orderData.phone}</a></span>
               </div>
+              ${orderData.phone_mechutenet ? `
+              <div class="info-row">
+                <span class="label">טלפון מחותנת:</span>
+                <span class="value"><a href="tel:${orderData.phone_mechutenet}" style="color: #314020;">${orderData.phone_mechutenet}</a></span>
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- Event Details -->
+            <div class="info-box">
+              <div class="section-title">פרטי האירוע</div>
               <div class="info-row">
                 <span class="label">תאריך האירוע:</span>
                 <span class="value">${new Date(orderData.event_date).toLocaleDateString('he-IL')}</span>
               </div>
+              ${orderData.day_of_week ? `
+              <div class="info-row">
+                <span class="label">יום בשבוע:</span>
+                <span class="value">${orderData.day_of_week}</span>
+              </div>
+              ` : ''}
+              ${orderData.dress_color ? `
+              <div class="info-row">
+                <span class="label">גוון שמלה:</span>
+                <span class="value">${orderData.dress_color}</span>
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- Delivery Address -->
+            ${orderData.address ? `
+            <div class="info-box">
+              <div class="section-title">כתובת למשלוח</div>
+              <div class="info-row">
+                <span class="label">כתובת:</span>
+                <span class="value">${orderData.address}</span>
+              </div>
+            </div>
+            ` : ''}
+
+            <!-- Payment Method -->
+            ${orderData.payment_method ? `
+            <div class="info-box">
+              <div class="section-title">אמצעי תשלום</div>
+              <div class="info-row">
+                <span class="label">שיטת תשלום:</span>
+                <span class="value">${paymentMethodLabels[orderData.payment_method] || orderData.payment_method}</span>
+              </div>
+            </div>
+            ` : ''}
+
+            <!-- Order Metadata -->
+            <div class="info-box">
+              <div class="section-title">פרטי הזמנה</div>
               <div class="info-row">
                 <span class="label">תאריך הזמנה:</span>
                 <span class="value">${new Date(orderData.created_at).toLocaleDateString('he-IL')} ${new Date(orderData.created_at).toLocaleTimeString('he-IL')}</span>
