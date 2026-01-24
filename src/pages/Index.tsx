@@ -951,7 +951,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col items-center text-center space-y-2">
             <p className="text-white/90 font-ploni-aaa text-base">
-              בוקט - שזירת פרחים מקצועית | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
+              בוקט | <a href="tel:0527614436" className="hover:text-white transition-colors">0527614436</a> | <a href="mailto:r0527614436@gmail.com" className="hover:text-white transition-colors">r0527614436@gmail.com</a>
             </p>
             <div className="flex gap-4">
               <Link to="/privacy-policy" className="text-white/60 text-sm hover:text-white transition-colors">
@@ -981,7 +981,7 @@ const Index = () => {
               </button>
             </div>
             <p className="text-white/60 text-sm">
-              <span className="font-bold">בניה</span> <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a> | <span className="font-bold">עיצוב</span> <a href="https://rsilver.co.il" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">rsilver</a>
+              <span className="font-bold">בניה</span> <a href="https://jobclic.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">AD אתרים</a>
             </p>
           </div>
         </div>
