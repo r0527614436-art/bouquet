@@ -305,7 +305,7 @@ function generateCatalogHTML(items: any[], categories: any[]): string {
   html += `
       <div class="footer">
         <p>עודכן ב: ${new Date().toLocaleDateString('he-IL')}</p>
-        <p>רוחי רובינשטיין עיצוב אירועים | מודיעין עלית והסביבה</p>
+        <p>רוחי רובינשטיין עיצוב אירועים | מודיעין עילית והסביבה</p>
       </div>
     </body>
     </html>
