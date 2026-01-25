@@ -920,7 +920,7 @@ const Index = () => {
                     })} className="w-full bg-transparent border-0 border-b-2 border-[#314020] text-right px-0 py-1 focus:outline-none focus:border-[#314020] focus:ring-0 font-ploni-aaa font-light min-h-[60px] resize-none text-[#314020]" required />
                 </div>
 
-                <div className="flex items-start gap-3 justify-end mt-4 flex-row-reverse">
+                <div className="flex items-start gap-3 mt-4">
                   <input
                     type="checkbox"
                     id="privacy-checkbox-index"
@@ -928,7 +928,7 @@ const Index = () => {
                     onChange={(e) => setPrivacyAccepted(e.target.checked)}
                     className="h-5 w-5 rounded border-2 border-[#314020] bg-transparent checked:bg-[#314020] checked:border-[#314020] focus:ring-[#314020] focus:ring-offset-0 cursor-pointer mt-0.5 accent-[#314020]"
                   />
-                  <label htmlFor="privacy-checkbox-index" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer">
+                  <label htmlFor="privacy-checkbox-index" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer text-right">
                     קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
                   </label>
                 </div>
