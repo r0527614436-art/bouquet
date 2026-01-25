@@ -25,6 +25,7 @@ const Order = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +34,15 @@ const Order = () => {
       toast({
         title: "שגיאה",
         description: "אנא מלאו את כל השדות",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!privacyAccepted) {
+      toast({
+        title: "שגיאה",
+        description: "יש לאשר את מדיניות הפרטיות",
         variant: "destructive"
       });
       return;
@@ -212,18 +222,27 @@ const Order = () => {
             </Popover>
           </div>
 
+          <div className="flex items-start gap-3 justify-end mt-4">
+            <label htmlFor="privacy-checkbox-order" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer">
+              קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+            </label>
+            <input
+              type="checkbox"
+              id="privacy-checkbox-order"
+              checked={privacyAccepted}
+              onChange={(e) => setPrivacyAccepted(e.target.checked)}
+              className="h-5 w-5 rounded border-[#314020] text-[#314020] focus:ring-[#314020] cursor-pointer mt-0.5"
+            />
+          </div>
+
           {/* Submit Button */}
           <Button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !privacyAccepted}
             className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white font-ploni-aaa font-bold text-lg py-6 rounded-full transition-all duration-300 disabled:opacity-50"
           >
             {isSubmitting ? 'שולח...' : 'שליחת הזמנה'}
           </Button>
-          
-          <p className="text-center text-sm text-gray-500 font-ploni-aaa">
-            בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
-          </p>
         </form>
       </div>
     </div>

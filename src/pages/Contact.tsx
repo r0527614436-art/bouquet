@@ -13,6 +13,7 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const { toast } = useToast();
 
   const handleContactSubmit = async (e: React.FormEvent) => {
@@ -22,6 +23,15 @@ const Contact = () => {
       toast({
         title: "שגיאה",
         description: "אנא מלא את כל השדות",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!privacyAccepted) {
+      toast({
+        title: "שגיאה",
+        description: "יש לאשר את מדיניות הפרטיות",
         variant: "destructive"
       });
       return;
@@ -212,16 +222,25 @@ const Contact = () => {
                   className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] resize-none focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
+              <div className="flex items-start gap-3 justify-end mt-4">
+                <label htmlFor="privacy-checkbox" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer">
+                  קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+                </label>
+                <input
+                  type="checkbox"
+                  id="privacy-checkbox"
+                  checked={privacyAccepted}
+                  onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                  className="h-5 w-5 rounded border-[#314020] text-[#314020] focus:ring-[#314020] cursor-pointer mt-0.5"
+                />
+              </div>
               <button 
                 type="submit" 
-                disabled={isSubmitting}
+                disabled={isSubmitting || !privacyAccepted}
                 className="w-full bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full py-3 text-lg font-ploni-aaa font-medium transition-all duration-300 disabled:opacity-50"
               >
                 {isSubmitting ? 'שולח...' : 'שליחה'}
               </button>
-              <p className="text-center text-sm text-gray-500 mt-4">
-                בשליחת הטופס את/ה מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
-              </p>
             </form>
           </div>
 
