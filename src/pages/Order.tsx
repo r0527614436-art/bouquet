@@ -236,12 +236,12 @@ const Order = () => {
                 className="flex h-4 w-4 cursor-pointer items-center justify-center rounded border-2 border-[#314020] bg-transparent transition-all duration-200 peer-checked:border-[#314020]"
               >
                 <svg
-                  className="h-5 w-5 text-[#314020] transition-transform duration-200 -mt-1 -mr-1"
+                  className="h-7 w-7 text-[#314020] transition-transform duration-200 -mt-2 -mr-2"
                   style={{ transform: privacyAccepted ? 'scale(1)' : 'scale(0)' }}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="3"
+                  strokeWidth="4"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
