@@ -222,17 +222,17 @@ const Contact = () => {
                   className="w-full px-0 py-3 border-0 border-b-2 border-[#314020] bg-transparent outline-none font-ploni-aaa font-light text-[#314020] resize-none focus:outline-none focus:border-[#314020] focus:ring-0 text-right transition-colors"
                 />
               </div>
-              <div className="flex items-start gap-3 justify-end mt-4">
-                <label htmlFor="privacy-checkbox" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer">
-                  קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
-                </label>
+              <div className="flex items-start gap-3 justify-end mt-4 flex-row-reverse">
                 <input
                   type="checkbox"
                   id="privacy-checkbox"
                   checked={privacyAccepted}
                   onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                  className="h-5 w-5 rounded border-[#314020] text-[#314020] focus:ring-[#314020] cursor-pointer mt-0.5"
+                  className="h-5 w-5 rounded border-2 border-[#314020] bg-transparent checked:bg-[#314020] checked:border-[#314020] focus:ring-[#314020] focus:ring-offset-0 cursor-pointer mt-0.5 accent-[#314020]"
                 />
+                <label htmlFor="privacy-checkbox" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer">
+                  קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
+                </label>
               </div>
               <button 
                 type="submit" 
