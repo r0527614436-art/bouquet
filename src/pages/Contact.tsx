@@ -223,13 +223,32 @@ const Contact = () => {
                 />
               </div>
               <div className="flex items-start gap-3 mt-4">
-                <input
-                  type="checkbox"
-                  id="privacy-checkbox"
-                  checked={privacyAccepted}
-                  onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                  className="h-5 w-5 rounded border-2 border-[#314020] bg-transparent checked:bg-[#314020] checked:border-[#314020] focus:ring-[#314020] focus:ring-offset-0 cursor-pointer mt-0.5 accent-[#314020]"
-                />
+                <div className="relative flex-shrink-0">
+                  <input
+                    type="checkbox"
+                    id="privacy-checkbox"
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                    className="peer sr-only"
+                  />
+                  <label
+                    htmlFor="privacy-checkbox"
+                    className="flex h-4 w-4 cursor-pointer items-center justify-center rounded border-2 border-[#314020] bg-transparent transition-all duration-200 peer-checked:border-[#314020]"
+                  >
+                    <svg
+                      className="h-5 w-5 scale-0 text-[#314020] transition-transform duration-200 peer-checked:scale-100 -mt-1 -mr-1"
+                      style={{ transform: privacyAccepted ? 'scale(1)' : 'scale(0)' }}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </label>
+                </div>
                 <label htmlFor="privacy-checkbox" className="text-sm text-gray-600 font-ploni-aaa cursor-pointer text-right">
                   קראתי ואני מסכימ/ה ל<Link to="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</Link>
                 </label>
