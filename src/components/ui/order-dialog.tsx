@@ -30,6 +30,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [lastName, setLastName] = useState('');
   const [phoneEvent, setPhoneEvent] = useState('');
   const [phoneMechuteNet, setPhoneMechuteNet] = useState('');
+  const [email, setEmail] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [dayOfWeek, setDayOfWeek] = useState('');
   const [address, setAddress] = useState('');
@@ -39,6 +40,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [entrance, setEntrance] = useState('');
   const [floor, setFloor] = useState('');
   const [dressColor, setDressColor] = useState('');
+  const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'bit' | 'credit' | 'transfer' | ''>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -80,6 +82,8 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
         customer_name: `${firstName} ${lastName}`,
         phone: phoneEvent,
         phone_mechutenet: phoneMechuteNet,
+        email: email || null,
+        notes: notes || null,
         event_date: new Date(eventDate).toISOString(),
         day_of_week: dayOfWeek,
         address: `${address}, ${city}, ${street}, בניין ${building}, כניסה ${entrance}, קומה ${floor}`,
@@ -105,6 +109,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       setLastName('');
       setPhoneEvent('');
       setPhoneMechuteNet('');
+      setEmail('');
       setEventDate('');
       setDayOfWeek('');
       setAddress('');
@@ -114,6 +119,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       setEntrance('');
       setFloor('');
       setDressColor('');
+      setNotes('');
       setPaymentMethod('');
       onClose();
       navigate('/order-confirmation');
@@ -149,7 +155,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
           <div className="flex flex-col md:flex-row gap-6 md:gap-10">
             {/* Image Section - Left side on desktop */}
             <div className="md:w-[35%] flex flex-col items-center order-first md:order-none self-stretch">
-              <p className="font-synopsis text-xl md:text-2xl text-[#314020] mb-3 font-bold">דגם {item.price || item.title}</p>
+              <p className="font-synopsis text-xl md:text-2xl text-[#314020] mb-3 font-bold">דגם {item.title}</p>
               <div className="w-full rounded-2xl overflow-hidden bg-[#6B8E4E] max-h-[200px] md:max-h-none md:flex-1">
                 <img 
                   src={item.image_url} 
@@ -206,6 +212,18 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                     className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                   />
                 </div>
+              </div>
+
+              {/* Row 3: Email */}
+              <div className="border-b border-[#314020]">
+                <Input
+                  type="email"
+                  placeholder="אימייל (לקבלת אישור הזמנה):"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
+                  dir="ltr"
+                />
               </div>
 
               {/* Row 3: Event Date and Day */}
@@ -295,6 +313,17 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   placeholder="גוון שמלה:"
                   value={dressColor}
                   onChange={(e) => setDressColor(e.target.value)}
+                  className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
+                />
+              </div>
+
+              {/* Row 7: Notes */}
+              <div className="border-b border-[#314020]">
+                <Input
+                  type="text"
+                  placeholder="הערות (לא חובה):"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
                   className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
                 />
               </div>
