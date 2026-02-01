@@ -149,18 +149,18 @@ const handler = async (req: Request): Promise<Response> => {
     const siteUrl = 'https://bouquet.lovable.app';
     
     const itemsHtml = items.map((item: any) => `
-      <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa;">
-        <table style="width: 100%;">
+      <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; direction: rtl; text-align: right;">
+        <table style="width: 100%; direction: rtl;">
           <tr>
-            <td style="width: 120px; vertical-align: top;">
-              <a href="${siteUrl}/catalog" target="_blank" style="display: block; cursor: pointer;">
-                <img src="${item.image_url}" alt="${item.title}" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px; border: 2px solid #314020; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-              </a>
+            <td style="vertical-align: top; padding-left: 15px; text-align: right;">
+              <h3 style="margin: 0 0 10px 0; color: #314020; text-align: right;">דגם ${item.title}</h3>
+              <p style="margin: 5px 0; color: #666; text-align: right;">כמות: ${item.quantity}</p>
+              <a href="${siteUrl}/catalog?item=${item.id}" target="_blank" style="color: #314020; text-decoration: underline; font-size: 12px;">צפה בפריט</a>
             </td>
-            <td style="vertical-align: top; padding-right: 15px;">
-              <h3 style="margin: 0 0 10px 0; color: #314020;">דגם ${item.title}</h3>
-              <p style="margin: 5px 0; color: #666;">כמות: ${item.quantity}</p>
-              <a href="${siteUrl}/catalog" target="_blank" style="color: #314020; text-decoration: underline; font-size: 12px;">צפה בקטלוג</a>
+            <td style="width: 120px; vertical-align: top;">
+              <a href="${siteUrl}/catalog?item=${item.id}" target="_blank" style="display: block; cursor: pointer;">
+                <img src="${item.image_url}" alt="${item.title}" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px; border: 2px solid #314020;">
+              </a>
             </td>
           </tr>
         </table>
@@ -178,13 +178,13 @@ const handler = async (req: Request): Promise<Response> => {
           .header { background: #314020; color: white; padding: 25px; text-align: center; }
           .header h1 { margin: 0; font-size: 24px; }
           .content { padding: 25px; text-align: right; }
-          .info-box { background: #f8fbf4; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-          .section-title { color: #314020; font-size: 16px; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #314020; padding-bottom: 8px; }
-          .info-row { display: flex; flex-direction: row-reverse; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e8e8; }
+          .info-box { background: #f8fbf4; border-radius: 8px; padding: 20px; margin-bottom: 20px; direction: rtl; text-align: right; }
+          .section-title { color: #314020; font-size: 16px; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #314020; padding-bottom: 8px; text-align: right; }
+          .info-row { display: block; padding: 8px 0; border-bottom: 1px solid #e8e8e8; text-align: right; direction: rtl; }
           .info-row:last-child { border-bottom: none; }
-          .label { color: #666; font-weight: bold; text-align: right; }
-          .value { color: #314020; text-align: left; }
-          .items-section { margin-top: 20px; text-align: right; }
+          .label { color: #666; font-weight: bold; }
+          .value { color: #314020; margin-right: 10px; }
+          .items-section { margin-top: 20px; text-align: right; direction: rtl; }
           .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; text-align: right; }
         </style>
       </head>
@@ -198,18 +198,18 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-box">
               <div class="section-title">פרטי האירוע</div>
               <div class="info-row">
-                <span class="label">תאריך האירוע:</span>
+                <span class="label">תאריך האירוע: </span>
                 <span class="value">${new Date(orderData.event_date).toLocaleDateString('he-IL')}</span>
               </div>
               ${orderData.day_of_week ? `
               <div class="info-row">
-                <span class="label">יום בשבוע:</span>
+                <span class="label">יום בשבוע: </span>
                 <span class="value">${orderData.day_of_week}</span>
               </div>
               ` : ''}
               ${orderData.dress_color ? `
               <div class="info-row">
-                <span class="label">גוון שמלה:</span>
+                <span class="label">גוון שמלה: </span>
                 <span class="value">${orderData.dress_color}</span>
               </div>
               ` : ''}
@@ -225,16 +225,16 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-box">
               <div class="section-title">פרטי הלקוח</div>
               <div class="info-row">
-                <span class="label">שם המזמין:</span>
+                <span class="label">שם המזמין: </span>
                 <span class="value">${orderData.customer_name}</span>
               </div>
               <div class="info-row">
-                <span class="label">טלפון:</span>
+                <span class="label">טלפון: </span>
                 <span class="value"><a href="tel:${orderData.phone}" style="color: #314020;">${orderData.phone}</a></span>
               </div>
               ${orderData.phone_mechutenet ? `
               <div class="info-row">
-                <span class="label">טלפון מחותנת:</span>
+                <span class="label">טלפון מחותנת: </span>
                 <span class="value"><a href="tel:${orderData.phone_mechutenet}" style="color: #314020;">${orderData.phone_mechutenet}</a></span>
               </div>
               ` : ''}
@@ -245,7 +245,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-box">
               <div class="section-title">כתובת</div>
               <div class="info-row">
-                <span class="label">כתובת למשלוח:</span>
+                <span class="label">כתובת למשלוח: </span>
                 <span class="value">${orderData.address}</span>
               </div>
             </div>
@@ -256,7 +256,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-box">
               <div class="section-title">אמצעי תשלום</div>
               <div class="info-row">
-                <span class="label">שיטת תשלום:</span>
+                <span class="label">שיטת תשלום: </span>
                 <span class="value">${paymentMethodLabels[orderData.payment_method] || orderData.payment_method}</span>
               </div>
             </div>
@@ -276,7 +276,7 @@ const handler = async (req: Request): Promise<Response> => {
             <div class="info-box">
               <div class="section-title">פרטי הזמנה</div>
               <div class="info-row">
-                <span class="label">תאריך הזמנה:</span>
+                <span class="label">תאריך הזמנה: </span>
                 <span class="value">${new Date(orderData.created_at).toLocaleDateString('he-IL')} ${new Date(orderData.created_at).toLocaleTimeString('he-IL')}</span>
               </div>
             </div>
