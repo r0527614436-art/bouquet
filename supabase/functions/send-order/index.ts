@@ -100,6 +100,43 @@ const handler = async (req: Request): Promise<Response> => {
       itemCount: items.length
     });
 
+    // Send to Zapier for Google Calendar integration
+    const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/26280346/ulixmam/';
+    try {
+      const itemsList = items.map((item: any) => `דגם ${item.title} (כמות: ${item.quantity})`).join(', ');
+      
+      const zapierPayload = {
+        event_date: orderData.event_date,
+        customer_name: orderData.customer_name,
+        phone: orderData.phone,
+        phone_mechutenet: orderData.phone_mechutenet || '',
+        address: orderData.address || '',
+        dress_color: orderData.dress_color || '',
+        day_of_week: orderData.day_of_week || '',
+        items: itemsList,
+        order_time: orderData.created_at
+      };
+
+      console.log('Sending to Zapier:', zapierPayload);
+      
+      const zapierResponse = await fetch(zapierWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(zapierPayload),
+      });
+
+      if (zapierResponse.ok) {
+        console.log('Zapier webhook triggered successfully');
+      } else {
+        console.error('Zapier webhook failed:', await zapierResponse.text());
+      }
+    } catch (zapierError) {
+      console.error('Error sending to Zapier:', zapierError);
+      // Don't fail the order if Zapier fails
+    }
+
     // Create email content
     const subject = 'הזמנה חדשה מהאתר - בוקט';
     
