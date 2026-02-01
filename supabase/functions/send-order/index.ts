@@ -117,13 +117,23 @@ const handler = async (req: Request): Promise<Response> => {
       const eventDateOnly = orderData.event_date.split('T')[0];
       
       const zapierPayload = {
-        // Date in simple YYYY-MM-DD format
+        // תאריך בלבד
         event_date: eventDateOnly,
+        
+        // תאריך ושעת התחלה - תחילת היום
         start_date: eventDateOnly,
+        start_time: "00:01",
+        start_datetime: `${eventDateOnly}T00:01:00`,
+        
+        // תאריך ושעת סיום - סוף היום
+        end_date: eventDateOnly,
+        end_time: "23:59",
+        end_datetime: `${eventDateOnly}T23:59:00`,
+        
+        // אירוע של יום שלם
         all_day: true,
-        start_time: "09:00",
-        end_time: "10:00",
-        // Event details
+        
+        // פרטי האירוע
         event_title: eventTitle,
         event_description: eventDescription,
         customer_name: orderData.customer_name,
