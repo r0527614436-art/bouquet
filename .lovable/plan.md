@@ -1,11 +1,9 @@
 
 
-# עדכון פורמט התאריך ב-Webhook לזפייר
+# עדכון ה-Edge Function להשתמש ב-Google Apps Script
 
 ## מה נשנה
-נעדכן את ה-payload שנשלח ל-Zapier כך שיכלול תאריך ושעת התחלה וסיום מפורשים:
-- **התחלה**: 00:01 בלילה (תחילת היום)
-- **סיום**: 23:59 (סוף היום)
+נחליף את ה-Webhook של Zapier ב-URL החדש של Google Apps Script שיצרת.
 
 ---
 
@@ -15,73 +13,48 @@
 
 **לפני:**
 ```typescript
-const zapierPayload = {
-  event_date: eventDateOnly,
-  start_date: eventDateOnly,
-  all_day: true,
-  start_time: "09:00",
-  end_time: "10:00",
-  ...
-};
+const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/26280346/ulixmam/';
 ```
 
 **אחרי:**
 ```typescript
-const zapierPayload = {
-  // תאריך בלבד
-  event_date: eventDateOnly,
-  
-  // תאריך ושעת התחלה - תחילת היום
-  start_date: eventDateOnly,
-  start_time: "00:01",
-  start_datetime: `${eventDateOnly}T00:01:00`,
-  
-  // תאריך ושעת סיום - סוף היום
-  end_date: eventDateOnly,
-  end_time: "23:59",
-  end_datetime: `${eventDateOnly}T23:59:00`,
-  
-  // אירוע של יום שלם
-  all_day: true,
-  ...
-};
+const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwwlBVM5nHD0T3HbLHEi2bOe9jipXvDCVhxbfZrxfGELgcQFaVJ9CfSbFm_DBSJsxpAsw/exec';
 ```
 
 ---
 
-## הפורמט החדש שיישלח ל-Zapier
+## מבנה הנתונים שיישלח
+
+הנתונים יישלחו בפורמט שה-Google Apps Script מצפה לקבל:
 
 ```json
 {
   "event_date": "2026-02-02",
-  "start_date": "2026-02-02",
-  "start_time": "00:01",
-  "start_datetime": "2026-02-02T00:01:00",
-  "end_date": "2026-02-02",
-  "end_time": "23:59",
-  "end_datetime": "2026-02-02T23:59:00",
-  "all_day": true,
-  "event_title": "דגם 101",
-  "event_description": "שם המזמין: ...",
-  ...
+  "event_title": "דגם 101, דגם 102",
+  "customer_name": "ישראל ישראלי",
+  "phone": "052-1234567",
+  "phone_mechutenet": "052-7654321",
+  "address": "רחוב הפרחים 10, תל אביב"
 }
 ```
 
 ---
 
-## מיפוי ב-Zapier
+## יתרונות המעבר
 
-| שדה ב-Google Calendar | מיפוי מה-Webhook |
-|----------------------|------------------|
-| **Start Date & Time** | `start_datetime` |
-| **End Date & Time** | `end_datetime` |
-| **All Day Event** | Yes |
+| Zapier | Google Apps Script |
+|--------|-------------------|
+| תלוי בשירות חיצוני | ישירות ל-Google |
+| עלות חודשית | חינם לגמרי |
+| בעיות בפרשנות תאריכים | שליטה מלאה על הפורמט |
+| מוגבל לפי תוכנית | ללא הגבלות |
 
 ---
 
 ## פעולות
 
-1. עדכון הקוד ב-Edge Function
-2. פריסה מחדש
-3. ביצוע הזמנת ניסיון לבדיקה
+1. עדכון ה-URL ב-Edge Function
+2. עדכון שם המשתנה והלוגים
+3. פריסה מחדש של ה-Function
+4. ביצוע הזמנת ניסיון לבדיקה
 
