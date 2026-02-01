@@ -143,16 +143,22 @@ const handler = async (req: Request): Promise<Response> => {
     // Create email content - subject includes customer name
     const subject = `הזמנה חדשה - ${orderData.customer_name} - בוקט`;
     
+    // Build catalog URL for linking items
+    const siteUrl = 'https://bouquet.lovable.app';
+    
     const itemsHtml = items.map((item: any) => `
       <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa;">
         <table style="width: 100%;">
           <tr>
             <td style="width: 120px; vertical-align: top;">
-              <img src="${item.image_url}" alt="${item.title}" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px;">
+              <a href="${siteUrl}/catalog" target="_blank" style="display: block; cursor: pointer;">
+                <img src="${item.image_url}" alt="${item.title}" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px; border: 2px solid #314020; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+              </a>
             </td>
             <td style="vertical-align: top; padding-right: 15px;">
               <h3 style="margin: 0 0 10px 0; color: #314020;">דגם ${item.title}</h3>
               <p style="margin: 5px 0; color: #666;">כמות: ${item.quantity}</p>
+              <a href="${siteUrl}/catalog" target="_blank" style="color: #314020; text-decoration: underline; font-size: 12px;">צפה בקטלוג</a>
             </td>
           </tr>
         </table>
