@@ -1,60 +1,85 @@
 
+# תיקון שליחת אישור הזמנה ללקוחות
 
-# עדכון ה-Edge Function להשתמש ב-Google Apps Script
+## הבעיה הנוכחית
+הלקוחות לא מקבלים מייל אישור הזמנה כי:
+- המערכת משתמשת בדומיין הבדיקות של Resend: `onboarding@resend.dev`
+- דומיין זה מוגבל לשליחה רק לכתובת המייל של בעל חשבון Resend
+- כל מייל לכתובת חיצונית (הלקוח) נחסם
 
-## מה נשנה
-נחליף את ה-Webhook של Zapier ב-URL החדש של Google Apps Script שיצרת.
+## הפתרון המומלץ: אימות דומיין משלך
 
----
+### שלב 1: רכישת דומיין (אם אין לך)
+- אפשרויות זולות: Namecheap, GoDaddy, או ישראלי כמו domains.co.il
+- עלות: כ-40-80 ש"ח לשנה לדומיין בסיסי
+- דוגמה: `bouquet-events.co.il` או `bouquet-flowers.com`
 
-## שינויים בקוד
+### שלב 2: אימות הדומיין ב-Resend
+1. כניסה ל-[Resend Dashboard](https://resend.com/domains)
+2. לחיצה על "Add Domain"
+3. הזנת הדומיין שלך
+4. הוספת רשומות DNS שיסופקו:
+   - רשומת TXT לאימות
+   - רשומות MX (אופציונלי)
+   - רשומת DKIM לאבטחה
 
-### קובץ: `supabase/functions/send-order/index.ts`
+### שלב 3: יצירת API Key חדש
+- יצירת מפתח API חדש המוגבל לדומיין המאומת
+- עדכון הסוד ב-Supabase
 
-**לפני:**
+### שלב 4: עדכון הקוד
+שינוי כתובת השולח מ:
 ```typescript
-const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/26280346/ulixmam/';
+from: "בוקט עיצוב אירועים <onboarding@resend.dev>"
 ```
-
-**אחרי:**
+ל:
 ```typescript
-const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwwlBVM5nHD0T3HbLHEi2bOe9jipXvDCVhxbfZrxfGELgcQFaVJ9CfSbFm_DBSJsxpAsw/exec';
+from: "בוקט עיצוב אירועים <orders@your-domain.com>"
 ```
 
 ---
 
-## מבנה הנתונים שיישלח
+## פרטים טכניים
 
-הנתונים יישלחו בפורמט שה-Google Apps Script מצפה לקבל:
+### קבצים לעדכון
+| קובץ | שינוי |
+|------|-------|
+| `supabase/functions/send-order/index.ts` | עדכון כתובת "from" בשתי הפונקציות |
 
-```json
-{
-  "event_date": "2026-02-02",
-  "event_title": "דגם 101, דגם 102",
-  "customer_name": "ישראל ישראלי",
-  "phone": "052-1234567",
-  "phone_mechutenet": "052-7654321",
-  "address": "רחוב הפרחים 10, תל אביב"
-}
+### שינויים בקוד
+
+**פונקציית sendEmail (שורה 41):**
+```typescript
+from: "בוקט הזמנות <orders@YOUR-DOMAIN.com>"
 ```
 
+**פונקציית sendEmailToCustomer (שורה 67):**
+```typescript
+from: "בוקט עיצוב אירועים <noreply@YOUR-DOMAIN.com>"
+```
+
+### רשומות DNS נדרשות
+- TXT record לאימות בעלות
+- DKIM record לחתימה דיגיטלית (מונע סימון כספאם)
+- SPF record (אופציונלי אך מומלץ)
+
 ---
 
-## יתרונות המעבר
+## אפשרות חלופית: שימוש בשירות אחר
 
-| Zapier | Google Apps Script |
-|--------|-------------------|
-| תלוי בשירות חיצוני | ישירות ל-Google |
-| עלות חודשית | חינם לגמרי |
-| בעיות בפרשנות תאריכים | שליטה מלאה על הפורמט |
-| מוגבל לפי תוכנית | ללא הגבלות |
+אם אין לך דומיין ולא מעוניין לרכוש:
+
+**SendGrid** - יש תוכנית חינמית ל-100 מיילים ביום
+**Mailgun** - 5,000 מיילים חינם לחודש הראשון
+
+שני השירותים דורשים גם הם אימות דומיין לשליחה מאסיבית, אך יש להם אפשרויות נוספות.
 
 ---
 
-## פעולות
-
-1. עדכון ה-URL ב-Edge Function
-2. עדכון שם המשתנה והלוגים
-3. פריסה מחדש של ה-Function
-4. ביצוע הזמנת ניסיון לבדיקה
-
+## סיכום
+| מה צריך | פרטים |
+|---------|--------|
+| דומיין | רכישה או שימוש בקיים |
+| אימות ב-Resend | הוספת רשומות DNS |
+| עדכון קוד | שורה אחת בקובץ Edge Function |
+| זמן משוער | 30 דקות - שעה (תלוי בזמן התפשטות DNS) |
