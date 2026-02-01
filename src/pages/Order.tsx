@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import simpleArrow from '@/assets/simple-arrow.png';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
@@ -25,6 +26,7 @@ const Order = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [notes, setNotes] = useState('');
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
 
   const handleSubmitOrder = async (e: React.FormEvent) => {
@@ -55,6 +57,7 @@ const Order = () => {
         customer_name: name,
         phone: phone,
         email: email || null,
+        notes: notes || null,
         event_date: eventDate.toISOString(),
         items: JSON.stringify(items),
         created_at: new Date().toISOString()
@@ -220,6 +223,18 @@ const Order = () => {
                 />
               </PopoverContent>
             </Popover>
+          </div>
+
+          {/* Notes */}
+          <div className="space-y-2">
+            <Label htmlFor="notes" className="font-ploni-aaa text-[#314020]">הערות</Label>
+            <Textarea
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="הערות נוספות להזמנה (לא חובה)"
+              className="border-[#314020]/30 focus:border-[#314020] rounded-lg font-ploni-aaa min-h-[80px]"
+            />
           </div>
 
           <div className="flex items-start gap-3 mt-4">

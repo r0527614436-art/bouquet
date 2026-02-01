@@ -10,6 +10,7 @@ interface OrderData {
   phone: string;
   phone_mechutenet?: string;
   email?: string | null;
+  notes?: string | null;
   event_date: string;
   day_of_week?: string;
   address?: string;
@@ -97,6 +98,7 @@ const handler = async (req: Request): Promise<Response> => {
       address: orderData.address,
       dress_color: orderData.dress_color,
       payment_method: orderData.payment_method,
+      notes: orderData.notes,
       itemCount: items.length
     });
 
@@ -260,7 +262,17 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             ` : ''}
 
-            <!-- 6. Order Metadata -->
+            <!-- 6. Notes -->
+            ${orderData.notes ? `
+            <div class="info-box">
+              <div class="section-title">הערות</div>
+              <div style="padding: 10px 0; color: #314020;">
+                ${orderData.notes}
+              </div>
+            </div>
+            ` : ''}
+
+            <!-- 7. Order Metadata -->
             <div class="info-box">
               <div class="section-title">פרטי הזמנה</div>
               <div class="info-row">
