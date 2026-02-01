@@ -142,8 +142,8 @@ const handler = async (req: Request): Promise<Response> => {
       // Don't fail the order if Zapier fails
     }
 
-    // Create email content
-    const subject = 'הזמנה חדשה מהאתר - בוקט';
+    // Create email content - subject includes customer name
+    const subject = `הזמנה חדשה - ${orderData.customer_name} - בוקט`;
     
     const itemsHtml = items.map((item: any) => `
       <div style="border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa;">
@@ -185,29 +185,10 @@ const handler = async (req: Request): Promise<Response> => {
       <body>
         <div class="container">
           <div class="header">
-            <h1>הזמנה חדשה מהאתר</h1>
+            <h1>הזמנה חדשה - ${orderData.customer_name}</h1>
           </div>
           <div class="content">
-            <!-- Customer Details -->
-            <div class="info-box">
-              <div class="section-title">פרטי הלקוח</div>
-              <div class="info-row">
-                <span class="label">שם המזמין:</span>
-                <span class="value">${orderData.customer_name}</span>
-              </div>
-              <div class="info-row">
-                <span class="label">טלפון:</span>
-                <span class="value"><a href="tel:${orderData.phone}" style="color: #314020;">${orderData.phone}</a></span>
-              </div>
-              ${orderData.phone_mechutenet ? `
-              <div class="info-row">
-                <span class="label">טלפון מחותנת:</span>
-                <span class="value"><a href="tel:${orderData.phone_mechutenet}" style="color: #314020;">${orderData.phone_mechutenet}</a></span>
-              </div>
-              ` : ''}
-            </div>
-
-            <!-- Event Details -->
+            <!-- 1. Event Details -->
             <div class="info-box">
               <div class="section-title">פרטי האירוע</div>
               <div class="info-row">
@@ -228,18 +209,43 @@ const handler = async (req: Request): Promise<Response> => {
               ` : ''}
             </div>
 
-            <!-- Delivery Address -->
+            <!-- 2. Ordered Items -->
+            <div class="info-box">
+              <div class="section-title">פריטים שהוזמנו</div>
+              ${itemsHtml}
+            </div>
+
+            <!-- 3. Customer Details -->
+            <div class="info-box">
+              <div class="section-title">פרטי הלקוח</div>
+              <div class="info-row">
+                <span class="label">שם המזמין:</span>
+                <span class="value">${orderData.customer_name}</span>
+              </div>
+              <div class="info-row">
+                <span class="label">טלפון:</span>
+                <span class="value"><a href="tel:${orderData.phone}" style="color: #314020;">${orderData.phone}</a></span>
+              </div>
+              ${orderData.phone_mechutenet ? `
+              <div class="info-row">
+                <span class="label">טלפון מחותנת:</span>
+                <span class="value"><a href="tel:${orderData.phone_mechutenet}" style="color: #314020;">${orderData.phone_mechutenet}</a></span>
+              </div>
+              ` : ''}
+            </div>
+
+            <!-- 4. Delivery Address -->
             ${orderData.address ? `
             <div class="info-box">
-              <div class="section-title">כתובת למשלוח</div>
+              <div class="section-title">כתובת</div>
               <div class="info-row">
-                <span class="label">כתובת:</span>
+                <span class="label">כתובת למשלוח:</span>
                 <span class="value">${orderData.address}</span>
               </div>
             </div>
             ` : ''}
 
-            <!-- Payment Method -->
+            <!-- 5. Payment Method -->
             ${orderData.payment_method ? `
             <div class="info-box">
               <div class="section-title">אמצעי תשלום</div>
@@ -250,18 +256,13 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             ` : ''}
 
-            <!-- Order Metadata -->
+            <!-- 6. Order Metadata -->
             <div class="info-box">
               <div class="section-title">פרטי הזמנה</div>
               <div class="info-row">
                 <span class="label">תאריך הזמנה:</span>
                 <span class="value">${new Date(orderData.created_at).toLocaleDateString('he-IL')} ${new Date(orderData.created_at).toLocaleTimeString('he-IL')}</span>
               </div>
-            </div>
-            
-            <div class="items-section">
-              <h2 class="items-title">פריטים שהוזמנו:</h2>
-              ${itemsHtml}
             </div>
           </div>
         </div>
