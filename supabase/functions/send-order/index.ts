@@ -103,18 +103,23 @@ const handler = async (req: Request): Promise<Response> => {
     // Send to Zapier for Google Calendar integration
     const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/26280346/ulixmam/';
     try {
-      const itemsList = items.map((item: any) => `דגם ${item.title} (כמות: ${item.quantity})`).join(', ');
+      // Event title = model names (e.g. "דגם 101, דגם 102")
+      const eventTitle = items.map((item: any) => `דגם ${item.title}`).join(', ');
+      
+      // Event description = customer details for when clicking on the event
+      const eventDescription = `שם המזמין: ${orderData.customer_name}
+טלפון: ${orderData.phone}${orderData.phone_mechutenet ? `
+טלפון מחותנת: ${orderData.phone_mechutenet}` : ''}${orderData.address ? `
+כתובת למשלוח: ${orderData.address}` : ''}${orderData.dress_color ? `
+גוון שמלה: ${orderData.dress_color}` : ''}`;
       
       const zapierPayload = {
         event_date: orderData.event_date,
+        event_title: eventTitle,
+        event_description: eventDescription,
         customer_name: orderData.customer_name,
         phone: orderData.phone,
-        phone_mechutenet: orderData.phone_mechutenet || '',
-        address: orderData.address || '',
-        dress_color: orderData.dress_color || '',
-        day_of_week: orderData.day_of_week || '',
-        items: itemsList,
-        order_time: orderData.created_at
+        address: orderData.address || ''
       };
 
       console.log('Sending to Zapier:', zapierPayload);
