@@ -100,65 +100,44 @@ const handler = async (req: Request): Promise<Response> => {
       itemCount: items.length
     });
 
-    // Send to Zapier for Google Calendar integration
-    const zapierWebhookUrl = 'https://hooks.zapier.com/hooks/catch/26280346/ulixmam/';
+    // Send to Google Apps Script for Google Calendar integration
+    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwwlBVM5nHD0T3HbLHEi2bOe9jipXvDCVhxbfZrxfGELgcQFaVJ9CfSbFm_DBSJsxpAsw/exec';
     try {
       // Event title = model names (e.g. "דגם 101, דגם 102")
       const eventTitle = items.map((item: any) => `דגם ${item.title}`).join(', ');
       
-      // Event description = customer details for when clicking on the event
-      const eventDescription = `שם המזמין: ${orderData.customer_name}
-טלפון: ${orderData.phone}${orderData.phone_mechutenet ? `
-טלפון מחותנת: ${orderData.phone_mechutenet}` : ''}${orderData.address ? `
-כתובת למשלוח: ${orderData.address}` : ''}${orderData.dress_color ? `
-גוון שמלה: ${orderData.dress_color}` : ''}`;
-      
       // Extract date in YYYY-MM-DD format for Google Calendar
       const eventDateOnly = orderData.event_date.split('T')[0];
       
-      const zapierPayload = {
-        // תאריך בלבד
+      const calendarPayload = {
         event_date: eventDateOnly,
-        
-        // תאריך ושעת התחלה - תחילת היום
-        start_date: eventDateOnly,
-        start_time: "00:01",
-        start_datetime: `${eventDateOnly}T00:01:00`,
-        
-        // תאריך ושעת סיום - סוף היום
-        end_date: eventDateOnly,
-        end_time: "23:59",
-        end_datetime: `${eventDateOnly}T23:59:00`,
-        
-        // אירוע של יום שלם
-        all_day: true,
-        
-        // פרטי האירוע
         event_title: eventTitle,
-        event_description: eventDescription,
         customer_name: orderData.customer_name,
         phone: orderData.phone,
-        address: orderData.address || ''
+        phone_mechutenet: orderData.phone_mechutenet || '',
+        address: orderData.address || '',
+        dress_color: orderData.dress_color || ''
       };
 
-      console.log('Sending to Zapier:', zapierPayload);
+      console.log('Sending to Google Apps Script:', calendarPayload);
       
-      const zapierResponse = await fetch(zapierWebhookUrl, {
+      const gasResponse = await fetch(googleAppsScriptUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(zapierPayload),
+        body: JSON.stringify(calendarPayload),
       });
 
-      if (zapierResponse.ok) {
-        console.log('Zapier webhook triggered successfully');
+      if (gasResponse.ok) {
+        const gasResult = await gasResponse.json();
+        console.log('Google Apps Script response:', gasResult);
       } else {
-        console.error('Zapier webhook failed:', await zapierResponse.text());
+        console.error('Google Apps Script failed:', await gasResponse.text());
       }
-    } catch (zapierError) {
-      console.error('Error sending to Zapier:', zapierError);
-      // Don't fail the order if Zapier fails
+    } catch (gasError) {
+      console.error('Error sending to Google Apps Script:', gasError);
+      // Don't fail the order if calendar integration fails
     }
 
     // Create email content - subject includes customer name
