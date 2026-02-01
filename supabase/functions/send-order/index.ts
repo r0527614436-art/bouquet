@@ -101,7 +101,7 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     // Send to Google Apps Script for Google Calendar integration
-    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbwwlBVM5nHD0T3HbLHEi2bOe9jipXvDCVhxbfZrxfGELgcQFaVJ9CfSbFm_DBSJsxpAsw/exec';
+    const googleAppsScriptUrl = 'https://script.google.com/macros/s/AKfycbyQJSmftXDBOZOpgY7ZEr4EKn55mUPP2nRv_rdDIbykffOaOTwO-eGOzR71PjgifXqNaw/exec';
     try {
       // Event title = model names (e.g. "דגם 101, דגם 102")
       const eventTitle = items.map((item: any) => `דגם ${item.title}`).join(', ');
