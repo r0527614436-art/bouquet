@@ -1,90 +1,87 @@
 
-# תוכנית לתיקון בעיית Zapier ויומן גוגל
 
-## סיכום הבעיה
-במקום שייווצר אירוע בודד בתאריך ההזמנה, Zapier יוצר אירועים בכל הימים ביומן.
+# עדכון פורמט התאריך ב-Webhook לזפייר
 
----
-
-## שלב 1: תיקון פורמט התאריך בקוד
-
-כרגע התאריך נשלח בפורמט ISO מלא:
-```
-"2026-02-02T00:00:00.000Z"
-```
-
-נשנה אותו לפורמט פשוט יותר שGoogle Calendar מבין טוב יותר:
-```
-"2026-02-02"
-```
-
-### שינוי בקובץ `supabase/functions/send-order/index.ts`:
-```typescript
-// לפני:
-event_date: orderData.event_date,
-
-// אחרי - המרה לפורמט תאריך בלבד:
-event_date: orderData.event_date.split('T')[0],  // "2026-02-02"
-```
+## מה נשנה
+נעדכן את ה-payload שנשלח ל-Zapier כך שיכלול תאריך ושעת התחלה וסיום מפורשים:
+- **התחלה**: 00:01 בלילה (תחילת היום)
+- **סיום**: 23:59 (סוף היום)
 
 ---
 
-## שלב 2: הוספת שדות נוספים לדיוק
+## שינויים בקוד
 
-נוסיף שדות נפרדים שיעזרו ל-Zapier למפות נכון:
+### קובץ: `supabase/functions/send-order/index.ts`
 
+**לפני:**
 ```typescript
 const zapierPayload = {
-  // תאריך בפורמט YYYY-MM-DD בלבד
-  event_date: orderData.event_date.split('T')[0],
+  event_date: eventDateOnly,
+  start_date: eventDateOnly,
+  all_day: true,
+  start_time: "09:00",
+  end_time: "10:00",
+  ...
+};
+```
+
+**אחרי:**
+```typescript
+const zapierPayload = {
+  // תאריך בלבד
+  event_date: eventDateOnly,
   
-  // שדות נוספים לגיבוי
-  start_date: orderData.event_date.split('T')[0],
-  start_time: "09:00",  // שעת התחלה קבועה
-  end_time: "10:00",    // שעת סיום קבועה
-  all_day: true,        // אירוע של יום שלם
+  // תאריך ושעת התחלה - תחילת היום
+  start_date: eventDateOnly,
+  start_time: "00:01",
+  start_datetime: `${eventDateOnly}T00:01:00`,
   
-  // שאר השדות
-  event_title: eventTitle,
-  event_description: eventDescription,
-  customer_name: orderData.customer_name,
-  phone: orderData.phone,
-  address: orderData.address || ''
+  // תאריך ושעת סיום - סוף היום
+  end_date: eventDateOnly,
+  end_time: "23:59",
+  end_datetime: `${eventDateOnly}T23:59:00`,
+  
+  // אירוע של יום שלם
+  all_day: true,
+  ...
 };
 ```
 
 ---
 
-## שלב 3: הוראות למיפוי נכון ב-Zapier
+## הפורמט החדש שיישלח ל-Zapier
 
-לאחר השינוי, יש לוודא את ההגדרות הבאות ב-Zap:
-
-| שדה ב-Google Calendar | מיפוי מהWebhook |
-|----------------------|-----------------|
-| **Summary** | `event_title` |
-| **Start Date & Time** | `event_date` או `start_date` |
-| **All Day Event** | Yes / `all_day` |
-| **Description** | `event_description` |
-| **Repeat** | None (חשוב! לא לבחור חזרה) |
-
----
-
-## שלב 4: פריסה ובדיקה
-
-1. עדכון ופריסה מחדש של Edge Function
-2. ביצוע הזמנת ניסיון
-3. בדיקה שנוצר אירוע בודד בתאריך הנכון
+```json
+{
+  "event_date": "2026-02-02",
+  "start_date": "2026-02-02",
+  "start_time": "00:01",
+  "start_datetime": "2026-02-02T00:01:00",
+  "end_date": "2026-02-02",
+  "end_time": "23:59",
+  "end_datetime": "2026-02-02T23:59:00",
+  "all_day": true,
+  "event_title": "דגם 101",
+  "event_description": "שם המזמין: ...",
+  ...
+}
+```
 
 ---
 
-## פרטים טכניים
+## מיפוי ב-Zapier
 
-### קובץ לעריכה:
-- `supabase/functions/send-order/index.ts`
+| שדה ב-Google Calendar | מיפוי מה-Webhook |
+|----------------------|------------------|
+| **Start Date & Time** | `start_datetime` |
+| **End Date & Time** | `end_datetime` |
+| **All Day Event** | Yes |
 
-### שינויים עיקריים:
-1. המרת `event_date` מפורמט ISO לפורמט תאריך פשוט
-2. הוספת שדות `start_date`, `all_day` לגיבוי
-3. פריסה מחדש של ה-Edge Function
+---
 
-### זמן משוער: 5 דקות
+## פעולות
+
+1. עדכון הקוד ב-Edge Function
+2. פריסה מחדש
+3. ביצוע הזמנת ניסיון לבדיקה
+
