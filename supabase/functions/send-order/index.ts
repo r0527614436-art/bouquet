@@ -113,8 +113,17 @@ const handler = async (req: Request): Promise<Response> => {
 כתובת למשלוח: ${orderData.address}` : ''}${orderData.dress_color ? `
 גוון שמלה: ${orderData.dress_color}` : ''}`;
       
+      // Extract date in YYYY-MM-DD format for Google Calendar
+      const eventDateOnly = orderData.event_date.split('T')[0];
+      
       const zapierPayload = {
-        event_date: orderData.event_date,
+        // Date in simple YYYY-MM-DD format
+        event_date: eventDateOnly,
+        start_date: eventDateOnly,
+        all_day: true,
+        start_time: "09:00",
+        end_time: "10:00",
+        // Event details
         event_title: eventTitle,
         event_description: eventDescription,
         customer_name: orderData.customer_name,
