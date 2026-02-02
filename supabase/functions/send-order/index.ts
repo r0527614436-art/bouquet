@@ -16,6 +16,7 @@ interface OrderData {
   address?: string;
   dress_color?: string;
   payment_method?: string;
+  payment_amount?: string | null;
   items: string;
   created_at: string;
 }
@@ -255,6 +256,12 @@ const handler = async (req: Request): Promise<Response> => {
             ${orderData.payment_method ? `
             <div class="info-box">
               <div class="section-title">אמצעי תשלום</div>
+              ${orderData.payment_amount ? `
+              <div class="info-row">
+                <span class="label">סכום לתשלום: </span>
+                <span class="value">${orderData.payment_amount} ₪</span>
+              </div>
+              ` : ''}
               <div class="info-row">
                 <span class="label">שיטת תשלום: </span>
                 <span class="value">${paymentMethodLabels[orderData.payment_method] || orderData.payment_method}</span>
@@ -425,6 +432,12 @@ const handler = async (req: Request): Promise<Response> => {
               ${orderData.payment_method ? `
               <div class="info-box">
                 <div class="section-title">אמצעי תשלום</div>
+                ${orderData.payment_amount ? `
+                <div class="info-row">
+                  <span class="label">סכום לתשלום: </span>
+                  <span class="value">${orderData.payment_amount} ₪</span>
+                </div>
+                ` : ''}
                 <div class="info-row">
                   <span class="label">שיטת תשלום: </span>
                   <span class="value">${paymentMethodLabels[orderData.payment_method] || orderData.payment_method}</span>

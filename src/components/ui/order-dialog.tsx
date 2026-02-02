@@ -42,6 +42,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [dressColor, setDressColor] = useState('');
   const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'bit' | 'credit' | 'transfer' | ''>('');
+  const [paymentAmount, setPaymentAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -89,6 +90,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
         address: `${address}, ${city}, ${street}, בניין ${building}, כניסה ${entrance}, קומה ${floor}`,
         dress_color: dressColor,
         payment_method: paymentMethod,
+        payment_amount: paymentAmount || null,
         items: JSON.stringify([{
           id: item.id,
           title: item.title,
@@ -121,6 +123,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       setDressColor('');
       setNotes('');
       setPaymentMethod('');
+      setPaymentAmount('');
       onClose();
       navigate('/order-confirmation');
     } catch (error) {
@@ -331,6 +334,17 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               {/* Payment Method */}
               <div className="pt-2">
                 <p className="text-right font-synopsis text-[#314020] mb-3 text-base">אמצעי תשלום:</p>
+                
+                {/* Payment Amount Field */}
+                <div className="border-b border-[#314020] mb-4">
+                  <Input
+                    type="text"
+                    placeholder="סכום לתשלום:"
+                    value={paymentAmount}
+                    onChange={(e) => setPaymentAmount(e.target.value)}
+                    className="text-right border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 py-2 h-10 text-base font-ploni-aaa placeholder:text-[#314020]/70"
+                  />
+                </div>
                 <div className="flex gap-3 justify-end flex-wrap">
                   <button
                     type="button"
