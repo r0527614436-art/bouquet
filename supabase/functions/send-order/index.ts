@@ -38,7 +38,7 @@ async function sendEmail(subject: string, html: string) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: "בוקט הזמנות <orders@bouquet-flowers.co.il>",
+      from: "בוקט הזמנות <onboarding@resend.dev>",
       to: ["r0527614436@gmail.com"],
       subject,
       html,
@@ -64,7 +64,7 @@ async function sendEmailToCustomer(toEmail: string, subject: string, html: strin
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: "בוקט עיצוב אירועים <noreply@bouquet-flowers.co.il>",
+      from: "בוקט עיצוב אירועים <onboarding@resend.dev>",
       to: [toEmail],
       subject,
       html,
