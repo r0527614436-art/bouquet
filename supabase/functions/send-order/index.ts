@@ -294,6 +294,14 @@ const handler = async (req: Request): Promise<Response> => {
     if (orderData.email) {
       console.log('Sending customer confirmation email to:', orderData.email);
       
+      // Payment method explanations
+      const paymentMethodDetails: Record<string, string> = {
+        'cash': 'ניצור איתכם קשר בהמשך לצורך התשלום',
+        'bit': 'יש להעביר לטלפון: 052-7669989',
+        'credit': 'ניצור איתכם קשר בהמשך לצורך התשלום',
+        'transfer': 'בנק מזרחי טפחות, סניף 722, חשבון 102979 ע"ש רובינשטיין רחל'
+      };
+
       const customerEmailContent = `
         <!DOCTYPE html>
         <html dir="rtl" lang="he">
@@ -305,26 +313,30 @@ const handler = async (req: Request): Promise<Response> => {
             .header { background: #314020; color: white; padding: 30px; text-align: center; }
             .header h1 { margin: 0; font-size: 28px; }
             .header p { margin: 10px 0 0 0; opacity: 0.9; font-size: 16px; }
-            .content { padding: 30px; text-align: right; }
-            .thank-you { background: linear-gradient(135deg, #f8fbf4 0%, #e8f5e0 100%); border-radius: 12px; padding: 25px; margin-bottom: 25px; text-align: center; }
-            .thank-you h2 { color: #314020; margin: 0 0 10px 0; font-size: 22px; }
-            .thank-you p { color: #666; margin: 0; }
-            .info-box { background: #fafafa; border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid #e8e8e8; }
-            .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+            .content { padding: 30px; text-align: right; direction: rtl; }
+            .thank-you { background: linear-gradient(135deg, #f8fbf4 0%, #e8f5e0 100%); border-radius: 12px; padding: 25px; margin-bottom: 25px; text-align: right; }
+            .thank-you h2 { color: #314020; margin: 0 0 10px 0; font-size: 22px; text-align: right; }
+            .thank-you p { color: #666; margin: 0; text-align: right; }
+            .info-box { background: #fafafa; border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid #e8e8e8; text-align: right; direction: rtl; }
+            .section-title { color: #314020; font-size: 16px; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #314020; padding-bottom: 8px; text-align: right; }
+            .info-row { display: block; padding: 10px 0; border-bottom: 1px solid #eee; text-align: right; direction: rtl; }
             .info-row:last-child { border-bottom: none; }
             .label { color: #888; font-size: 14px; }
-            .value { color: #314020; font-weight: bold; }
-            .items-section { margin-top: 25px; }
-            .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #314020; padding-bottom: 10px; }
-            .item-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 12px; background: #fafafa; }
+            .value { color: #314020; font-weight: bold; margin-right: 8px; }
+            .payment-detail { color: #666; font-size: 13px; margin-top: 5px; display: block; }
+            .items-section { margin-bottom: 25px; text-align: right; direction: rtl; }
+            .items-title { color: #314020; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #314020; padding-bottom: 10px; text-align: right; }
+            .item-card { border: 1px solid #e0e0e0; border-radius: 10px; padding: 15px; margin-bottom: 12px; background: #fafafa; text-align: right; direction: rtl; }
             .item-card img { width: 80px; height: 100px; object-fit: cover; border-radius: 8px; }
-            .item-card h3 { margin: 0; color: #314020; font-size: 16px; }
-            .item-card p { margin: 5px 0 0 0; color: #666; font-size: 14px; }
-            .footer { background: #f8fbf4; padding: 25px; text-align: center; border-top: 1px solid #e8e8e8; }
-            .footer p { color: #666; margin: 5px 0; font-size: 14px; }
+            .item-card h3 { margin: 0; color: #314020; font-size: 16px; text-align: right; }
+            .item-card p { margin: 5px 0 0 0; color: #666; font-size: 14px; text-align: right; }
+            .footer { background: #f8fbf4; padding: 25px; text-align: right; border-top: 1px solid #e8e8e8; direction: rtl; }
+            .footer p { color: #666; margin: 5px 0; font-size: 14px; text-align: right; }
             .footer a { color: #314020; text-decoration: none; font-weight: bold; }
-            .contact-info { background: #314020; color: white; padding: 15px; border-radius: 8px; margin-top: 15px; }
-            .contact-info a { color: white; }
+            .contact-note { background: #fff8e1; border: 1px solid #ffe082; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: right; direction: rtl; }
+            .contact-note p { margin: 0; color: #5d4037; font-size: 14px; }
+            .contact-note a { color: #314020; font-weight: bold; }
+            .no-reply { background: #f5f5f5; padding: 12px; text-align: center; color: #999; font-size: 12px; margin-top: 15px; border-radius: 6px; }
           </style>
         </head>
         <body>
@@ -335,33 +347,23 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
             <div class="content">
               <div class="thank-you">
-                <h2>תודה על הזמנתך, ${orderData.customer_name}! 💐</h2>
+                <h2>תודה על הזמנתך, ${orderData.customer_name}!</h2>
                 <p>הזמנתך התקבלה בהצלחה וניצור איתך קשר בהקדם</p>
               </div>
               
-              <div class="info-box">
-                <div class="info-row">
-                  <span class="label">תאריך האירוע:</span>
-                  <span class="value">${new Date(orderData.event_date).toLocaleDateString('he-IL')}</span>
-                </div>
-                <div class="info-row">
-                  <span class="label">תאריך הזמנה:</span>
-                  <span class="value">${new Date(orderData.created_at).toLocaleDateString('he-IL')}</span>
-                </div>
-              </div>
-              
+              <!-- 1. Ordered Items -->
               <div class="items-section">
-                <h3 class="items-title">הפריטים שהזמנת:</h3>
+                <div class="section-title">הפריטים שהזמנת</div>
                 ${items.map((item: any) => `
                   <div class="item-card">
-                    <table style="width: 100%;">
+                    <table style="width: 100%; direction: rtl;">
                       <tr>
-                        <td style="width: 100px; vertical-align: top;">
-                          <img src="${item.image_url}" alt="${item.title}">
-                        </td>
-                        <td style="vertical-align: top; padding-right: 15px;">
+                        <td style="vertical-align: top; padding-left: 15px; text-align: right;">
                           <h3>דגם ${item.title}</h3>
                           <p>כמות: ${item.quantity}</p>
+                        </td>
+                        <td style="width: 100px; vertical-align: top;">
+                          <img src="${item.image_url}" alt="${item.title}">
                         </td>
                       </tr>
                     </table>
@@ -369,9 +371,76 @@ const handler = async (req: Request): Promise<Response> => {
                 `).join('')}
               </div>
               
-              <div class="contact-info">
-                <p style="margin: 0; font-size: 14px;">יש לך שאלות? צרו קשר:</p>
-                <p style="margin: 8px 0 0 0;"><a href="tel:052-7614436">052-7614436</a></p>
+              <!-- 2. Event Date -->
+              <div class="info-box">
+                <div class="section-title">פרטי האירוע</div>
+                <div class="info-row">
+                  <span class="label">תאריך האירוע: </span>
+                  <span class="value">${new Date(orderData.event_date).toLocaleDateString('he-IL')}</span>
+                </div>
+                ${orderData.day_of_week ? `
+                <div class="info-row">
+                  <span class="label">יום בשבוע: </span>
+                  <span class="value">${orderData.day_of_week}</span>
+                </div>
+                ` : ''}
+                ${orderData.dress_color ? `
+                <div class="info-row">
+                  <span class="label">גוון שמלה: </span>
+                  <span class="value">${orderData.dress_color}</span>
+                </div>
+                ` : ''}
+              </div>
+              
+              <!-- 3. Address -->
+              ${orderData.address ? `
+              <div class="info-box">
+                <div class="section-title">כתובת</div>
+                <div class="info-row">
+                  <span class="value">${orderData.address}</span>
+                </div>
+              </div>
+              ` : ''}
+              
+              <!-- 4. Customer Details -->
+              <div class="info-box">
+                <div class="section-title">פרטי הלקוח</div>
+                <div class="info-row">
+                  <span class="label">שם: </span>
+                  <span class="value">${orderData.customer_name}</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">טלפון: </span>
+                  <span class="value">${orderData.phone}</span>
+                </div>
+                ${orderData.phone_mechutenet ? `
+                <div class="info-row">
+                  <span class="label">טלפון מחותנת: </span>
+                  <span class="value">${orderData.phone_mechutenet}</span>
+                </div>
+                ` : ''}
+              </div>
+              
+              <!-- 5. Payment Method with Explanation -->
+              ${orderData.payment_method ? `
+              <div class="info-box">
+                <div class="section-title">אמצעי תשלום</div>
+                <div class="info-row">
+                  <span class="label">שיטת תשלום: </span>
+                  <span class="value">${paymentMethodLabels[orderData.payment_method] || orderData.payment_method}</span>
+                  <span class="payment-detail">${paymentMethodDetails[orderData.payment_method] || ''}</span>
+                </div>
+              </div>
+              ` : ''}
+              
+              <!-- Contact Note -->
+              <div class="contact-note">
+                <p>אם אחד מהפרטים אינו נכון, ניתן ליצור איתנו קשר <a href="https://bouquet.lovable.app/contact">באתר</a> או בטלפון/וואטסאפ: <a href="tel:052-7614436">052-7614436</a></p>
+              </div>
+              
+              <!-- No Reply Notice -->
+              <div class="no-reply">
+                אין להשיב למייל זה
               </div>
             </div>
             <div class="footer">
