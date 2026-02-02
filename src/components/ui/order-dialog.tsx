@@ -138,7 +138,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-4xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[95vh] md:overflow-visible max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F0E8' }}>
+      <DialogContent className="w-[95vw] max-w-5xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[98vh] md:overflow-visible max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F0E8' }}>
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
@@ -330,13 +330,13 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
               </div>
 
               {/* Payment Method */}
-              <div className="pt-1">
-                <p className="text-right font-synopsis text-[#314020] mb-2 text-base">אמצעי תשלום:</p>
-                <div className="flex gap-2 justify-end flex-wrap">
+              <div className="pt-2">
+                <p className="text-right font-synopsis text-[#314020] mb-3 text-base">אמצעי תשלום:</p>
+                <div className="flex gap-3 justify-end flex-wrap">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('transfer')}
-                    className={`px-4 md:px-6 py-1.5 rounded-full border-2 font-synopsis transition-all text-sm ${
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'transfer' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -347,7 +347,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('credit')}
-                    className={`px-4 md:px-6 py-1.5 rounded-full border-2 font-synopsis transition-all text-sm ${
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'credit' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -358,7 +358,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('bit')}
-                    className={`px-4 md:px-6 py-1.5 rounded-full border-2 font-synopsis transition-all text-sm ${
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'bit' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -369,7 +369,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('cash')}
-                    className={`px-4 md:px-6 py-1.5 rounded-full border-2 font-synopsis transition-all text-sm ${
+                    className={`px-5 md:px-8 py-2 rounded-full border-2 font-synopsis transition-all text-base ${
                       paymentMethod === 'cash' 
                         ? 'bg-[#314020] text-white border-[#314020]' 
                         : 'bg-transparent text-[#314020] border-[#314020] hover:bg-[#314020]/10'
@@ -380,32 +380,32 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                 </div>
 
                 {/* Payment Method Info - Fixed height to prevent layout shift */}
-                <div className="h-5 mt-1">
+                <div className="h-6 mt-2">
                   {paymentMethod === 'cash' && (
-                    <p className="font-synopsis text-[#314020] text-xs text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
+                    <p className="font-synopsis text-[#314020] text-sm text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                   )}
                   {paymentMethod === 'bit' && (
-                    <p className="font-synopsis text-[#314020] text-xs text-right">לתשלום בביט: 052-7669989</p>
+                    <p className="font-synopsis text-[#314020] text-sm text-right">לתשלום בביט: 052-7669989</p>
                   )}
                   {paymentMethod === 'credit' && (
-                    <p className="font-synopsis text-[#314020] text-xs text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
+                    <p className="font-synopsis text-[#314020] text-sm text-right">ניצור איתכם קשר בהמשך לצורך התשלום</p>
                   )}
                   {paymentMethod === 'transfer' && (
-                    <p className="font-synopsis text-[#314020] text-xs text-right">בנק מזרחי טפחות (20) סניף 722 חשבון 102979 ע"ש רחל רובינשטיין</p>
+                    <p className="font-synopsis text-[#314020] text-sm text-right">בנק מזרחי טפחות (20) סניף 722 חשבון 102979 ע"ש רחל רובינשטיין</p>
                   )}
                 </div>
 
                 {/* Submit Button - Below payment buttons */}
-                <div className="pt-2 md:pt-3 flex flex-col items-center">
+                <div className="pt-4 md:pt-6 flex flex-col items-center">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-6 md:px-10 py-2 md:py-2.5 flex items-center justify-center gap-2 font-synopsis font-bold disabled:opacity-50 text-base md:text-lg"
+                    className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 md:px-12 py-2.5 md:py-3 flex items-center justify-center gap-3 font-synopsis font-bold disabled:opacity-50 text-lg md:text-xl"
                   >
                     <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
-                    <img src={orderArrow} alt="" className="h-4 w-4 md:h-5 md:w-5" />
+                    <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
                   </Button>
-                  <p className="text-center text-xs text-gray-600 mt-2" dir="rtl">
+                  <p className="text-center text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
                     בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
                   </p>
                 </div>
