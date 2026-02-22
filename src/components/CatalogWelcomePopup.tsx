@@ -68,7 +68,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
             >
               <p>לא נהיה זמינים בתאריכים</p>
               <p>22.2 עד 04.03</p>
-              <p>ה' אדר עד ט"ו אדר</p>
+              <p><span className="font-bold">ה' אדר עד ט"ו אדר</span></p>
               <p>עקב שמחה משפחתית</p>
             </div>
             
