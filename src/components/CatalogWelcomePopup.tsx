@@ -66,10 +66,10 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
               className="font-ploni-aaa font-regular text-base md:text-xl leading-relaxed max-w-[650px] mb-10 md:mb-12 space-y-1"
               style={{ color: '#314020' }}
             >
-              <p>בתהליך בחירת הפרחים והשזירה</p>
-              <p>מושקע מאמץ רב ע"מ להנגיש לכם זר עמיד יפה ורענן,</p>
-              <p>עם כל זאת מכיון שהפרחים בחלקם אינם זמינים בכל ימות השנה,</p>
-              <p>ייתכנו שינויים קלים בסוג הפרח / גוון הפרח ובשלבי הפתיחה.</p>
+              <p>לא נהיה זמינים בתאריכים</p>
+              <p>22.2 עד 04.03</p>
+              <p>ה' אדר עד ט"ו אדר</p>
+              <p>עקב שמחה משפחתית</p>
             </div>
             
             {/* Continue button */}
