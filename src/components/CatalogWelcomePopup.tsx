@@ -61,15 +61,17 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
               לקוחות יקרים!
             </h2>
             
-            {/* Body text */}
             <div 
               className="font-ploni-aaa font-regular text-base md:text-xl leading-relaxed max-w-[650px] mb-10 md:mb-12 space-y-1"
               style={{ color: '#314020' }}
             >
-              <p>לא נהיה זמינים בתאריכים</p>
+              <p>עקב שמחה משפחתית</p>
+              <p>לא נהיה זמינים בין התאריכים</p>
               <p>22.2 עד 04.03</p>
               <p><span className="font-bold">ה' אדר עד ט"ו אדר</span></p>
-              <p>עקב שמחה משפחתית</p>
+              <p>עמכם הסליחה</p>
+              <p>שניפגש בשמחות!</p>
+              <p className="mt-4 font-semibold">צוות בוקט</p>
             </div>
             
             {/* Continue button */}
