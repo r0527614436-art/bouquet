@@ -65,42 +65,13 @@ const Index = () => {
     }
   });
 
-  // Track image loading
+  // Loading timeout - show loading screen for a fixed short duration
   useEffect(() => {
-    const images = document.querySelectorAll('img');
-    let loadedCount = 0;
-    const totalImages = images.length;
-    if (totalImages === 0) {
-      setIsLoading(false);
-      return;
-    }
-    const checkAllLoaded = () => {
-      loadedCount++;
-      if (loadedCount === totalImages) {
-        setTimeout(() => setIsLoading(false), 500);
-      }
-    };
-    images.forEach(img => {
-      if (img.complete) {
-        checkAllLoaded();
-      } else {
-        img.addEventListener('load', checkAllLoaded);
-        img.addEventListener('error', checkAllLoaded);
-      }
-    });
-
-    // Fallback timeout
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
-    return () => {
-      clearTimeout(timeout);
-      images.forEach(img => {
-        img.removeEventListener('load', checkAllLoaded);
-        img.removeEventListener('error', checkAllLoaded);
-      });
-    };
-  }, [slides]);
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   // Hero image - single static image
   const heroImageData = {
