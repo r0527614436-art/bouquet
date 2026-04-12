@@ -224,7 +224,7 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
       // Upload to Supabase Storage
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('catalog-images')
-        .upload(fileName, file, {
+        .upload(fileName, convertedFile, {
           cacheControl: '3600',
           upsert: false
         });
