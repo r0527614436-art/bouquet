@@ -134,27 +134,89 @@ const ItemManagement = ({ categories, items }: ItemManagementProps) => {
     }
   };
 
+  const convertToWebP = (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      if (file.type === 'image/webp') {
+        resolve(file);
+        return;
+      }
+      if (file.type === 'image/gif') {
+        resolve(file);
+        return;
+      }
+
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        
+        const MAX_WIDTH = 1400;
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > MAX_WIDTH) {
+          height = Math.round((height * MAX_WIDTH) / width);
+          width = MAX_WIDTH;
+        }
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Failed to get canvas context'));
+          return;
+        }
+        
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('Failed to convert image to WebP'));
+              return;
+            }
+            const baseName = file.name.replace(/\.[^.]+$/, '');
+            const webpFile = new File([blob], `${baseName}.webp`, { type: 'image/webp' });
+            console.log(`Converted ${file.name} (${(file.size / 1024).toFixed(0)}KB) → WebP (${(webpFile.size / 1024).toFixed(0)}KB)`);
+            resolve(webpFile);
+          },
+          'image/webp',
+          0.8
+        );
+      };
+      
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('Failed to load image for conversion'));
+      };
+      
+      img.src = url;
+    });
+  };
+
   const uploadImageToStorage = async (file: File): Promise<string> => {
     console.log('Starting image upload for file:', file.name, 'Size:', file.size);
     
     try {
-      // Validate file type
       if (!file.type.startsWith('image/')) {
         throw new Error('הקובץ חייב להיות תמונה');
       }
       
-      // Validate file size (10MB limit)
       if (file.size > 10 * 1024 * 1024) {
         throw new Error('התמונה גדולה מדי. מקסימום 10MB');
       }
 
-      // Get file extension
-      const fileExt = file.name.split('.').pop()?.toLowerCase();
+      // Convert to WebP before upload
+      const convertedFile = await convertToWebP(file);
+      
+      const fileExt = convertedFile.name.split('.').pop()?.toLowerCase();
       if (!fileExt || !['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(fileExt)) {
         throw new Error('סוג קובץ לא נתמך. השתמש ב-JPG, PNG, WebP או GIF');
       }
 
-      // Generate unique filename
       const fileName = `catalog-${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       
       console.log('Uploading to catalog-images bucket with filename:', fileName);
