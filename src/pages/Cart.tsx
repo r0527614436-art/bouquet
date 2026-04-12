@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
-import simpleArrow from '@/assets/simple-arrow.png';
+import simpleArrow from '@/assets/simple-arrow.webp';
 
 const Cart = () => {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalItems } = useCart();

@@ -11,11 +11,11 @@ import Testimonials from '@/components/Testimonials';
 import LoadingScreen from '@/components/LoadingScreen';
 import CatalogNotReadyPopup from '@/components/CatalogNotReadyPopup';
 import wazeIcon from '@/assets/waze-icon.png';
-import downloadCatalogBtn from '@/assets/download-catalog-btn.png';
+import downloadCatalogBtn from '@/assets/download-catalog-btn.webp';
 import downloadArrow from '@/assets/download-arrow.png';
-import heroImage from '@/assets/hero-image.jpg';
+import heroImage from '@/assets/hero-image.webp';
 import arrowCircleGreen from '@/assets/arrow-circle-new.png';
-import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
+import bouquetLogo3D from '@/assets/bouquet-logo-3d.webp';
 import { useToast } from '@/hooks/use-toast';
 import { AnimatePresence } from 'framer-motion';
 interface HomepageSlide {
@@ -29,7 +29,7 @@ interface HomepageSlide {
 }
 const Index = () => {
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const heroBackgrounds = ['/lovable-uploads/hero-new-1.jpg', '/lovable-uploads/hero-new-2.jpg', '/lovable-uploads/hero-new-3.jpg'];
+  const heroBackgrounds = ['/lovable-uploads/hero-new-1.webp', '/lovable-uploads/hero-new-2.webp', '/lovable-uploads/hero-new-3.webp'];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
@@ -463,25 +463,25 @@ const Index = () => {
             <div className="flex md:hidden gap-2 items-stretch flex-shrink-0 w-full justify-center">
               {/* Mobile: With special rounded corners and object positioning */}
               <div className="flex-1 max-w-[110px] aspect-square rounded-br-[30px] rounded-tl-lg rounded-bl-lg rounded-tr-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
+                <img src="/lovable-uploads/about-image-3.webp" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom" />
               </div>
               <div className="flex-1 max-w-[110px] aspect-square rounded-2xl overflow-hidden">
-                <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/about-image-2.webp" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="flex-1 max-w-[110px] aspect-square rounded-tl-[30px] rounded-tr-lg rounded-bl-lg rounded-br-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
+                <img src="/lovable-uploads/about-image-1.webp" alt="זרי כלה" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
               </div>
             </div>
             {/* Desktop: Original layout */}
             <div className="hidden md:flex gap-3 md:gap-6 items-end flex-shrink-0 lg:mt-[69px] lg:mb-[87px] w-full justify-center lg:w-auto">
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-br-[40px] md:rounded-br-[60px] rounded-bl-lg overflow-hidden">
-                <img src="/lovable-uploads/about-image-3.png" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/about-image-3.webp" alt="סידורי פרחים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="w-24 h-24 md:w-48 md:h-48 rounded-2xl overflow-hidden">
-                <img src="/lovable-uploads/about-image-2.png" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/about-image-2.webp" alt="עיצוב אירועים" width="192" height="192" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
               <div className="w-36 h-48 md:w-64 md:h-[450px] rounded-tl-[120px] md:rounded-tl-[180px] rounded-tr-2xl rounded-br-2xl rounded-bl-2xl overflow-hidden flex-shrink-0">
-                <img src="/lovable-uploads/about-image-1.png" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/about-image-1.webp" alt="זרי כלה" width="256" height="450" loading="lazy" decoding="async" className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -613,7 +613,7 @@ const Index = () => {
             }
           `}</style>
           <div className="diagonal-scroll-container flex gap-2 md:gap-4">
-            {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.jpg', '/lovable-uploads/about-scroll-2.jpg', '/lovable-uploads/about-scroll-3.jpg', '/lovable-uploads/about-scroll-4.jpg', '/lovable-uploads/about-scroll-5.jpg', '/lovable-uploads/about-scroll-6.jpg', '/lovable-uploads/about-scroll-7.jpg', '/lovable-uploads/about-scroll-8.jpg', '/lovable-uploads/about-scroll-9.jpg', '/lovable-uploads/about-scroll-10.jpg', '/lovable-uploads/about-scroll-11.jpg', '/lovable-uploads/about-scroll-12.jpg', '/lovable-uploads/about-scroll-13.jpg', '/lovable-uploads/about-scroll-14.jpg'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-[100px] h-[140px] md:w-[280px] md:h-[380px]">
+            {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.webp', '/lovable-uploads/about-scroll-2.webp', '/lovable-uploads/about-scroll-3.webp', '/lovable-uploads/about-scroll-4.webp', '/lovable-uploads/about-scroll-5.webp', '/lovable-uploads/about-scroll-6.webp', '/lovable-uploads/about-scroll-7.webp', '/lovable-uploads/about-scroll-8.webp', '/lovable-uploads/about-scroll-9.webp', '/lovable-uploads/about-scroll-10.webp', '/lovable-uploads/about-scroll-11.webp', '/lovable-uploads/about-scroll-12.webp', '/lovable-uploads/about-scroll-13.webp', '/lovable-uploads/about-scroll-14.webp'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden shadow-lg w-[100px] h-[140px] md:w-[280px] md:h-[380px]">
                   <img src={img} alt={`עיצוב פרחים ${idx + 1}`} width="280" height="200" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
                 </div>))}
           </div>
@@ -658,19 +658,19 @@ const Index = () => {
           {/* Catalog Images Grid - Full Width - Vertical on mobile */}
           <div className="hidden md:grid grid-cols-4 gap-0 w-full mt-16 pr-16">
             {[{
-                img: '/lovable-uploads/catalog-bouquet.png',
+                img: '/lovable-uploads/catalog-bouquet.webp',
                 title: 'כסאות וזרי\nכלה',
                 category: 'זרי כלה'
               }, {
-                img: '/lovable-uploads/catalog-engagement.png',
+                img: '/lovable-uploads/catalog-engagement.webp',
                 title: 'זרי\nאירוסין',
                 category: 'זרי אירוסין'
               }, {
-                img: '/lovable-uploads/catalog-hair.png',
+                img: '/lovable-uploads/catalog-hair.webp',
                 title: 'קישוטי\nשיער',
                 category: 'קישוטי שיער'
               }, {
-                img: '/lovable-uploads/catalog-chairs.png',
+                img: '/lovable-uploads/catalog-chairs.webp',
                 title: 'עיצוב\nאירועים',
                 category: 'מתנות מעוצבות'
               }].map((item, idx) => <Link key={idx} to={`/catalog?category=${encodeURIComponent(item.category)}`} onClick={() => window.scrollTo(0, 0)} className={`relative overflow-hidden aspect-[2/3] cursor-pointer hover:scale-[1.02] transition-transform ${idx === 0 ? 'rounded-r-3xl' : ''}`}>
@@ -683,19 +683,19 @@ const Index = () => {
           {/* Mobile: Vertical stacked layout with rounded corners */}
           <div className="md:hidden flex flex-col gap-0 w-full mt-8 px-4">
             {[{
-                img: '/lovable-uploads/catalog-bouquet.png',
+                img: '/lovable-uploads/catalog-bouquet.webp',
                 title: 'כסאות וזרי כלה',
                 category: 'זרי כלה'
               }, {
-                img: '/lovable-uploads/catalog-engagement.png',
+                img: '/lovable-uploads/catalog-engagement.webp',
                 title: 'זרי אירוסין',
                 category: 'זרי אירוסין'
               }, {
-                img: '/lovable-uploads/catalog-hair.png',
+                img: '/lovable-uploads/catalog-hair.webp',
                 title: 'קישוטי שיער',
                 category: 'קישוטי שיער'
               }, {
-                img: '/lovable-uploads/catalog-chairs.png',
+                img: '/lovable-uploads/catalog-chairs.webp',
                 title: 'עיצוב אירועים',
                 category: 'מתנות מעוצבות'
               }].map((item, idx) => <Link key={idx} to={`/catalog?category=${encodeURIComponent(item.category)}`} onClick={() => window.scrollTo(0, 0)} className={`relative overflow-hidden aspect-[16/9] cursor-pointer active:scale-[0.98] transition-transform ${idx === 0 ? 'rounded-t-2xl' : ''} ${idx === 3 ? 'rounded-b-2xl' : ''}`}>

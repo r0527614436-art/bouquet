@@ -93,7 +93,7 @@ const About = () => {
   }} id="about-page">
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] w-full" style={{
-      backgroundImage: `url('/lovable-uploads/about-hero.jpg')`,
+      backgroundImage: `url('/lovable-uploads/about-hero.webp')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center 70%',
       backgroundRepeat: 'no-repeat'
@@ -202,7 +202,7 @@ const About = () => {
             }
           `}</style>
           <div className="scroll-container flex gap-6 overflow-visible py-4">
-            {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.jpg', '/lovable-uploads/about-scroll-2.jpg', '/lovable-uploads/about-scroll-3.jpg', '/lovable-uploads/about-scroll-4.jpg', '/lovable-uploads/about-scroll-5.jpg', '/lovable-uploads/about-scroll-6.jpg', '/lovable-uploads/about-scroll-7.jpg', '/lovable-uploads/about-scroll-8.jpg', '/lovable-uploads/about-scroll-9.jpg', '/lovable-uploads/about-scroll-10.jpg', '/lovable-uploads/about-scroll-11.jpg', '/lovable-uploads/about-scroll-12.jpg', '/lovable-uploads/about-scroll-13.jpg', '/lovable-uploads/about-scroll-14.jpg', '/lovable-uploads/about-scroll-15.jpg', '/lovable-uploads/about-scroll-16.jpg', '/lovable-uploads/about-scroll-17.jpg', '/lovable-uploads/about-scroll-18.jpg', '/lovable-uploads/about-scroll-19.jpg', '/lovable-uploads/about-scroll-20.jpg', '/lovable-uploads/about-scroll-21.jpg', '/lovable-uploads/about-scroll-22.jpg', '/lovable-uploads/about-scroll-23.jpg', '/lovable-uploads/about-scroll-24.jpg', '/lovable-uploads/about-scroll-25.jpg', '/lovable-uploads/about-scroll-26.jpg', '/lovable-uploads/about-scroll-27.jpg', '/lovable-uploads/about-scroll-28.jpg'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{
+            {[...Array(2)].map((_, setIndex) => ['/lovable-uploads/about-scroll-1.webp', '/lovable-uploads/about-scroll-2.webp', '/lovable-uploads/about-scroll-3.webp', '/lovable-uploads/about-scroll-4.webp', '/lovable-uploads/about-scroll-5.webp', '/lovable-uploads/about-scroll-6.webp', '/lovable-uploads/about-scroll-7.webp', '/lovable-uploads/about-scroll-8.webp', '/lovable-uploads/about-scroll-9.webp', '/lovable-uploads/about-scroll-10.webp', '/lovable-uploads/about-scroll-11.webp', '/lovable-uploads/about-scroll-12.webp', '/lovable-uploads/about-scroll-13.webp', '/lovable-uploads/about-scroll-14.webp', '/lovable-uploads/about-scroll-15.webp', '/lovable-uploads/about-scroll-16.webp', '/lovable-uploads/about-scroll-17.webp', '/lovable-uploads/about-scroll-18.webp', '/lovable-uploads/about-scroll-19.webp', '/lovable-uploads/about-scroll-20.webp', '/lovable-uploads/about-scroll-21.webp', '/lovable-uploads/about-scroll-22.webp', '/lovable-uploads/about-scroll-23.webp', '/lovable-uploads/about-scroll-24.webp', '/lovable-uploads/about-scroll-25.webp', '/lovable-uploads/about-scroll-26.webp', '/lovable-uploads/about-scroll-27.webp', '/lovable-uploads/about-scroll-28.webp'].map((img, idx) => <div key={`${setIndex}-${idx}`} className="flex-shrink-0 rounded-2xl overflow-hidden" style={{
             width: 'calc((100vw - 48px) / 5)',
             height: 'calc(((100vw - 48px) / 5) * 1.5)'
           }}>

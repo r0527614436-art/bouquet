@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, ShoppingCart, Plus, X, ChevronLeft, ChevronRight, Download, MapPin, Mail, Phone, ChevronDown } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import arrowSimple from '@/assets/arrow-simple.png';
+import arrowSimple from '@/assets/arrow-simple.webp';
 import { Button } from '@/components/ui/button';
 import { ImageViewer } from '@/components/ui/image-viewer';
 import { OrderDialog } from '@/components/ui/order-dialog';
@@ -342,7 +342,7 @@ const Catalog = () => {
   }} id="catalog-page">
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
-      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.jpg')`
+      backgroundImage: `url('/lovable-uploads/catalog-hero-bg.webp')`
     }}>
         {/* White Cloud Gradient Overlay - only bottom fifth (20%) */}
         <div className="absolute inset-0" style={{

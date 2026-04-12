@@ -75,7 +75,7 @@ const PrivacyPolicy = () => {
         <div 
           className="absolute inset-0 bg-cover"
           style={{ 
-            backgroundImage: `url('/lovable-uploads/contact-hero.jpg')`,
+            backgroundImage: `url('/lovable-uploads/contact-hero.webp')`,
             backgroundPosition: 'center 75%'
           }}
         />

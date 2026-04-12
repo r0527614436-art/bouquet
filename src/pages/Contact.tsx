@@ -97,7 +97,7 @@ const Contact = () => {
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[45vh] md:min-h-[70vh] w-full" style={{
-        backgroundImage: `url('/lovable-uploads/contact-hero-new.jpg')`,
+        backgroundImage: `url('/lovable-uploads/contact-hero-new.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'top center',
         backgroundRepeat: 'no-repeat'
