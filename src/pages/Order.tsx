@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Calendar, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import simpleArrow from '@/assets/simple-arrow.png';
+import simpleArrow from '@/assets/simple-arrow.webp';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';

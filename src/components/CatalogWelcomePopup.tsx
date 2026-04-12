@@ -28,7 +28,7 @@ const CatalogWelcomePopup: React.FC<CatalogWelcomePopupProps> = ({ isOpen, onClo
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ 
-              backgroundImage: `url('/lovable-uploads/catalog-popup-bg.jpg')`,
+              backgroundImage: `url('/lovable-uploads/catalog-popup-bg.webp')`,
             }}
           />
           

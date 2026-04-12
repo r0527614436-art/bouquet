@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import arrowSimple from '@/assets/arrow-simple.png';
+import arrowSimple from '@/assets/arrow-simple.webp';
 
 interface GallerySlide {
   id: string;
@@ -144,36 +144,36 @@ export const GalleryCarousel: React.FC<GalleryCarouselProps> = ({
             <div className="overflow-visible w-full px-2 md:px-4" ref={galleryEmblaRef}>
               <div className="flex items-center justify-center">
                 {[
-                  '/lovable-uploads/scroll-1.jpg',
-                  '/lovable-uploads/scroll-2.jpg',
-                  '/lovable-uploads/scroll-3.jpg',
-                  '/lovable-uploads/scroll-4.jpg',
-                  '/lovable-uploads/scroll-5.jpg',
-                  '/lovable-uploads/scroll-6.jpg',
-                  '/lovable-uploads/scroll-7.jpg',
-                  '/lovable-uploads/scroll-8.jpg',
-                  '/lovable-uploads/scroll-9.jpg',
-                  '/lovable-uploads/scroll-10.jpg',
-                  '/lovable-uploads/scroll-11.jpg',
-                  '/lovable-uploads/scroll-12.jpg',
-                  '/lovable-uploads/scroll-13.jpg',
-                  '/lovable-uploads/scroll-14.jpg',
-                  '/lovable-uploads/scroll-15.jpg',
-                  '/lovable-uploads/scroll-16.jpg',
-                  '/lovable-uploads/scroll-17.jpg',
-                  '/lovable-uploads/scroll-18.jpg',
-                  '/lovable-uploads/scroll-19.jpg',
-                  '/lovable-uploads/scroll-20.jpg',
-                  '/lovable-uploads/scroll-21.jpg',
-                  '/lovable-uploads/scroll-22.jpg',
-                  '/lovable-uploads/scroll-23.jpg',
-                  '/lovable-uploads/scroll-24.jpg',
-                  '/lovable-uploads/scroll-25.jpg',
-                  '/lovable-uploads/scroll-26.jpg',
-                  '/lovable-uploads/scroll-27.jpg',
-                  '/lovable-uploads/scroll-28.jpg',
-                  '/lovable-uploads/scroll-29.jpg',
-                  '/lovable-uploads/scroll-30.jpg'
+                  '/lovable-uploads/scroll-1.webp',
+                  '/lovable-uploads/scroll-2.webp',
+                  '/lovable-uploads/scroll-3.webp',
+                  '/lovable-uploads/scroll-4.webp',
+                  '/lovable-uploads/scroll-5.webp',
+                  '/lovable-uploads/scroll-6.webp',
+                  '/lovable-uploads/scroll-7.webp',
+                  '/lovable-uploads/scroll-8.webp',
+                  '/lovable-uploads/scroll-9.webp',
+                  '/lovable-uploads/scroll-10.webp',
+                  '/lovable-uploads/scroll-11.webp',
+                  '/lovable-uploads/scroll-12.webp',
+                  '/lovable-uploads/scroll-13.webp',
+                  '/lovable-uploads/scroll-14.webp',
+                  '/lovable-uploads/scroll-15.webp',
+                  '/lovable-uploads/scroll-16.webp',
+                  '/lovable-uploads/scroll-17.webp',
+                  '/lovable-uploads/scroll-18.webp',
+                  '/lovable-uploads/scroll-19.webp',
+                  '/lovable-uploads/scroll-20.webp',
+                  '/lovable-uploads/scroll-21.webp',
+                  '/lovable-uploads/scroll-22.webp',
+                  '/lovable-uploads/scroll-23.webp',
+                  '/lovable-uploads/scroll-24.webp',
+                  '/lovable-uploads/scroll-25.webp',
+                  '/lovable-uploads/scroll-26.webp',
+                  '/lovable-uploads/scroll-27.webp',
+                  '/lovable-uploads/scroll-28.webp',
+                  '/lovable-uploads/scroll-29.webp',
+                  '/lovable-uploads/scroll-30.webp'
                 ].map((img, idx) => {
                   const isSelected = idx === gallerySelectedIndex;
                   

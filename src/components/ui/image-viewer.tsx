@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import arrowSimple from '@/assets/arrow-simple.png';
+import arrowSimple from '@/assets/arrow-simple.webp';
 
 interface CatalogItem {
   id: string;

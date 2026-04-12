@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import bouquetLogo3D from '@/assets/bouquet-logo-3d.png';
+import bouquetLogo3D from '@/assets/bouquet-logo-3d.webp';
 const OrderConfirmation = () => {
   return <div className="min-h-screen w-full relative flex items-center justify-center" dir="rtl">
       {/* Background Image with Blur Overlay */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: 'url(/lovable-uploads/order-confirmation-bg.jpg)'
+      backgroundImage: 'url(/lovable-uploads/order-confirmation-bg.webp)'
     }} />
       
       
