@@ -18,6 +18,7 @@ import arrowCircleGreen from '@/assets/arrow-circle-new.png';
 import bouquetLogo3D from '@/assets/bouquet-logo-3d.webp';
 import { useToast } from '@/hooks/use-toast';
 import { AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 interface HomepageSlide {
   id: string;
   title: string;
