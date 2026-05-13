@@ -30,6 +30,7 @@ const App = () => (
           <div className="min-h-screen w-full">
             <SideNavigation />
             <div className="pr-0 md:pr-20">
+              <main>
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/catalog" element={<Catalog />} />
@@ -44,6 +45,7 @@ const App = () => (
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              </main>
             </div>
           </div>
         </BrowserRouter>
