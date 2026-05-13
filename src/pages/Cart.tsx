@@ -48,7 +48,7 @@ const Cart = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <ShoppingBag className="h-24 w-24 text-gray-300 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-700 mb-4">העגלה ריקה</h2>
+            <h1 className="text-2xl font-bold text-gray-700 mb-4">העגלה ריקה</h1>
             <p className="text-gray-500 mb-8">אין פריטים בסל המוצרים שלכם</p>
             <Link to="/catalog">
               <Button className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-3">
@@ -119,6 +119,7 @@ const Cart = () => {
                   size="icon"
                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
                   className="h-8 w-8"
+                  aria-label={`הפחת כמות עבור ${item.title}`}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -130,6 +131,7 @@ const Cart = () => {
                   size="icon"
                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
                   className="h-8 w-8"
+                  aria-label={`הוסף כמות עבור ${item.title}`}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -140,6 +142,7 @@ const Cart = () => {
                 size="icon"
                 onClick={() => removeFromCart(item.id)}
                 className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
+                aria-label={`הסר את ${item.title} מהעגלה`}
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
