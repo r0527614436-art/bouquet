@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Helmet } from 'react-helmet-async';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -95,6 +96,14 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
+      <Helmet>
+        <title>צור קשר | בוקט — שזירת פרחים</title>
+        <meta name="description" content="צרו קשר עם בוקט: טלפון 052-7614436, שערי תשובה 14 מודיעין עילית. שזירת פרחים ועיצוב אירועים בהתאמה אישית." />
+        <link rel="canonical" href="https://bouquet-flowers.co.il/contact" />
+        <meta property="og:title" content="צור קשר | בוקט" />
+        <meta property="og:description" content="צרו קשר עם בוקט לשזירת פרחים ועיצוב אירועים." />
+        <meta property="og:url" content="https://bouquet-flowers.co.il/contact" />
+      </Helmet>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[45vh] md:min-h-[70vh] w-full" style={{
         backgroundImage: `url('/lovable-uploads/contact-hero-new.webp')`,
@@ -162,9 +171,9 @@ const Contact = () => {
           {/* Title with Layered Effect */}
           <div className="relative mb-4 md:mb-8 h-[70px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[45px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none" style={{ transform: 'translate(15px, -10px)' }}>
+            <span aria-hidden="true" className="font-allura text-[45px] md:text-[120px] font-bold text-gray-400/70 leading-none select-none block" style={{ transform: 'translate(15px, -10px)' }}>
               Contact us
-            </h1>
+            </span>
             {/* Hebrew Front Text */}
             <h1 className="font-synopsis text-[40px] md:text-[100px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none whitespace-nowrap text-center"
                 style={{

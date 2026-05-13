@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import Testimonials from '@/components/Testimonials';
+import { Helmet } from 'react-helmet-async';
 const About = () => {
   const navigate = useNavigate();
   const {
@@ -91,6 +92,14 @@ const About = () => {
   return <div className="min-h-screen" style={{
     backgroundColor: '#F8FBF4'
   }} id="about-page">
+      <Helmet>
+        <title>אודות בוקט | רוחי רובינשטיין — שזירת פרחים</title>
+        <meta name="description" content="הסיפור של בוקט: רוחי רובינשטיין, שזירת פרחים ועיצוב אירועים מהודר במגזר החרדי באזור ירושלים, בני ברק ומודיעין עילית." />
+        <link rel="canonical" href="https://bouquet-flowers.co.il/about" />
+        <meta property="og:title" content="אודות בוקט | רוחי רובינשטיין" />
+        <meta property="og:description" content="הסיפור של בוקט — שזירת פרחים ועיצוב אירועים מהודר." />
+        <meta property="og:url" content="https://bouquet-flowers.co.il/about" />
+      </Helmet>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] w-full" style={{
       backgroundImage: `url('/lovable-uploads/about-hero.webp')`,
@@ -159,11 +168,11 @@ const About = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4 md:mb-8 h-[80px] md:h-auto flex items-center justify-center">
             {/* English Background Text */}
-            <h1 className="font-allura text-[50px] md:text-[160px] font-light text-gray-400/70 leading-none select-none" style={{
+            <span aria-hidden="true" className="font-allura text-[50px] md:text-[160px] font-light text-gray-400/70 leading-none select-none block" style={{
             transform: 'translate(15px, -10px)'
           }}>
               About
-            </h1>
+            </span>
             {/* Hebrew Front Text */}
             <h1 className="font-synopsis text-[45px] md:text-[140px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" style={{
             textShadow: '3px 3px 6px rgba(0,0,0,0.2)'

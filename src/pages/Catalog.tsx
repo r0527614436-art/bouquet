@@ -11,6 +11,7 @@ import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
 import CatalogWelcomePopup from '@/components/CatalogWelcomePopup';
+import { Helmet } from 'react-helmet-async';
 interface FilterOption {
   name: string;
   options: string[];
@@ -340,6 +341,14 @@ const Catalog = () => {
   return <div className="min-h-screen" style={{
     backgroundColor: '#F8FBF4'
   }} id="catalog-page">
+      <Helmet>
+        <title>קטלוג זרי כלה ועיצוב אירועים | בוקט</title>
+        <meta name="description" content="קטלוג בוקט: זרי כלה, זרי אירוסין, חופות, כסאות כלה ועיצובי אירועים מהודרים בהתאמה אישית." />
+        <link rel="canonical" href="https://bouquet-flowers.co.il/catalog" />
+        <meta property="og:title" content="קטלוג זרי כלה ועיצוב אירועים | בוקט" />
+        <meta property="og:description" content="זרי כלה, זרי אירוסין, חופות, כסאות כלה ועיצובי אירועים בהתאמה אישית." />
+        <meta property="og:url" content="https://bouquet-flowers.co.il/catalog" />
+      </Helmet>
       {/* Hero Section with Background Image */}
       <div className="relative min-h-[70vh] bg-cover md:bg-contain bg-top bg-no-repeat" style={{
       backgroundImage: `url('/lovable-uploads/catalog-hero-bg.webp')`
@@ -403,11 +412,11 @@ const Catalog = () => {
           {/* Title with Layered Effect - Hebrew in front, English in back */}
           <div className="relative mb-4 md:mb-4 h-[100px] md:h-auto flex items-center justify-center">
             {/* English Background Text - much bigger, thinner font */}
-            <h1 className="font-allura text-[80px] md:text-[260px] font-light text-gray-400/50 leading-none select-none" style={{
+            <span aria-hidden="true" className="font-allura text-[80px] md:text-[260px] font-light text-gray-400/50 leading-none select-none block" style={{
             transform: 'translate(15px, -10px)'
           }}>
               Catalog
-            </h1>
+            </span>
             {/* Hebrew Front Text - smaller relative to English */}
             <h1 className="font-synopsis text-[50px] md:text-[110px] font-bold text-[#314020] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 leading-none" style={{
             textShadow: '3px 3px 6px rgba(0,0,0,0.2)'
