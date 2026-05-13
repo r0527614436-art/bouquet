@@ -323,6 +323,15 @@ const Index = () => {
       <div className="min-h-screen" style={{
       backgroundColor: '#F8FBF4'
     }}>
+      <Helmet>
+        <title>בוקט — שזירת פרחים ועיצוב אירועים</title>
+        <meta name="description" content="בוקט — שזירת פרחים מקצועית: זרי אירוסין, זרי כלה, עיצוב חופות וכסאות כלה והפקת אירועים במגזר החרדי באזור ירושלים, בני ברק והמרכז." />
+        <link rel="canonical" href="https://bouquet-flowers.co.il/" />
+        <meta property="og:title" content="בוקט — שזירת פרחים ועיצוב אירועים" />
+        <meta property="og:description" content="זרי אירוסין, זרי כלה, עיצוב חופות וכסאות כלה והפקת אירועים במגזר החרדי." />
+        <meta property="og:url" content="https://bouquet-flowers.co.il/" />
+      </Helmet>
+      <h1 className="sr-only">בוקט — שזירת פרחים ועיצוב אירועים</h1>
       {/* Main Content */}
       <div>
 
