@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import SEO from "@/components/SEO";
 
 const PrivacyPolicy = () => {
   const { toast } = useToast();
+  
   const [contactForm, setContactForm] = useState({
     name: '',
     phone: '',
