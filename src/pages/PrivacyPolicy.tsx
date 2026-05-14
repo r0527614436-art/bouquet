@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import SEO from "@/components/SEO";
 
 const PrivacyPolicy = () => {
   const { toast } = useToast();
+  
   const [contactForm, setContactForm] = useState({
     name: '',
     phone: '',
@@ -70,6 +72,11 @@ const PrivacyPolicy = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }} dir="rtl">
+      <SEO
+        title="מדיניות פרטיות | בוקט - שזירת פרחים"
+        description="מדיניות הפרטיות של בוקט שזירת פרחים: כיצד אנו אוספים, משתמשים ומגנים על המידע האישי שלך באתר."
+        path="/privacy-policy"
+      />
       {/* Hero Section */}
       <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
         <div 
