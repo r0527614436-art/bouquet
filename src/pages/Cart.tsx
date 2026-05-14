@@ -5,6 +5,7 @@ import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import simpleArrow from '@/assets/simple-arrow.webp';
+import SEO from '@/components/SEO';
 
 const Cart = () => {
   const { items, updateQuantity, removeFromCart, clearCart, getTotalItems } = useCart();
@@ -19,6 +20,11 @@ const Cart = () => {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+        <SEO
+          title="עגלת הקניות | בוקט - שזירת פרחים"
+          description="העגלה שלך בבוקט שזירת פרחים. הוסיפי פריטים מהקטלוג והמשיכי להזמנה."
+          path="/cart"
+        />
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-pink-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,6 +69,11 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+      <SEO
+        title="עגלת הקניות | בוקט - שזירת פרחים"
+        description="עגלת הקניות שלך בבוקט שזירת פרחים. עברי על הפריטים שבחרת והמשיכי להזמנה."
+        path="/cart"
+      />
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-pink-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

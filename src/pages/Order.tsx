@@ -14,6 +14,7 @@ import { he } from 'date-fns/locale';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import SEO from '@/components/SEO';
 
 const Order = () => {
   const { items, clearCart } = useCart();
@@ -88,6 +89,11 @@ const Order = () => {
   if (items.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#F8FBF4' }}>
+        <SEO
+          title="השלמת הזמנה | בוקט - שזירת פרחים"
+          description="השלמת ההזמנה שלך בבוקט שזירת פרחים. מילוי פרטי ההזמנה ושליחה."
+          path="/order"
+        />
         <div className="text-center">
           <h2 className="text-2xl font-ploni-aaa font-bold text-[#314020] mb-4">אין פריטים בעגלה</h2>
           <Link to="/catalog">
@@ -102,6 +108,11 @@ const Order = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8FBF4' }}>
+      <SEO
+        title="השלמת הזמנה | בוקט - שזירת פרחים"
+        description="טופס הזמנה לסידורי פרחים ועיצוב אירועים בבוקט שזירת פרחים."
+        path="/order"
+      />
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
