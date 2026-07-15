@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Edit, Trash2, Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useUndo } from '@/contexts/UndoContext';
 
 interface HomepageSlide {
   id: string;
@@ -29,6 +30,7 @@ const HomepageSlideManagement = () => {
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { pushUndo } = useUndo();
 
   const { data: slides = [], isLoading } = useQuery({
     queryKey: ['homepage-slides'],
@@ -120,7 +122,8 @@ const HomepageSlideManagement = () => {
           font_family: slideData.font_family,
           is_active: true
         }])
-        .select();
+        .select()
+        .single();
         
       if (error) {
         console.error('Error adding slide:', error);
@@ -130,9 +133,18 @@ const HomepageSlideManagement = () => {
       console.log('Slide added successfully:', data);
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
       setIsAddDialogOpen(false);
+      if (data?.id) {
+        pushUndo({
+          label: `הוספת שקופית: ${data.title}`,
+          run: async () => {
+            await supabase.from('homepage_slides').delete().eq('id', data.id);
+            queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
+          },
+        });
+      }
       toast({ title: "התמונה נוספה בהצלחה!" });
     },
     onError: (error: any) => {
@@ -149,6 +161,11 @@ const HomepageSlideManagement = () => {
     mutationFn: async (slideData: HomepageSlide) => {
       console.log('Updating slide with data:', slideData);
       
+      const { data: prev } = await supabase
+        .from('homepage_slides')
+        .select('*')
+        .eq('id', slideData.id)
+        .single();
       const { data, error } = await supabase
         .from('homepage_slides')
         .update({
@@ -168,12 +185,33 @@ const HomepageSlideManagement = () => {
       }
       
       console.log('Slide updated successfully:', data);
-      return data;
+      return { data, prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
       setIsEditDialogOpen(false);
       setEditingSlide(null);
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `עדכון שקופית: ${prev.title}`,
+          run: async () => {
+            await supabase
+              .from('homepage_slides')
+              .update({
+                title: prev.title,
+                description: prev.description,
+                image_url: prev.image_url,
+                order_index: prev.order_index,
+                font_family: prev.font_family,
+                is_active: prev.is_active,
+                updated_at: new Date().toISOString(),
+              })
+              .eq('id', prev.id);
+            queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
+          },
+        });
+      }
       toast({ title: "התמונה עודכנה בהצלחה!" });
     },
     onError: (error: any) => {
@@ -190,6 +228,11 @@ const HomepageSlideManagement = () => {
     mutationFn: async (id: string) => {
       console.log('Deleting slide with id:', id);
       
+      const { data: prev } = await supabase
+        .from('homepage_slides')
+        .select('*')
+        .eq('id', id)
+        .single();
       const { error } = await supabase
         .from('homepage_slides')
         .delete()
@@ -201,9 +244,20 @@ const HomepageSlideManagement = () => {
       }
       
       console.log('Slide deleted successfully');
+      return { prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `מחיקת שקופית: ${prev.title}`,
+          run: async () => {
+            await supabase.from('homepage_slides').insert(prev);
+            queryClient.invalidateQueries({ queryKey: ['homepage-slides'] });
+          },
+        });
+      }
       toast({ title: "התמונה נמחקה בהצלחה!" });
     },
     onError: (error: any) => {
