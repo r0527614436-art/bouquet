@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 
 interface PopupRow {
@@ -38,6 +39,39 @@ const HomepagePopupManager: React.FC = () => {
       return data as PopupRow | null;
     },
   });
+
+  const { data: categories = [] } = useQuery({
+    queryKey: ['popup-admin-categories'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('id, name')
+        .order('created_at', { ascending: true });
+      if (error) throw error;
+      return data as { id: string; name: string }[];
+    },
+  });
+
+  const PRESET_PAGES = [
+    { label: 'דף הבית', value: '/' },
+    { label: 'קטלוג (הכל)', value: '/catalog' },
+    { label: 'אודות', value: '/about' },
+    { label: 'צור קשר', value: '/contact' },
+    { label: 'עגלת קניות', value: '/cart' },
+  ];
+
+  const linkPresets = [
+    ...PRESET_PAGES,
+    ...categories.map((c) => ({
+      label: `קטלוג — ${c.name}`,
+      value: `/catalog?category=${encodeURIComponent(c.name)}`,
+    })),
+  ];
+
+  const currentPresetValue =
+    form && linkPresets.some((p) => p.value === form.button_link)
+      ? form.button_link
+      : '__custom__';
 
   useEffect(() => {
     if (data && !form) setForm(data);
@@ -161,8 +195,28 @@ const HomepagePopupManager: React.FC = () => {
             />
           </div>
           <div>
-            <Label>קישור הכפתור</Label>
+            <Label>יעד הכפתור</Label>
+            <Select
+              value={currentPresetValue}
+              onValueChange={(v) => {
+                if (v === '__custom__') return;
+                setForm({ ...form, button_link: v });
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="בחר עמוד או קטגוריה" />
+              </SelectTrigger>
+              <SelectContent className="max-h-72 bg-white z-[10000]">
+                {linkPresets.map((p) => (
+                  <SelectItem key={p.value} value={p.value}>
+                    {p.label}
+                  </SelectItem>
+                ))}
+                <SelectItem value="__custom__">קישור מותאם אישית...</SelectItem>
+              </SelectContent>
+            </Select>
             <Input
+              className="mt-2"
               value={form.button_link}
               onChange={(e) => setForm({ ...form, button_link: e.target.value })}
               placeholder="/catalog או https://..."
