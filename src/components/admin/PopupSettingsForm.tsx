@@ -8,9 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { Trash2 } from 'lucide-react';
 
 interface PopupRow {
   id: string;
+  page_path: string;
   is_active: boolean;
   title: string;
   body_text: string;
@@ -21,29 +23,18 @@ interface PopupRow {
 }
 
 interface Props {
-  tableName: 'homepage_popup' | 'catalog_popup';
-  queryKey: string;
-  publicQueryKey: string;
+  popup: PopupRow;
 }
 
-const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKey }) => {
+const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
-  const [form, setForm] = useState<PopupRow | null>(null);
+  const [form, setForm] = useState<PopupRow>(popup);
 
-  const { data } = useQuery({
-    queryKey: [queryKey],
-    queryFn: async () => {
-      const { data, error } = await (supabase as any)
-        .from(tableName)
-        .select('*')
-        .limit(1)
-        .maybeSingle();
-      if (error) throw error;
-      return data as PopupRow | null;
-    },
-  });
+  useEffect(() => {
+    setForm(popup);
+  }, [popup.id]);
 
   const { data: categories = [] } = useQuery({
     queryKey: ['popup-admin-categories'],
@@ -74,19 +65,14 @@ const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKe
   ];
 
   const currentPresetValue =
-    form && linkPresets.some((p) => p.value === form.button_link)
-      ? form.button_link
-      : '__custom__';
-
-  useEffect(() => {
-    if (data && !form) setForm(data);
-  }, [data, form]);
+    linkPresets.some((p) => p.value === form.button_link) ? form.button_link : '__custom__';
 
   const saveMutation = useMutation({
     mutationFn: async (row: PopupRow) => {
-      const { error } = await (supabase as any)
-        .from(tableName)
+      const { error } = await supabase
+        .from('popups')
         .update({
+          page_path: row.page_path,
           is_active: row.is_active,
           title: row.title,
           body_text: row.body_text,
@@ -100,12 +86,27 @@ const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKe
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [queryKey] });
-      queryClient.invalidateQueries({ queryKey: [publicQueryKey] });
+      queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
+      queryClient.invalidateQueries({ queryKey: ['popups-public'] });
       toast({ title: 'הפופאפ נשמר בהצלחה!' });
     },
     onError: (err: any) => {
       toast({ title: 'שגיאה בשמירה', description: err.message, variant: 'destructive' });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabase.from('popups').delete().eq('id', form.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
+      queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+      toast({ title: 'הפופאפ נמחק' });
+    },
+    onError: (err: any) => {
+      toast({ title: 'שגיאה במחיקה', description: err.message, variant: 'destructive' });
     },
   });
 
@@ -135,11 +136,10 @@ const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKe
     });
 
   const handleUpload = async (file: File) => {
-    if (!form) return;
     try {
       setUploading(true);
       const webp = await compressToWebP(file);
-      const fileName = `${tableName}-${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
+      const fileName = `popup-${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
       const { error } = await supabase.storage
         .from('homepage-slides')
         .upload(fileName, webp, { cacheControl: '3600', upsert: false, contentType: 'image/webp' });
@@ -154,18 +154,62 @@ const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKe
     }
   };
 
-  if (!form) return <div>טוען...</div>;
+  const currentPageValue =
+    linkPresets.some((p) => p.value === form.page_path) ? form.page_path : '__custom__';
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-end gap-2 text-sm">
-        <Label htmlFor={`is_active_${tableName}`}>פעיל</Label>
-        <Switch
-          id={`is_active_${tableName}`}
-          checked={form.is_active}
-          onCheckedChange={(v) => setForm({ ...form, is_active: v })}
+      <div className="flex items-center justify-between gap-2 text-sm">
+        <div className="flex items-center gap-2">
+          <Label htmlFor={`is_active_${form.id}`}>פעיל</Label>
+          <Switch
+            id={`is_active_${form.id}`}
+            checked={form.is_active}
+            onCheckedChange={(v) => setForm({ ...form, is_active: v })}
+          />
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            if (confirm('למחוק את הפופאפ הזה?')) deleteMutation.mutate();
+          }}
+          disabled={deleteMutation.isPending}
+          className="text-red-600 border-red-300 hover:bg-red-50"
+        >
+          <Trash2 className="w-4 h-4 ml-1" />
+          מחק פופאפ
+        </Button>
+      </div>
+
+      <div>
+        <Label>עמוד יעד (איפה הפופאפ יופיע)</Label>
+        <Select
+          value={currentPageValue}
+          onValueChange={(v) => {
+            if (v === '__custom__') return;
+            setForm({ ...form, page_path: v });
+          }}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="בחר עמוד" />
+          </SelectTrigger>
+          <SelectContent className="max-h-72 bg-white z-[10000]">
+            {linkPresets.map((p) => (
+              <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
+            ))}
+            <SelectItem value="__custom__">נתיב מותאם אישית...</SelectItem>
+          </SelectContent>
+        </Select>
+        <Input
+          className="mt-2"
+          value={form.page_path}
+          onChange={(e) => setForm({ ...form, page_path: e.target.value })}
+          placeholder="/some-path"
+          dir="ltr"
         />
       </div>
+
       <div>
         <Label>כותרת</Label>
         <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
@@ -200,9 +244,7 @@ const PopupSettingsForm: React.FC<Props> = ({ tableName, queryKey, publicQueryKe
             </SelectTrigger>
             <SelectContent className="max-h-72 bg-white z-[10000]">
               {linkPresets.map((p) => (
-                <SelectItem key={p.value} value={p.value}>
-                  {p.label}
-                </SelectItem>
+                <SelectItem key={p.value} value={p.value}>{p.label}</SelectItem>
               ))}
               <SelectItem value="__custom__">קישור מותאם אישית...</SelectItem>
             </SelectContent>
