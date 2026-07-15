@@ -39,11 +39,8 @@ const SitePopup: React.FC = () => {
   useEffect(() => {
     setOpen(false);
     if (!popup) return;
-    const key = `popup-shown:${popup.id}`;
-    if (sessionStorage.getItem(key)) return;
     const t = setTimeout(() => {
       setOpen(true);
-      sessionStorage.setItem(key, '1');
     }, 1500);
     return () => clearTimeout(t);
   }, [popup?.id, location.pathname]);
