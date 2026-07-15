@@ -9,6 +9,7 @@ import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Trash2 } from 'lucide-react';
+import { useUndo } from '@/contexts/UndoContext';
 
 interface PopupRow {
   id: string;
@@ -29,6 +30,7 @@ interface Props {
 const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { pushUndo } = useUndo();
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState<PopupRow>(popup);
 
@@ -69,6 +71,11 @@ const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
 
   const saveMutation = useMutation({
     mutationFn: async (row: PopupRow) => {
+      const { data: prev } = await supabase
+        .from('popups')
+        .select('*')
+        .eq('id', row.id)
+        .single();
       const { error } = await supabase
         .from('popups')
         .update({
@@ -84,10 +91,35 @@ const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
         })
         .eq('id', row.id);
       if (error) throw error;
+      return { prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
       queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `עדכון פופאפ (${prev.page_path})`,
+          run: async () => {
+            await supabase
+              .from('popups')
+              .update({
+                page_path: prev.page_path,
+                is_active: prev.is_active,
+                title: prev.title,
+                body_text: prev.body_text,
+                button_text: prev.button_text,
+                button_link: prev.button_link,
+                image_url: prev.image_url,
+                overlay_opacity: prev.overlay_opacity,
+                updated_at: new Date().toISOString(),
+              })
+              .eq('id', prev.id);
+            queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
+            queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+          },
+        });
+      }
       toast({ title: 'הפופאפ נשמר בהצלחה!' });
     },
     onError: (err: any) => {
@@ -97,12 +129,29 @@ const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
+      const { data: prev } = await supabase
+        .from('popups')
+        .select('*')
+        .eq('id', form.id)
+        .single();
       const { error } = await supabase.from('popups').delete().eq('id', form.id);
       if (error) throw error;
+      return { prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
       queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `מחיקת פופאפ (${prev.page_path})`,
+          run: async () => {
+            await supabase.from('popups').insert(prev);
+            queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
+            queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+          },
+        });
+      }
       toast({ title: 'הפופאפ נמחק' });
     },
     onError: (err: any) => {
