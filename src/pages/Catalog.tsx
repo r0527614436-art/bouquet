@@ -10,7 +10,6 @@ import { OrderDialog } from '@/components/ui/order-dialog';
 import { useCart } from '@/contexts/CartContext';
 import { useToast } from '@/hooks/use-toast';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
-import CatalogWelcomePopup from '@/components/CatalogWelcomePopup';
 import { Helmet } from 'react-helmet-async';
 interface FilterOption {
   name: string;
@@ -56,15 +55,6 @@ const Catalog = () => {
   const [currentImageItem, setCurrentImageItem] = useState<CatalogItem | null>(null);
   const [currentOrderItem, setCurrentOrderItem] = useState<CatalogItem | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [welcomePopupOpen, setWelcomePopupOpen] = useState(false);
-  
-  // Show welcome popup after 3 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setWelcomePopupOpen(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
   const [contactForm, setContactForm] = useState({
     name: '',
     phone: '',
@@ -756,8 +746,6 @@ const Catalog = () => {
         {/* Order Dialog */}
         <OrderDialog isOpen={orderDialogOpen} onClose={() => setOrderDialogOpen(false)} item={currentOrderItem} />
 
-        {/* Welcome Popup */}
-        <CatalogWelcomePopup isOpen={welcomePopupOpen} onClose={() => setWelcomePopupOpen(false)} onContinue={() => setWelcomePopupOpen(false)} />
     </div>;
 };
 export default Catalog;
