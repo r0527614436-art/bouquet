@@ -79,6 +79,45 @@ export type Database = {
           },
         ]
       }
+      catalog_popup: {
+        Row: {
+          body_text: string
+          button_link: string
+          button_text: string
+          created_at: string
+          id: string
+          image_url: string
+          is_active: boolean
+          overlay_opacity: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body_text?: string
+          button_link?: string
+          button_text?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          overlay_opacity?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          body_text?: string
+          button_link?: string
+          button_text?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          overlay_opacity?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           allow_cart: boolean
