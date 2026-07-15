@@ -10,7 +10,6 @@ import { GalleryCarousel } from '@/components/GalleryCarousel';
 import Testimonials from '@/components/Testimonials';
 import LoadingScreen from '@/components/LoadingScreen';
 import CatalogNotReadyPopup from '@/components/CatalogNotReadyPopup';
-import HomepagePopup, { HomepagePopupData } from '@/components/HomepagePopup';
 import wazeIcon from '@/assets/waze-icon.png';
 import downloadCatalogBtn from '@/assets/download-catalog-btn.webp';
 import downloadArrow from '@/assets/download-arrow.png';
@@ -45,27 +44,6 @@ const Index = () => {
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showCatalogNotReadyPopup, setShowCatalogNotReadyPopup] = useState(false);
-  const [showHomepagePopup, setShowHomepagePopup] = useState(false);
-
-  const { data: homepagePopup } = useQuery({
-    queryKey: ['homepage-popup'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('homepage_popup')
-        .select('*')
-        .limit(1)
-        .maybeSingle();
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  useEffect(() => {
-    if (homepagePopup?.is_active && !isLoading) {
-      const t = setTimeout(() => setShowHomepagePopup(true), 1500);
-      return () => clearTimeout(t);
-    }
-  }, [homepagePopup, isLoading]);
   const navigate = useNavigate();
   const {
     toast
@@ -341,14 +319,6 @@ const Index = () => {
       </AnimatePresence>
       
       <CatalogNotReadyPopup isOpen={showCatalogNotReadyPopup} onClose={() => setShowCatalogNotReadyPopup(false)} />
-
-      {homepagePopup && (
-        <HomepagePopup
-          isOpen={showHomepagePopup}
-          onClose={() => setShowHomepagePopup(false)}
-          data={homepagePopup as HomepagePopupData}
-        />
-      )}
 
       <div className="min-h-screen" style={{
       backgroundColor: '#F8FBF4'
