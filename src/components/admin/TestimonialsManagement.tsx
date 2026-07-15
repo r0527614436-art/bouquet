@@ -9,6 +9,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Trash2, Plus, Edit, Save, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useUndo } from '@/contexts/UndoContext';
 
 interface Testimonial {
   id: string;
@@ -30,6 +31,7 @@ const TestimonialsManagement = () => {
   
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { pushUndo } = useUndo();
 
   const { data: testimonials = [] } = useQuery({
     queryKey: ['admin-testimonials'],
@@ -45,13 +47,26 @@ const TestimonialsManagement = () => {
 
   const addMutation = useMutation({
     mutationFn: async (newTestimonial: typeof formData) => {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('testimonials')
-        .insert([newTestimonial]);
+        .insert([newTestimonial])
+        .select()
+        .single();
       if (error) throw error;
+      return data;
     },
-    onSuccess: () => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+      if (data?.id) {
+        pushUndo({
+          label: `הוספת המלצה: ${data.author_name}`,
+          run: async () => {
+            await supabase.from('testimonials').delete().eq('id', data.id);
+            queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+            queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+          },
+        });
+      }
       toast({ title: "המלצה נוספה בהצלחה" });
       setIsAdding(false);
       resetForm();
@@ -63,14 +78,39 @@ const TestimonialsManagement = () => {
 
   const updateMutation = useMutation({
     mutationFn: async ({ id, updates }: { id: string; updates: Partial<Testimonial> }) => {
+      const { data: prev } = await supabase
+        .from('testimonials')
+        .select('*')
+        .eq('id', id)
+        .single();
       const { error } = await supabase
         .from('testimonials')
         .update(updates)
         .eq('id', id);
       if (error) throw error;
+      return { prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `עדכון המלצה: ${prev.author_name}`,
+          run: async () => {
+            await supabase
+              .from('testimonials')
+              .update({
+                author_name: prev.author_name,
+                content: prev.content,
+                order_index: prev.order_index,
+                is_active: prev.is_active,
+              })
+              .eq('id', prev.id);
+            queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+            queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+          },
+        });
+      }
       toast({ title: "המלצה עודכנה בהצלחה" });
       setEditingId(null);
       resetForm();
@@ -82,14 +122,31 @@ const TestimonialsManagement = () => {
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
+      const { data: prev } = await supabase
+        .from('testimonials')
+        .select('*')
+        .eq('id', id)
+        .single();
       const { error } = await supabase
         .from('testimonials')
         .delete()
         .eq('id', id);
       if (error) throw error;
+      return { prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+      const prev = result?.prev;
+      if (prev) {
+        pushUndo({
+          label: `מחיקת המלצה: ${prev.author_name}`,
+          run: async () => {
+            await supabase.from('testimonials').insert(prev);
+            queryClient.invalidateQueries({ queryKey: ['admin-testimonials'] });
+            queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+          },
+        });
+      }
       toast({ title: "המלצה נמחקה בהצלחה" });
     },
     onError: () => {
