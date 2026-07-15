@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import SideNavigation from "@/components/SideNavigation";
+import SitePopup from "@/components/SitePopup";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
@@ -29,6 +30,7 @@ const App = () => (
         <BrowserRouter>
           <div className="min-h-screen w-full">
             <SideNavigation />
+            <SitePopup />
             <div className="pr-0 md:pr-20">
               <main>
               <Routes>
