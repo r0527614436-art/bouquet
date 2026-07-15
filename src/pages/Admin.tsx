@@ -16,6 +16,8 @@ import HomepagePopupManager from '@/components/admin/HomepagePopupManager';
 import TestimonialsManagement from '@/components/admin/TestimonialsManagement';
 import CatalogPDFManagement from '@/components/admin/CatalogPDFManagement';
 import { useAutoGeneratePDF } from '@/hooks/useAutoGeneratePDF';
+import { UndoProvider } from '@/contexts/UndoContext';
+import UndoButton from '@/components/admin/UndoButton';
 
 interface Category {
   id: string;
@@ -127,6 +129,7 @@ const Admin = () => {
   };
 
   return (
+    <UndoProvider>
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* Header */}
       <header className="bg-white shadow-sm border-b border-pink-100">
@@ -145,13 +148,16 @@ const Admin = () => {
             
             <h1 className="text-2xl font-bold text-pink-800">פאנל ניהול</h1>
             
-            <Button
-              onClick={() => setShowPasswordDialog(true)}
-              variant="outline"
-              className="border-pink-600 text-pink-600 hover:bg-pink-50"
-            >
-              שנה סיסמה
-            </Button>
+            <div className="flex items-center gap-2">
+              <UndoButton />
+              <Button
+                onClick={() => setShowPasswordDialog(true)}
+                variant="outline"
+                className="border-pink-600 text-pink-600 hover:bg-pink-50"
+              >
+                שנה סיסמה
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -196,6 +202,7 @@ const Admin = () => {
         setShowPasswordDialog={setShowPasswordDialog} 
       />
     </div>
+    </UndoProvider>
   );
 };
 
