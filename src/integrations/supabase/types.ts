@@ -79,45 +79,6 @@ export type Database = {
           },
         ]
       }
-      catalog_popup: {
-        Row: {
-          body_text: string
-          button_link: string
-          button_text: string
-          created_at: string
-          id: string
-          image_url: string
-          is_active: boolean
-          overlay_opacity: number
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          body_text?: string
-          button_link?: string
-          button_text?: string
-          created_at?: string
-          id?: string
-          image_url?: string
-          is_active?: boolean
-          overlay_opacity?: number
-          title?: string
-          updated_at?: string
-        }
-        Update: {
-          body_text?: string
-          button_link?: string
-          button_text?: string
-          created_at?: string
-          id?: string
-          image_url?: string
-          is_active?: boolean
-          overlay_opacity?: number
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       categories: {
         Row: {
           allow_cart: boolean
@@ -145,45 +106,6 @@ export type Database = {
           name?: string
           subcategories?: Json | null
           subtitle?: string | null
-        }
-        Relationships: []
-      }
-      homepage_popup: {
-        Row: {
-          body_text: string
-          button_link: string
-          button_text: string
-          created_at: string
-          id: string
-          image_url: string
-          is_active: boolean
-          overlay_opacity: number
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          body_text?: string
-          button_link?: string
-          button_text?: string
-          created_at?: string
-          id?: string
-          image_url?: string
-          is_active?: boolean
-          overlay_opacity?: number
-          title?: string
-          updated_at?: string
-        }
-        Update: {
-          body_text?: string
-          button_link?: string
-          button_text?: string
-          created_at?: string
-          id?: string
-          image_url?: string
-          is_active?: boolean
-          overlay_opacity?: number
-          title?: string
-          updated_at?: string
         }
         Relationships: []
       }
@@ -218,6 +140,48 @@ export type Database = {
           image_url?: string
           is_active?: boolean
           order_index?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      popups: {
+        Row: {
+          body_text: string
+          button_link: string
+          button_text: string
+          created_at: string
+          id: string
+          image_url: string
+          is_active: boolean
+          overlay_opacity: number
+          page_path: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body_text?: string
+          button_link?: string
+          button_text?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          overlay_opacity?: number
+          page_path: string
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          body_text?: string
+          button_link?: string
+          button_text?: string
+          created_at?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          overlay_opacity?: number
+          page_path?: string
           title?: string
           updated_at?: string
         }
