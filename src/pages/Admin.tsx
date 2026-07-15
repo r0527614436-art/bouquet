@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FolderTree, Download, Package, MessageSquareQuote, MessageCircle, Images } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -39,6 +39,8 @@ const Admin = () => {
   
   // Auto-generate PDF when admin panel is accessed
   useAutoGeneratePDF();
+
+  const [activeSection, setActiveSection] = useState<string>('categories');
 
   useEffect(() => {
     const auth = sessionStorage.getItem('admin_auth');
@@ -83,6 +85,47 @@ const Admin = () => {
     return <AdminAuth onLogin={() => setIsAuthenticated(true)} />;
   }
 
+  const sections = [
+    { id: 'categories', label: 'ניהול קטגוריות', icon: FolderTree },
+    { id: 'catalog-pdf', label: 'הורדת קטגוריות וקובץ קטלוג', icon: Download },
+    { id: 'items', label: 'ניהול מוצרים', icon: Package },
+    { id: 'testimonials', label: 'ניהול המלצות', icon: MessageSquareQuote },
+    { id: 'popups', label: 'ניהול פופאפים', icon: MessageCircle },
+    { id: 'slides', label: 'ניהול סליידר דף הבית', icon: Images },
+  ];
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'categories':
+        return (
+          <>
+            <CategoryOrderManagement
+              categories={categories}
+              onReorderCategories={handleReorderCategories}
+            />
+            <CategoryManagement categories={categories as any} items={items} />
+          </>
+        );
+      case 'catalog-pdf':
+        return <CatalogPDFManagement />;
+      case 'items':
+        return (
+          <>
+            <FilterManagement categories={categories as any} items={items} />
+            <ItemManagement categories={categories as any} items={items} />
+          </>
+        );
+      case 'testimonials':
+        return <TestimonialsManagement />;
+      case 'popups':
+        return <HomepagePopupManager />;
+      case 'slides':
+        return <HomepageSlideManagement />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white">
       {/* Header */}
@@ -113,20 +156,40 @@ const Admin = () => {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <HomepagePopupManager />
-        <HomepageSlideManagement />
-        <TestimonialsManagement />
-        <CatalogPDFManagement />
-        <CategoryOrderManagement 
-          categories={categories} 
-          onReorderCategories={handleReorderCategories}
-        />
-        <CategoryManagement categories={categories as any} items={items} />
-        <FilterManagement categories={categories as any} items={items} />
-        <ItemManagement categories={categories as any} items={items} />
-      </main>
+      {/* Main Content with Sidebar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-6" dir="rtl">
+        {/* Sidebar */}
+        <aside className="lg:w-64 lg:shrink-0">
+          <nav className="bg-white rounded-lg shadow-sm border border-pink-100 p-2 lg:sticky lg:top-6">
+            <ul className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible">
+              {sections.map((s) => {
+                const Icon = s.icon;
+                const active = activeSection === s.id;
+                return (
+                  <li key={s.id} className="shrink-0 lg:shrink">
+                    <button
+                      onClick={() => setActiveSection(s.id)}
+                      className={`w-full flex items-center gap-2 px-3 py-2 rounded-md text-right text-sm transition-colors whitespace-nowrap lg:whitespace-normal ${
+                        active
+                          ? 'bg-pink-600 text-white'
+                          : 'text-pink-800 hover:bg-pink-50'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" />
+                      <span>{s.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Content */}
+        <main className="flex-1 min-w-0">
+          {renderSection()}
+        </main>
+      </div>
 
       <PasswordDialog 
         showPasswordDialog={showPasswordDialog} 
