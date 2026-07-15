@@ -1,27 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
+import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-
-interface PopupRow {
-  id: string;
-  is_active: boolean;
-  title: string;
-  body_text: string;
-  button_text: string;
-  button_link: string;
-  image_url: string;
-  overlay_opacity: number;
-}
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import PopupSettingsForm from './PopupSettingsForm';
 
 const HomepagePopupManager: React.FC = () => {
+  return (
+    <Card className="mb-8">
+      <CardHeader>
+        <CardTitle>ניהול פופאפים</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Tabs defaultValue="homepage" dir="rtl">
+          <TabsList className="mb-4">
+            <TabsTrigger value="homepage">פופאפ דף הבית</TabsTrigger>
+            <TabsTrigger value="catalog">פופאפ הקטלוג</TabsTrigger>
+          </TabsList>
+          <TabsContent value="homepage">
+            <PopupSettingsForm
+              tableName="homepage_popup"
+              queryKey="homepage-popup-admin"
+              publicQueryKey="homepage-popup"
+            />
+          </TabsContent>
+          <TabsContent value="catalog">
+            <PopupSettingsForm
+              tableName="catalog_popup"
+              queryKey="catalog-popup-admin"
+              publicQueryKey="catalog-popup"
+            />
+          </TabsContent>
+        </Tabs>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default HomepagePopupManager;
+
+// legacy code below removed
+const _unused = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState(false);
