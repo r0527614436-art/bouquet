@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useUndo } from '@/contexts/UndoContext';
 
 interface FilterOption {
   name: string;
@@ -49,6 +50,7 @@ const normalizeFilters = (filters: any): FilterOption[] => {
 const FilterManagement = ({ categories, items }: FilterManagementProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { pushUndo } = useUndo();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [newFilter, setNewFilter] = useState('');
   const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
@@ -63,15 +65,35 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
 
   const updateCategoryFiltersMutation = useMutation({
     mutationFn: async ({ categoryId, filters }: { categoryId: string; filters: FilterOption[] }) => {
+      const { data: prev } = await supabase
+        .from('categories')
+        .select('filters, name')
+        .eq('id', categoryId)
+        .single();
       const { error } = await supabase
         .from('categories')
         .update({ filters: filters as any })
         .eq('id', categoryId);
       if (error) throw error;
+      return { categoryId, prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
       queryClient.invalidateQueries({ queryKey: ['admin-categories'] });
+      const { categoryId, prev } = result || {};
+      if (prev) {
+        pushUndo({
+          label: `עדכון מסננים${prev.name ? ` בקטגוריה ${prev.name}` : ''}`,
+          run: async () => {
+            await supabase
+              .from('categories')
+              .update({ filters: (prev.filters || []) as any })
+              .eq('id', categoryId);
+            queryClient.invalidateQueries({ queryKey: ['categories'] });
+            queryClient.invalidateQueries({ queryKey: ['admin-categories'] });
+          },
+        });
+      }
       toast({
         title: "הצלחה",
         description: "המסננים עודכנו בהצלחה"
@@ -88,15 +110,35 @@ const FilterManagement = ({ categories, items }: FilterManagementProps) => {
 
   const updateItemFilterTagsMutation = useMutation({
     mutationFn: async ({ itemId, filterTags }: { itemId: string; filterTags: any }) => {
+      const { data: prev } = await supabase
+        .from('catalog_items')
+        .select('filter_tags, title')
+        .eq('id', itemId)
+        .single();
       const { error } = await supabase
         .from('catalog_items')
         .update({ filter_tags: filterTags })
         .eq('id', itemId);
       if (error) throw error;
+      return { itemId, prev } as any;
     },
-    onSuccess: () => {
+    onSuccess: (result: any) => {
       queryClient.invalidateQueries({ queryKey: ['admin-items'] });
       queryClient.invalidateQueries({ queryKey: ['catalog-items'] });
+      const { itemId, prev } = result || {};
+      if (prev) {
+        pushUndo({
+          label: `עדכון תגי מסנן${prev.title ? ` בפריט ${prev.title}` : ''}`,
+          run: async () => {
+            await supabase
+              .from('catalog_items')
+              .update({ filter_tags: prev.filter_tags || {} })
+              .eq('id', itemId);
+            queryClient.invalidateQueries({ queryKey: ['admin-items'] });
+            queryClient.invalidateQueries({ queryKey: ['catalog-items'] });
+          },
+        });
+      }
     }
   });
 
