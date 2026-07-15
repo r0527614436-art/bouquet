@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import PopupSettingsForm from './PopupSettingsForm';
+import { useUndo } from '@/contexts/UndoContext';
 
 interface PopupRow {
   id: string;
@@ -33,6 +34,7 @@ const labelForPath = (path: string) => PAGE_LABELS[path] || path;
 const HomepagePopupManager: React.FC = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { pushUndo } = useUndo();
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const { data: popups = [] } = useQuery({
@@ -81,6 +83,14 @@ const HomepagePopupManager: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
       queryClient.invalidateQueries({ queryKey: ['popups-public'] });
       setActiveId(row.id);
+      pushUndo({
+        label: `הוספת פופאפ (${row.page_path})`,
+        run: async () => {
+          await supabase.from('popups').delete().eq('id', row.id);
+          queryClient.invalidateQueries({ queryKey: ['popups-admin'] });
+          queryClient.invalidateQueries({ queryKey: ['popups-public'] });
+        },
+      });
       toast({ title: 'פופאפ חדש נוצר' });
     },
     onError: (err: any) => {
