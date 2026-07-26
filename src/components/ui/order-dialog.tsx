@@ -408,8 +408,12 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
                 {/* Submit Button - Below payment buttons */}
                 <div className="pt-4 md:pt-6 flex flex-col items-center">
-                  <div className="flex items-start gap-3 mb-4" dir="rtl">
-                    <div className="relative flex-shrink-0">
+                  <div
+                    className="flex items-start gap-3 mb-4 cursor-pointer select-none"
+                    dir="rtl"
+                    onClick={() => setPrivacyAccepted((v) => !v)}
+                  >
+                    <div className="relative flex-shrink-0 pointer-events-none">
                       <input
                         type="checkbox"
                         id="privacy-checkbox-order-dialog"
@@ -422,7 +426,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                         className="flex h-4 w-4 cursor-pointer items-center justify-center rounded border-2 border-[#314020] bg-transparent transition-all duration-200"
                       >
                         <svg
-                          className="h-10 w-10 text-[#314020] transition-transform duration-200 mt-0.5 ml-0.5"
+                          className="h-10 w-10 text-[#314020] transition-transform duration-200 mt-0.5 ml-0.5 pointer-events-none"
                           style={{ transform: privacyAccepted ? 'scale(1)' : 'scale(0)' }}
                           viewBox="0 0 24 24"
                           fill="none"
@@ -435,12 +439,9 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
                         </svg>
                       </label>
                     </div>
-                    <label
-                      htmlFor="privacy-checkbox-order-dialog"
-                      className="text-xs md:text-sm text-gray-600 cursor-pointer text-right"
-                    >
-                      קראתי ואני מאשר/ת את <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#314020] hover:underline">תנאי השימוש ומדיניות הפרטיות</a>
-                    </label>
+                    <span className="text-xs md:text-sm text-gray-600 cursor-pointer text-right">
+                      קראתי ואני מאשר/ת את <a onClick={(e) => e.stopPropagation()} href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#314020] hover:underline">תנאי השימוש ומדיניות הפרטיות</a>
+                    </span>
                   </div>
                   <Button
                     type="submit"
