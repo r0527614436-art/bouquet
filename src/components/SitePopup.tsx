@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useLocation, Link } from 'react-router-dom';
 import { X } from 'lucide-react';
@@ -40,11 +40,19 @@ const SitePopup: React.FC = () => {
     (p) => p.is_active && p.page_path === activePath,
   );
 
+  const popupsRef = useRef(popups);
+  popupsRef.current = popups;
+
   // Allow other parts of the app (e.g. the quick-order dialog) to trigger a popup
   useEffect(() => {
     const handler = (e: Event) => {
       const path = (e as CustomEvent<string>).detail;
-      if (typeof path === 'string') setVirtualPath(path);
+      if (typeof path !== 'string') return;
+      // Virtual popups (e.g. quick-order dialog) should show every time they are triggered
+      setDismissedIds((prev) =>
+        prev.filter((id) => !popupsRef.current.some((p) => p.id === id && p.page_path === path)),
+      );
+      setVirtualPath(path);
     };
     window.addEventListener('site-popup:show', handler as EventListener);
     return () => window.removeEventListener('site-popup:show', handler as EventListener);
@@ -69,7 +77,9 @@ const SitePopup: React.FC = () => {
   const handleClose = (event?: React.SyntheticEvent) => {
     if (event) event.stopPropagation();
     setOpen(false);
-    if (popup) setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
+    if (popup && !virtualPath) {
+      setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
+    }
     setVirtualPath(null);
   };
 
@@ -80,7 +90,9 @@ const SitePopup: React.FC = () => {
       event.stopPropagation();
     }
     setOpen(false);
-    if (popup) setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
+    if (popup && !virtualPath) {
+      setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
+    }
     setVirtualPath(null);
   };
 
