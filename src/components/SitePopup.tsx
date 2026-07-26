@@ -3,8 +3,6 @@ import { useLocation, Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import arrowCircleGreen from '@/assets/arrow-circle-new.png';
 
 interface PopupRow {
@@ -68,7 +66,7 @@ const SitePopup: React.FC = () => {
     setVirtualPath(null);
   };
 
-  if (!popup) return null;
+  if (!popup || !open) return null;
 
   const isExternal = /^https?:\/\//i.test(popup.button_link);
   const opacity = Math.min(100, Math.max(0, popup.overlay_opacity)) / 100;
@@ -88,11 +86,18 @@ const SitePopup: React.FC = () => {
   );
 
   return (
-    <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent
-        className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[800px] w-full [&>button]:hidden z-[9999]"
-        style={{ background: 'transparent' }}
-      >
+    <div
+      className="fixed inset-0 flex items-center justify-center p-4"
+      style={{ zIndex: 100000 }}
+      role="dialog"
+      aria-modal="false"
+      aria-label={popup.title || 'הודעה'}
+    >
+      <div
+        className="absolute inset-0 bg-black/60"
+        onClick={handleClose}
+      />
+      <div className="relative w-full max-w-[95vw] md:max-w-[800px]">
         <div
           className="relative rounded-3xl overflow-hidden"
           style={{
@@ -110,11 +115,6 @@ const SitePopup: React.FC = () => {
             className="absolute inset-0"
             style={{ backgroundColor: `rgba(128, 128, 128, ${opacity})` }}
           />
-
-          <VisuallyHidden>
-            <DialogTitle>{popup.title || 'הודעה'}</DialogTitle>
-            <DialogDescription>{popup.body_text}</DialogDescription>
-          </VisuallyHidden>
 
           <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-12 md:px-14 md:py-16 min-h-[400px] md:min-h-[480px]">
             <button
@@ -177,8 +177,8 @@ const SitePopup: React.FC = () => {
             )}
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 };
 
