@@ -64,6 +64,11 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   if (!item) return null;
 
+  const isSitePopupInteraction = (event: Event) => {
+    const originalTarget = event.target;
+    return originalTarget instanceof Element && Boolean(originalTarget.closest('[data-site-popup-root="true"]'));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -149,7 +154,16 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-5xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[98vh] md:overflow-visible max-h-[90vh] overflow-y-auto" style={{ backgroundColor: '#F5F0E8' }}>
+      <DialogContent
+        className="w-[95vw] max-w-5xl p-0 overflow-hidden border-[3px] border-[#314020] rounded-2xl md:max-h-[98vh] md:overflow-visible max-h-[90vh] overflow-y-auto"
+        style={{ backgroundColor: '#F5F0E8' }}
+        onPointerDownOutside={(event) => {
+          if (isSitePopupInteraction(event.detail.originalEvent)) event.preventDefault();
+        }}
+        onInteractOutside={(event) => {
+          if (isSitePopupInteraction(event.detail.originalEvent)) event.preventDefault();
+        }}
+      >
         <VisuallyHidden>
           <DialogTitle>הזמנת פריט: {item.title}</DialogTitle>
           <DialogDescription>מלא את הפרטים להשלמת ההזמנה</DialogDescription>
