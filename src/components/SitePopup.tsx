@@ -62,7 +62,13 @@ const SitePopup: React.FC = () => {
     return () => clearTimeout(t);
   }, [popup?.id, activePath]);
 
-  const handleClose = () => {
+  const stopPopupEvent = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  const handleClose = (event?: React.SyntheticEvent) => {
+    if (event) stopPopupEvent(event);
     setOpen(false);
     setVirtualPath(null);
   };
@@ -88,11 +94,14 @@ const SitePopup: React.FC = () => {
 
   return createPortal(
     <div
+      data-site-popup-root="true"
       className="fixed inset-0 flex items-center justify-center p-4 pointer-events-auto"
       style={{ zIndex: 100000, pointerEvents: 'auto' }}
       role="dialog"
       aria-modal="false"
       aria-label={popup.title || 'הודעה'}
+      onPointerDownCapture={(event) => event.stopPropagation()}
+      onClickCapture={(event) => event.stopPropagation()}
     >
       <div
         className="absolute inset-0 bg-black/60"
@@ -166,8 +175,8 @@ const SitePopup: React.FC = () => {
               ) : (
                 <Link
                   to={popup.button_link}
-                  onClick={() => {
-                    handleClose();
+                  onClick={(event) => {
+                    handleClose(event);
                     window.scrollTo(0, 0);
                   }}
                   className="flex items-center gap-4 hover:scale-105 transition-transform"
