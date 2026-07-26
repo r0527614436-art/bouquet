@@ -117,9 +117,9 @@ const Order = () => {
       <header className="bg-white shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <Link to="/cart" className="flex items-center text-[#314020] hover:text-[#314020]/70">
+            <Link to="/catalog" className="flex items-center text-[#314020] hover:text-[#314020]/70">
               <img src={simpleArrow} alt="" className="h-5 w-5 ml-2" />
-              חזרה לעגלה
+              חזרה לקטלוג
             </Link>
             
             <div className="flex items-center cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate('/')}>
