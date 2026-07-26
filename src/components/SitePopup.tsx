@@ -106,8 +106,8 @@ const SitePopup: React.FC = () => {
       role="dialog"
       aria-modal="false"
       aria-label={popup.title || 'הודעה'}
-      onPointerDownCapture={(event) => event.stopPropagation()}
-      onClickCapture={(event) => event.stopPropagation()}
+      onPointerDown={(event) => event.stopPropagation()}
+      onClick={(event) => event.stopPropagation()}
     >
       <div
         className="absolute inset-0 bg-black/60"
