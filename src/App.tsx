@@ -10,7 +10,6 @@ import SitePopup from "@/components/SitePopup";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import Admin from "./pages/Admin";
-import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import About from "./pages/About";
@@ -36,7 +35,6 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/catalog" element={<Catalog />} />
-                <Route path="/cart" element={<Cart />} />
                 <Route path="/order" element={<Order />} />
                 <Route path="/order-confirmation" element={<OrderConfirmation />} />
                 <Route path="/about" element={<About />} />

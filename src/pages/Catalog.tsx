@@ -579,17 +579,6 @@ const Catalog = () => {
             <p className="text-gray-500 text-lg font-ploni-aaa font-light">אין פריטים בקטגוריה זו</p>
           </div>}
 
-        {getTotalItems() > 0 && <div className="fixed bottom-6 right-6 z-50">
-            <Link to="/cart">
-              <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative">
-                <ShoppingCart className="h-8 w-8" />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-sm w-7 h-7 flex items-center justify-center font-bold">
-                  {getTotalItems()}
-                </span>
-              </Button>
-            </Link>
-          </div>}
-
         {/* Image Viewer Modal */}
         <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} allowCart={currentImageItem ? getCategoryByItem(currentImageItem)?.allow_cart || false : false} onOrderClick={item => {
         setCurrentOrderItem(item);
@@ -728,17 +717,6 @@ const Catalog = () => {
           </div>
         </div>
       </section>
-
-      {getTotalItems() > 0 && <div className="fixed bottom-6 right-6 z-50">
-            <Link to="/cart">
-              <Button className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-6 shadow-lg hover:shadow-xl transition-all duration-200 relative">
-                <ShoppingCart className="h-8 w-8" />
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-sm w-7 h-7 flex items-center justify-center font-bold">
-                  {getTotalItems()}
-                </span>
-              </Button>
-            </Link>
-          </div>}
 
         {/* Image Viewer Modal */}
         <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} />
