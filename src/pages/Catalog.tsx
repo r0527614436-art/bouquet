@@ -585,6 +585,7 @@ const Catalog = () => {
         <ImageViewer isOpen={imageViewerOpen} onClose={() => setImageViewerOpen(false)} currentItem={currentImageItem} items={filteredItems} onPrevious={handlePreviousImage} onNext={handleNextImage} allowCart={currentImageItem ? getCategoryByItem(currentImageItem)?.allow_cart || false : false} onOrderClick={item => {
         setCurrentOrderItem(item);
         setOrderDialogOpen(true);
+        window.dispatchEvent(new CustomEvent('site-popup:show', { detail: '/order' }));
       }} />
         
         {/* Order Dialog */}
