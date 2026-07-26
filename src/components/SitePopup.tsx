@@ -22,6 +22,8 @@ const SitePopup: React.FC = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [virtualPath, setVirtualPath] = useState<string | null>(null);
+  // Popups the user already dismissed on the current route
+  const [dismissedIds, setDismissedIds] = useState<string[]>([]);
 
   const { data: popups = [] } = useQuery({
     queryKey: ['popups-public'],
@@ -48,24 +50,26 @@ const SitePopup: React.FC = () => {
     return () => window.removeEventListener('site-popup:show', handler as EventListener);
   }, []);
 
-  // Reset any virtual popup when navigating
+  // Reset any virtual popup + dismissals when navigating to another page
   useEffect(() => {
     setVirtualPath(null);
+    setDismissedIds([]);
   }, [location.pathname]);
 
   useEffect(() => {
     setOpen(false);
-    if (!popup) return;
+    if (!popup || dismissedIds.includes(popup.id)) return;
     const t = setTimeout(() => {
       setOpen(true);
     }, virtualPath ? 300 : 1500);
     return () => clearTimeout(t);
-  }, [popup?.id, activePath]);
+  }, [popup?.id, activePath, dismissedIds]);
 
   // Close without blocking default behaviour (needed so links still navigate)
   const handleClose = (event?: React.SyntheticEvent) => {
     if (event) event.stopPropagation();
     setOpen(false);
+    if (popup) setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
     setVirtualPath(null);
   };
 
@@ -76,6 +80,7 @@ const SitePopup: React.FC = () => {
       event.stopPropagation();
     }
     setOpen(false);
+    if (popup) setDismissedIds((prev) => (prev.includes(popup.id) ? prev : [...prev, popup.id]));
     setVirtualPath(null);
   };
 
