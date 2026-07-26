@@ -309,6 +309,8 @@ const Catalog = () => {
     e.stopPropagation(); // Prevent opening image viewer
     setCurrentOrderItem(item);
     setOrderDialogOpen(true);
+    // Trigger the popup configured for the quick-order page, if any
+    window.dispatchEvent(new CustomEvent('site-popup:show', { detail: '/order' }));
   };
   const handlePreviousImage = () => {
     if (!currentImageItem) return;
