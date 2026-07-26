@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useLocation, Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
@@ -85,10 +86,10 @@ const SitePopup: React.FC = () => {
     </>
   );
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 flex items-center justify-center p-4"
-      style={{ zIndex: 100000 }}
+      className="fixed inset-0 flex items-center justify-center p-4 pointer-events-auto"
+      style={{ zIndex: 100000, pointerEvents: 'auto' }}
       role="dialog"
       aria-modal="false"
       aria-label={popup.title || 'הודעה'}
@@ -178,7 +179,8 @@ const SitePopup: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
