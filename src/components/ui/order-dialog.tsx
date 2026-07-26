@@ -42,6 +42,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
   const [dressColor, setDressColor] = useState('');
   const [notes, setNotes] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'bit' | 'credit' | 'transfer' | ''>('');
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -70,6 +71,15 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       toast({
         title: "שגיאה",
         description: "אנא מלא את כל השדות הנדרשים",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!privacyAccepted) {
+      toast({
+        title: "שגיאה",
+        description: "יש לאשר את קריאת תנאי השימוש ומדיניות הפרטיות",
         variant: "destructive"
       });
       return;
@@ -122,6 +132,7 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
       setDressColor('');
       setNotes('');
       setPaymentMethod('');
+      setPrivacyAccepted(false);
       onClose();
       navigate('/order-confirmation');
     } catch (error) {
@@ -397,17 +408,48 @@ export const OrderDialog: React.FC<OrderDialogProps> = ({ isOpen, onClose, item 
 
                 {/* Submit Button - Below payment buttons */}
                 <div className="pt-4 md:pt-6 flex flex-col items-center">
+                  <div className="flex items-start gap-3 mb-4" dir="rtl">
+                    <div className="relative flex-shrink-0">
+                      <input
+                        type="checkbox"
+                        id="privacy-checkbox-order-dialog"
+                        checked={privacyAccepted}
+                        onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                        className="peer sr-only"
+                      />
+                      <label
+                        htmlFor="privacy-checkbox-order-dialog"
+                        className="flex h-4 w-4 cursor-pointer items-center justify-center rounded border-2 border-[#314020] bg-transparent transition-all duration-200"
+                      >
+                        <svg
+                          className="h-10 w-10 text-[#314020] transition-transform duration-200 mt-0.5 ml-0.5"
+                          style={{ transform: privacyAccepted ? 'scale(1)' : 'scale(0)' }}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </label>
+                    </div>
+                    <label
+                      htmlFor="privacy-checkbox-order-dialog"
+                      className="text-xs md:text-sm text-gray-600 cursor-pointer text-right"
+                    >
+                      קראתי ואני מאשר/ת את <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-[#314020] hover:underline">תנאי השימוש ומדיניות הפרטיות</a>
+                    </label>
+                  </div>
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !privacyAccepted}
                     className="bg-[#314020] hover:bg-[#314020]/90 text-white rounded-full px-8 md:px-12 py-2.5 md:py-3 flex items-center justify-center gap-3 font-synopsis font-bold disabled:opacity-50 text-lg md:text-xl"
                   >
                     <span>{isSubmitting ? 'שולח...' : 'שליחת הזמנה'}</span>
                     <img src={orderArrow} alt="" className="h-5 w-5 md:h-6 md:w-6" />
                   </Button>
-                  <p className="text-center text-xs md:text-sm text-gray-600 mt-3" dir="rtl">
-                    בשליחת הטופס את/ה מסכימ/ה ל<a href="/privacy-policy" className="text-[#314020] hover:underline">מדיניות הפרטיות</a>
-                  </p>
                 </div>
               </div>
             </div>
