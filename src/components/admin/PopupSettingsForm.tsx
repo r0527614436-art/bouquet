@@ -56,6 +56,7 @@ const PopupSettingsForm: React.FC<Props> = ({ popup }) => {
     { label: 'אודות', value: '/about' },
     { label: 'צור קשר', value: '/contact' },
     { label: 'עגלת קניות', value: '/cart' },
+    { label: 'הזמנה מהירה', value: '/order' },
   ];
 
   const linkPresets = [
