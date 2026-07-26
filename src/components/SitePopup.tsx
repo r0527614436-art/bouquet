@@ -22,6 +22,7 @@ interface PopupRow {
 const SitePopup: React.FC = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [virtualPath, setVirtualPath] = useState<string | null>(null);
 
   const { data: popups = [] } = useQuery({
     queryKey: ['popups-public'],
@@ -32,18 +33,40 @@ const SitePopup: React.FC = () => {
     },
   });
 
+  const activePath = virtualPath ?? location.pathname;
+
   const popup = popups.find(
-    (p) => p.is_active && p.page_path === location.pathname,
+    (p) => p.is_active && p.page_path === activePath,
   );
+
+  // Allow other parts of the app (e.g. the quick-order dialog) to trigger a popup
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const path = (e as CustomEvent<string>).detail;
+      if (typeof path === 'string') setVirtualPath(path);
+    };
+    window.addEventListener('site-popup:show', handler as EventListener);
+    return () => window.removeEventListener('site-popup:show', handler as EventListener);
+  }, []);
+
+  // Reset any virtual popup when navigating
+  useEffect(() => {
+    setVirtualPath(null);
+  }, [location.pathname]);
 
   useEffect(() => {
     setOpen(false);
     if (!popup) return;
     const t = setTimeout(() => {
       setOpen(true);
-    }, 1500);
+    }, virtualPath ? 300 : 1500);
     return () => clearTimeout(t);
-  }, [popup?.id, location.pathname]);
+  }, [popup?.id, activePath]);
+
+  const handleClose = () => {
+    setOpen(false);
+    setVirtualPath(null);
+  };
 
   if (!popup) return null;
 
@@ -65,7 +88,7 @@ const SitePopup: React.FC = () => {
   );
 
   return (
-    <Dialog open={open} onOpenChange={(o) => !o && setOpen(false)}>
+    <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
       <DialogContent
         className="p-0 border-0 bg-transparent shadow-none max-w-[95vw] md:max-w-[800px] w-full [&>button]:hidden z-[9999]"
         style={{ background: 'transparent' }}
@@ -95,7 +118,7 @@ const SitePopup: React.FC = () => {
 
           <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-12 md:px-14 md:py-16 min-h-[400px] md:min-h-[480px]">
             <button
-              onClick={() => setOpen(false)}
+              onClick={handleClose}
               className="absolute top-4 right-4 md:top-6 md:right-6 hover:opacity-70 transition-opacity z-20"
               style={{ color: '#314020' }}
               aria-label="סגור"
@@ -127,14 +150,14 @@ const SitePopup: React.FC = () => {
                   href={popup.button_link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
+                  onClick={handleClose}
                   className="flex items-center gap-4 hover:scale-105 transition-transform"
                 >
                   {buttonContent}
                 </a>
-              ) : popup.button_link === popup.page_path ? (
+              ) : popup.button_link === popup.page_path || popup.button_link === location.pathname ? (
                 <button
-                  onClick={() => setOpen(false)}
+                  onClick={handleClose}
                   className="flex items-center gap-4 hover:scale-105 transition-transform"
                 >
                   {buttonContent}
@@ -143,7 +166,7 @@ const SitePopup: React.FC = () => {
                 <Link
                   to={popup.button_link}
                   onClick={() => {
-                    setOpen(false);
+                    handleClose();
                     window.scrollTo(0, 0);
                   }}
                   className="flex items-center gap-4 hover:scale-105 transition-transform"
