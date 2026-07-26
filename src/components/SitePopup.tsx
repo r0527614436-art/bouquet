@@ -62,13 +62,19 @@ const SitePopup: React.FC = () => {
     return () => clearTimeout(t);
   }, [popup?.id, activePath]);
 
-  const stopPopupEvent = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
+  // Close without blocking default behaviour (needed so links still navigate)
+  const handleClose = (event?: React.SyntheticEvent) => {
+    if (event) event.stopPropagation();
+    setOpen(false);
+    setVirtualPath(null);
   };
 
-  const handleClose = (event?: React.SyntheticEvent) => {
-    if (event) stopPopupEvent(event);
+  // Close for non-navigating elements (overlay / X button)
+  const handleDismiss = (event?: React.SyntheticEvent) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     setOpen(false);
     setVirtualPath(null);
   };
@@ -100,12 +106,12 @@ const SitePopup: React.FC = () => {
       role="dialog"
       aria-modal="false"
       aria-label={popup.title || 'הודעה'}
-      onPointerDownCapture={(event) => event.stopPropagation()}
-      onClickCapture={(event) => event.stopPropagation()}
+      onPointerDown={(event) => event.stopPropagation()}
+      onClick={(event) => event.stopPropagation()}
     >
       <div
         className="absolute inset-0 bg-black/60"
-        onClick={handleClose}
+        onClick={handleDismiss}
       />
       <div className="relative w-full max-w-[95vw] md:max-w-[800px]">
         <div
@@ -128,7 +134,8 @@ const SitePopup: React.FC = () => {
 
           <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-12 md:px-14 md:py-16 min-h-[400px] md:min-h-[480px]">
             <button
-              onClick={handleClose}
+              type="button"
+              onClick={handleDismiss}
               className="absolute top-4 right-4 md:top-6 md:right-6 hover:opacity-70 transition-opacity z-20"
               style={{ color: '#314020' }}
               aria-label="סגור"
@@ -167,7 +174,8 @@ const SitePopup: React.FC = () => {
                 </a>
               ) : popup.button_link === popup.page_path || popup.button_link === location.pathname ? (
                 <button
-                  onClick={handleClose}
+                  type="button"
+                  onClick={handleDismiss}
                   className="flex items-center gap-4 hover:scale-105 transition-transform"
                 >
                   {buttonContent}
