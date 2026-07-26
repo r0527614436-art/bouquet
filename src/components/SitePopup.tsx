@@ -40,6 +40,9 @@ const SitePopup: React.FC = () => {
     (p) => p.is_active && p.page_path === activePath,
   );
 
+  const popupsRef = useRef(popups);
+  popupsRef.current = popups;
+
   // Allow other parts of the app (e.g. the quick-order dialog) to trigger a popup
   useEffect(() => {
     const handler = (e: Event) => {
