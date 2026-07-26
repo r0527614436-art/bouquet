@@ -27,6 +27,7 @@ const PAGE_LABELS: Record<string, string> = {
   '/about': 'אודות',
   '/contact': 'צור קשר',
   '/cart': 'עגלה',
+  '/order': 'הזמנה מהירה',
 };
 
 const labelForPath = (path: string) => PAGE_LABELS[path] || path;
@@ -59,7 +60,7 @@ const HomepagePopupManager: React.FC = () => {
     mutationFn: async () => {
       // pick a page_path that doesn't already exist
       const used = new Set(popups.map((p) => p.page_path));
-      const candidates = ['/', '/catalog', '/about', '/contact', '/cart'];
+      const candidates = ['/', '/catalog', '/about', '/contact', '/cart', '/order'];
       const free = candidates.find((c) => !used.has(c));
       const page_path = free || `/new-${Date.now()}`;
       const { data, error } = await supabase
